@@ -97,7 +97,7 @@ brew install uv  # macOS with Homebrew
 
 # Verify
 uv --version
-python3 --version  # >= 3.8
+python3 --version  # >= 3.14
 ```
 
 #### Install Dependencies
@@ -107,10 +107,7 @@ git clone <this-repo-url>
 cd ppt-master
 
 # Install project dependencies (auto-creates .venv)
-uv pip install -r requirements.txt
-
-# Extra deps for the Excel converter
-uv pip install openpyxl pillow
+uv sync
 ```
 
 > 💡 All scripts are run via **`uv run python3`** to ensure dependency isolation:
@@ -139,10 +136,15 @@ brew install node  # macOS, requires node >= 18
 
 | Tool | Rating | Notes |
 |------|:------:|-------|
+| **Antigravity** | ⭐⭐⭐⭐ | Highly recommended — gemini-3.x-pro |
 | **Claude Code** | ⭐⭐⭐ | Highly recommended — native Opus support, largest context window |
 | **Cursor** | ⭐⭐ | Popular AI editor, great UX |
 | VS Code + Copilot | ⭐⭐ | Microsoft official, cost-effective |
 | Codebuddy IDE | ⭐⭐ | Good support for Kimi / MiniMax models |
+
+**Open ppt-master folder in your AI IDE**
+**Just chat with IDE and say: I want to create a PPT from a PDF file.**
+
 
 ### 3. Start Creating
 

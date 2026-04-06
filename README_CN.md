@@ -97,7 +97,7 @@ brew install uv  # macOS（使用 Homebrew）
 
 # 验证安装
 uv --version
-python3 --version  # 需要 >= 3.8
+python3 --version  # 需要 >= 3.14
 ```
 
 #### 安装依赖
@@ -107,10 +107,7 @@ git clone <this-repo-url>
 cd ppt-master
 
 # 安装项目依赖（自动创建 .venv）
-uv pip install -r requirements.txt
-
-# Excel 转换工具额外依赖
-uv pip install openpyxl pillow
+uv sync
 ```
 
 > 💡 所有脚本**统一使用 `uv run python3`** 执行，确保依赖隔离：
@@ -138,11 +135,15 @@ brew install node  # macOS
 ### 2. 选择 AI 编辑器
 
 | 工具 | 推荐度 | 说明 |
-|------|:------:|------|
+|------|:------:|------|    
+| **Antigravity** | ⭐⭐⭐⭐ | 强烈推荐 — gemini-3.x-pro |
 | **Claude Code** | ⭐⭐⭐ | 强烈推荐，原生 Opus 支持，上下文窗口最大 |
 | **Cursor** | ⭐⭐ | 主流 AI 编辑器，体验好 |
 | VS Code + Copilot | ⭐⭐ | 微软官方，性价比高 |
 | Codebuddy IDE | ⭐⭐ | 支持国产模型（Kimi / MiniMax） |
+
+**打开 ppt-master 文件夹在你的 AI IDE 中**
+**直接和 IDE 对话，说：我需要把一个 PDF 文件做成 PPT。**
 
 ### 3. 开始创作
 
