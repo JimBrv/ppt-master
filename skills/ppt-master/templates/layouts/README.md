@@ -1,4 +1,4 @@
-# Page Layout Template Library (20 Templates)
+# Page Layout Template Library (21 Templates)
 
 Pre-built PPT page layout templates supporting multiple styles and use cases.
 
@@ -22,6 +22,7 @@ Pre-built PPT page layout templates supporting multiple styles and use cases.
 | `中国电建_常规` | Brand | Power & energy, engineering, state-owned enterprise reports | PowerChina Blue `#00418D` | Craftsmanship, steady and reliable |
 | `中国电建_现代` | Brand | International engineering, premium roadshows, tech innovation | Deep Sea Blue `#001F45` | [Modern] Grand narrative, digital tech |
 | `招商银行` | Brand | Premium reports, VIP services, annual reports | CMB Red `#C41230` | Minimalist luxury, financial texture, borderless |
+| `奇安信` | Brand | Cybersecurity reports, business planning, tech solutions | QAX Blue `#003892` + Gold `#FAC800` | Authoritative, clean, tiger watermark |
 | `exhibit` | General | Exhibit-driven strategic reports, executive presentations, board briefings | Gradient top bar + Gold accents | Conclusion-first, data-driven, confidential |
 | `academic_defense` | Scenario | Thesis defense, academic reports, grant proposals | Deep Blue + Red accents | Clear hierarchy, academic standards |
 | `psychology_attachment` | Scenario | Psychotherapy training, counseling lectures | Blue-green gradient + Colorful semantic colors | Warm professional, therapeutic feel |
@@ -53,6 +54,7 @@ Templates mimicking **specific well-known brands/institutions** with their exclu
 | `中国电建_常规` | PowerChina standard style (v1), suitable for power, energy, and engineering SOEs |
 | `中国电建_现代` | PowerChina modern style (v2), emphasis on grand narrative and digital tech |
 | `招商银行` | China Merchants Bank v2.0, minimalist luxury, borderless open layout |
+| `奇安信` | Qi An Xin (奇安信) cybersecurity style, white-blue gradient, tiger watermark, authoritative tech corporate |
 
 ### 2. General Style Templates
 
