@@ -20,6 +20,7 @@
     AI Flexible Layout Area
     Available Space: x=50, y=210, width=1180, height=450
   -->
+  <!-- CONTENT_AREA_START -->
   <rect x="50" y="210" width="1180" height="450" fill="none" stroke="#BDC3C7" stroke-width="1.5" stroke-dasharray="8,6" rx="4"/>
   <text x="640" y="425" text-anchor="middle" fill="#BDC3C7" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20">
     {{CONTENT_AREA}}
@@ -27,6 +28,7 @@
   <text x="640" y="460" text-anchor="middle" fill="#D5DBDB" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14">
     Content Area: 1180 × 450 px
   </text>
+  <!-- CONTENT_AREA_END -->
 
   <!-- Source Note (Bottom Left) -->
   <text x="50" y="695" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="12" fill="#95A5A6">Source: {{SOURCE}}</text>
