@@ -6,27 +6,93 @@
 
 ## 1. Template Adherence Rules
 
-If template files exist in the project's `templates/` directory, the template structure must be followed:
+> 🚨 **CRITICAL — MANDATORY**: If template SVG files exist in the project's `templates/` directory, **you MUST use them as the actual base layer for every generated SVG page**. This is NOT optional styling guidance — it is a hard structural requirement.
 
-| Page Type | Corresponding Template | Adherence Rules |
-|-----------|----------------------|-----------------|
-| Cover | `01_cover.svg` | Inherit background, decorative elements, layout structure; replace placeholder content |
-| Chapter | `02_chapter.svg` | Inherit numbering style, title position, decorative elements |
-| Content | `03_content.svg` | Inherit header/footer styles; **content area may be freely laid out** |
-| Ending | `04_ending.svg` | Inherit background, thank-you message position, contact info layout |
-| TOC | `02_toc.svg` | **Optional**: Inherit TOC title, list styles |
+### 1.1 Core Rule: Template as Base Layer
 
-### Page-Template Mapping Declaration (Required Output)
+**The correct workflow for EVERY SVG page is:**
 
-Before generating each page, you must explicitly output which template (or "free design") is used:
+1. **READ** the corresponding template file (`templates/01_cover.svg`, `templates/03_content.svg`, etc.)
+2. **COPY** the entire `<svg>` opening tag (including `xmlns:xlink` namespace) from the template
+3. **COPY ALL `<image>` elements** from the template as the **first children** inside `<svg>` — these contain the actual brand background (base64-encoded JPEG/PNG). They MUST appear before any content elements.
+4. **ADD your content elements** (text, shapes, charts) AFTER the template background layers
+5. **DO NOT redraw** the background — no custom `<linearGradient>`, no hand-drawn watermark paths, no self-made logo groups
+
+**Required SVG structure when a template exists:**
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- ✅ STEP 1: Copy ALL <image> tags verbatim from the template -->
+  <image xlink:href="data:image/jpeg;base64,..." x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image xlink:href="data:image/png;base64,..." x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+
+  <!-- ✅ STEP 2: Add your page content BELOW the background images -->
+  <text x="60" y="380" font-family="Microsoft YaHei, sans-serif" font-size="54" font-weight="bold" fill="#003892">Your Title</text>
+  <!-- ... more content elements ... -->
+</svg>
+```
+
+### 1.2 Template → Page Type Mapping
+
+| Page Type | Corresponding Template | What to Copy | What to Add |
+|-----------|----------------------|--------------|-------------|
+| Cover | `templates/01_cover.svg` | ALL `<image>` tags (background + logo) | Title text, subtitle, date — positioned per design_spec |
+| Chapter / TOC | `templates/02_chapter.svg` | ALL `<image>` tags | Chapter number, title, TOC items |
+| Content (all body pages) | `templates/03_content.svg` | ALL `<image>` tags | Page title text, all content area elements |
+| Ending | `templates/04_ending.svg` | ALL `<image>` tags (background + logo) | Thank-you text, slogan, contact info |
+
+> ⚠️ If `02_chapter.svg` doesn't exist but `02_toc.svg` does, use `02_toc.svg` for chapter/TOC pages.
+
+### 1.3 Strict Prohibitions When Template Exists
+
+**FORBIDDEN — do NOT do any of these:**
+
+- ❌ Creating a `<linearGradient>` background to simulate the template
+- ❌ Drawing `<path>` elements to approximate the tiger watermark or decorative patterns
+- ❌ Drawing a `<rect>` with `fill="#FFFFFF"` as a full-canvas background instead of the template image
+- ❌ Creating a hand-drawn logo group with `<circle>` + `<text>` instead of using the template's `<image>` logo
+- ❌ Generating the SVG from scratch without opening and reading the template file first
+- ❌ Omitting `xmlns:xlink` namespace when the template uses `xlink:href`
+
+### 1.4 How to Extract Template Background Elements
+
+Before writing any SVG page, **read the template file** and extract the `<image>` elements:
+
+```bash
+# Inspect the template structure (look for <image> tags)
+grep -n '<image' templates/03_content.svg
+```
+
+The template `<image>` elements typically look like:
+
+```xml
+<!-- Full-canvas brand background -->
+<image xlink:href="data:image/jpeg;base64,/9j/4AAQ..." x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+<!-- HD logo overlay (top-right corner) -->
+<image xlink:href="data:image/png;base64,iVBOR..." x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+```
+
+Copy both tags **verbatim** (including the full base64 data) into your generated SVG.
+
+### 1.5 Pre-Generation Checklist (Required)
+
+Before generating each page, you MUST:
+
+- [ ] Confirm which template file maps to this page type
+- [ ] Read the template file and identify all `<image>` elements
+- [ ] Plan the content layout within the safe area (avoiding overlap with logo)
+- [ ] Confirm `xmlns:xlink` will be present in the SVG root element
+
+### 1.6 Page-Template Declaration (Required Output)
+
+Before generating each page's SVG code, declare:
 
 ```
-📝 **Template mapping**: `templates/01_cover.svg` (or "None (free design)")
-🎯 **Adherence rules / layout strategy**: [specific description]
+📝 **Template base**: `templates/03_content.svg` — copying 2 <image> background tags
+🎯 **Content layout**: [describe what content goes where in the safe area]
 ```
 
-- **Content pages**: Templates only define header and footer; the content area is freely laid out by the Executor
-- **No template**: Generate entirely per the Design Specification & Content Outline
+- **No template found**: Generate entirely per the Design Specification & Content Outline (free design)
 
 ---
 
@@ -168,12 +234,12 @@ Automatically split `notes/total.md` into individual speaker note files in the `
 
 ```bash
 # 1. Split speaker notes
-python3 scripts/total_md_split.py <project_path>
+uv run python3 scripts/total_md_split.py <project_path>
 
 # 2. SVG post-processing (auto-embed icons, images, etc.)
-python3 scripts/finalize_svg.py <project_path>
+uv run python3 scripts/finalize_svg.py <project_path>
 
 # 3. Export PPTX
-python3 scripts/svg_to_pptx.py <project_path> -s final
+uv run python3 scripts/svg_to_pptx.py <project_path> -s final
 # Default: generates native shapes (.pptx) + SVG reference (_svg.pptx)
 ```
