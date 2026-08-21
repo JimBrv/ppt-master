@@ -48,6 +48,7 @@ description: >
 | `${SKILL_DIR}/scripts/svg_to_pptx.py` | Export to PPTX |
 | `${SKILL_DIR}/scripts/verify_pptx_text.py` | Verify no text wrapped in the exported deck |
 | `${SKILL_DIR}/scripts/build_pptx.py` | Run all of Step 7 as one fail-fast command |
+| `${SKILL_DIR}/scripts/preview.py` | Pre-export preview: outline cards and/or SVG thumbnail gallery |
 
 For complete tool documentation, see `${SKILL_DIR}/scripts/README.md`.
 
@@ -189,6 +190,14 @@ python3 ${SKILL_DIR}/scripts/analyze_images.py <project_path>/images
 - [ ] **Next**: Auto-proceed to [Image_Generator / Executor] phase
 ```
 
+**Auto-preview (non-blocking)**: Immediately run
+```bash
+python3 ${SKILL_DIR}/scripts/preview.py <project_path>
+```
+and surface the resulting `<project_path>/preview.html` path as a clickable link in your reply,
+e.g. "💡 Outline preview ready: [preview.html](<project_path>/preview.html)". This runs once, does
+not require user confirmation, and must not block or delay proceeding to the next step.
+
 ---
 
 ### Step 5: Image_Generator Phase (Conditional)
@@ -294,6 +303,17 @@ rendering page screenshots — it checks all pages at once and names the offende
 python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
 ```
 Stages stay serial and abort on first failure; this only removes the round-trips.
+
+**Auto-preview (non-blocking)**: After export (Step 7.3 or the `build_pptx.py` shortcut)
+completes, immediately run
+```bash
+python3 ${SKILL_DIR}/scripts/preview.py <project_path>
+```
+and surface the resulting `<project_path>/preview.html` path as a clickable link in your reply,
+e.g. "💡 Layout preview ready: [preview.html](<project_path>/preview.html)" — it now renders the
+real SVG thumbnail gallery (tabbed against the outline if design_spec.md is still present). This
+runs once, does not require user confirmation, and must not block or delay reporting the pipeline
+as complete.
 
 ---
 

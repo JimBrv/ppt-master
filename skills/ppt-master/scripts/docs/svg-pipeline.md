@@ -90,6 +90,25 @@ Checks include:
 - width/height consistency
 - line-break structure
 
+## `preview.py`
+
+Generate a self-contained `preview.html` inside the project directory so the
+user can review the deck before (or during) SVG generation.
+
+```bash
+python3 scripts/preview.py <project_path>
+python3 scripts/preview.py <project_path> --open
+```
+
+Behavior (auto-detects project stage):
+- Only `design_spec.md` present -> outline-level cards (page / title / layout / content points), parsed from the Content Outline section. Text description only, not a real layout.
+- `svg_output/` or `svg_final/` has files -> real SVG thumbnail gallery (click to enlarge)
+- Both present -> tabbed view to compare intended outline vs. actual rendered pages
+
+Output is a single HTML file that references SVGs by relative path (no
+inlining), so it opens with a plain double-click — no HTTP server required.
+Non-blocking helper; safe to run at any point in the pipeline.
+
 ## `svg_position_calculator.py`
 
 Analyze or pre-calculate chart coordinates.
