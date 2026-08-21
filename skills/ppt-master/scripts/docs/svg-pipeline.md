@@ -93,7 +93,9 @@ Checks include:
 ## `preview.py`
 
 Generate a self-contained `preview.html` inside the project directory so the
-user can review the deck before (or during) SVG generation.
+user can review the deck before (or during) SVG generation. When SVGs exist,
+also writes `executor_output.md` — a design_spec.md-shaped Markdown transcript
+of every page's actual text, for diffing against the original outline.
 
 ```bash
 python3 scripts/preview.py <project_path>
@@ -104,6 +106,11 @@ Behavior (auto-detects project stage, shows up to three tabs):
 - Only `design_spec.md` present -> "设计大纲" outline cards (page / title / layout / content points), parsed from the Content Outline section. Text description only, not a real layout.
 - `svg_output/` or `svg_final/` has files -> "实际排布" real SVG thumbnail gallery (click to enlarge), plus "实际文字" — every `<text>` run in each SVG extracted and grouped by page, so you can read exactly what the Executor wrote without the visual layout getting in the way
 - Multiple present -> tabbed view to compare intended outline vs. actual rendered pages vs. actual text; the bigger the gap between tabs, the more the Executor added or rewrote beyond the outline
+
+`executor_output.md` mirrors design_spec.md's Content Outline structure
+(`#### Slide NN - <filename>` sections, raw unmerged `<text>` list per page),
+so the two files can be opened side by side to see exactly what the Executor
+added or rewrote beyond the outline on a per-page basis.
 
 Output is a single HTML file that references SVGs by relative path (no
 inlining), so it opens with a plain double-click — no HTTP server required.
