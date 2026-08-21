@@ -172,3 +172,8 @@ exampleDoc/*
 .venv/*
 .env
 .python-version
+# Quarantine for files awaiting manual deletion
+_to_delete/
+
+# Packaged skill exports (rebuild them on demand)
+*.skill

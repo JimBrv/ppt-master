@@ -93,13 +93,19 @@ uv run python3 scripts/finalize_svg.py <project_path>
 
 # 3. Export PPTX (from svg_final/, embeds speaker notes by default)
 uv run python3 scripts/svg_to_pptx.py <project_path> -s final
-# Default: generates native shapes (.pptx) + SVG reference (_svg.pptx)
+# Produces ONE editable native-shapes deck; re-running overwrites it in place.
+
+# 4. (recommended) Verify no text run wrapped during export
+uv run python3 scripts/verify_pptx_text.py <project_path>
+
+# Or run steps 1-4 as a single fail-fast command:
+uv run python3 scripts/build_pptx.py <project_path> --verify
 ```
 
 **Prohibited**:
 - NEVER use `cp` as a substitute for `finalize_svg.py`
 - NEVER export directly from `svg_output/` — MUST export from `svg_final/` (use `-s final`)
-- NEVER add extra flags like `--only`
+- NEVER emit the `_svg.pptx` twin by default — one deck is the deliverable
 
 **Re-run rule**: Any modification to `svg_output/` after post-processing has completed (including page revisions, additions, or deletions) requires re-running Steps 2 and 3. Step 1 only needs re-running if `notes/total.md` was also modified.
 

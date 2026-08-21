@@ -46,6 +46,8 @@ description: >
 | `${SKILL_DIR}/scripts/total_md_split.py` | Speaker notes splitting |
 | `${SKILL_DIR}/scripts/finalize_svg.py` | SVG post-processing (unified entry) |
 | `${SKILL_DIR}/scripts/svg_to_pptx.py` | Export to PPTX |
+| `${SKILL_DIR}/scripts/verify_pptx_text.py` | Verify no text wrapped in the exported deck |
+| `${SKILL_DIR}/scripts/build_pptx.py` | Run all of Step 7 as one fail-fast command |
 
 For complete tool documentation, see `${SKILL_DIR}/scripts/README.md`.
 
@@ -270,14 +272,28 @@ python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>
 **Step 7.3** — Export PPTX (embeds speaker notes by default):
 ```bash
 python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
-# Default: generates two files — native shapes (.pptx) + SVG reference (_svg.pptx)
-# Use --only native  to skip SVG reference version
-# Use --only legacy  to only generate SVG image version
+# Produces exactly ONE editable native-shapes deck named after the project.
+# Re-running overwrites it in place — no timestamped duplicates accumulate.
+#   --with-svg-ref  also emit the _svg.pptx reference twin (rarely needed)
+#   --timestamp     keep each run as a separate file
 ```
+
+**Step 7.4 (recommended)** — Verify the export:
+```bash
+python3 ${SKILL_DIR}/scripts/verify_pptx_text.py <project_path>
+```
+Renders the deck and asserts every text run survived intact. Use this instead of
+rendering page screenshots — it checks all pages at once and names the offender.
 
 > ❌ **NEVER** use `cp` as a substitute for `finalize_svg.py` — it performs multiple critical processing steps
 > ❌ **NEVER** export directly from `svg_output/` — MUST use `-s final` to export from `svg_final/`
-> ❌ **NEVER** add extra flags like `--only`
+> ❌ **NEVER** request the `_svg.pptx` twin by default — one deck is the deliverable
+
+**Shortcut** — all of Step 7 as a single fail-fast command:
+```bash
+python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
+```
+Stages stay serial and abort on first failure; this only removes the round-trips.
 
 ---
 

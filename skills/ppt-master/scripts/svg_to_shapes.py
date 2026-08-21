@@ -33,6 +33,8 @@ XLINK_NS = 'http://www.w3.org/1999/xlink'
 
 # 1 SVG pixel = 9525 EMU (at 96 DPI)
 EMU_PER_PX = 9525
+# Slack applied to estimated text-box width (see convert_text)
+TEXT_WIDTH_SAFETY = 1.25
 
 # DrawingML font size unit: 1/100 of a point. 1px = 0.75pt at 96 DPI.
 FONT_PX_TO_HUNDREDTHS_PT = 75
@@ -1596,7 +1598,15 @@ def _build_text_runs(elem: ET.Element, parent_attrs: Dict[str, Any]) -> List[Dic
                     run_attrs['font_family'] = child.get('font-family')
                 if child.get('font-style'):
                     run_attrs['font_style'] = child.get('font-style')
-                runs.append({**run_attrs, 'text': t})
+                # SVG expresses a manual line break as <tspan x=".." dy="..">.
+                # Flag it so convert_text() can emit a real <a:br/>; without this
+                # every tspan collapses onto one line in the exported PPTX.
+                dy_raw = child.get('dy')
+                starts_line = bool(runs) and (
+                    (dy_raw is not None and _f(dy_raw, 0.0) != 0.0)
+                    or child.get('x') is not None
+                )
+                runs.append({**run_attrs, 'text': t, 'br': starts_line})
 
             # Tail text after </tspan> (still belongs to parent)
             if child.tail:
@@ -1681,9 +1691,24 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> str:
     if not full_text.strip():
         return ''
 
-    # Estimate text dimensions
-    text_width = estimate_text_width(full_text, font_size, font_weight) * 1.15
-    text_height = font_size * 1.5
+    # Group runs into visual lines; a run flagged 'br' opens a new one.
+    lines: List[List[Dict[str, Any]]] = [[]]
+    for r in runs:
+        if r.get('br') and lines[-1]:
+            lines.append([])
+        lines[-1].append(r)
+
+    # Estimate text dimensions: width = widest line, height = number of lines.
+    # TEXT_WIDTH_SAFETY is deliberately generous: the box is invisible (noFill,
+    # no outline) so an oversized one costs nothing, whereas an undersized one
+    # makes renderers wrap CJK text mid-sentence despite wrap="none".
+    line_widths = [
+        sum(estimate_text_width(r['text'], r.get('font_size', font_size),
+                                r.get('font_weight', font_weight)) for r in ln)
+        for ln in lines
+    ]
+    text_width = (max(line_widths) if line_widths else 0.0) * TEXT_WIDTH_SAFETY
+    text_height = font_size * 1.5 * len(lines)
     padding = font_size * 0.1
 
     # Adjust position based on text-anchor
@@ -1730,7 +1755,12 @@ def convert_text(elem: ET.Element, ctx: ConvertContext) -> str:
     rot_attr = f' rot="{text_rot}"' if text_rot else ''
 
     # Build runs XML (pass ctx for gradient support)
-    runs_xml = '\n'.join(_build_run_xml(r, fonts, ctx) for r in runs)
+    runs_xml_parts = []
+    for li, ln in enumerate(lines):
+        if li:
+            runs_xml_parts.append('<a:br/>')
+        runs_xml_parts.extend(_build_run_xml(r, fonts, ctx) for r in ln)
+    runs_xml = '\n'.join(runs_xml_parts)
 
     return f'''<p:sp>
 <p:nvSpPr>

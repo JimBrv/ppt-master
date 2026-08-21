@@ -126,10 +126,34 @@ def finalize_project(project_dir: Path, options: dict, dry_run: bool = False, qu
         safe_print("[PREVIEW] Preview mode, no operations will be performed")
         return True
 
-    # Step 1: Copy directory
-    if svg_final.exists():
-        shutil.rmtree(svg_final)
-    shutil.copytree(svg_output, svg_final)
+    # Step 1: Sync svg_output -> svg_final
+    # NOTE: on managed / mounted filesystems (e.g. the Cowork device bridge, some
+    # network shares) unlink() and rmdir() are denied while ordinary writes still
+    # succeed.  A plain rmtree() aborts the entire run there, so fall back to an
+    # in-place overwrite sync instead of failing.
+    if not svg_final.exists():
+        shutil.copytree(svg_output, svg_final)
+    else:
+        try:
+            shutil.rmtree(svg_final)
+            shutil.copytree(svg_output, svg_final)
+        except PermissionError:
+            svg_final.mkdir(parents=True, exist_ok=True)
+            for src in sorted(svg_output.rglob('*')):
+                dst = svg_final / src.relative_to(svg_output)
+                if src.is_dir():
+                    dst.mkdir(parents=True, exist_ok=True)
+                else:
+                    dst.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(src, dst)  # truncating write, no unlink needed
+            stale = ({p.name for p in svg_final.glob('*.svg')}
+                     - {p.name for p in svg_output.glob('*.svg')})
+            if stale:
+                safe_print(
+                    "[WARN] svg_final/ holds stale page(s) this filesystem will not let "
+                    "us delete: " + ", ".join(sorted(stale))
+                )
+                safe_print("[WARN] Remove them manually or they will be exported too.")
 
     if not quiet:
         print()

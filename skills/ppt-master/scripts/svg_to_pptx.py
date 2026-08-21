@@ -971,9 +971,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=f'''
 Examples:
-    %(prog)s examples/ppt169_demo -s final    # Default: native + SVG reference (two files)
-    %(prog)s examples/ppt169_demo --only native   # Only native shapes version
-    %(prog)s examples/ppt169_demo --only legacy   # Only SVG image version
+    %(prog)s examples/ppt169_demo -s final    # Default: ONE editable native-shapes deck
+    %(prog)s examples/ppt169_demo -s final --with-svg-ref  # Also emit the _svg.pptx twin
+    %(prog)s examples/ppt169_demo --only legacy   # Only the SVG image version
+    %(prog)s examples/ppt169_demo -s final --timestamp     # Keep each run as a separate file
     %(prog)s examples/ppt169_demo -o out.pptx     # Explicit path (SVG ref → out_svg.pptx)
 
     # Disable transition / change transition effect
@@ -1021,6 +1022,10 @@ Speaker notes (enabled by default):
                             help='Only generate one version: native (editable shapes) or legacy (SVG image)')
     mode_group.add_argument('--native', action='store_true', default=False,
                             help='(Deprecated, now default) Convert SVG to native DrawingML shapes')
+    parser.add_argument('--with-svg-ref', action='store_true', default=False,
+                        help='Also emit the _svg.pptx reference twin (off by default)')
+    parser.add_argument('--timestamp', action='store_true', default=False,
+                        help='Append _YYYYmmdd_HHMMSS to the output name instead of overwriting')
 
     # Transition effect arguments
     parser.add_argument('-t', '--transition', type=str, choices=transition_choices, default='fade',
@@ -1059,15 +1064,17 @@ Speaker notes (enabled by default):
         print("Error: No SVG files found")
         sys.exit(1)
 
-    # Determine which versions to generate
-    # Default: both native + SVG reference.  --only limits to one.
+    # Determine which versions to generate.
+    # Default: native editable shapes ONLY -- the SVG-reference twin is a
+    # near-duplicate of the same deck and doubles both runtime and disk use, so
+    # it is opt-in via --with-svg-ref (or --only legacy).
     only_mode = args.only  # None | 'native' | 'legacy'
-    gen_native = only_mode in (None, 'native')
-    gen_legacy = only_mode in (None, 'legacy')
-
-    # --native flag (deprecated) maps to --only native
-    if args.native and only_mode is None:
-        gen_legacy = False
+    if only_mode == 'legacy':
+        gen_native, gen_legacy = False, True
+    elif only_mode == 'native':
+        gen_native, gen_legacy = True, False
+    else:
+        gen_native, gen_legacy = True, bool(args.with_svg_ref)
 
     from datetime import datetime
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -1079,8 +1086,11 @@ Speaker notes (enabled by default):
         stem = output_base.stem
         legacy_path = output_base.parent / f"{stem}_svg{output_base.suffix}"
     else:
-        native_path = project_path / f"{project_name}_{timestamp}.pptx"
-        legacy_path = project_path / f"{project_name}_{timestamp}_svg.pptx"
+        # Stable name by default so re-running overwrites in place instead of
+        # littering the project with one timestamped deck per attempt.
+        suffix = f"_{timestamp}" if args.timestamp else ""
+        native_path = project_path / f"{project_name}{suffix}.pptx"
+        legacy_path = project_path / f"{project_name}{suffix}_svg.pptx"
 
     native_path.parent.mkdir(parents=True, exist_ok=True)
 
