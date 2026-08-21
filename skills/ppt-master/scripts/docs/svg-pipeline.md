@@ -100,10 +100,10 @@ python3 scripts/preview.py <project_path>
 python3 scripts/preview.py <project_path> --open
 ```
 
-Behavior (auto-detects project stage):
-- Only `design_spec.md` present -> outline-level cards (page / title / layout / content points), parsed from the Content Outline section. Text description only, not a real layout.
-- `svg_output/` or `svg_final/` has files -> real SVG thumbnail gallery (click to enlarge)
-- Both present -> tabbed view to compare intended outline vs. actual rendered pages
+Behavior (auto-detects project stage, shows up to three tabs):
+- Only `design_spec.md` present -> "设计大纲" outline cards (page / title / layout / content points), parsed from the Content Outline section. Text description only, not a real layout.
+- `svg_output/` or `svg_final/` has files -> "实际排布" real SVG thumbnail gallery (click to enlarge), plus "实际文字" — every `<text>` run in each SVG extracted and grouped by page, so you can read exactly what the Executor wrote without the visual layout getting in the way
+- Multiple present -> tabbed view to compare intended outline vs. actual rendered pages vs. actual text; the bigger the gap between tabs, the more the Executor added or rewrote beyond the outline
 
 Output is a single HTML file that references SVGs by relative path (no
 inlining), so it opens with a plain double-click — no HTTP server required.

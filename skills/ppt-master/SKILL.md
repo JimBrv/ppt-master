@@ -48,7 +48,7 @@ description: >
 | `${SKILL_DIR}/scripts/svg_to_pptx.py` | Export to PPTX |
 | `${SKILL_DIR}/scripts/verify_pptx_text.py` | Verify no text wrapped in the exported deck |
 | `${SKILL_DIR}/scripts/build_pptx.py` | Run all of Step 7 as one fail-fast command |
-| `${SKILL_DIR}/scripts/preview.py` | Pre-export preview: outline cards and/or SVG thumbnail gallery |
+| `${SKILL_DIR}/scripts/preview.py` | Pre-export preview: outline cards, SVG thumbnail gallery, and/or plain-text transcript |
 
 For complete tool documentation, see `${SKILL_DIR}/scripts/README.md`.
 
@@ -311,9 +311,9 @@ python3 ${SKILL_DIR}/scripts/preview.py <project_path>
 ```
 and surface the resulting `<project_path>/preview.html` path as a clickable link in your reply,
 e.g. "💡 Layout preview ready: [preview.html](<project_path>/preview.html)" — it now renders the
-real SVG thumbnail gallery (tabbed against the outline if design_spec.md is still present). This
-runs once, does not require user confirmation, and must not block or delay reporting the pipeline
-as complete.
+real SVG thumbnail gallery plus a plain-text transcript of every page's actual text runs (tabbed
+against the outline if design_spec.md is still present). This runs once, does not require user
+confirmation, and must not block or delay reporting the pipeline as complete.
 
 ---
 

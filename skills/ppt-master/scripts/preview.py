@@ -3,11 +3,16 @@
 
 Generates a single self-contained HTML file that lets the user preview a
 project before (or during) SVG generation, at whatever stage it is
-currently in:
+currently in. Up to three tabs are shown depending on what exists:
 
-    - design_spec.md only      -> outline-level preview (text cards per page)
-    - svg_output/ or svg_final -> layout-level preview (real SVG thumbnails)
-    - both present              -> tabbed view, switch between the two
+    - design_spec.md only       -> "设计大纲" outline cards (page/title/layout/points)
+    - svg_output/ or svg_final  -> "实际排布" real SVG thumbnail gallery
+                                    + "实际文字" plain-text transcript of every
+                                    <text> run in each SVG, grouped by page —
+                                    useful for spotting how much the Executor
+                                    added/rewrote beyond the outline, without
+                                    visual layout noise
+    - multiple present          -> tabbed view, switch between them
 
 Usage:
     python3 scripts/preview.py <project_path> [--open]
@@ -45,6 +50,13 @@ class SvgPage:
     number: str
     filename: str
     rel_path: str
+
+
+@dataclass
+class SvgTextPage:
+    number: str
+    filename: str
+    lines: List[str] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -287,6 +299,34 @@ def discover_svg_pages(svg_dir: Path, project_path: Path) -> List[SvgPage]:
     return pages
 
 
+def extract_svg_text_pages(svg_dir: Path) -> List[SvgTextPage]:
+    """Extract every <text> run from each SVG, in document order.
+
+    Same traversal as verify_pptx_text.py (ET iter + itertext), but here the
+    goal is a readable per-page transcript rather than a wrap-check diff.
+    """
+    import xml.etree.ElementTree as ET
+
+    files = sorted(svg_dir.glob('*.svg'))
+    pages: List[SvgTextPage] = []
+    for f in files:
+        m = SVG_NUMBER_RE.search(f.stem)
+        number = m.group(1).zfill(2) if m else '??'
+        lines: List[str] = []
+        try:
+            root = ET.parse(f).getroot()
+            for node in root.iter():
+                if node.tag.split('}')[-1] != 'text':
+                    continue
+                text = ''.join(node.itertext()).strip()
+                if text:
+                    lines.append(text)
+        except ET.ParseError:
+            lines = ['(SVG 解析失败，无法提取文字)']
+        pages.append(SvgTextPage(number=number, filename=f.name, lines=lines))
+    return pages
+
+
 # ---------------------------------------------------------------------------
 # HTML rendering
 # ---------------------------------------------------------------------------
@@ -356,6 +396,25 @@ main { padding: 24px 28px 60px; max-width: 1400px; margin: 0 auto; }
 .svg-card .label .num { color: var(--muted); font-weight: 600; margin-right: 6px; }
 .empty-state {
   text-align: center; padding: 60px 20px; color: var(--muted); font-size: 14px;
+}
+.text-list {
+  display: flex; flex-direction: column; gap: 14px; max-width: 900px; margin: 0 auto;
+}
+.text-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px;
+}
+.text-card-head {
+  display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--border);
+}
+.text-card-head .num { font-size: 12px; color: var(--muted); font-weight: 600; }
+.text-card-head .fname { font-size: 13.5px; font-weight: 600; }
+.text-card-head .count { margin-left: auto; font-size: 11.5px; color: var(--muted); }
+.text-card ul { margin: 0; padding-left: 18px; font-size: 13px; color: #333; columns: 1; }
+.text-card ul li { margin-bottom: 4px; line-height: 1.5; }
+@media (min-width: 700px) {
+  .text-card ul { columns: 2; column-gap: 24px; }
+  .text-card ul li { break-inside: avoid; }
 }
 .lightbox {
   position: fixed; inset: 0; background: rgba(15,17,24,.82); display: none;
@@ -500,43 +559,76 @@ def render_svg_gallery(pages: List[SvgPage], source_label: str) -> str:
     return f'<div class="svg-grid">{"".join(cards)}</div>'
 
 
+def render_text_pages(pages: List[SvgTextPage], source_label: str) -> str:
+    if not pages:
+        return f'<div class="empty-state">{escape(source_label)} 目录暂无 SVG 文件。</div>'
+
+    cards = []
+    for page in pages:
+        title = Path(page.filename).stem
+        li_html = ''.join(f'<li>{escape(line)}</li>' for line in page.lines) \
+            or '<li style="color:#999">(页面无文字内容)</li>'
+        cards.append(f'''
+        <div class="text-card">
+          <div class="text-card-head">
+            <span class="num">P{escape(page.number)}</span>
+            <span class="fname">{escape(title)}</span>
+            <span class="count">{len(page.lines)} 条文字</span>
+          </div>
+          <ul>{li_html}</ul>
+        </div>''')
+
+    return f'<div class="text-list">{"".join(cards)}</div>'
+
+
 def build_html(project_name: str, spec_slides: List[SlideOutline],
-                svg_pages: List[SvgPage], svg_source_label: str) -> str:
+                svg_pages: List[SvgPage], svg_source_label: str,
+                text_pages: List[SvgTextPage]) -> str:
     has_outline = bool(spec_slides)
     has_svg = bool(svg_pages)
+    has_text = bool(text_pages)  # only meaningful when has_svg is also true
+
+    # Assemble whichever tabs have content. Falls back to a single empty-state
+    # panel when neither the outline nor any SVG could be found.
+    tabs: List[tuple] = []  # (key, label, panel_html)
+    if has_outline:
+        tabs.append(('outline', '设计大纲', render_outline_cards(spec_slides)))
+    if has_svg:
+        tabs.append(('layout', '实际排布', render_svg_gallery(svg_pages, svg_source_label)))
+    if has_text:
+        tabs.append(('text', '实际文字', render_text_pages(text_pages, svg_source_label)))
+
+    if not tabs:
+        tabs.append(('outline', '设计大纲', render_outline_cards([])))
+
+    # Default view: prefer the real layout gallery when available, else outline.
+    default_tab = 'layout' if has_svg else tabs[0][0]
 
     if has_outline and has_svg:
-        default_tab = 'layout'
-        tabs_html = '''
-        <div class="tabs">
-          <button class="tab-btn" data-tab="outline" onclick="showTab('outline')">设计大纲</button>
-          <button class="tab-btn active" data-tab="layout" onclick="showTab('layout')">实际排布</button>
-        </div>'''
-        notice = '<div class="notice">💡 大纲基于 design_spec.md 的文字描述，排布为 svg_output/svg_final 中已生成的真实页面，两者可能存在差异。</div>'
+        notice = '<div class="notice">💡 「设计大纲」基于 design_spec.md 的文字描述；「实际排布」「实际文字」取自 svg_output/svg_final 中已生成的真实页面 —— 三者可能存在差异，差异越大说明 Executor 在生成时补充/改写得越多。</div>'
     elif has_outline:
-        default_tab = 'outline'
-        tabs_html = ''
         notice = '<div class="notice">💡 当前仅有设计大纲，尚未生成 SVG 页面。以下卡片按 design_spec.md 的文字描述展示，非最终排布。</div>'
     elif has_svg:
-        default_tab = 'layout'
-        tabs_html = ''
         notice = ''
     else:
-        default_tab = 'outline'
-        tabs_html = ''
         notice = '<div class="notice">未找到 design_spec.md 大纲内容，也未找到任何 SVG 文件。</div>'
 
-    outline_panel = f'''
-    <div class="tab-panel {"active" if default_tab == "outline" else ""}" data-tab="outline">
-      {render_outline_cards(spec_slides)}
-    </div>''' if has_outline or not has_svg else ''
+    tabs_html = ''
+    if len(tabs) > 1:
+        buttons = ''.join(
+            f'<button class="tab-btn{" active" if key == default_tab else ""}" '
+            f'data-tab="{key}" onclick="showTab(\'{key}\')">{escape(label)}</button>'
+            for key, label, _ in tabs
+        )
+        tabs_html = f'<div class="tabs">{buttons}</div>'
 
-    layout_panel = f'''
-    <div class="tab-panel {"active" if default_tab == "layout" else ""}" data-tab="layout">
-      {render_svg_gallery(svg_pages, svg_source_label)}
-    </div>''' if has_svg or not has_outline else ''
+    panels_html = ''.join(
+        f'<div class="tab-panel{" active" if key == default_tab else ""}" data-tab="{key}">{panel}</div>'
+        for key, _, panel in tabs
+    )
 
     page_count = len(spec_slides) if has_outline else len(svg_pages)
+    meta_label = ' + '.join(label for _, label, _ in tabs)
 
     return f'''<!doctype html>
 <html lang="zh-CN">
@@ -550,14 +642,13 @@ def build_html(project_name: str, spec_slides: List[SlideOutline],
 <header class="top">
   <div>
     <h1>{escape(project_name)}</h1>
-    <div class="meta">{page_count} 页 · {"设计大纲 + 实际排布" if has_outline and has_svg else ("设计大纲" if has_outline else "实际排布")}</div>
+    <div class="meta">{page_count} 页 · {escape(meta_label)}</div>
   </div>
   {tabs_html}
 </header>
 <main>
   {notice}
-  {outline_panel}
-  {layout_panel}
+  {panels_html}
 </main>
 <div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
@@ -598,18 +689,22 @@ def main() -> int:
         svg_dir, svg_label = None, ''
 
     svg_pages = discover_svg_pages(svg_dir, project_path) if svg_dir else []
+    text_pages = extract_svg_text_pages(svg_dir) if svg_dir else []
 
     if not spec_slides and not svg_pages:
         print('[warn] Neither a parsable design_spec.md outline nor SVG pages were found.', file=sys.stderr)
         print('       Nothing meaningful to preview yet.', file=sys.stderr)
 
-    html = build_html(project_path.name, spec_slides, svg_pages, svg_label)
+    html = build_html(project_path.name, spec_slides, svg_pages, svg_label, text_pages)
     out_path = project_path / 'preview.html'
     out_path.write_text(html, encoding='utf-8')
 
     print(f'[ok] Preview written to: {out_path}')
     print(f'     Outline pages parsed: {len(spec_slides)}')
     print(f'     SVG pages found ({svg_label or "none"}): {len(svg_pages)}')
+    if text_pages:
+        total_lines = sum(len(p.lines) for p in text_pages)
+        print(f'     Text runs extracted: {total_lines} across {len(text_pages)} page(s)')
 
     if args.open:
         webbrowser.open(out_path.as_uri())
