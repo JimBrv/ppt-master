@@ -319,6 +319,35 @@ confirmation, and must not block or delay reporting the pipeline as complete.
 
 ---
 
+## Editing a Single Page in an Existing Project
+
+> Scope: content changes to one already-generated page. Structural changes
+> (add/remove/reorder slides) are NOT covered here — do those directly in
+> PowerPoint after export; it's native there and a script would only add a
+> layer of indirection.
+
+Two edit paths, depending on what changed:
+
+| Change type | Path |
+|-------------|------|
+| Wording / numbers only (typo, updated figure, phrasing) — layout and structure untouched | Edit the `<text>` content directly in `svg_final/<page>.svg` (and `svg_output/<page>.svg` to keep them in sync) |
+| Content or layout redesign (wrong emphasis, wants a different layout, needs a new chart) | Edit the matching `#### Slide NN` entry in `design_spec.md` first, then re-invoke the Executor role for that page only, overwriting both `svg_output/<page>.svg` and `svg_final/<page>.svg` |
+
+**Locate the target page first**: use `<project_path>/executor_output.md` or the "实际文字" tab in
+`preview.html` to find the page number and filename by its actual rendered content.
+
+**After either path, re-run the full pipeline** (whole-project re-run is cheap; there is no
+single-page mode for `finalize_svg.py` / `svg_to_pptx.py`, so don't try to hand-patch the exported
+`.pptx`):
+```bash
+python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
+python3 ${SKILL_DIR}/scripts/preview.py <project_path>
+```
+Check the changed page in the refreshed `preview.html` (layout tab) and `executor_output.md`
+(text tab) before calling the edit done.
+
+---
+
 ## Role Switching Protocol
 
 Before switching roles, you **MUST first read** the corresponding reference file — skipping is FORBIDDEN. Output marker:
