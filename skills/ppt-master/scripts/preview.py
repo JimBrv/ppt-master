@@ -19,8 +19,22 @@ per-page text transcript as the "实际文字" tab, but as a design_spec.md-shap
 Markdown document (### Slide NN sections) so it can be diffed or read
 side-by-side against design_spec.md's Content Outline.
 
+preview.html's "实际排布" gallery references SVGs by relative path
+(svg_output/svg_final/xxx.svg), which resolves correctly when the file is
+opened directly (Finder double-click, or any browser's file:// address bar,
+since the sibling folder is right there) but NOT when some other tool reads
+the HTML out of its directory context (e.g. re-serves it as a data: URI) —
+relative paths have nothing to resolve against in that case. Use `--serve` to
+sidestep this entirely: it starts a local HTTP server rooted at the project
+directory, so the gallery loads over real http:// URLs regardless of how the
+viewer got there, and it doubles as a "live" preview — the SVG gallery always
+reflects whatever's on disk right now, no re-run needed for new/changed
+pages; re-run preview.py (without --serve, from elsewhere) only to refresh
+the 设计大纲/实际文字 tabs, whose content is baked into the HTML at write time.
+
 Usage:
     python3 scripts/preview.py <project_path> [--open]
+    python3 scripts/preview.py <project_path> --serve [--port 8890]
 """
 
 from __future__ import annotations
@@ -304,6 +318,36 @@ def discover_svg_pages(svg_dir: Path, project_path: Path) -> List[SvgPage]:
     return pages
 
 
+VIEWBOX_RE = re.compile(r'viewBox\s*=\s*["\']\s*[\d.\-]+\s+[\d.\-]+\s+([\d.]+)\s+([\d.]+)\s*["\']')
+
+
+def detect_canvas_ratio(svg_dir: Optional[Path]) -> float:
+    """Read the first SVG's viewBox to get the deck's width/height ratio.
+
+    Our SVGs only declare viewBox (no width/height attribute on the root
+    <svg>), which leaves some renderers to guess an intrinsic size for <img>
+    elements — most reliably avoided by giving the lightbox img an explicit
+    aspect-ratio instead of trusting the browser's guess. Falls back to
+    16:9 (this skill's default canvas) if nothing can be read.
+    """
+    default_ratio = 1280 / 720
+    if svg_dir is None:
+        return default_ratio
+    files = sorted(svg_dir.glob('*.svg'))
+    if not files:
+        return default_ratio
+    try:
+        head = files[0].read_text(encoding='utf-8', errors='ignore')[:2000]
+        m = VIEWBOX_RE.search(head)
+        if m:
+            w, h = float(m.group(1)), float(m.group(2))
+            if w > 0 and h > 0:
+                return w / h
+    except OSError:
+        pass
+    return default_ratio
+
+
 def render_executor_output_md(text_pages: List[SvgTextPage], project_name: str,
                                svg_source_label: str) -> str:
     """Render extracted SVG text as a design_spec.md-shaped Markdown document.
@@ -460,13 +504,32 @@ main { padding: 24px 28px 60px; max-width: 1400px; margin: 0 auto; }
 .lightbox {
   position: fixed; inset: 0; background: rgba(15,17,24,.82); display: none;
   align-items: center; justify-content: center; z-index: 100; padding: 40px;
+  flex-direction: column;
 }
 .lightbox.active { display: flex; }
-.lightbox img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 6px; }
+.lightbox img {
+  width: min(92vw, 70vh * (var(--lb-ratio, 1.778)));
+  aspect-ratio: var(--lb-ratio, 1.778);
+  max-width: 100%; max-height: 70vh;
+  background: #fff; border-radius: 6px; object-fit: contain;
+}
 .lightbox-close {
   position: absolute; top: 24px; right: 32px; color: #fff; font-size: 28px;
   cursor: pointer; background: none; border: none;
 }
+.lightbox-toolbar {
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+  margin-bottom: 16px; background: rgba(255,255,255,.08); border-radius: 999px;
+  padding: 8px 10px;
+}
+.lightbox-caption { color: #fff; font-size: 14px; min-width: 220px; text-align: center; }
+.lightbox-nav {
+  background: rgba(255,255,255,.14); border: none; color: #fff;
+  font-size: 14px; padding: 9px 18px; border-radius: 999px;
+  cursor: pointer; transition: background .15s; white-space: nowrap;
+}
+.lightbox-nav:hover:not(:disabled) { background: rgba(255,255,255,.28); }
+.lightbox-nav:disabled { opacity: .3; cursor: default; }
 .detail-panel {
   position: fixed; inset: 0; background: rgba(15,17,24,.5); display: none;
   align-items: center; justify-content: center; z-index: 100; padding: 30px;
@@ -497,18 +560,43 @@ function openDetail(id) {
 function closeDetail(id) {
   document.getElementById(id).classList.remove('active');
 }
-function openLightbox(src) {
-  var lb = document.getElementById('lightbox');
-  document.getElementById('lightbox-img').src = src;
-  lb.classList.add('active');
+var LIGHTBOX_INDEX = 0;
+function renderLightbox() {
+  var page = LIGHTBOX_PAGES[LIGHTBOX_INDEX];
+  document.getElementById('lightbox-img').src = page.src;
+  document.getElementById('lightbox-caption').textContent =
+    page.title + ' (' + (LIGHTBOX_INDEX + 1) + ' / ' + LIGHTBOX_PAGES.length + ')';
+  var atStart = LIGHTBOX_INDEX <= 0;
+  var atEnd = LIGHTBOX_INDEX >= LIGHTBOX_PAGES.length - 1;
+  document.getElementById('lightbox-prev').disabled = atStart;
+  document.getElementById('lightbox-next').disabled = atEnd;
+}
+function openLightbox(index) {
+  if (!LIGHTBOX_PAGES.length) return;
+  LIGHTBOX_INDEX = index;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('active');
 }
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
 }
+function lightboxPrev(e) {
+  if (e) e.stopPropagation();
+  if (LIGHTBOX_INDEX > 0) { LIGHTBOX_INDEX -= 1; renderLightbox(); }
+}
+function lightboxNext(e) {
+  if (e) e.stopPropagation();
+  if (LIGHTBOX_INDEX < LIGHTBOX_PAGES.length - 1) { LIGHTBOX_INDEX += 1; renderLightbox(); }
+}
 document.addEventListener('keydown', function(e){
+  var lbActive = document.getElementById('lightbox').classList.contains('active');
   if (e.key === 'Escape') {
     closeLightbox();
     document.querySelectorAll('.detail-panel.active').forEach(function(p){ p.classList.remove('active'); });
+  } else if (lbActive && e.key === 'ArrowLeft') {
+    lightboxPrev();
+  } else if (lbActive && e.key === 'ArrowRight') {
+    lightboxNext();
   }
 });
 """
@@ -589,15 +677,25 @@ def render_svg_gallery(pages: List[SvgPage], source_label: str) -> str:
         return f'<div class="empty-state">{escape(source_label)} 目录暂无 SVG 文件。</div>'
 
     cards = []
-    for page in pages:
+    for i, page in enumerate(pages):
         title = Path(page.filename).stem
         cards.append(f'''
-        <div class="svg-card" onclick="openLightbox('{escape(page.rel_path)}')">
+        <div class="svg-card" onclick="openLightbox({i})">
           <div class="thumb"><img src="{escape(page.rel_path)}" loading="lazy" alt="{escape(title)}"></div>
           <div class="label"><span class="num">P{escape(page.number)}</span>{escape(title)}</div>
         </div>''')
 
     return f'<div class="svg-grid">{"".join(cards)}</div>'
+
+
+def render_lightbox_pages_json(pages: List[SvgPage]) -> str:
+    """JS array literal of {src, title} for lightbox prev/next navigation."""
+    import json
+    entries = [
+        {'src': page.rel_path, 'title': f'P{page.number} {Path(page.filename).stem}'}
+        for page in pages
+    ]
+    return json.dumps(entries, ensure_ascii=False)
 
 
 def render_text_pages(pages: List[SvgTextPage], source_label: str) -> str:
@@ -624,7 +722,7 @@ def render_text_pages(pages: List[SvgTextPage], source_label: str) -> str:
 
 def build_html(project_name: str, spec_slides: List[SlideOutline],
                 svg_pages: List[SvgPage], svg_source_label: str,
-                text_pages: List[SvgTextPage]) -> str:
+                text_pages: List[SvgTextPage], canvas_ratio: float = 1280 / 720) -> str:
     has_outline = bool(spec_slides)
     has_svg = bool(svg_pages)
     has_text = bool(text_pages)  # only meaningful when has_svg is also true
@@ -670,6 +768,7 @@ def build_html(project_name: str, spec_slides: List[SlideOutline],
 
     page_count = len(spec_slides) if has_outline else len(svg_pages)
     meta_label = ' + '.join(label for _, label, _ in tabs)
+    lightbox_pages_json = render_lightbox_pages_json(svg_pages)
 
     return f'''<!doctype html>
 <html lang="zh-CN">
@@ -691,10 +790,16 @@ def build_html(project_name: str, spec_slides: List[SlideOutline],
   {notice}
   {panels_html}
 </main>
-<div class="lightbox" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+<div class="lightbox" id="lightbox" style="--lb-ratio: {canvas_ratio:.6g}" onclick="if(event.target===this) closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <div class="lightbox-toolbar" onclick="event.stopPropagation()">
+    <button class="lightbox-nav" id="lightbox-prev" onclick="lightboxPrev(event)">&#8249; 上一页</button>
+    <span class="lightbox-caption" id="lightbox-caption"></span>
+    <button class="lightbox-nav" id="lightbox-next" onclick="lightboxNext(event)">下一页 &#8250;</button>
+  </div>
   <img id="lightbox-img" src="">
 </div>
+<script>var LIGHTBOX_PAGES = {lightbox_pages_json};</script>
 <script>{PAGE_JS}</script>
 </body>
 </html>'''
@@ -704,10 +809,48 @@ def build_html(project_name: str, spec_slides: List[SlideOutline],
 # CLI
 # ---------------------------------------------------------------------------
 
+def serve_preview(project_path: Path, port: int, open_browser: bool) -> int:
+    """Serve `project_path` over local HTTP so preview.html's relative image
+    paths (svg_output/svg_final/...) resolve like a normal website, instead of
+    depending on whatever local-file access the viewer happens to grant.
+    Blocks until Ctrl+C; re-run `preview.py` (no --serve) in another terminal
+    to refresh preview.html while this keeps serving the latest file on disk.
+    """
+    import functools
+    import http.server
+
+    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(project_path))
+    httpd = http.server.ThreadingHTTPServer(('127.0.0.1', port), handler)
+    actual_port = httpd.server_address[1]
+    url = f'http://127.0.0.1:{actual_port}/preview.html'
+
+    print(f'[serve] Serving {project_path} at http://127.0.0.1:{actual_port}/')
+    print(f'[serve] Preview:  {url}')
+    print('[serve] Ctrl+C to stop. Re-run preview.py (without --serve) elsewhere to refresh the outline/text tabs;')
+    print('[serve] the 实际排布 gallery always reflects whatever is on disk right now, no refresh needed for it.')
+
+    if open_browser:
+        webbrowser.open(url)
+
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print('\n[serve] Stopped.')
+    finally:
+        httpd.server_close()
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Generate a pre-export preview of a PPT Master project.')
     parser.add_argument('project_path', help='Path to the project directory')
     parser.add_argument('--open', action='store_true', help='Open the generated preview.html in the default browser')
+    parser.add_argument('--serve', action='store_true',
+                         help='After writing preview.html, serve the project directory over local HTTP '
+                              '(so 实际排布 thumbnails/lightbox always resolve regardless of how the '
+                              'viewer accesses local files) and block until Ctrl+C.')
+    parser.add_argument('--port', type=int, default=8890,
+                         help='Port for --serve (default: 8890; falls back to a random free port if taken)')
     args = parser.parse_args()
 
     project_path = Path(args.project_path).resolve()
@@ -731,12 +874,13 @@ def main() -> int:
 
     svg_pages = discover_svg_pages(svg_dir, project_path) if svg_dir else []
     text_pages = extract_svg_text_pages(svg_dir) if svg_dir else []
+    canvas_ratio = detect_canvas_ratio(svg_dir)
 
     if not spec_slides and not svg_pages:
         print('[warn] Neither a parsable design_spec.md outline nor SVG pages were found.', file=sys.stderr)
         print('       Nothing meaningful to preview yet.', file=sys.stderr)
 
-    html = build_html(project_path.name, spec_slides, svg_pages, svg_label, text_pages)
+    html = build_html(project_path.name, spec_slides, svg_pages, svg_label, text_pages, canvas_ratio)
     out_path = project_path / 'preview.html'
     out_path.write_text(html, encoding='utf-8')
 
@@ -752,6 +896,14 @@ def main() -> int:
         md_path = project_path / 'executor_output.md'
         md_path.write_text(md, encoding='utf-8')
         print(f'[ok] Executor output written to: {md_path}')
+
+    if args.serve:
+        port = args.port
+        try:
+            return serve_preview(project_path, port, open_browser=True)
+        except OSError:
+            print(f'[serve] Port {port} unavailable, falling back to a random free port.', file=sys.stderr)
+            return serve_preview(project_path, 0, open_browser=True)
 
     if args.open:
         webbrowser.open(out_path.as_uri())

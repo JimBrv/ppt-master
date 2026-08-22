@@ -78,10 +78,10 @@ When the user provides non-Markdown content, convert immediately:
 
 | User Provides | Command |
 |---------------|---------|
-| PDF file | `python3 ${SKILL_DIR}/scripts/pdf_to_md.py <file>` |
-| DOCX / Word / Office document | `python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
-| EPUB / HTML / LaTeX / RST / other | `python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
-| Web link | `python3 ${SKILL_DIR}/scripts/web_to_md.py <URL>` |
+| PDF file | `uv run python3 ${SKILL_DIR}/scripts/pdf_to_md.py <file>` |
+| DOCX / Word / Office document | `uv run python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
+| EPUB / HTML / LaTeX / RST / other | `uv run python3 ${SKILL_DIR}/scripts/doc_to_md.py <file>` |
+| Web link | `uv run python3 ${SKILL_DIR}/scripts/web_to_md.py <URL>` |
 | WeChat / high-security site | `node ${SKILL_DIR}/scripts/web_to_md.cjs <URL>` |
 | Markdown | Read directly |
 
@@ -94,7 +94,7 @@ When the user provides non-Markdown content, convert immediately:
 🚧 **GATE**: Step 1 complete; source content is ready (Markdown file, user-provided text, or requirements described in conversation are all valid).
 
 ```bash
-python3 ${SKILL_DIR}/scripts/project_manager.py init <project_name> --format <format>
+uv run python3 ${SKILL_DIR}/scripts/project_manager.py init <project_name> --format <format>
 ```
 
 Format options: `ppt169` (default), `ppt43`, `xhs`, `story`, etc. For the full format list, see `references/canvas-formats.md`.
@@ -103,7 +103,7 @@ Import source content (choose based on the situation):
 
 | Situation | Action |
 |-----------|--------|
-| Has source files (PDF/MD/etc.) | `python3 ${SKILL_DIR}/scripts/project_manager.py import-sources <project_path> <source_files...> --move` |
+| Has source files (PDF/MD/etc.) | `uv run python3 ${SKILL_DIR}/scripts/project_manager.py import-sources <project_path> <source_files...> --move` |
 | User provided text directly in conversation | No import needed — content is already in conversation context; subsequent steps can reference it directly |
 
 > ⚠️ **MUST use `--move`**: All source files (original PDF / MD / images) MUST be **moved** (not copied) into `sources/` for archiving.
@@ -174,13 +174,13 @@ Read references/shared-standards.md
 
 If the user has provided images, run the analysis script **before outputting the design spec** (do NOT directly read/open image files — use the script output only):
 ```bash
-python3 ${SKILL_DIR}/scripts/analyze_images.py <project_path>/images
+uv run python3 ${SKILL_DIR}/scripts/analyze_images.py <project_path>/images
 ```
 
 > ⚠️ **Image handling rule**: The AI must NEVER directly read, open, or view image files (`.jpg`, `.png`, etc.). All image information must come from the `analyze_images.py` script output or the Design Specification's Image Resource List.
 
 **Output**: `<project_path>/design_spec.md`
-> 🚨 **CRITICAL I/O RULE**: To prevent IDE/Watcher deadlocks in this workspace, **NEVER** use standard AI file writing tools (like `write_to_file`) to output `design_spec.md`. You MUST use `python3 ${SKILL_DIR}/scripts/file_write.py <target_path>` and pass the content via STDIN (e.g., using `send_command_input`) terminated by `<<EOF>>`.
+> 🚨 **CRITICAL I/O RULE**: To prevent IDE/Watcher deadlocks in this workspace, **NEVER** use standard AI file writing tools (like `write_to_file`) to output `design_spec.md`. You MUST use `uv run python3 ${SKILL_DIR}/scripts/file_write.py <target_path>` and pass the content via STDIN (e.g., using `send_command_input`) terminated by `<<EOF>>`.
 
 **✅ Checkpoint — Phase deliverables complete, auto-proceed to next step**:
 ```markdown
@@ -190,13 +190,35 @@ python3 ${SKILL_DIR}/scripts/analyze_images.py <project_path>/images
 - [ ] **Next**: Auto-proceed to [Image_Generator / Executor] phase
 ```
 
-**Auto-preview (non-blocking)**: Immediately run
+**Auto-preview (non-blocking, FIRST appearance)**: Immediately run
 ```bash
-python3 ${SKILL_DIR}/scripts/preview.py <project_path>
+uv run python3 ${SKILL_DIR}/scripts/preview.py <project_path> --serve
 ```
-and surface the resulting `<project_path>/preview.html` path as a clickable link in your reply,
-e.g. "💡 Outline preview ready: [preview.html](<project_path>/preview.html)". This runs once, does
-not require user confirmation, and must not block or delay proceeding to the next step.
+`--serve` writes `preview.html` as usual, then starts a local HTTP server rooted at the project
+directory and opens it in the user's browser at `http://127.0.0.1:8890/preview.html` (falls back to
+a random free port if 8890 is taken). **This is the recommended way to open it — not a plain
+double-click** — because the "实际排布" SVG gallery and its lightbox reference pages by relative
+path (`svg_output/xxx.svg`); serving over real HTTP guarantees those resolve regardless of how the
+browser or environment handles local files, whereas a bare `file://` open depends on the viewer
+keeping the HTML next to its sibling folder (usually fine, but not guaranteed everywhere). It also
+means the "实际排布" gallery always reflects whatever is on disk **right now** with zero extra
+effort — no rebuild needed just to see a newly-added SVG, since the browser fetches it live.
+
+Tell the user the server is running and give them the URL from the command's own output, e.g.
+"💡 Live preview: http://127.0.0.1:8890/preview.html (leave this running, just reload the page as
+pages get added)". `--serve` blocks the terminal it runs in (Ctrl+C to stop) — run it as a
+background/detached process so it doesn't block the rest of the pipeline. Re-running
+`preview.py` **without** `--serve` from elsewhere still works to refresh the "设计大纲"/"实际文字"
+tabs (their content is baked into the HTML at write time, unlike the live SVG gallery) — the
+running server will pick up the rewritten `preview.html` on the browser's next reload.
+
+At this point only `design_spec.md` exists, so the preview shows the "设计大纲" outline-cards tab
+(no SVGs yet) — this is expected and is the whole point: the user gets something to look at from
+the earliest possible moment, before any SVG generation starts. This does not require user
+confirmation and must not block or delay proceeding to the next step.
+
+> 🔁 **This same server and file keep evolving in place** — see the refresh call inside Step 6
+> below. The user just reloads the browser tab to see progress; no new link or server is needed.
 
 ---
 
@@ -212,7 +234,7 @@ Read `references/image-generator.md`
 2. Generate prompt document → `<project_path>/images/image_prompts.md`
 3. Generate images (CLI tool recommended):
    ```bash
-   python3 ${SKILL_DIR}/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
+   uv run python3 ${SKILL_DIR}/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
    ```
 
 **✅ Checkpoint — Confirm all images are ready, proceed to Step 6**:
@@ -244,10 +266,25 @@ Read references/executor-consultant-top.md # Top consulting style (MBB level)
 - Generate SVG pages one by one → `<project_path>/svg_output/`
 > 🚨 **CRITICAL I/O RULE**: Do NOT use standard AI file writing tools directly to workspace files to create SVGs (to prevent IDE Watcher lock). Additionally, because terminal PTY pseudoterminals have single-command length limits (e.g., 4096 bytes) which cause bash HEREDOCs to hang and drop characters, you MUST use the Python Chunking bypass:
 > 1. Create a `tmp/` directory inside the current project (`<project_path>/tmp/`).
-> 2. Use `python3 -c 'with open("<project_path>/tmp/page.svg.tmp", "a", encoding="utf-8") as f: f.write("""[CHUNK]""")'` to append small chunks (e.g., < 1000 characters) sequentially into a `.tmp` file.
-> 3. Run `python3 ${SKILL_DIR}/scripts/file_write.py <target_path> < <project_path>/tmp/page.svg.tmp` via `run_command` to safely write it into the workspace.
+> 2. Use `uv run python3 -c 'with open("<project_path>/tmp/page.svg.tmp", "a", encoding="utf-8") as f: f.write("""[CHUNK]""")'` to append small chunks (e.g., < 1000 characters) sequentially into a `.tmp` file.
+> 3. Run `uv run python3 ${SKILL_DIR}/scripts/file_write.py <target_path> < <project_path>/tmp/page.svg.tmp` via `run_command` to safely write it into the workspace.
 > 4. After the file is successfully written, delete the temporary file/directory (`rm -rf <project_path>/tmp/`).
 > ⚠️ **SINGLE PAGE GENERATION RULE (MANDATORY)**: You MUST only generate **ONE SVG page per cycle**. Wait for the command to finish and verify that the SVG file was successfully generated before proceeding to the next page. **NEVER** batch-generate multiple SVGs.
+
+**Auto-preview refresh (non-blocking, after EVERY page)**: Immediately after each SVG page is
+successfully written to `svg_output/`, re-run
+```bash
+uv run python3 ${SKILL_DIR}/scripts/preview.py <project_path>
+```
+(without `--serve` here — the server from Step 4 is already running in the background; this call
+just rewrites `preview.html` on disk). This is cheap (no LLM call, just re-parses `svg_output/`)
+and updates the "实际文字" tab's baked-in transcript to include the page just generated. Note the
+"实际排布" gallery itself needs no refresh call at all when `--serve` is running — it fetches SVGs
+live from disk on every browser reload, so a newly-written page shows up the moment the user
+reloads, even before this preview.py call runs. Do not skip the preview.py re-run anyway — it's
+what keeps "实际文字" and the outline-vs-actual diff notice in sync. Do not re-surface the link
+each time (it was already shared after Step 4 and is the same server); only mention progress in
+your own status update if useful, e.g. "page 3/8 done, reload the preview to see it."
 
 **Logic Construction Phase**:
 - Generate speaker notes → `<project_path>/notes/total.md`
@@ -270,17 +307,17 @@ Read references/executor-consultant-top.md # Top consulting style (MBB level)
 
 **Step 7.1** — Split speaker notes:
 ```bash
-python3 ${SKILL_DIR}/scripts/total_md_split.py <project_path>
+uv run python3 ${SKILL_DIR}/scripts/total_md_split.py <project_path>
 ```
 
 **Step 7.2** — SVG post-processing (icon embedding / image crop & embed / text flattening / rounded rect to path):
 ```bash
-python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>
+uv run python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>
 ```
 
 **Step 7.3** — Export PPTX (embeds speaker notes by default):
 ```bash
-python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
+uv run python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
 # Produces exactly ONE editable native-shapes deck named after the project.
 # Re-running overwrites it in place — no timestamped duplicates accumulate.
 #   --with-svg-ref  also emit the _svg.pptx reference twin (rarely needed)
@@ -289,7 +326,7 @@ python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
 
 **Step 7.4 (recommended)** — Verify the export:
 ```bash
-python3 ${SKILL_DIR}/scripts/verify_pptx_text.py <project_path>
+uv run python3 ${SKILL_DIR}/scripts/verify_pptx_text.py <project_path>
 ```
 Renders the deck and asserts every text run survived intact. Use this instead of
 rendering page screenshots — it checks all pages at once and names the offender.
@@ -300,19 +337,20 @@ rendering page screenshots — it checks all pages at once and names the offende
 
 **Shortcut** — all of Step 7 as a single fail-fast command:
 ```bash
-python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
+uv run python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
 ```
 Stages stay serial and abort on first failure; this only removes the round-trips.
 
 **Auto-preview (non-blocking)**: After export (Step 7.3 or the `build_pptx.py` shortcut)
 completes, immediately run
 ```bash
-python3 ${SKILL_DIR}/scripts/preview.py <project_path>
+uv run python3 ${SKILL_DIR}/scripts/preview.py <project_path>
 ```
-and surface the resulting `<project_path>/preview.html` path as a clickable link in your reply,
-e.g. "💡 Layout preview ready: [preview.html](<project_path>/preview.html)" — it now renders the
-real SVG thumbnail gallery plus a plain-text transcript of every page's actual text runs (tabbed
-against the outline if design_spec.md is still present). It also writes
+(no `--serve` — the server started back at Step 4 is still running; this just rewrites
+`preview.html` so the "实际文字" tab and outline-vs-actual diff notice reflect the final
+`svg_final/` pages). If the user still has the preview open, tell them to reload for the final
+state — no new link needed, same server. If no server is running for this project (e.g. resuming
+in a fresh session), start one now with `--serve` and share the URL. It also writes
 `<project_path>/executor_output.md`, a design_spec.md-shaped Markdown transcript of the same
 per-page text, for diffing against the original outline. This runs once, does not require user
 confirmation, and must not block or delay reporting the pipeline as complete.
@@ -340,8 +378,8 @@ Two edit paths, depending on what changed:
 single-page mode for `finalize_svg.py` / `svg_to_pptx.py`, so don't try to hand-patch the exported
 `.pptx`):
 ```bash
-python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
-python3 ${SKILL_DIR}/scripts/preview.py <project_path>
+uv run python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
+uv run python3 ${SKILL_DIR}/scripts/preview.py <project_path>
 ```
 Check the changed page in the refreshed `preview.html` (layout tab) and `executor_output.md`
 (text tab) before calling the edit done.

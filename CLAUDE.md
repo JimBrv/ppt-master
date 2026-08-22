@@ -12,34 +12,34 @@ PPT Master is an AI-driven presentation generation system. Through multi-role co
 
 ```bash
 # Source content conversion
-python3 skills/ppt-master/scripts/pdf_to_md.py <PDF_file>
-python3 skills/ppt-master/scripts/doc_to_md.py <DOCX_or_other_file>   # Requires: pandoc (DOCX/EPUB/HTML/LaTeX/RST/etc.)
-python3 skills/ppt-master/scripts/web_to_md.py <URL>
+uv run python3 skills/ppt-master/scripts/pdf_to_md.py <PDF_file>
+uv run python3 skills/ppt-master/scripts/doc_to_md.py <DOCX_or_other_file>   # Requires: pandoc (DOCX/EPUB/HTML/LaTeX/RST/etc.)
+uv run python3 skills/ppt-master/scripts/web_to_md.py <URL>
 node skills/ppt-master/scripts/web_to_md.cjs <URL>
 
 # Project management
-python3 skills/ppt-master/scripts/project_manager.py init <project_name> --format ppt169
-python3 skills/ppt-master/scripts/project_manager.py import-sources <project_path> <source_files_or_URLs...> --move
-python3 skills/ppt-master/scripts/project_manager.py validate <project_path>
+uv run python3 skills/ppt-master/scripts/project_manager.py init <project_name> --format ppt169
+uv run python3 skills/ppt-master/scripts/project_manager.py import-sources <project_path> <source_files_or_URLs...> --move
+uv run python3 skills/ppt-master/scripts/project_manager.py validate <project_path>
 
 # Image tools
-python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
-python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
+uv run python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
+uv run python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
 
 # SVG quality check
-python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
+uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
 
 # Post-processing & export — RECOMMENDED: one fail-fast invocation
-python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
 # Runs notes-split → finalize → export strictly in order, aborting on first failure,
 # then asserts no text run wrapped during export.
 
 # Equivalent manual form (still valid; run one at a time, check each before the next)
-python3 skills/ppt-master/scripts/total_md_split.py <project_path>
+uv run python3 skills/ppt-master/scripts/total_md_split.py <project_path>
 # ✅ Confirm no errors before running the next command
-python3 skills/ppt-master/scripts/finalize_svg.py <project_path>
+uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path>
 # ✅ Confirm no errors before running the next command
-python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
+uv run python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
 # Produces exactly ONE editable native-shapes deck, named after the project
 # (re-running overwrites it — no timestamped duplicates).
 #   --with-svg-ref  also emit the _svg.pptx reference twin (rarely needed)
@@ -47,7 +47,7 @@ python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
 #   --only legacy   emit only the SVG-image version
 
 # Verify an exported deck on its own
-python3 skills/ppt-master/scripts/verify_pptx_text.py <project_path>
+uv run python3 skills/ppt-master/scripts/verify_pptx_text.py <project_path>
 ```
 
 ## Architecture
