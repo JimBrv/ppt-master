@@ -127,7 +127,14 @@ Import source content (choose based on the situation):
 Query `${SKILL_DIR}/templates/layouts/layouts_index.json` to list available templates and their style descriptions.
 **When presenting options, you MUST provide a professional recommendation based on the current PPT topic and content** (recommend a specific template or free design, with reasoning), then ask the user:
 
-> 💡 **AI Recommendation**: Based on your content topic (brief summary), I recommend **[specific template / free design]** because...
+> **Default recommendation**: Unless the content is clearly a poor fit for it (e.g. a
+> non-corporate, non-technical, or non-security topic — academic defense, wedding invite,
+> children's book, etc.), recommend the **QAX (奇安信)** template — `templates/layouts/奇安信/` —
+> as the default choice. Still present it as a recommendation, not an automatic pick: the user
+> confirms or overrides in their reply.
+
+> 💡 **AI Recommendation**: Based on your content topic (brief summary), I recommend **[QAX (奇安信),
+> unless clearly unsuitable] / [specific template / free design]** because...
 >
 > Which approach would you prefer?
 > **A) Use an existing template** (please specify template name or style preference)
