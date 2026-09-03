@@ -550,6 +550,28 @@ main { padding: 24px 28px 60px; max-width: 1400px; margin: 0 auto; }
 """
 
 PAGE_JS = """
+// --- live auto-refresh -----------------------------------------------------
+// While `preview.py --serve` is running, the page polls a tiny state endpoint
+// and reloads itself whenever the project's page set changes on disk. This is
+// what makes generation visible page-by-page instead of only at the very end.
+// Silently no-ops when the file is opened over file:// (no server to poll).
+(function () {
+  if (location.protocol === 'file:') return;
+  var current = null;
+  function poll() {
+    fetch('__preview_state__', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.text() : null; })
+      .then(function (state) {
+        if (state === null) return;
+        if (current === null) { current = state; return; }
+        if (state !== current) { location.reload(); }
+      })
+      .catch(function () { /* server gone; stop bothering */ });
+  }
+  setInterval(poll, 2000);
+  poll();
+})();
+
 function showTab(name) {
   document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.toggle('active', p.dataset.tab === name); });
   document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.tab === name); });
@@ -813,21 +835,70 @@ def serve_preview(project_path: Path, port: int, open_browser: bool) -> int:
     """Serve `project_path` over local HTTP so preview.html's relative image
     paths (svg_output/svg_final/...) resolve like a normal website, instead of
     depending on whatever local-file access the viewer happens to grant.
-    Blocks until Ctrl+C; re-run `preview.py` (no --serve) in another terminal
-    to refresh preview.html while this keeps serving the latest file on disk.
+    preview.html is rebuilt on every request and the open page polls
+    `__preview_state__`, reloading itself within ~2s of a page landing in
+    svg_output/ -- so generation is visible page-by-page with no manual
+    re-run and no manual browser refresh. Blocks until Ctrl+C.
     """
-    import functools
     import http.server
 
-    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(project_path))
-    httpd = http.server.ThreadingHTTPServer(('127.0.0.1', port), handler)
+    def project_state() -> str:
+        """Cheap fingerprint of everything the preview renders: page files and
+        their mtimes, plus design_spec.md. Changes whenever a page is added,
+        rewritten, or the outline is edited."""
+        parts = []
+        for sub in ('svg_final', 'svg_output'):
+            d = project_path / sub
+            if d.is_dir():
+                for f in sorted(d.glob('*.svg')):
+                    try:
+                        parts.append(f'{sub}/{f.name}:{f.stat().st_mtime_ns}')
+                    except OSError:
+                        pass
+        spec = project_path / 'design_spec.md'
+        if spec.exists():
+            try:
+                parts.append(f'spec:{spec.stat().st_mtime_ns}')
+            except OSError:
+                pass
+        return '\n'.join(parts)
+
+    class PreviewHandler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *a, **kw):
+            super().__init__(*a, directory=str(project_path), **kw)
+
+        def log_message(self, fmt, *args):  # keep the console readable
+            pass
+
+        def do_GET(self):
+            if self.path.rstrip('/').endswith('__preview_state__'):
+                body = project_state().encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/plain; charset=utf-8')
+                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Cache-Control', 'no-store')
+                self.end_headers()
+                self.wfile.write(body)
+                return
+            # Rebuild preview.html on demand so a reload always reflects the
+            # pages currently on disk -- no separate preview.py re-run needed.
+            if self.path.rstrip('/').endswith('preview.html') or self.path in ('/', ''):
+                try:
+                    build_preview(project_path)
+                except Exception:
+                    pass  # serve the last good file rather than 500-ing
+            return super().do_GET()
+
+    httpd = http.server.ThreadingHTTPServer(('127.0.0.1', port), PreviewHandler)
     actual_port = httpd.server_address[1]
     url = f'http://127.0.0.1:{actual_port}/preview.html'
 
     print(f'[serve] Serving {project_path} at http://127.0.0.1:{actual_port}/')
     print(f'[serve] Preview:  {url}')
-    print('[serve] Ctrl+C to stop. Re-run preview.py (without --serve) elsewhere to refresh the outline/text tabs;')
-    print('[serve] the 实际排布 gallery always reflects whatever is on disk right now, no refresh needed for it.')
+    print('[serve] Live mode: preview.html is rebuilt on every request and the open page')
+    print('[serve] auto-reloads within ~2s of a new SVG landing in svg_output/ -- no manual')
+    print('[serve] re-run and no manual browser refresh needed while generating.')
+    print(f'[serve] Stop with Ctrl+C, or from another terminal:  kill $(lsof -ti tcp:{actual_port})')
 
     if open_browser:
         webbrowser.open(url)
@@ -839,6 +910,49 @@ def serve_preview(project_path: Path, port: int, open_browser: bool) -> int:
     finally:
         httpd.server_close()
     return 0
+
+
+def build_preview(project_path: Path, quiet: bool = True) -> dict:
+    """Regenerate preview.html (and executor_output.md) from whatever is on
+    disk right now. Safe to call repeatedly -- the --serve loop calls it on
+    every preview.html request so a reload always shows the current pages.
+    Returns a small summary dict for callers that want to print it."""
+    spec_path = project_path / 'design_spec.md'
+    spec_slides: List[SlideOutline] = []
+    if spec_path.exists():
+        spec_slides = parse_design_spec(spec_path)
+
+    svg_final = project_path / 'svg_final'
+    svg_output = project_path / 'svg_output'
+    if svg_final.exists() and any(svg_final.glob('*.svg')):
+        svg_dir, svg_label = svg_final, 'svg_final'
+    elif svg_output.exists() and any(svg_output.glob('*.svg')):
+        svg_dir, svg_label = svg_output, 'svg_output'
+    else:
+        svg_dir, svg_label = None, ''
+
+    svg_pages = discover_svg_pages(svg_dir, project_path) if svg_dir else []
+    text_pages = extract_svg_text_pages(svg_dir) if svg_dir else []
+    canvas_ratio = detect_canvas_ratio(svg_dir)
+
+    html = build_html(project_path.name, spec_slides, svg_pages, svg_label, text_pages, canvas_ratio)
+    out_path = project_path / 'preview.html'
+    out_path.write_text(html, encoding='utf-8')
+
+    md_path = None
+    if text_pages:
+        md = render_executor_output_md(text_pages, project_path.name, svg_label)
+        md_path = project_path / 'executor_output.md'
+        md_path.write_text(md, encoding='utf-8')
+
+    return {
+        'out_path': out_path,
+        'md_path': md_path,
+        'spec_slides': spec_slides,
+        'svg_pages': svg_pages,
+        'svg_label': svg_label,
+        'text_pages': text_pages,
+    }
 
 
 def main() -> int:
@@ -858,31 +972,16 @@ def main() -> int:
         print(f'[error] Project directory not found: {project_path}', file=sys.stderr)
         return 1
 
-    spec_path = project_path / 'design_spec.md'
-    spec_slides: List[SlideOutline] = []
-    if spec_path.exists():
-        spec_slides = parse_design_spec(spec_path)
-
-    svg_final = project_path / 'svg_final'
-    svg_output = project_path / 'svg_output'
-    if svg_final.exists() and any(svg_final.glob('*.svg')):
-        svg_dir, svg_label = svg_final, 'svg_final'
-    elif svg_output.exists() and any(svg_output.glob('*.svg')):
-        svg_dir, svg_label = svg_output, 'svg_output'
-    else:
-        svg_dir, svg_label = None, ''
-
-    svg_pages = discover_svg_pages(svg_dir, project_path) if svg_dir else []
-    text_pages = extract_svg_text_pages(svg_dir) if svg_dir else []
-    canvas_ratio = detect_canvas_ratio(svg_dir)
+    result = build_preview(project_path)
+    spec_slides = result['spec_slides']
+    svg_pages = result['svg_pages']
+    svg_label = result['svg_label']
+    text_pages = result['text_pages']
+    out_path = result['out_path']
 
     if not spec_slides and not svg_pages:
         print('[warn] Neither a parsable design_spec.md outline nor SVG pages were found.', file=sys.stderr)
         print('       Nothing meaningful to preview yet.', file=sys.stderr)
-
-    html = build_html(project_path.name, spec_slides, svg_pages, svg_label, text_pages, canvas_ratio)
-    out_path = project_path / 'preview.html'
-    out_path.write_text(html, encoding='utf-8')
 
     print(f'[ok] Preview written to: {out_path}')
     print(f'     Outline pages parsed: {len(spec_slides)}')
@@ -891,11 +990,7 @@ def main() -> int:
     if text_pages:
         total_lines = sum(len(p.lines) for p in text_pages)
         print(f'     Text runs extracted: {total_lines} across {len(text_pages)} page(s)')
-
-        md = render_executor_output_md(text_pages, project_path.name, svg_label)
-        md_path = project_path / 'executor_output.md'
-        md_path.write_text(md, encoding='utf-8')
-        print(f'[ok] Executor output written to: {md_path}')
+        print(f'[ok] Executor output written to: {result["md_path"]}')
 
     if args.serve:
         port = args.port

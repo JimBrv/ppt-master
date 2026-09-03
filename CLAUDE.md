@@ -26,6 +26,9 @@ uv run python3 skills/ppt-master/scripts/project_manager.py validate <project_pa
 uv run python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
 uv run python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
 
+# Use a user-supplied .pptx as the template (extracts real backgrounds + logos)
+uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <project_path>
+
 # SVG quality check
 uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
 
@@ -47,7 +50,17 @@ uv run python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
 #   --only legacy   emit only the SVG-image version
 
 # Verify an exported deck on its own
+# (uses LibreOffice when present for full visual-wrap detection; otherwise falls
+#  back to a python-pptx text-integrity check instead of failing)
 uv run python3 skills/ppt-master/scripts/verify_pptx_text.py <project_path>
+
+# Re-process a SINGLE page after editing it (leaves every other page untouched)
+uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path> --page 07_arch
+
+# Live preview: rebuilds on each request and the open page auto-reloads (~2s)
+# as new SVGs land, so generation is visible page-by-page.
+uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
+# Stop it:  kill $(lsof -ti tcp:8890)     (or Ctrl+C in its terminal)
 ```
 
 ## Architecture
@@ -92,6 +105,23 @@ uv run python3 skills/ppt-master/scripts/verify_pptx_text.py <project_path>
 - Run the three stages **strictly in order, checking each before the next**. Use
   `build_pptx.py` (fail-fast wrapper) or three separate shell invocations — never
   chain them blindly in one line where a mid-pipeline failure would go unnoticed.
+
+## Using a User-Supplied .pptx as the Template
+
+When the user says "参照 XXX 模板" / points at a `.pptx`, that deck IS the template.
+
+1. Run `pptx_to_template.py` — it writes `templates/0*.svg` with the real
+   background art and logos at their exact coordinates, plus `images/` assets.
+2. Every generated page then copies those `<image>` tags verbatim as its base layer.
+
+**Never** empty `templates/` because a built-in template clashes (that silently
+downgrades the run to free design and loses the user's brand), never hand-draw a
+gradient or re-place a logo you have the real asset for, and never blend two
+templates together. Verify before export:
+
+```bash
+grep -o 'href="\.\./images/[^"]*"' <project_path>/svg_output/*.svg | sort | uniq -c
+```
 
 ## Output Sanity Rules
 

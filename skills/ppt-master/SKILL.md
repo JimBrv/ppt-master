@@ -40,6 +40,7 @@ description: >
 | `${SKILL_DIR}/scripts/web_to_md.py` | Web page to Markdown |
 | `${SKILL_DIR}/scripts/web_to_md.cjs` | WeChat / high-security sites to Markdown |
 | `${SKILL_DIR}/scripts/project_manager.py` | Project init / validate / manage |
+| `${SKILL_DIR}/scripts/pptx_to_template.py` | Turn a user-supplied `.pptx` into a layout template (real backgrounds + logos) |
 | `${SKILL_DIR}/scripts/analyze_images.py` | Image analysis |
 | `${SKILL_DIR}/scripts/image_gen.py` | AI image generation (multi-provider) |
 | `${SKILL_DIR}/scripts/svg_quality_checker.py` | SVG quality check |
@@ -122,6 +123,37 @@ Import source content (choose based on the situation):
 ⛔ **BLOCKING**: If the user has not yet clearly expressed whether to use a template, you MUST present options and **wait for an explicit user response** before proceeding. If the user has previously stated "no template" or specified a particular template, skip this prompt and proceed directly.
 
 **⚡ Early-exit**: If the user has already stated "no template" / "不使用模板" / "自由设计" (or equivalent) at any prior point in the conversation, **do NOT query `layouts_index.json`** — skip directly to Step 4. This avoids unnecessary token consumption.
+
+> [!CAUTION]
+> ## 🎯 Case C — the user supplies their own `.pptx` as the template
+>
+> **This takes priority over the built-in library.** When the user points at a `.pptx`
+> ("参照 XXX 模板输出", "用这个模板"), that file — not a `layouts/` entry — is the
+> template, and its look must be reproduced, not approximated.
+>
+> ```bash
+> uv run python3 ${SKILL_DIR}/scripts/pptx_to_template.py <template.pptx> <project_path>
+> ```
+> This unpacks the deck, extracts each layout's real background images and logos at
+> their **exact** positions, and writes `templates/01_cover.svg` … `04_ending.svg`
+> plus the brand assets into `images/`. Step 6 then inherits them automatically via
+> the normal "template as base layer" rule.
+>
+> **Three failure modes to avoid — all observed in practice:**
+> 1. ❌ **Never delete `templates/` because the built-in template clashes.** Emptying
+>    that directory silently downgrades the run to free design, and the user's brand
+>    disappears. Replace its contents instead.
+> 2. ❌ **Never hand-draw a stand-in** for a background or logo you have the real
+>    asset for (no `<linearGradient>` mimicking the backdrop, no re-placed logo at a
+>    position you chose). Copy the real `<image>` at the real coordinates.
+> 3. ❌ **Never mix two templates.** A built-in layout's colours plus the user's
+>    background is not "fusion", it is a broken deck. One template wins.
+>
+> **Self-check before leaving Step 6** — every page must reference the template's own
+> assets, and no page may carry a hand-made substitute:
+> ```bash
+> grep -o 'href="\.\./images/[^"]*"' <project_path>/svg_output/*.svg | sort | uniq -c
+> ```
 
 **Template recommendation flow** (only when the user has NOT yet decided):
 Query `${SKILL_DIR}/templates/layouts/layouts_index.json` to list available templates and their style descriptions.
@@ -212,9 +244,20 @@ means the "实际排布" gallery always reflects whatever is on disk **right now
 effort — no rebuild needed just to see a newly-added SVG, since the browser fetches it live.
 
 Tell the user the server is running and give them the URL from the command's own output, e.g.
-"💡 Live preview: http://127.0.0.1:8890/preview.html (leave this running, just reload the page as
-pages get added)". `--serve` blocks the terminal it runs in (Ctrl+C to stop) — run it as a
-background/detached process so it doesn't block the rest of the pipeline. Re-running
+"💡 Live preview: http://127.0.0.1:8890/preview.html — 页面会随生成自动刷新，无需手动重载".
+`--serve` blocks the terminal it runs in — run it as a background/detached process so it doesn't
+block the rest of the pipeline.
+
+**Live refresh (automatic)**: the served page polls a small state endpoint and reloads itself
+within ~2s whenever a new SVG lands in `svg_output/`, and `preview.html` is regenerated on every
+request. So generation is visible **page by page** as it happens — the user does not need to
+refresh, and you do not need to re-run `preview.py` just to make new pages appear.
+
+**Stopping the preview server**:
+```bash
+kill $(lsof -ti tcp:8890)     # or press Ctrl+C in the terminal running it
+```
+Always stop it when the project is finished or you start a different project on the same port. Re-running
 `preview.py` **without** `--serve` from elsewhere still works to refresh the "设计大纲"/"实际文字"
 tabs (their content is baked into the HTML at write time, unlike the live SVG gallery) — the
 running server will pick up the rewritten `preview.html` on the browser's next reload.
@@ -381,13 +424,17 @@ Two edit paths, depending on what changed:
 **Locate the target page first**: use `<project_path>/executor_output.md` or the "实际文字" tab in
 `preview.html` to find the page number and filename by its actual rendered content.
 
-**After either path, re-run the full pipeline** (whole-project re-run is cheap; there is no
-single-page mode for `finalize_svg.py` / `svg_to_pptx.py`, so don't try to hand-patch the exported
-`.pptx`):
+**Then re-process.** Prefer the incremental path — it re-runs post-processing for just that page
+and leaves every other page in `svg_final/` untouched:
+```bash
+uv run python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path> --page <page_name>
+uv run python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
+```
+Use the full rebuild when several pages changed or you are unsure:
 ```bash
 uv run python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
-uv run python3 ${SKILL_DIR}/scripts/preview.py <project_path>
 ```
+Either way, never hand-patch the exported `.pptx`. The live preview refreshes on its own.
 Check the changed page in the refreshed `preview.html` (layout tab) and `executor_output.md`
 (text tab) before calling the edit done.
 

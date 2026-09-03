@@ -15,6 +15,7 @@ Requires: soffice + pdftotext on PATH.
 """
 import argparse
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -25,7 +26,64 @@ MIN_LEN = 4  # ignore very short strings; too noisy to match reliably
 
 
 def flatten(s: str) -> str:
-    return re.sub(r'\s+', '', s)
+    # Fold every kind of whitespace away, including the ideographic space
+    # U+3000 that CJK decks use for padding -- exporters normalise it to a
+    # plain space, which would otherwise read as a spurious "lost text" hit.
+    return re.sub(r'\s+', '', s.replace('　', ' '))
+
+
+def svg_text_runs(svg: Path):
+    """Yield the meaningful text strings of one SVG page."""
+    for node in ET.parse(svg).getroot().iter():
+        if node.tag.split('}')[-1] != 'text':
+            continue
+        s = ''.join(node.itertext()).strip()
+        if len(s) >= MIN_LEN:
+            yield s
+
+
+def verify_via_pptx(deck: Path, svgs) -> int:
+    """Fallback verification with no LibreOffice: read the deck's own text
+    frames via python-pptx and confirm every SVG string is present.
+
+    This cannot detect *visual* mid-sentence wrapping the way the PDF render
+    can -- it proves no text was dropped or corrupted during export, which is
+    the failure that actually loses content. Reported honestly as such.
+    """
+    try:
+        from pptx import Presentation
+    except ImportError:
+        print('[ERROR] Neither LibreOffice (soffice) nor python-pptx is available;')
+        print('        cannot verify. Install one:  uv pip install python-pptx')
+        return 1
+
+    prs = Presentation(str(deck))
+    slides = list(prs.slides)
+    print(f'[SCAN] {deck.name} vs {len(svgs)} page(s)  (mode: python-pptx text comparison)')
+    print('[NOTE] soffice not found -- checking that no text was LOST.')
+    print('       Visual wrap detection needs LibreOffice; install it for the full check.')
+
+    total = bad = 0
+    for i, svg in enumerate(svgs):
+        if i >= len(slides):
+            print(f'  [MISSING PAGE] {svg.name}: no slide {i + 1} in deck')
+            bad += 1
+            continue
+        present = {flatten(sh.text_frame.text)
+                   for sh in slides[i].shapes
+                   if sh.has_text_frame and sh.text_frame.text.strip()}
+        blob = ''.join(present)
+        for s in svg_text_runs(svg):
+            total += 1
+            if flatten(s) not in blob:
+                bad += 1
+                print(f'  [LOST?] {svg.name}: {s[:60]!r}')
+
+    print(f'\n[SUMMARY] {total} text run(s) checked, {bad} suspect')
+    if bad:
+        return 1
+    print('[OK] every text run is present in the exported deck')
+    return 0
 
 
 def main() -> int:
@@ -53,8 +111,18 @@ def main() -> int:
             return 1
         deck = max(cands, key=lambda p: p.stat().st_mtime)
 
+    # Degrade gracefully instead of crashing with FileNotFoundError when
+    # LibreOffice isn't installed: a missing optional renderer must not read
+    # as "the export failed".
+    soffice = shutil.which('soffice') or shutil.which('libreoffice')
+    if not soffice:
+        mac_soffice = Path('/Applications/LibreOffice.app/Contents/MacOS/soffice')
+        soffice = str(mac_soffice) if mac_soffice.exists() else None
+    if not soffice:
+        return verify_via_pptx(deck, svgs)
+
     with tempfile.TemporaryDirectory() as td:
-        r = subprocess.run(['soffice', '--headless', '--convert-to', 'pdf',
+        r = subprocess.run([soffice, '--headless', '--convert-to', 'pdf',
                             '--outdir', td, str(deck)],
                            capture_output=True, text=True, timeout=180)
         pdfs = list(Path(td).glob('*.pdf'))
@@ -70,12 +138,7 @@ def main() -> int:
     total = bad = 0
     for i, svg in enumerate(svgs):
         page = pages[i] if i < len(pages) else ''
-        for node in ET.parse(svg).getroot().iter():
-            if node.tag.split('}')[-1] != 'text':
-                continue
-            s = ''.join(node.itertext()).strip()
-            if len(s) < MIN_LEN:
-                continue
+        for s in svg_text_runs(svg):
             total += 1
             if flatten(s) not in page:
                 bad += 1

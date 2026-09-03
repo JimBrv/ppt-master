@@ -19,6 +19,7 @@ Usage:
 import math
 import re
 import base64
+import hashlib
 from pathlib import Path
 from typing import Optional, Tuple, List, Dict, Any
 from xml.etree import ElementTree as ET
@@ -1828,9 +1829,12 @@ def convert_image(elem: ET.Element, ctx: ConvertContext) -> str:
             img_format = 'jpg'
         img_data = img_path.read_bytes()
 
-    # Generate filename and relationship
-    img_idx = len(ctx.media_files) + 1
-    img_filename = f's{ctx.slide_num}_img{img_idx}.{img_format}'
+    # Name media by content hash so an image reused across slides (brand
+    # background, logo) is stored once in ppt/media/ and merely referenced
+    # again, instead of being re-embedded per slide. Cuts deck size massively
+    # on template-driven decks where every page carries the same backdrop.
+    img_digest = hashlib.sha1(img_data).hexdigest()[:16]
+    img_filename = f'img_{img_digest}.{img_format}'
     ctx.media_files[img_filename] = img_data
 
     r_id = ctx.next_rel_id()
