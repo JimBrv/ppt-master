@@ -14,7 +14,7 @@
 
 1. **READ** the corresponding template file (`templates/01_cover.svg`, `templates/03_content.svg`, etc.)
 2. **COPY** the entire `<svg>` opening tag (including `xmlns:xlink` namespace) from the template
-3. **COPY ALL `<image>` elements** from the template as the **first children** inside `<svg>` — these contain the actual brand background (base64-encoded JPEG/PNG). They MUST appear before any content elements.
+3. **COPY ALL `<image>` elements** from the template as the **first children** inside `<svg>` — these carry the actual brand background and logo. They MUST appear before any content elements.
 4. **ADD your content elements** (text, shapes, charts) AFTER the template background layers
 5. **DO NOT redraw** the background — no custom `<linearGradient>`, no hand-drawn watermark paths, no self-made logo groups
 
@@ -23,8 +23,8 @@
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
   <!-- ✅ STEP 1: Copy ALL <image> tags verbatim from the template -->
-  <image xlink:href="data:image/jpeg;base64,..." x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
-  <image xlink:href="data:image/png;base64,..." x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
 
   <!-- ✅ STEP 2: Add your page content BELOW the background images -->
   <text x="60" y="380" font-family="Microsoft YaHei, sans-serif" font-size="54" font-weight="bold" fill="#003892">Your Title</text>
@@ -48,7 +48,7 @@
 **FORBIDDEN — do NOT do any of these:**
 
 - ❌ Creating a `<linearGradient>` background to simulate the template
-- ❌ Drawing `<path>` elements to approximate the tiger watermark or decorative patterns
+- ❌ Drawing `<path>` elements to approximate a brand watermark or decorative pattern
 - ❌ Drawing a `<rect>` with `fill="#FFFFFF"` as a full-canvas background instead of the template image
 - ❌ Creating a hand-drawn logo group with `<circle>` + `<text>` instead of using the template's `<image>` logo
 - ❌ Generating the SVG from scratch without opening and reading the template file first
@@ -67,12 +67,12 @@ The template `<image>` elements typically look like:
 
 ```xml
 <!-- Full-canvas brand background -->
-<image xlink:href="data:image/jpeg;base64,/9j/4AAQ..." x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+<image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
 <!-- HD logo overlay (top-right corner) -->
-<image xlink:href="data:image/png;base64,iVBOR..." x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+<image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
 ```
 
-Copy both tags **verbatim** (including the full base64 data) into your generated SVG.
+Copy both tags **verbatim** into your generated SVG. `finalize_svg.py` embeds the files at export. Older project templates may still inline base64; copy those as-is too.
 
 ### 1.5 Pre-Generation Checklist (Required)
 
@@ -93,6 +93,21 @@ Before generating each page's SVG code, declare:
 ```
 
 - **No template found**: Generate entirely per the Design Specification & Content Outline (free design)
+
+---
+
+### 1.7 Content Layouts
+
+When a page's `Layout` field in the design spec is a layout ID, build that page from `templates/content/<id>.svg` instead of `03_content.svg`:
+
+1. Read the SVG and its entry in `templates/content/layouts.json`. The SVG is the complete page, including the background layer and title.
+2. Keep its geometry, colors, and font sizes. Replace every `{{SLOT}}`; each text slot is one line.
+3. If text exceeds the slot's capacity, shorten the text. Do not shrink the font or resize the box.
+4. Delete the whole `<text>` element for an unused line. Change the number of items only as the entry's `items` rule describes.
+5. Fill icon slots with names from the approved icon list.
+6. Replace a `<rect data-image-slot="...">` with an `<image>` using the same box, or keep the rect if the image is a placeholder.
+
+A `free: ...` Layout value means free design inside `03_content.svg`. Before leaving Step 6, `grep -l '{{' svg_output/*.svg` must print nothing.
 
 ---
 

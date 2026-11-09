@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: three_pillars. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="qaxHead" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1773ED"/><stop offset="100%" stop-color="#6C9CE5"/></linearGradient>
+  </defs>
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <!-- column 1 -->
+  <rect x="40" y="136" width="386" height="530" rx="14" fill="#FFFFFF" fill-opacity="0.85" stroke="#D4E5FC" stroke-width="1"/>
+  <rect x="52" y="148" width="362" height="62" rx="10" fill="url(#qaxHead)"/>
+  <text x="233" y="189" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL1_TITLE}}</text>
+  <rect x="52" y="222" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL1_CARD1_ICON}}" x="66" y="234" width="28" height="28" fill="#1E6BEE"/>
+  <text x="104" y="256" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL1_CARD1_TITLE}}</text>
+  <text x="68" y="288" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD1_L1}}</text>
+  <text x="68" y="314" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD1_L2}}</text>
+  <text x="68" y="340" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD1_L3}}</text>
+  <rect x="52" y="368" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL1_CARD2_ICON}}" x="66" y="380" width="28" height="28" fill="#1E6BEE"/>
+  <text x="104" y="402" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL1_CARD2_TITLE}}</text>
+  <text x="68" y="434" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD2_L1}}</text>
+  <text x="68" y="460" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD2_L2}}</text>
+  <text x="68" y="486" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD2_L3}}</text>
+  <rect x="52" y="514" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL1_CARD3_ICON}}" x="66" y="526" width="28" height="28" fill="#1E6BEE"/>
+  <text x="104" y="548" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL1_CARD3_TITLE}}</text>
+  <text x="68" y="580" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD3_L1}}</text>
+  <text x="68" y="606" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD3_L2}}</text>
+  <text x="68" y="632" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL1_CARD3_L3}}</text>
+  <!-- column 2 -->
+  <rect x="447" y="136" width="386" height="530" rx="14" fill="#FFFFFF" fill-opacity="0.85" stroke="#D4E5FC" stroke-width="1"/>
+  <rect x="459" y="148" width="362" height="62" rx="10" fill="url(#qaxHead)"/>
+  <text x="640" y="189" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL2_TITLE}}</text>
+  <rect x="459" y="222" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL2_CARD1_ICON}}" x="473" y="234" width="28" height="28" fill="#1E6BEE"/>
+  <text x="511" y="256" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL2_CARD1_TITLE}}</text>
+  <text x="475" y="288" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD1_L1}}</text>
+  <text x="475" y="314" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD1_L2}}</text>
+  <text x="475" y="340" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD1_L3}}</text>
+  <rect x="459" y="368" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL2_CARD2_ICON}}" x="473" y="380" width="28" height="28" fill="#1E6BEE"/>
+  <text x="511" y="402" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL2_CARD2_TITLE}}</text>
+  <text x="475" y="434" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD2_L1}}</text>
+  <text x="475" y="460" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD2_L2}}</text>
+  <text x="475" y="486" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD2_L3}}</text>
+  <rect x="459" y="514" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL2_CARD3_ICON}}" x="473" y="526" width="28" height="28" fill="#1E6BEE"/>
+  <text x="511" y="548" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL2_CARD3_TITLE}}</text>
+  <text x="475" y="580" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD3_L1}}</text>
+  <text x="475" y="606" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD3_L2}}</text>
+  <text x="475" y="632" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL2_CARD3_L3}}</text>
+  <!-- column 3 -->
+  <rect x="854" y="136" width="386" height="530" rx="14" fill="#FFFFFF" fill-opacity="0.85" stroke="#D4E5FC" stroke-width="1"/>
+  <rect x="866" y="148" width="362" height="62" rx="10" fill="url(#qaxHead)"/>
+  <text x="1047" y="189" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL3_TITLE}}</text>
+  <rect x="866" y="222" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL3_CARD1_ICON}}" x="880" y="234" width="28" height="28" fill="#1E6BEE"/>
+  <text x="918" y="256" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL3_CARD1_TITLE}}</text>
+  <text x="882" y="288" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD1_L1}}</text>
+  <text x="882" y="314" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD1_L2}}</text>
+  <text x="882" y="340" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD1_L3}}</text>
+  <rect x="866" y="368" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL3_CARD2_ICON}}" x="880" y="380" width="28" height="28" fill="#1E6BEE"/>
+  <text x="918" y="402" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL3_CARD2_TITLE}}</text>
+  <text x="882" y="434" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD2_L1}}</text>
+  <text x="882" y="460" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD2_L2}}</text>
+  <text x="882" y="486" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD2_L3}}</text>
+  <rect x="866" y="514" width="362" height="134" rx="10" fill="#0052CC" fill-opacity="0.07"/>
+  <use data-icon="{{COL3_CARD3_ICON}}" x="880" y="526" width="28" height="28" fill="#1E6BEE"/>
+  <text x="918" y="548" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{COL3_CARD3_TITLE}}</text>
+  <text x="882" y="580" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD3_L1}}</text>
+  <text x="882" y="606" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD3_L2}}</text>
+  <text x="882" y="632" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{COL3_CARD3_L3}}</text>
+  <text x="640" y="698" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#3182EF">{{CONCLUSION}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

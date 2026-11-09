@@ -208,7 +208,7 @@
 
 #### Slide 02 - [Page Name]
 
-- **Layout**: [Choose layout mode]
+- **Layout**: [Layout ID from `templates/content/layouts.json` if the template has one; otherwise choose a layout mode]
 - **Title**: [Page title]
 - **Chart**: [chart_type] (see VII. Chart Reference List)
 - **Content**:

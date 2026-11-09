@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: hub_numbered_rows. Fill every slot; see layouts.json for capacity. -->
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <circle cx="238" cy="440" r="123" fill="#1E6BEE" fill-opacity="0.12"/>
+  <circle cx="238" cy="440" r="80" fill="#1E6BEE"/>
+  <use data-icon="{{HUB_ICON}}" x="205" y="407" width="66" height="66" fill="#FFFFFF"/>
+  <rect x="20" y="300" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <text x="75" y="333" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT1}}</text>
+  <rect x="120" y="222" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <text x="175" y="255" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT2}}</text>
+  <rect x="262" y="246" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <text x="317" y="279" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT3}}</text>
+  <rect x="20" y="540" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <text x="75" y="573" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT4}}</text>
+  <rect x="258" y="585" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <text x="313" y="618" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT5}}</text>
+  <rect x="398" y="140" width="842" height="540" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="819" y="200" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="27" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{HEADING}}</text>
+  <!-- row 1 -->
+  <rect x="505" y="232" width="705" height="112" rx="14" fill="#F4F7FB" stroke="#D4E5FC" stroke-width="1"/>
+  <circle cx="500" cy="288" r="42" fill="#FFFFFF"/>
+  <circle cx="500" cy="288" r="31" fill="#1E6BEE"/>
+  <text x="500" y="298" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{R1_NUM}}</text>
+  <text x="556" y="296" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="21" font-weight="bold" fill="#0F1423">{{R1_TITLE}}</text>
+  <text x="748" y="284" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{R1_L1}}</text>
+  <text x="748" y="308" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{R1_L2}}</text>
+  <rect x="985" y="265" width="205" height="46" rx="10" fill="#1E6BEE" fill-opacity="0.15"/>
+  <text x="1087" y="294" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{R1_TAG}}</text>
+  <!-- row 2 -->
+  <rect x="505" y="372" width="705" height="112" rx="14" fill="#F4F7FB" stroke="#D4E5FC" stroke-width="1"/>
+  <circle cx="500" cy="428" r="42" fill="#FFFFFF"/>
+  <circle cx="500" cy="428" r="31" fill="#28A963"/>
+  <text x="500" y="438" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{R2_NUM}}</text>
+  <text x="556" y="436" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="21" font-weight="bold" fill="#0F1423">{{R2_TITLE}}</text>
+  <text x="748" y="424" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{R2_L1}}</text>
+  <text x="748" y="448" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{R2_L2}}</text>
+  <rect x="985" y="405" width="205" height="46" rx="10" fill="#28A963" fill-opacity="0.15"/>
+  <text x="1087" y="434" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#28A963">{{R2_TAG}}</text>
+  <!-- row 3 -->
+  <rect x="505" y="512" width="705" height="112" rx="14" fill="#F4F7FB" stroke="#D4E5FC" stroke-width="1"/>
+  <circle cx="500" cy="568" r="42" fill="#FFFFFF"/>
+  <circle cx="500" cy="568" r="31" fill="#42AFF0"/>
+  <text x="500" y="578" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{R3_NUM}}</text>
+  <text x="556" y="576" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="21" font-weight="bold" fill="#0F1423">{{R3_TITLE}}</text>
+  <text x="748" y="564" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{R3_L1}}</text>
+  <text x="748" y="588" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#0F1423">{{R3_L2}}</text>
+  <rect x="985" y="545" width="205" height="46" rx="10" fill="#42AFF0" fill-opacity="0.15"/>
+  <text x="1087" y="574" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#42AFF0">{{R3_TAG}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: image_stack_pills. Fill every slot; see layouts.json for capacity. -->
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <circle cx="232" cy="427" r="198" fill="#D9E8FC" fill-opacity="0.7"/>
+  <circle cx="232" cy="427" r="166" fill="#FFFFFF"/>
+  <rect data-image-slot="HERO" x="80" y="275" width="305" height="305" rx="6" fill="#F4F7FB" stroke="#9CAEC3" stroke-width="1" stroke-dasharray="6,4"/>
+  <!-- pill 1 -->
+  <rect x="379" y="150" width="861" height="45" rx="22" fill="#1E6BEE" fill-opacity="0.14"/>
+  <text x="401" y="180" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{P1_TAG}}</text>
+  <text x="544" y="179" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P1_BODY}}</text>
+  <!-- pill 2 -->
+  <rect x="417" y="219" width="823" height="45" rx="22" fill="#30C0B4" fill-opacity="0.14"/>
+  <text x="439" y="249" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#30C0B4">{{P2_TAG}}</text>
+  <text x="582" y="248" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P2_BODY}}</text>
+  <!-- pill 3 -->
+  <rect x="454" y="288" width="786" height="45" rx="22" fill="#75BD42" fill-opacity="0.14"/>
+  <text x="476" y="318" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#75BD42">{{P3_TAG}}</text>
+  <text x="619" y="317" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P3_BODY}}</text>
+  <!-- pill 4 -->
+  <rect x="471" y="357" width="769" height="45" rx="22" fill="#1E6BEE" fill-opacity="0.14"/>
+  <text x="493" y="387" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{P4_TAG}}</text>
+  <text x="636" y="386" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P4_BODY}}</text>
+  <!-- pill 5 -->
+  <rect x="471" y="426" width="769" height="45" rx="22" fill="#30C0B4" fill-opacity="0.14"/>
+  <text x="493" y="456" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#30C0B4">{{P5_TAG}}</text>
+  <text x="636" y="455" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P5_BODY}}</text>
+  <!-- pill 6 -->
+  <rect x="454" y="495" width="786" height="45" rx="22" fill="#75BD42" fill-opacity="0.14"/>
+  <text x="476" y="525" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#75BD42">{{P6_TAG}}</text>
+  <text x="619" y="524" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P6_BODY}}</text>
+  <!-- pill 7 -->
+  <rect x="417" y="564" width="823" height="45" rx="22" fill="#1E6BEE" fill-opacity="0.14"/>
+  <text x="439" y="594" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#1E6BEE">{{P7_TAG}}</text>
+  <text x="582" y="593" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P7_BODY}}</text>
+  <!-- pill 8 -->
+  <rect x="379" y="633" width="861" height="45" rx="22" fill="#30C0B4" fill-opacity="0.14"/>
+  <text x="401" y="663" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#30C0B4">{{P8_TAG}}</text>
+  <text x="544" y="662" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" fill="#333333">{{P8_BODY}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

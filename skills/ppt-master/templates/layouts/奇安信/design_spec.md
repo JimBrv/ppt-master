@@ -6,115 +6,97 @@
 
 - **Brand**: 奇安信 Qi An Xin — 新一代网络安全领军者
 - **Design Tone**: Authoritative, clean, tech-corporate, precise
-- **Key Visual Elements**: 
-  - Right-side watermark tiger silhouette (网安虎) with binary digits
-  - Top-left QAX logo with gold tiger icon
-  - White-to-light-blue bottom gradient background
-  - Clean left-aligned title typography
+- **Key Visual Elements**:
+  - Right-side tiger silhouette (网安虎) with binary digits, part of the background image
+  - Yellow tiger logo with QAX wordmark
+  - White-to-light-blue bottom gradient, part of the background image
+  - Left-aligned bold titles
 
 ## II. Canvas Specification
 
 - **Aspect Ratio**: 16:9
 - **viewBox**: `0 0 1280 720`
-- **Source PDF ratio**: 1376×768 (scaled down to 1280×714, mapped to 1280×720)
 
-## III. Color Scheme
+## III. Brand Assets
 
-### Primary Colors (pixel-extracted from official template)
+Backgrounds and the logo are real image files, referenced as `../images/<file>`. Copy the template's `<image>` tags verbatim; never redraw them.
 
-| Role | HEX | RGB | Usage |
-|------|-----|-----|-------|
-| **QAX Blue** (Primary) | `#003892` | (0, 56, 146) | Titles, tiger outline, logo text |
-| **QAX Gold** (Accent) | `#FAC800` | (250, 200, 0) | Tiger logo, gold highlights |
-| **QAX Light Blue** (Accent 2) | `#0884E2` | (8, 132, 226) | Content icons, callout accents |
-| **Table Header Blue** | `#4471C4` | (68, 113, 196) | Table header backgrounds |
+| File | Used by |
+|------|---------|
+| `qax_bg_cover.jpg` | `01_cover.svg` |
+| `qax_bg_chapter.jpg` | `02_chapter.svg` |
+| `qax_bg_content.jpg` | `03_content.svg`, all `content/*.svg` |
+| `qax_bg_ending.jpg` | `04_ending.svg` |
+| `qax_logo.png` | Chapter and content pages, at x=992.3 y=0 w=275.2 h=110.4. The cover and ending backgrounds already carry the logo. |
 
-### Backgrounds
-
-| Role | HEX | RGB | Usage |
-|------|-----|-----|-------|
-| **Base BG** | `#FFFFFF` | (255, 255, 255) | Top of slides |
-| **Bottom Gradient** | `#E8F1FF` | (232, 241, 255) | Bottom edge gradient |
-| **Insight Bar BG** | `#E5F2FC` | (229, 242, 252) | Light blue callout bar |
-| **Table Row Alt** | `#E9EBF5` | (233, 235, 245) | Alternating table row |
-
-### Text Colors
+## IV. Color Scheme
 
 | Role | HEX | Usage |
 |------|-----|-------|
-| **Title** | `#003892` | H1 page titles |
-| **Body** | `#333333` | Primary body text |
-| **Muted** | `#666666` | Captions, dates |
-| **Red Accent** | `#E03030` | Subtitle/unit label on cover |
+| **QAX Blue** | `#003893` | Cover, chapter, and ending text; content-layout page titles |
+| **Shell Title Blue** | `#1D4F9F` | Page title in `03_content.svg` |
+| **Primary Blue** | `#2C7FEF` | Solid panels, stage labels |
+| **Deep Blue** | `#1E6BEE` | Emphasis text, icons, bands |
+| **Header Gradient** | `#1773ED` → `#6C9CE5` | Column headers |
+| **Tint / Halo** | `#F4F7FB` / `#D9E8FC` | Card fills, callouts |
+| **Border** | `#D4E5FC` | Card outlines |
+| **Series Colors** | `#62CB78` `#30C0B4` `#42AFF0` `#75BD42` `#28A963` | Sequences and levels |
+| **Insight Accent** | `#0884E2` on `#E5F2FC` | Insight bar in `03_content.svg` |
+| **Body Text** | `#0F1423` / `#333333` | Primary body text |
+| **Muted Text** | `#666666` / `#9CAEC3` | Dates, sources, page numbers |
 
-### Tiger Watermark Colors
+## V. Typography System
 
-| Context | HEX | Usage |
-|---------|-----|-------|
-| **Cover/Ending** (dark) | `#013893` | Bold tiger outline + binary |
-| **Chapter/TOC** (light) | `#B4C3DC` | Soft watermark tiger outline |
+Font stack: `Microsoft YaHei, SimHei, sans-serif`. Sizes are SVG px; 1pt ≈ 1.33px on this canvas.
 
-## IV. Typography System
-
-- **Font Family**: Microsoft YaHei / sans-serif
-- **Cover Title**: 54px, bold, `#003892`
-- **Page Title (H1)**: 40px, bold, `#003892`
-- **Section Title (H2)**: 28px, bold, `#003892`
-- **Body Text**: 20px, regular, `#333333`
-- **Caption/Source**: 14px, regular, `#666666`
-- **Logo Slogan**: 16px, regular, `#003892`, letter-spacing: 4px
-
-## V. Core Design Principles
-
-### QAX Style Characteristics
-
-1. **Data-Driven**: Key data and insights at the core, strengthening argument support
-2. **Structured Thinking**: MECE principle, clear logical frameworks
-3. **Information Visualization**: Charts, matrices, and funnel models take priority
-4. **Professional Whitespace**: Ample breathing room, content coverage < 65%
-5. **Grid Alignment**: 40px baseline grid, precise alignment
-6. **Minimalist Icons**: Geometric shapes, avoiding ornate decoration
-7. **Professional Color Palette**: Avoiding flashy gradients, maintaining restraint
+| Element | Size | Weight |
+|---------|------|--------|
+| Cover title | 54px | Bold |
+| Cover subtitle | 28px | Regular |
+| Chapter title | 48px | Bold |
+| Chapter items | 28px | Regular |
+| Ending message | 64px | Bold |
+| Page title, content layouts | 40px | Bold |
+| Page title, `03_content.svg` | 36px | Bold |
+| Card and column titles | 20–26px | Bold |
+| Body text | 15–18px | Regular |
+| Captions and page numbers | 14px | Regular |
 
 ## VI. Page Structure
 
-### Cover (Page 1)
-- Logo + gold tiger icon: top-left (~80, 70)
-- Slogan "新一代网络安全领军者": below logo
-- Main title: left-aligned, vertical center (~80, 380)
-- Subtitle in gray bar: below title
-- Tiger watermark: right half, extending beyond right edge
-- BG: white → `#E8F1FF` bottom gradient
+| Page | Key geometry |
+|------|--------------|
+| Cover | Title x=103 y=420; subtitle y=510; date y=640 |
+| Chapter / TOC | Title x=60 y=90; items x=100 from y=220, 70px apart |
+| Content shell (`03_content.svg`) | Title x=50 y=62; summary y=110; insight bar y=140 h=50; content area x=50 y=210 w=1180 h=450; source y=695; page number right-aligned at x=1230 |
+| Content layouts (`content/*.svg`) | Title x=58 y=88; body fills y=140–695 |
+| Ending | Message x=100 y=330 and y=440; slogan x=108 y=545 |
 
-### Chapter/TOC (Page 2)
-- Page title: top-left (~60, 55), bold, `#003892`
-- QAX logo: top-right corner
-- Content items: left-side listing
-- Tiger watermark: right half, light blue `#B4C3DC` version
-- BG: pure white, no gradient
+## VII. Content Layouts
 
-### Content (Pages 3-4)
-- Page title: top-left (~60, 55), bold, `#003892`
-- QAX logo: top-right corner
-- Content safe area: 60px margins
-- Optional bottom insight bar: light blue `#E5F2FC`
-- Table headers: `#4471C4` with white text
-- BG: pure white
+`content/layouts.json` indexes fifteen ready-made content pages. Prefer one of these for every body page; use `03_content.svg` only when none fits.
 
-### Ending (Page 5)
-- Logo + gold tiger: top-left (~80, 70)
-- Thank you text: large, left-aligned, `#003892`
-- English "Thanks!": below
-- Slogan "让网络更安全 让世界更美好": bottom-left
-- Tiger watermark: right half, dark blue version
-- BG: white → `#E8F1FF` bottom gradient (same as cover)
+| ID | Best for |
+|----|----------|
+| `three_pillars` | Three parallel themes |
+| `chevron_stages` | Three sequential stages |
+| `stair_steps` | Graded levels, low to high |
+| `layered_rows` | Layered architectures |
+| `hub_numbered_rows` | One concept, three dimensions |
+| `image_stack_pills` | Advantage lists with a hero image |
+| `loop_nodes` | Five-step closed loops |
+| `stage_matrix_evidence` | Case studies backed by a screenshot |
+| `architecture_radial` | End-to-end architecture: inputs, central hub, outputs |
+| `probe_tier_channels` | One platform connecting several channels |
+| `three_track_checklist` | Three parallel step-by-step checklists |
+| `tier_chip_pyramid` | Compatibility or support matrices by tier |
+| `chain_core_grid` | A chain, a core engine, and its constraints |
+| `funnel_layers` | Layers that progressively filter or converge |
+| `arrow_track_columns` | Modes or policies that escalate in stages |
 
-## VI. SVG Technical Constraints
+## VIII. SVG Technical Constraints
 
 - `viewBox="0 0 1280 720"`
-- All backgrounds use `<rect>` elements
-- Tiger watermark rendered as `<path>` geometric approximation
 - Use `fill-opacity` for transparency (NO `rgba()`)
 - NO `clipPath`, `mask`, `<foreignObject>`, `<style>`, `class`
 - Gradients via `<defs>` + `<linearGradient>`
-- Text uses `<text>` + `<tspan>` for wrapping

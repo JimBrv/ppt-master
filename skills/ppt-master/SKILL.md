@@ -176,6 +176,7 @@ After the user confirms option A, copy template files to the project directory:
 ```bash
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.svg <project_path>/templates/
 cp ${SKILL_DIR}/templates/layouts/<template_name>/design_spec.md <project_path>/templates/
+cp -R ${SKILL_DIR}/templates/layouts/<template_name>/content <project_path>/templates/ 2>/dev/null || true
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.png <project_path>/images/ 2>/dev/null || true
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2>/dev/null || true
 ```

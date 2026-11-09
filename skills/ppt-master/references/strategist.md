@@ -279,6 +279,17 @@ Built-in library contains 33 chart templates; see `templates/charts/charts_index
 
 **PPT 16:9 (1280x720) key dimensions**: Safe area 1200x640 (40px margins); Title area 1200x100; Content area 1200x500; Footer area 1200x40.
 
+### Content Layout Library
+
+When `<project_path>/templates/content/layouts.json` exists, plan every body page against it:
+
+1. Pick a layout ID by `bestFor` / `avoidFor`, and write it as the page's field: `- **Layout**: three_pillars`.
+2. Fit the Content points to that layout's `items` rule and `slots` capacity; the numbers are maximum Chinese characters per line.
+3. If nothing fits, write `- **Layout**: free: <description>`. The Executor then uses `03_content.svg`.
+4. Vary layouts between neighboring pages, except for parallel instances such as a run of case studies.
+
+Cover, TOC, chapter, and ending pages keep their standard templates.
+
 ---
 
 ## 5. Template Flexibility Principle

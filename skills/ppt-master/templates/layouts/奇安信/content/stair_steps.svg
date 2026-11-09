@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: stair_steps. Fill every slot; see layouts.json for capacity. -->
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <polygon points="0,470 420,452 830,330 1280,205 1280,130 830,250 420,400 0,438" fill="#7995D8" fill-opacity="0.22"/>
+  <text x="58" y="160" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#4874CB">{{SUBTITLE}}</text>
+  <!-- step 1 -->
+  <rect x="35" y="295" width="181" height="400" rx="12" fill="#FFFFFF" stroke="#D4E5FC" stroke-width="1"/>
+  <path d="M35,335 L35,307 Q35,295 47,295 L204,295 Q216,295 216,307 L216,335 Z" fill="#2C7FEF"/>
+  <text x="125" y="322" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S1_NAME}}</text>
+  <circle cx="125" cy="407" r="58" fill="#62CB78" fill-opacity="0.2"/>
+  <circle cx="125" cy="407" r="40" fill="#62CB78"/>
+  <text x="125" y="416" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S1_GRADE}}</text>
+  <text x="125" y="495" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S1_HEAD1}}</text>
+  <text x="125" y="518" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S1_A1}}</text>
+  <text x="125" y="541" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S1_A2}}</text>
+  <text x="125" y="571" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S1_HEAD2}}</text>
+  <text x="125" y="594" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S1_B1}}</text>
+  <text x="125" y="617" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S1_B2}}</text>
+  <text x="125" y="640" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S1_B3}}</text>
+  <!-- step 2 -->
+  <rect x="232" y="295" width="181" height="400" rx="12" fill="#FFFFFF" stroke="#D4E5FC" stroke-width="1"/>
+  <path d="M232,335 L232,307 Q232,295 244,295 L401,295 Q413,295 413,307 L413,335 Z" fill="#2C7FEF"/>
+  <text x="322" y="322" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S2_NAME}}</text>
+  <circle cx="322" cy="407" r="58" fill="#62CB78" fill-opacity="0.2"/>
+  <circle cx="322" cy="407" r="40" fill="#62CB78"/>
+  <text x="322" y="416" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S2_GRADE}}</text>
+  <text x="322" y="495" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S2_HEAD1}}</text>
+  <text x="322" y="518" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S2_A1}}</text>
+  <text x="322" y="541" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S2_A2}}</text>
+  <text x="322" y="571" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S2_HEAD2}}</text>
+  <text x="322" y="594" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S2_B1}}</text>
+  <text x="322" y="617" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S2_B2}}</text>
+  <text x="322" y="640" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S2_B3}}</text>
+  <!-- step 3 -->
+  <rect x="428" y="271" width="181" height="400" rx="12" fill="#FFFFFF" stroke="#D4E5FC" stroke-width="1"/>
+  <path d="M428,311 L428,283 Q428,271 440,271 L597,271 Q609,271 609,283 L609,311 Z" fill="#2C7FEF"/>
+  <text x="518" y="298" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S3_NAME}}</text>
+  <circle cx="518" cy="383" r="58" fill="#30C0B4" fill-opacity="0.2"/>
+  <circle cx="518" cy="383" r="40" fill="#30C0B4"/>
+  <text x="518" y="392" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S3_GRADE}}</text>
+  <text x="518" y="471" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S3_HEAD1}}</text>
+  <text x="518" y="494" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S3_A1}}</text>
+  <text x="518" y="517" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S3_A2}}</text>
+  <text x="518" y="547" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S3_HEAD2}}</text>
+  <text x="518" y="570" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S3_B1}}</text>
+  <text x="518" y="593" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S3_B2}}</text>
+  <text x="518" y="616" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S3_B3}}</text>
+  <!-- step 4 -->
+  <rect x="624" y="243" width="181" height="400" rx="12" fill="#FFFFFF" stroke="#D4E5FC" stroke-width="1"/>
+  <path d="M624,283 L624,255 Q624,243 636,243 L793,243 Q805,243 805,255 L805,283 Z" fill="#2C7FEF"/>
+  <text x="714" y="270" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S4_NAME}}</text>
+  <circle cx="714" cy="355" r="58" fill="#4991F1" fill-opacity="0.2"/>
+  <circle cx="714" cy="355" r="40" fill="#4991F1"/>
+  <text x="714" y="364" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S4_GRADE}}</text>
+  <text x="714" y="443" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S4_HEAD1}}</text>
+  <text x="714" y="466" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S4_A1}}</text>
+  <text x="714" y="489" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S4_A2}}</text>
+  <text x="714" y="519" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S4_HEAD2}}</text>
+  <text x="714" y="542" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S4_B1}}</text>
+  <text x="714" y="565" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S4_B2}}</text>
+  <text x="714" y="588" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S4_B3}}</text>
+  <!-- step 5 -->
+  <rect x="821" y="198" width="181" height="400" rx="12" fill="#FFFFFF" stroke="#D4E5FC" stroke-width="1"/>
+  <path d="M821,238 L821,210 Q821,198 833,198 L990,198 Q1002,198 1002,210 L1002,238 Z" fill="#2C7FEF"/>
+  <text x="911" y="225" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S5_NAME}}</text>
+  <circle cx="911" cy="310" r="58" fill="#4381DD" fill-opacity="0.2"/>
+  <circle cx="911" cy="310" r="40" fill="#4381DD"/>
+  <text x="911" y="319" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S5_GRADE}}</text>
+  <text x="911" y="398" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S5_HEAD1}}</text>
+  <text x="911" y="421" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S5_A1}}</text>
+  <text x="911" y="444" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S5_A2}}</text>
+  <text x="911" y="474" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S5_HEAD2}}</text>
+  <text x="911" y="497" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S5_B1}}</text>
+  <text x="911" y="520" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S5_B2}}</text>
+  <text x="911" y="543" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S5_B3}}</text>
+  <!-- step 6 -->
+  <rect x="1019" y="141" width="181" height="400" rx="12" fill="#FFFFFF" stroke="#D4E5FC" stroke-width="1"/>
+  <path d="M1019,181 L1019,153 Q1019,141 1031,141 L1188,141 Q1200,141 1200,153 L1200,181 Z" fill="#2C7FEF"/>
+  <text x="1109" y="168" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S6_NAME}}</text>
+  <circle cx="1109" cy="253" r="58" fill="#1E6BEE" fill-opacity="0.2"/>
+  <circle cx="1109" cy="253" r="40" fill="#1E6BEE"/>
+  <text x="1109" y="262" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S6_GRADE}}</text>
+  <text x="1109" y="341" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S6_HEAD1}}</text>
+  <text x="1109" y="364" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S6_A1}}</text>
+  <text x="1109" y="387" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S6_A2}}</text>
+  <text x="1109" y="417" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{S6_HEAD2}}</text>
+  <text x="1109" y="440" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S6_B1}}</text>
+  <text x="1109" y="463" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S6_B2}}</text>
+  <text x="1109" y="486" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" text-anchor="middle" fill="#0F1423">{{S6_B3}}</text>
+  <text x="1240" y="620" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#4874CB">{{AXIS_NOTE}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

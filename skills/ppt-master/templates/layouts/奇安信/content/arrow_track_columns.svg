@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: arrow_track_columns. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="qaxTrackA" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#31C068"/><stop offset="100%" stop-color="#30C0B4"/></linearGradient>
+    <linearGradient id="qaxTrackB" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#44B4CF"/><stop offset="100%" stop-color="#4874CB"/></linearGradient>
+    <linearGradient id="qaxBtn" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4991F1"/><stop offset="100%" stop-color="#1B71FF"/></linearGradient>
+    <linearGradient id="qaxArrow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4874CB"/><stop offset="100%" stop-color="#E54C5E"/></linearGradient>
+  </defs>
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <!-- track -->
+  <rect x="132" y="216" width="340" height="49" fill="url(#qaxTrackA)"/>
+  <rect x="470" y="216" width="384" height="49" fill="url(#qaxTrackB)"/>
+  <polygon points="852,216 1130,216 1130,194 1203,240 1130,287 1130,265 852,265" fill="url(#qaxArrow)"/>
+  <rect x="100" y="201" width="72" height="72" rx="24" fill="#31C068"/>
+  <use data-icon="{{S1_ICON}}" x="119" y="220" width="34" height="34" fill="#FFFFFF"/>
+  <text x="300" y="250" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S1_LABEL}}</text>
+  <rect x="425" y="201" width="72" height="72" rx="24" fill="#30C0B4"/>
+  <use data-icon="{{S2_ICON}}" x="444" y="220" width="34" height="34" fill="#FFFFFF"/>
+  <text x="665" y="250" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S2_LABEL}}</text>
+  <rect x="822" y="201" width="72" height="72" rx="24" fill="#4874CB"/>
+  <use data-icon="{{S3_ICON}}" x="841" y="220" width="34" height="34" fill="#FFFFFF"/>
+  <text x="1010" y="250" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{S3_LABEL}}</text>
+  <!-- column 1 -->
+  <rect x="160" y="288" width="253" height="197" rx="12" fill="#FFFFFF" fill-opacity="0.7"/>
+  <text x="286" y="344" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">{{C1_TITLE}}</text>
+  <text x="286" y="412" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#0F1423">{{C1_L1}}</text>
+  <text x="286" y="442" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#0F1423">{{C1_L2}}</text>
+  <!-- column 2 -->
+  <rect x="546" y="288" width="253" height="197" rx="12" fill="#FFFFFF" fill-opacity="0.7"/>
+  <text x="672" y="344" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">{{C2_TITLE}}</text>
+  <text x="672" y="412" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#0F1423">{{C2_L1}}</text>
+  <text x="672" y="442" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#0F1423">{{C2_L2}}</text>
+  <!-- column 3 -->
+  <rect x="931" y="288" width="253" height="197" rx="12" fill="#FFFFFF" fill-opacity="0.7"/>
+  <text x="1057" y="344" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#000000">{{C3_TITLE}}</text>
+  <text x="1057" y="412" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#0F1423">{{C3_L1}}</text>
+  <text x="1057" y="442" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#0F1423">{{C3_L2}}</text>
+  <rect x="160" y="511" width="1024" height="95" rx="14" fill="#FFFFFF" fill-opacity="0.7"/>
+  <rect x="215" y="533" width="184" height="50" rx="6" fill="url(#qaxBtn)"/>
+  <text x="307" y="566" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{POLICY_BTN}}</text>
+  <text x="628" y="566" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#4991F1">{{POLICY_A}}</text>
+  <text x="961" y="566" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#4991F1">{{POLICY_B}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

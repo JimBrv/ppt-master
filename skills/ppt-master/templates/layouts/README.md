@@ -112,6 +112,7 @@ Each template should contain the following standard files (TOC page is optional)
 | `02_chapter.svg` | Yes | Chapter page | Chapter number, chapter title |
 | `03_content.svg` | Yes | Content page | Fixed header/footer, flexible content area |
 | `04_ending.svg` | Yes | Ending page | Thank-you message, contact info |
+| `content/` | Optional | Content layout library | Complete body pages with named slots, indexed by `content/layouts.json` |
 
 > **Design philosophy**: Templates define visual consistency and structural pages; content pages maintain maximum flexibility, letting AI determine layout based on actual content.
 

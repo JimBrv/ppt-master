@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: layered_rows. Fill every slot; see layouts.json for capacity. -->
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <rect x="571" y="140" width="8" height="464" rx="4" fill="#D4E5FC"/>
+  <!-- layer 1 -->
+  <rect x="150" y="140" width="998" height="104" rx="8" fill="#7995D8" fill-opacity="0.18"/>
+  <rect x="1143" y="140" width="5" height="104" rx="2" fill="#7995D8"/>
+  <circle cx="575" cy="192" r="30" fill="#7995D8"/>
+  <use data-icon="{{R1_ICON}}" x="559" y="176" width="32" height="32" fill="#FFFFFF"/>
+  <text x="176" y="201" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#0F1423">{{R1_LABEL}}</text>
+  <text x="636" y="186" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R1_L1}}</text>
+  <text x="636" y="212" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R1_L2}}</text>
+  <!-- layer 2 -->
+  <rect x="150" y="256" width="998" height="104" rx="8" fill="#4381DD" fill-opacity="0.18"/>
+  <rect x="1143" y="256" width="5" height="104" rx="2" fill="#4381DD"/>
+  <circle cx="575" cy="308" r="30" fill="#4381DD"/>
+  <use data-icon="{{R2_ICON}}" x="559" y="292" width="32" height="32" fill="#FFFFFF"/>
+  <text x="176" y="317" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#0F1423">{{R2_LABEL}}</text>
+  <text x="636" y="302" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R2_L1}}</text>
+  <text x="636" y="328" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R2_L2}}</text>
+  <!-- layer 3 -->
+  <rect x="150" y="372" width="998" height="104" rx="8" fill="#44B4CF" fill-opacity="0.18"/>
+  <rect x="1143" y="372" width="5" height="104" rx="2" fill="#44B4CF"/>
+  <circle cx="575" cy="424" r="30" fill="#44B4CF"/>
+  <use data-icon="{{R3_ICON}}" x="559" y="408" width="32" height="32" fill="#FFFFFF"/>
+  <text x="176" y="433" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#0F1423">{{R3_LABEL}}</text>
+  <text x="636" y="418" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R3_L1}}</text>
+  <text x="636" y="444" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R3_L2}}</text>
+  <!-- layer 4 -->
+  <rect x="150" y="488" width="998" height="104" rx="8" fill="#62CB78" fill-opacity="0.18"/>
+  <rect x="1143" y="488" width="5" height="104" rx="2" fill="#62CB78"/>
+  <circle cx="575" cy="540" r="30" fill="#62CB78"/>
+  <use data-icon="{{R4_ICON}}" x="559" y="524" width="32" height="32" fill="#FFFFFF"/>
+  <text x="176" y="549" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#0F1423">{{R4_LABEL}}</text>
+  <text x="636" y="534" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R4_L1}}</text>
+  <text x="636" y="560" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#0F1423">{{R4_L2}}</text>
+  <rect x="186" y="620" width="915" height="56" rx="10" fill="#FFFFFF" fill-opacity="0.9" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="643" y="656" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#3182EF">{{CONCLUSION}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

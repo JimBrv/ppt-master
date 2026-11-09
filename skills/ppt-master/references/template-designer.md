@@ -121,6 +121,7 @@ templates/layouts/<template_name>/
 ├── 02_toc.svg          # Optional
 ├── 03_content.svg
 ├── 04_ending.svg
+├── content/            # Optional: layouts.json + complete body pages with {{SLOT}} text
 └── *.png / *.jpg       # Image assets (if any)
 ```
 

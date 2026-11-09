@@ -40,6 +40,8 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import base64
+import mimetypes
 import re
 import sys
 import webbrowser
@@ -831,6 +833,21 @@ def build_html(project_name: str, spec_slides: List[SlideOutline],
 # CLI
 # ---------------------------------------------------------------------------
 
+def inline_svg_images(svg_path: Path, project_path: Path) -> bytes:
+    """svg_output pages reference ../images/*, but a browser never loads
+    sub-resources for an SVG shown through <img>; they must travel inside it."""
+    def embed(m):
+        img = (svg_path.parent / m.group(2)).resolve()
+        if not img.is_file() or not img.is_relative_to(project_path.resolve()):
+            return m.group(0)
+        mime = mimetypes.guess_type(img.name)[0] or 'image/png'
+        return f'{m.group(1)}="data:{mime};base64,{base64.b64encode(img.read_bytes()).decode()}"'
+
+    text = svg_path.read_text(encoding='utf-8')
+    return re.sub(r'((?:xlink:)?href)="(?!data:|#|https?:)([^"]+\.(?:png|jpe?g|gif|webp))"',
+                  embed, text, flags=re.I).encode('utf-8')
+
+
 def serve_preview(project_path: Path, port: int, open_browser: bool) -> int:
     """Serve `project_path` over local HTTP so preview.html's relative image
     paths (svg_output/svg_final/...) resolve like a normal website, instead of
@@ -887,6 +904,16 @@ def serve_preview(project_path: Path, port: int, open_browser: bool) -> int:
                     build_preview(project_path)
                 except Exception:
                     pass  # serve the last good file rather than 500-ing
+            local = Path(self.translate_path(self.path))
+            if local.suffix.lower() == '.svg' and local.is_file():
+                body = inline_svg_images(local, project_path)
+                self.send_response(200)
+                self.send_header('Content-Type', 'image/svg+xml')
+                self.send_header('Content-Length', str(len(body)))
+                self.send_header('Cache-Control', 'no-store')
+                self.end_headers()
+                self.wfile.write(body)
+                return
             return super().do_GET()
 
     httpd = http.server.ThreadingHTTPServer(('127.0.0.1', port), PreviewHandler)

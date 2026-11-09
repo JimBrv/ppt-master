@@ -29,7 +29,7 @@
         "google_style",
         "mckinsey",
         "anthropic",
-        "qax_style",
+        "奇安信",
         "中汽研_常规",
         "中汽研_商务",
         "中汽研_现代",
@@ -378,11 +378,12 @@
         "Annual report"
       ]
     },
-    "qax_style": {
+    "奇安信": {
       "label": "Qi An Xin (奇安信) Cybersecurity Template",
       "summary": "Official QAX brand template for cybersecurity reports, business planning, and tech solution presentations. Features the signature tiger watermark and binary motifs.",
       "tone": "Authoritative, clean, tech-corporate, precise, cybersecurity",
       "themeMode": "Light theme (white background + white-to-blue gradient on cover/ending + QAX blue title accents)",
+      "contentLayouts": 15,
       "keywords": [
         "QAX",
         "奇安信",

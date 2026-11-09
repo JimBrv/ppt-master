@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: funnel_layers. Fill every slot; see layouts.json for capacity. -->
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <!-- layer 1 band -->
+  <rect x="171" y="195" width="977" height="90" rx="4" fill="#7995D8" fill-opacity="0.16"/>
+  <rect x="1143" y="195" width="5" height="90" rx="2" fill="#7995D8"/>
+  <!-- layer 2 band -->
+  <rect x="171" y="295" width="977" height="94" rx="4" fill="#4381DD" fill-opacity="0.16"/>
+  <rect x="1143" y="295" width="5" height="94" rx="2" fill="#4381DD"/>
+  <!-- layer 3 band -->
+  <rect x="171" y="399" width="977" height="87" rx="4" fill="#44B4CF" fill-opacity="0.16"/>
+  <rect x="1143" y="399" width="5" height="87" rx="2" fill="#44B4CF"/>
+  <!-- layer 4 band -->
+  <rect x="171" y="497" width="977" height="79" rx="4" fill="#62CB78" fill-opacity="0.16"/>
+  <rect x="1143" y="497" width="5" height="79" rx="2" fill="#62CB78"/>
+  <!-- funnel, drawn bottom-up so upper layers overlap lower ones -->
+  <path d="M512,473 L666,473 L645,567 Q589,587 533,567 Z" fill="#62CB78"/>
+  <path d="M480,378 L698,378 L668,473 Q589,493 510,473 Z" fill="#44B4CF"/>
+  <path d="M437,287 L741,287 L699,379 Q589,399 479,379 Z" fill="#4381DD"/>
+  <path d="M379,194 L799,194 L740,288 Q589,308 438,288 Z" fill="#7995D8"/>
+  <ellipse cx="589" cy="194" rx="209" ry="15" fill="#BCC8E3"/>
+  <circle cx="589" cy="256" r="26" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+  <use data-icon="{{L1_ICON}}" x="575" y="242" width="28" height="28" fill="#FFFFFF"/>
+  <text x="181" y="248" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#0F1423">{{L1_LABEL}}</text>
+  <text x="1135" y="235" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L1_D1}}</text>
+  <text x="1135" y="259" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L1_D2}}</text>
+  <circle cx="589" cy="348" r="26" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+  <use data-icon="{{L2_ICON}}" x="575" y="334" width="28" height="28" fill="#FFFFFF"/>
+  <text x="181" y="350" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#0F1423">{{L2_LABEL}}</text>
+  <text x="1135" y="337" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L2_D1}}</text>
+  <text x="1135" y="361" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L2_D2}}</text>
+  <circle cx="589" cy="440" r="26" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+  <use data-icon="{{L3_ICON}}" x="575" y="426" width="28" height="28" fill="#FFFFFF"/>
+  <text x="181" y="450" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#0F1423">{{L3_LABEL}}</text>
+  <text x="1135" y="437" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L3_D1}}</text>
+  <text x="1135" y="461" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L3_D2}}</text>
+  <circle cx="589" cy="533" r="26" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+  <use data-icon="{{L4_ICON}}" x="575" y="519" width="28" height="28" fill="#FFFFFF"/>
+  <text x="181" y="544" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-weight="bold" fill="#0F1423">{{L4_LABEL}}</text>
+  <text x="1135" y="531" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L4_D1}}</text>
+  <text x="1135" y="555" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="end" fill="#0F1423">{{L4_D2}}</text>
+  <text x="643" y="664" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#3182EF">{{CONCLUSION}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

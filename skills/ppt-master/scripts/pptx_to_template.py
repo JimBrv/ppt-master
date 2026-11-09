@@ -10,10 +10,11 @@ template SVGs plus the brand assets, so the Executor's normal
 
 What it does:
   1. Unpacks the .pptx and reads theme colours + fonts.
-  2. Picks the best-matching layout for each standard page type
-     (cover / chapter / content / ending) by name, then by artwork.
-  3. Extracts every <p:pic> on that layout with its EMU geometry, converts to
-     the 1280x720 canvas, and writes a template SVG referencing ../images/.
+  2. Picks the layout for each standard page type (cover / toc / chapter /
+     content / ending) by name, preferring the one the deck's slides really use.
+  3. Extracts the layout's art -- its <p:bg> picture fill (or the master's when
+     the layout has none), the master's pictures, and its own <p:pic>s --
+     converts to the 1280x720 canvas, and writes SVGs referencing ../images/.
   4. Copies the referenced media into the project's images/ (downsampled to
      2x canvas by default -- template art is routinely 3-4x oversized).
   5. Writes templates/design_spec.md documenting the extracted palette.
@@ -23,6 +24,7 @@ Usage:
     python3 scripts/pptx_to_template.py <template.pptx> <project_path> --no-downsample
 """
 import argparse
+import collections
 import re
 import shutil
 import subprocess
@@ -44,73 +46,134 @@ NS = {
 # overwhelmingly authored in PowerPoint/WPS zh-CN.
 TYPE_HINTS = {
     'cover':   ['标题幻灯片', '封面', 'title slide', 'cover'],
+    'toc':     ['目录', 'contents', 'agenda'],
     'chapter': ['节标题', '章节', 'section', 'divider'],
-    'content': ['标题和内容', '内容', 'content', 'title and content'],
-    'ending':  ['末尾幻灯片', '结束', '尾页', 'ending', 'closing', 'thank'],
+    'content': ['内板', '纯文字', '标题和内容', '内容', 'content', 'title and content'],
+    'ending':  ['末尾幻灯片', '结束', '尾页', '感谢', 'ending', 'closing', 'thank'],
 }
+# Whole-name matches only: "标题" is a substring of "标题幻灯片" and "标题和内容".
+EXACT_HINTS = {'chapter': ['标题']}
+REQUIRED_TYPES = ('cover', 'chapter', 'content', 'ending')
 
 STANDARD_FILES = {
     'cover': '01_cover.svg',
+    'toc': '02_toc.svg',
     'chapter': '02_chapter.svg',
     'content': '03_content.svg',
     'ending': '04_ending.svg',
 }
 
-
-def emu_to_px(v, axis='x'):
-    scale = CANVAS_W / (13.3333333) if axis == 'x' else CANVAS_H / 7.5
-    return round(int(v) / EMU_PER_IN * scale)
+# What finalize_svg.py can embed; EMF/WMF/TIFF art would be left dangling.
+SUPPORTED_MEDIA = {'.png', '.jpg', '.jpeg', '.gif', '.webp'}
 
 
-def parse_rels(z, layout_name):
-    """rId -> media filename for one slide layout."""
-    rels_path = f'ppt/slideLayouts/_rels/{layout_name}.rels'
-    out = {}
+def slide_size(z):
+    sz = ET.fromstring(z.read('ppt/presentation.xml')).find('p:sldSz', NS)
+    return int(sz.get('cx')), int(sz.get('cy'))
+
+
+def parse_rels(z, part):
+    """(rId -> media filename, master part path) for a layout or master part."""
+    directory, name = part.rsplit('/', 1)
+    media, master = {}, None
     try:
-        xml = z.read(rels_path)
+        xml = z.read(f'{directory}/_rels/{name}.rels')
     except KeyError:
-        return out
+        return media, master
     for rel in ET.fromstring(xml):
         tgt = rel.get('Target', '')
-        if '/media/' in tgt or tgt.startswith('../media/'):
-            out[rel.get('Id')] = tgt.rsplit('/', 1)[-1]
-    return out
+        if '/media/' in tgt:
+            media[rel.get('Id')] = tgt.rsplit('/', 1)[-1]
+        elif 'slideMasters/' in tgt:
+            master = 'ppt/slideMasters/' + tgt.rsplit('/', 1)[-1]
+    return media, master
 
 
-def layout_pictures(z, layout_file):
-    """Every picture on a layout, as (media_filename, x, y, w, h) in canvas px."""
-    rmap = parse_rels(z, layout_file)
-    root = ET.fromstring(z.read(f'ppt/slideLayouts/{layout_file}'))
+def walk_pictures(node, rmap, size, t=(1.0, 1.0, 0.0, 0.0)):
+    """Every <p:pic> below node in canvas px; t maps child EMU to slide EMU."""
+    cx, cy = size
+    sx, sy, tx, ty = t
     pics = []
-    for pic in root.iter(f'{{{NS["p"]}}}pic'):
-        blip = pic.find(f'.//{{{NS["a"]}}}blip')
-        # Read geometry from the shape's own <a:xfrm>, not any nested one --
-        # nested <a:ext> elements (effects, crops) lack cx/cy.
-        xfrm = pic.find(f'{{{NS["p"]}}}spPr/{{{NS["a"]}}}xfrm')
-        off = xfrm.find(f'{{{NS["a"]}}}off') if xfrm is not None else None
-        ext = xfrm.find(f'{{{NS["a"]}}}ext') if xfrm is not None else None
-        if blip is None or off is None or ext is None:
-            continue
-        if ext.get('cx') is None or off.get('x') is None:
-            continue
-        rid = blip.get(f'{{{NS["r"]}}}embed')
-        media = rmap.get(rid)
-        if not media:
-            continue
-        pics.append({
-            'media': media,
-            'x': emu_to_px(off.get('x'), 'x'),
-            'y': emu_to_px(off.get('y'), 'y'),
-            'w': emu_to_px(ext.get('cx'), 'x'),
-            'h': emu_to_px(ext.get('cy'), 'y'),
-        })
+    for child in node:
+        tag = child.tag.rsplit('}', 1)[-1]
+        if tag == 'grpSp':
+            xfrm = child.find('p:grpSpPr/a:xfrm', NS)
+            inner = t
+            if xfrm is not None:
+                off, ext = xfrm.find('a:off', NS), xfrm.find('a:ext', NS)
+                ch_off, ch_ext = xfrm.find('a:chOff', NS), xfrm.find('a:chExt', NS)
+                if None not in (off, ext, ch_off, ch_ext) and int(ch_ext.get('cx')) and int(ch_ext.get('cy')):
+                    gx = int(ext.get('cx')) / int(ch_ext.get('cx'))
+                    gy = int(ext.get('cy')) / int(ch_ext.get('cy'))
+                    inner = (sx * gx, sy * gy,
+                             tx + sx * (int(off.get('x')) - int(ch_off.get('x')) * gx),
+                             ty + sy * (int(off.get('y')) - int(ch_off.get('y')) * gy))
+            pics += walk_pictures(child, rmap, size, inner)
+        elif tag == 'pic':
+            blip = child.find('.//a:blip', NS)
+            # The shape's own <a:xfrm>: nested <a:ext> (effects, crops) lack cx/cy.
+            xfrm = child.find('p:spPr/a:xfrm', NS)
+            if blip is None or xfrm is None:
+                continue
+            off, ext = xfrm.find('a:off', NS), xfrm.find('a:ext', NS)
+            media = rmap.get(blip.get(f'{{{NS["r"]}}}embed'))
+            if off is None or ext is None or not media or ext.get('cx') is None:
+                continue
+            pics.append({
+                'media': media,
+                'x': round((int(off.get('x')) * sx + tx) / cx * CANVAS_W),
+                'y': round((int(off.get('y')) * sy + ty) / cy * CANVAS_H),
+                'w': round(int(ext.get('cx')) * sx / cx * CANVAS_W),
+                'h': round(int(ext.get('cy')) * sy / cy * CANVAS_H),
+            })
     return pics
+
+
+def background_art(root, rmap):
+    """(part declares its own background?, [full-canvas picture fill, if any])."""
+    bg = root.find('p:cSld/p:bg', NS)
+    if bg is None:
+        return False, []
+    blip = bg.find('.//a:blip', NS)
+    media = rmap.get(blip.get(f'{{{NS["r"]}}}embed')) if blip is not None else None
+    if not media:
+        return True, []
+    crop = bg.find('.//a:srcRect', NS)
+    return True, [{'media': media, 'x': 0, 'y': 0, 'w': CANVAS_W, 'h': CANVAS_H,
+                   'cropped': crop is not None and any(int(v) for v in crop.attrib.values())}]
+
+
+def layout_pictures(z, layout_file, size):
+    """A layout's art, back to front: background, master pictures, own pictures."""
+    part = f'ppt/slideLayouts/{layout_file}'
+    root = ET.fromstring(z.read(part))
+    rmap, master = parse_rels(z, part)
+    has_bg, art = background_art(root, rmap)
+    if master:
+        master_root = ET.fromstring(z.read(master))
+        master_rmap, _ = parse_rels(z, master)
+        if not has_bg:
+            art = background_art(master_root, master_rmap)[1]
+        if root.get('showMasterSp', '1') != '0':
+            art += walk_pictures(master_root.find('p:cSld/p:spTree', NS), master_rmap, size)
+    return art + walk_pictures(root.find('p:cSld/p:spTree', NS), rmap, size)
 
 
 def layout_display_name(z, layout_file):
     root = ET.fromstring(z.read(f'ppt/slideLayouts/{layout_file}'))
-    csld = root.find(f'{{{NS["p"]}}}cSld')
+    csld = root.find('p:cSld', NS)
     return (csld.get('name') if csld is not None else '') or ''
+
+
+def layout_usage(z):
+    """layout filename -> number of slides built on it."""
+    used = collections.Counter()
+    for n in z.namelist():
+        if re.fullmatch(r'ppt/slides/_rels/slide\d+\.xml\.rels', n):
+            m = re.search(r'slideLayouts/(slideLayout\d+\.xml)', z.read(n).decode('utf-8', 'ignore'))
+            if m:
+                used[m.group(1)] += 1
+    return used
 
 
 def theme_info(z):
@@ -137,32 +200,36 @@ def theme_info(z):
     return colors, fonts
 
 
-def pick_layouts(z):
-    """Map each standard page type to the most suitable layout file."""
+def pick_layouts(z, size, usage):
+    """Map page types to layouts: (ptype -> (file, name, pics), guessed ptypes)."""
     files = sorted((n.rsplit('/', 1)[-1] for n in z.namelist()
                     if re.fullmatch(r'ppt/slideLayouts/slideLayout\d+\.xml', n)),
                    key=lambda s: int(re.search(r'(\d+)', s).group(1)))
-    named = [(f, layout_display_name(z, f), layout_pictures(z, f)) for f in files]
+    named = [(f, layout_display_name(z, f), layout_pictures(z, f, size)) for f in files]
 
-    chosen = {}
-    for ptype, hints in TYPE_HINTS.items():
-        for f, name, pics in named:
-            if any(h.lower() in name.lower() for h in hints) and pics:
-                chosen[ptype] = (f, name, pics)
-                break
-    # Fallback: any layout carrying a full-bleed background we haven't used.
-    used = {v[0] for v in chosen.values()}
+    def matches(ptype, name):
+        low = name.strip().lower()
+        return low in EXACT_HINTS.get(ptype, []) or any(h in low for h in TYPE_HINTS[ptype])
+
+    chosen, used, guessed = {}, set(), []
     for ptype in TYPE_HINTS:
+        cands = [n for n in named if n[2] and n[0] not in used and matches(ptype, n[1])]
+        if cands:
+            # Decks carry dead layouts; the one slides really use is the design.
+            best = max(cands, key=lambda n: usage[n[0]])
+            chosen[ptype] = best
+            used.add(best[0])
+    for ptype in REQUIRED_TYPES:
         if ptype in chosen:
             continue
-        for f, name, pics in named:
-            if f in used or not pics:
-                continue
-            if any(p['w'] >= CANVAS_W * 0.95 for p in pics):
-                chosen[ptype] = (f, name, pics)
-                used.add(f)
-                break
-    return chosen
+        cands = [n for n in named if n[0] not in used
+                 and any(p['w'] >= CANVAS_W * 0.95 for p in n[2])]
+        if cands:
+            best = max(cands, key=lambda n: usage[n[0]])
+            chosen[ptype] = best
+            used.add(best[0])
+            guessed.append(ptype)
+    return chosen, guessed
 
 
 def downsample(path: Path, max_px: int):
@@ -199,13 +266,18 @@ def main() -> int:
     img_dir.mkdir(exist_ok=True)
 
     with zipfile.ZipFile(args.pptx) as z:
+        size = slide_size(z)
+        if abs(size[0] / size[1] - CANVAS_W / CANVAS_H) > 0.01:
+            print(f'[WARN] Deck is {size[0]}x{size[1]} EMU, not 16:9; art will be stretched '
+                  f'to {CANVAS_W}x{CANVAS_H}.', file=sys.stderr)
         colors, fonts = theme_info(z)
-        chosen = pick_layouts(z)
-        if not chosen:
-            print('[ERROR] No usable slide layouts with artwork found in this .pptx.',
-                  file=sys.stderr)
-            print('        Its design may live on the slides themselves rather than '
-                  'the layouts; extract manually in that case.', file=sys.stderr)
+        usage = layout_usage(z)
+        chosen, guessed = pick_layouts(z, size, usage)
+        if 'content' not in chosen:
+            print('[ERROR] No slide layout with background art or pictures can serve as '
+                  'the content page.', file=sys.stderr)
+            print('        Checked layout/master <p:bg> picture fills and <p:pic>s; any '
+                  'vector-only design must be extracted by hand.', file=sys.stderr)
             return 1
 
         exported = {}
@@ -217,9 +289,16 @@ def main() -> int:
                    f'  <!-- Extracted from {args.pptx.name} :: {lname} ({lfile}) -->',
                    '  <!-- Base layer: copy these <image> tags verbatim into every page -->']
             for p in pics:
+                if Path(p['media']).suffix.lower() not in SUPPORTED_MEDIA:
+                    print(f'[WARN] {ptype}: skipped {p["media"]} (unsupported image format)',
+                          file=sys.stderr)
+                    continue
+                if p.get('cropped'):
+                    print(f'[WARN] {ptype}: background {p["media"]} is cropped in the deck; '
+                          'exported uncropped, check it visually.', file=sys.stderr)
                 src = f'tpl_{ptype}_{Path(p["media"]).stem}{Path(p["media"]).suffix}'
                 dst = img_dir / src
-                if not dst.exists():
+                if src not in exported:
                     dst.write_bytes(z.read(f'ppt/media/{p["media"]}'))
                     if args.max_px:
                         downsample(dst, args.max_px)
@@ -230,7 +309,16 @@ def main() -> int:
             svg.append('</svg>')
             out = tpl_dir / STANDARD_FILES[ptype]
             out.write_text('\n'.join(svg) + '\n', encoding='utf-8')
-            print(f'[OK] {out.name:<16} <- {lname} ({len(pics)} image(s))')
+            print(f'[OK] {out.name:<16} <- {lname} ({len(pics)} image(s), '
+                  f'used by {usage[lfile]} slide(s))')
+
+        for ptype in guessed:
+            print(f'[WARN] {ptype}: no layout name matched; guessed "{chosen[ptype][1]}". '
+                  'Check it before generating.', file=sys.stderr)
+        for ptype in REQUIRED_TYPES:
+            if ptype not in chosen:
+                print(f'[WARN] {ptype}: no layout found, {STANDARD_FILES[ptype]} not written.',
+                      file=sys.stderr)
 
     accent = colors.get('accent1', '#1268E3')
     spec = [
