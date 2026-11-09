@@ -1,6 +1,14 @@
 # AGENTS.md
 
-This file serves as the project entry point for general AI agents. Before executing PPT generation tasks, **you MUST first read `skills/ppt-master/SKILL.md`** for the complete workflow and rules.
+This file is the project entry point for AI agents other than Claude Code (Codex, Gemini CLI, and others). Before executing PPT generation tasks, **you MUST first read `skills/ppt-master/SKILL.md`** for the complete workflow and rules.
+
+## How to Run
+
+- **Start from the repository root.** Scripts, the uv environment, and the `projects/` workspace all assume it.
+- **`${SKILL_DIR}` in the docs means `skills/ppt-master`.** Substitute it yourself.
+- **Run Python through `uv run python3`**, never bare `python3`, so the project's pinned dependencies are used.
+- **⛔ BLOCKING steps:** when `SKILL.md` requires a confirmation, ask in plain text and stop until the user replies. Skip a confirmation only if the user has already given that answer.
+- **Do not edit the source files in place.** `import-sources --move` removes its inputs, so run it on a copy of anything the user still needs.
 
 ## Project Overview
 
@@ -14,38 +22,47 @@ PPT Master is an AI-driven presentation generation system. Through multi-role co
 - To create a template independently, read `skills/ppt-master/workflows/create-template.md`
 - Role-specific rules and technical constraints are in `skills/ppt-master/references/`
 - ⚠️ **Strict serial execution**: Every Step in the pipeline MUST be executed sequentially — bundling, batching, or parallelizing Steps is FORBIDDEN
-- 🚨 **I/O Lock Bypass (CRITICAL)**: To prevent IDE/Watcher deadlocks in this workspace, **NEVER** use standard AI file writing tools (like `write_to_file`) or `cat` commands to output project files like `design_spec.md` or SVG files. You MUST use `python3 skills/ ppt-master/scripts/file_write.py <target_path>` and pass the content via STDIN (e.g., using `send_command_input`) terminated by `<<EOF>>`.
+- 🚨 **File output**: Write `design_spec.md` and SVG files through `uv run python3 skills/ppt-master/scripts/file_write.py <target_path>`, passing the content on STDIN terminated by a line containing only `<<EOF>>`. Generate one SVG per cycle and confirm it landed before the next.
+
+## Templates and Content Layouts
+
+- The default template is `skills/ppt-master/templates/layouts/奇安信/`. Follow Step 3 of `SKILL.md`; it copies the SVGs, `content/`, and the image assets into the project.
+- When `<project>/templates/content/layouts.json` exists, every body page should name a layout ID in its `Layout` field. The layout's SVG is the complete page: fill its `{{SLOT}}` placeholders and keep its geometry, colors, and font sizes. Rules are in `references/strategist.md` and section 1.7 of `references/executor-base.md`.
+- Use `Layout: free: <description>` with `03_content.svg` only when no layout fits.
 
 ## Common Commands
 
 ```bash
 # Source content conversion
-python3 skills/ppt-master/scripts/pdf_to_md.py <PDF_file>
-python3 skills/ppt-master/scripts/doc_to_md.py <DOCX_or_other_file>   # Requires: pandoc (DOCX/EPUB/HTML/LaTeX/RST/etc.)
-python3 skills/ppt-master/scripts/excel_to_md.py <XLSX_or_XLSM_file>  # Requires: pip install openpyxl pillow
-python3 skills/ppt-master/scripts/web_to_md.py <URL>
+uv run python3 skills/ppt-master/scripts/pdf_to_md.py <PDF_file>
+uv run python3 skills/ppt-master/scripts/doc_to_md.py <DOCX_or_other_file>   # Requires: pandoc (DOCX/EPUB/HTML/LaTeX/RST/etc.)
+uv run python3 skills/ppt-master/scripts/excel_to_md.py <XLSX_or_XLSM_file>
+uv run python3 skills/ppt-master/scripts/web_to_md.py <URL>
 node skills/ppt-master/scripts/web_to_md.cjs <URL>
 
 # Project management
-python3 skills/ppt-master/scripts/project_manager.py init <project_name> --format ppt169
-python3 skills/ppt-master/scripts/project_manager.py import-sources <project_path> <source_files_or_URLs...> --move
-python3 skills/ppt-master/scripts/project_manager.py validate <project_path>
+uv run python3 skills/ppt-master/scripts/project_manager.py init <project_name> --format ppt169
+uv run python3 skills/ppt-master/scripts/project_manager.py import-sources <project_path> <source_files_or_URLs...> --move
+uv run python3 skills/ppt-master/scripts/project_manager.py validate <project_path>
+
+# Use a user-supplied .pptx as the template
+uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <project_path>
 
 # Image tools
-python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
-python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
+uv run python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
+uv run python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_size 1K -o <project_path>/images
 
 # SVG quality check
-python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
+uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
 
-# Post-processing pipeline (MUST run sequentially, one at a time — NEVER batch)
-python3 skills/ppt-master/scripts/total_md_split.py <project_path>
-# ✅ Confirm no errors before running the next command
-python3 skills/ppt-master/scripts/finalize_svg.py <project_path>
-# ✅ Confirm no errors before running the next command
-python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
-# Default: generates native shapes (.pptx) + SVG reference (_svg.pptx)
-# Use --only native or --only legacy to generate just one version
+# Post-processing and export: one fail-fast invocation (recommended)
+uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+
+# Re-process a single page after editing it
+uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path> --page <page_name>
+
+# Live preview; blocks its terminal, so run it in the background
+uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
 ```
 
 ## Core Directories
@@ -86,5 +103,6 @@ python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
 
 - **NEVER** use `cp` as a substitute for `finalize_svg.py`
 - **NEVER** export directly from `svg_output/` — MUST export from `svg_final/` (use `-s final`)
-- Do NOT add extra flags like `--only` to the post-processing commands
-- **NEVER** run the three post-processing steps in a single code block or single shell invocation
+- Prefer `build_pptx.py --verify`. If you run the stages by hand, run them one at a time and check each before the next.
+- The export emits **one** editable deck. Do not request the `_svg.pptx` twin unless something needs it.
+- Verify with `verify_pptx_text.py`; it checks every text run on every page.
