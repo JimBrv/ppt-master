@@ -22,7 +22,12 @@ cover / toc / chapter / ending, or name them so in the slide heading.
 
 Usage:
     python3 scripts/layout_plan_check.py <project_path>            # check the plan (Strategist, before handing the spec over)
-    python3 scripts/layout_plan_check.py <project_path> --output   # also count text runs in svg_output/ (after the Executor)
+    python3 scripts/layout_plan_check.py <project_path> --output   # also check svg_output/ against the plan (after the Executor)
+
+--output adds two checks on svg_output/: every page must be a planned slide and
+must have been filled from the layout the plan names (error), and its content
+density is compared with the genre budget (hint). build_pptx.py runs this mode
+before exporting.
 """
 import argparse
 import json
@@ -74,6 +79,31 @@ def label_positions(layout_svg: Path, labels) -> set:
         if slot in ('PAGE_TITLE', 'PAGE_NUM') or slot_pattern(slot) in labels:
             out.add((x, y))
     return out
+
+
+PAGE_LAYOUT_RE = re.compile(r'content layout: (\w+)')
+
+
+def planned_layouts(spec: str) -> dict:
+    """Slide number -> planned layout: a layout ID, 'free', or 'standard'
+    (cover / TOC / chapter / ending)."""
+    out = {}
+    for num, name, f in parse_slides(spec):
+        layout = f.get('layout', '')
+        if is_standard(name, layout):
+            out[num] = 'standard'
+        elif layout.lower().startswith('free'):
+            out[num] = 'free'
+        else:
+            out[num] = layout.strip('`').split()[0] if layout else ''
+    return out
+
+
+def page_layout(svg_text: str):
+    """The layout a page was filled from (layout_fill keeps the shell's
+    'content layout: <id>' comment), or None for a hand-drawn page."""
+    m = PAGE_LAYOUT_RE.search(svg_text)
+    return m.group(1) if m else None
 
 
 def svg_runs(svg: Path, skip=None) -> int:
@@ -170,6 +200,25 @@ def main() -> int:
     for a, b in zip(body, body[1:]):
         if a['lid'] == b['lid'] and a['lid'] != 'free' and not (a['series'] and a['series'] == b['series']):
             hints.append(f'Slides {a["num"]:02d}–{b["num"]:02d}: same layout {a["lid"]} back to back outside a series')
+
+    # Pages on disk must be the pages that were planned.
+    if args.output:
+        plan = planned_layouts(spec)
+        for svg in sorted((args.project_path / 'svg_output').glob('*.svg')):
+            m = re.match(r'\d+', svg.stem)
+            if not m:
+                errors.append(f'svg_output/{svg.name}: page files must start with the slide number (NN_name.svg)')
+                continue
+            num = int(m.group())
+            if num not in plan:
+                errors.append(f'svg_output/{svg.name}: no "#### Slide {num:02d}" in design_spec.md')
+                continue
+            want, got = plan[num], page_layout(svg.read_text(encoding='utf-8'))
+            if want not in ('free', 'standard', '') and got != want:
+                errors.append(f'svg_output/{svg.name}: design_spec.md plans {want}, but the page '
+                              + (f'was filled from {got}' if got else 'was not filled from a layout (use layout_fill.py)'))
+            elif want == 'free' and got:
+                errors.append(f'svg_output/{svg.name}: design_spec.md plans a free page, but it was filled from {got}')
 
     # Density, after the Executor.
     if args.output:

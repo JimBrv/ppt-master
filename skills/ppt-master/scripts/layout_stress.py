@@ -138,7 +138,8 @@ def main() -> int:
         errors = int(m.group(1)) if m else (0 if code == 0 else -1)
         print(f'[QUALITY] {"OK" if errors == 0 else f"{errors} page(s) with errors"}')
         ok &= errors == 0
-        code, out = run([sys.executable, str(SCRIPTS / 'build_pptx.py'), str(proj), '--verify'], root / 'build.log')
+        code, out = run([sys.executable, str(SCRIPTS / 'build_pptx.py'), str(proj), '--verify', '--no-plan-check'],
+                        root / 'build.log')
         summary = re.findall(r'\[SUMMARY\].*', out)
         print(f'[BUILD] {"OK" if code == 0 else f"failed (exit {code})"}' + (f'  {summary[-1]}' if summary else ''))
         ok &= code == 0

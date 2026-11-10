@@ -94,7 +94,11 @@ uv run python3 scripts/layout_fill.py <project_path> funnel_layers values.json -
 ```
 
 The script rejects text over capacity, unknown slots, missing icons and missing
-images, and writes nothing if anything fails. Slots left out are removed along
+images, and writes nothing if anything fails. It also refuses a page that
+`design_spec.md` at the project root does not plan: the output name's leading
+number is the slide number, and that slide's Layout must be this layout
+(`--no-plan-check` for tests outside a project). `build_pptx.py` checks the same
+thing for every page before exporting. Slots left out are removed along
 with their containers (rects marked `data-slot-box`), so a seven-chip row with
 three values keeps three chips. Unfilled image slots stay as placeholders.
 

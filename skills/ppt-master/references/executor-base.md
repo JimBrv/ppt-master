@@ -114,7 +114,8 @@ uv run python3 ${SKILL_DIR}/scripts/layout_fill.py <project_path> --slots <layou
 uv run python3 ${SKILL_DIR}/scripts/layout_fill.py <project_path> <layout_id> <project_path>/tmp/<page>.json -o <project_path>/svg_output/<page>.svg
 ```
 
-Write values files under `<project_path>/tmp/`, never in the project root, and delete `tmp/` when the
+`layout_fill.py` refuses to write a page that `design_spec.md` (project root) does not plan with that
+layout; name pages `NN_name.svg` with NN the slide number. Write values files under `<project_path>/tmp/`, never in the project root, and delete `tmp/` when the
 pages are done. Fill only what the spec's Content holds: an empty slot is removed cleanly, an invented
 item is a defect (strategist.md P4). After all pages are written, compare density with the genre budget:
 

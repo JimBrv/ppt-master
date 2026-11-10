@@ -31,6 +31,7 @@ PPT Master is an AI-driven presentation generation system. Through multi-role co
 - Use `Layout: free: <description>` with `03_content.svg` only when no layout fits.
 - Templates with content layouts: `奇安信`, `mckinsey`, `pixel_retro` (22 each, `contentLayouts` in `layouts_index.json`). The others have core pages only; their body pages are designed freely, as before.
 - Choose a layout by the content's **relation** (statement, metric, contrast, problem_solution, parallel, sequence, …), never for variety. Each body page carries Message / Relation / Layout / Claim check (/ Series for parallel pages); run `layout_plan_check.py` before presenting the spec. Rules: `skills/ppt-master/references/strategist.md` → Content Layout Selection.
+- Each project is built only from its own `sources/` (the converted full text). Never copy notes, values files, pages or a design spec from another project, including an earlier run on the same source. `layout_fill.py` and `build_pptx.py` refuse pages that `design_spec.md` does not plan.
 - All three are built from one shared library, `templates/content_library/library.py`, plus each template's `content_src/theme.json` and `shell.svg`. Never edit `content/` by hand; rebuild it with `layout_build.py`. Adding layouts to another template is done on request only; see `skills/ppt-master/scripts/docs/layouts.md`.
 
 ## Common Commands
@@ -67,6 +68,7 @@ uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir
 
 # Post-processing and export: one fail-fast invocation (recommended)
 uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+# Preflight first: stops when design_spec.md is missing or svg_output/ does not match the plan.
 
 # Re-process a single page after editing it
 uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path> --page <page_name>

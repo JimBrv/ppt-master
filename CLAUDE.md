@@ -41,6 +41,7 @@ uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir
 
 # Post-processing & export — RECOMMENDED: one fail-fast invocation
 uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+# Preflight first: stops when design_spec.md is missing or svg_output/ does not match the plan.
 # Runs notes-split → finalize → export strictly in order, aborting on first failure,
 # then asserts no text run wrapped during export.
 
@@ -149,6 +150,9 @@ grep -o 'href="\.\./images/[^"]*"' <project_path>/svg_output/*.svg | sort | uniq
   `layout_build.py` and verify with `layout_stress.py`. Details: `skills/ppt-master/scripts/docs/layouts.md`.
 
 ## Output Sanity Rules
+
+- Each project is built only from its own `sources/`. Never copy notes, values files, pages or a
+  design spec from another project, including an earlier run on the same source.
 
 - One project → one deliverable deck. If the project root accumulates several
   `.pptx` files, something re-ran with `--timestamp`; keep the newest, drop the rest.

@@ -5,6 +5,11 @@ PPT Master - One-shot post-processing & export.
 Runs the three post-processing stages strictly in order, aborting immediately if
 any stage fails, then optionally verifies the exported deck:
 
+    0. preflight           layout_plan_check.py --output: design_spec.md exists at
+                           the project root, the plan passes, and every page in
+                           svg_output/ is the planned page filled from the planned
+                           layout (fails the build); stray files and a missing or
+                           summary-sized source are reported (warnings)
     1. total_md_split.py   split speaker notes
     2. finalize_svg.py     embed icons/images, flatten text, rects -> paths
     3. svg_to_pptx.py      export ONE editable native-shapes deck from svg_final/
@@ -17,6 +22,7 @@ Usage:
     python3 scripts/build_pptx.py <project_path>
     python3 scripts/build_pptx.py <project_path> --verify
     python3 scripts/build_pptx.py <project_path> --skip-notes -o deck.pptx
+    python3 scripts/build_pptx.py <project_path> --no-plan-check   # legacy projects planned before the layout fields existed
 """
 import argparse
 import subprocess
@@ -34,6 +40,31 @@ def run(label: str, argv: list) -> None:
         sys.exit(r.returncode)
 
 
+SOURCE_MIN_CHARS = 3000
+
+
+def hygiene(proj: Path) -> None:
+    """Warnings only: leftovers and sources that do not look like the real text."""
+    warn = []
+    stray = sorted(f.name for f in proj.glob('*.json'))
+    if stray:
+        warn.append(f'{len(stray)} .json file(s) in the project root ({", ".join(stray[:4])}{" …" if len(stray) > 4 else ""}); '
+                    'values files belong in tmp/ and are deleted when the pages are done')
+    if (proj / 'tmp').exists():
+        warn.append('tmp/ still exists; delete it once the pages are written')
+    src = proj / 'sources'
+    files = [f for f in src.rglob('*') if f.is_file() and not f.name.startswith('.')] if src.exists() else []
+    if not files:
+        warn.append('sources/ is empty; keep the converted source text in the project (Step 1)')
+    else:
+        md = sum(len(f.read_text(encoding='utf-8', errors='ignore')) for f in files if f.suffix == '.md')
+        if md and md < SOURCE_MIN_CHARS and not any(f.suffix != '.md' for f in files):
+            warn.append(f'sources/ holds only {md} characters of Markdown; if the source is longer, save the '
+                        'converted full text (pdf_to_md / doc_to_md / web_to_md), not a summary')
+    for w in warn:
+        print(f'[WARN] {w}')
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -45,9 +76,18 @@ def main() -> None:
                     help='Also emit the _svg.pptx reference twin')
     ap.add_argument('--verify', action='store_true',
                     help='After export, check no text run wrapped (needs soffice + pdftotext)')
+    ap.add_argument('--no-plan-check', action='store_true',
+                    help='Skip the design-spec preflight (only for projects planned before it existed)')
     args = ap.parse_args()
 
     proj = str(args.project_path)
+
+    hygiene(args.project_path)
+    if args.no_plan_check:
+        print('[SKIP] stage 0 (--no-plan-check): pages are NOT checked against design_spec.md')
+    else:
+        run('0/3  preflight: pages match design_spec.md',
+            [str(SCRIPTS / 'layout_plan_check.py'), proj, '--output'])
 
     if not args.skip_notes:
         run('1/3  split speaker notes', [str(SCRIPTS / 'total_md_split.py'), proj])

@@ -92,6 +92,15 @@ When the user provides non-Markdown content, convert immediately:
 | WeChat / high-security site | `node ${SKILL_DIR}/scripts/web_to_md.cjs <URL>` |
 | Markdown | Read directly |
 
+Keep the **converted full text** in `<project_path>/sources/` (Step 2 `import-sources`). Plan from
+that text — never from a summary you wrote yourself, and never from memory of the source.
+
+> 🚫 **Project isolation**: every project starts from its own `sources/`. Never copy speaker notes,
+> values files, SVG pages or a design spec from another project — not even an earlier run on the
+> same source. A re-run is a new project that goes through Steps 1–7 again. The tools enforce the
+> plan: `layout_fill.py` refuses a page that `design_spec.md` (at the project root) does not plan
+> with that layout, and the export stops when `svg_output/` does not match the plan.
+
 **✅ Checkpoint — Confirm source content is ready, proceed to Step 2.**
 
 ---
@@ -384,6 +393,21 @@ your own status update if useful, e.g. "page 3/8 done, reload the preview to see
 ### Step 7: Post-processing & Export
 
 🚧 **GATE**: Step 6 complete; all SVGs generated to `svg_output/`; speaker notes `notes/total.md` generated.
+
+**Recommended**: one fail-fast command that runs the preflight, all three sub-steps and the verification:
+```bash
+uv run python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
+```
+Its preflight (`layout_plan_check.py --output`) stops the export when `design_spec.md` is missing from
+the project root, the plan fails, or a page in `svg_output/` is not the planned page filled from the
+planned layout. It also warns about stray `.json` files, a leftover `tmp/`, and a source that looks
+like a summary. Fix the cause — do not skip the preflight. (`--no-plan-check` exists only for projects
+planned before the layout fields existed.)
+
+When running the sub-steps by hand instead, first run the same preflight and fix every `[FAIL]`:
+```bash
+uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path> --output
+```
 
 > ⚠️ The following three sub-steps MUST be **executed individually one at a time**. Each command must complete and be confirmed successful before running the next.
 > ❌ **NEVER** put all three commands in a single code block or single shell invocation.
