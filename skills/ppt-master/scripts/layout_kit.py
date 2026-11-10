@@ -60,7 +60,8 @@ WEIGHTS = ((12, 'light'), (30, 'medium'), (10 ** 9, 'heavy'))
 # Content text runs per body page, by genre: (average, single-page maximum).
 # The page title, the page number and a layout's fixed labels (its
 # "labelSlots": series tags, section captions, axis names) do not count.
-DENSITY = {'narrative': (15, 25), 'report': (25, 40), 'solution': (35, 50)}
+# The average may be a (target, ceiling) range; a hint fires above the ceiling.
+DENSITY = {'narrative': ((20, 25), 25), 'report': (25, 40), 'solution': (35, 50)}
 
 
 def weight_of(runs: int) -> str:

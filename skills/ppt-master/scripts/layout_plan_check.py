@@ -177,6 +177,8 @@ def main() -> int:
             hints.append('no **Genre** (narrative / report / solution) in the spec; density not checked')
         else:
             avg_cap, max_cap = DENSITY[genre]
+            avg_ceiling = avg_cap[1] if isinstance(avg_cap, tuple) else avg_cap
+            avg_label = f'{avg_cap[0]}–{avg_cap[1]}' if isinstance(avg_cap, tuple) else str(avg_cap)
             pages = sorted((args.project_path / 'svg_output').glob('*.svg'))
             by_num = {p['num']: p for p in body}
             content_dir = args.project_path / 'templates' / 'content'
@@ -195,10 +197,10 @@ def main() -> int:
                     hints.append(f'{s}: {c} text runs, over the {genre} page maximum of {max_cap}')
             if counts:
                 avg = sum(c for _, c in counts) / len(counts)
-                print(f'[DENSITY] {genre}: average {avg:.1f} content text runs per body page (budget {avg_cap}), '
+                print(f'[DENSITY] {genre}: average {avg:.1f} content text runs per body page (budget {avg_label}), '
                       f'max {max(c for _, c in counts)} (budget {max_cap})')
-                if avg > avg_cap:
-                    hints.append(f'average {avg:.1f} text runs per page is over the {genre} budget of {avg_cap}')
+                if avg > avg_ceiling:
+                    hints.append(f'average {avg:.1f} content text runs per page is over the {genre} budget of {avg_label}')
 
     print(f'[SCAN] {len(body)} body page(s); genre: {genre or "not set"}; '
           f'{"content layouts: " + str(len(layouts)) if layouts else "no content layouts (free design)"}')

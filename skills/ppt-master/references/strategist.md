@@ -45,7 +45,7 @@ because it sets how much each body page carries. Write it as `**Genre**` in I. P
 
 | Genre | Typical source | Avg text runs / body page | Single-page max | Light pages (statement / metric) |
 |-------|----------------|---------------------------|-----------------|----------------------------------|
-| `narrative` | Essay, speech, opinion piece, keynote | ≤ 15 | 25 | At least 1 per 4–5 body pages |
+| `narrative` | Essay, speech, opinion piece, keynote | 20–25 | 25 | At least 1 per 4–5 body pages |
 | `report` | Work report, review, research findings | ≤ 25 | 40 | Recommended |
 | `solution` | Solution, product, technical architecture | ≤ 35 | 50 | Optional |
 
