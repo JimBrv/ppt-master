@@ -31,6 +31,7 @@ carries, per layout:
 | `relations` | `META` in the library | Relations the layout shows; the first is the main one |
 | `claim` | `META` in the library | A sentence the content must make true, e.g. funnel: "every layer is narrower than the one above" |
 | `labels` → `labelSlots` | `META` in the library | Fixed labels (series tag, section captions, axis names); not counted as content |
+| `slotNotes` | `META` in the library | What an easily misused slot means (exact slot name or pattern); `layout_fill.py --slots` prints it |
 | `maxRuns` | computed | Content text slots when fully filled (title, page number and labels excluded) |
 | `weight` | computed | `light` ≤ 12, `medium` ≤ 30, `heavy` > 30 |
 

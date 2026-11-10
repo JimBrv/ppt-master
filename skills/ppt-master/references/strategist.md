@@ -306,7 +306,7 @@ apply to every body page, including free-design pages in templates without conte
 | P1 | **One message per page.** Write the one sentence (≤ 30 characters) the audience should remember; the title is that sentence or close to it | Reading only the title, can you state the page's conclusion? |
 | P2 | **The relation picks the layout.** Find the relation words in the message and source, classify the page into one relation below, and choose only among layouts that show it | Which relation is this? Does the chosen layout show that relation? |
 | P3 | **The visual claim must hold.** Every layout implies something (a funnel narrows, a loop returns to its start, stairs rise). Read the layout's `claim` against the content | Read the claim aloud with this content. Is it true? |
-| P4 | **Capacity is a ceiling.** Fill only what the source supports; every item must trace back to the source. If slots stay empty, delete them or pick a lighter layout of the same relation | Can you point to where each item comes from? |
+| P4 | **Capacity is a ceiling.** Fill only what the source supports; every item must trace back to the source. If slots stay empty, delete them or pick a lighter layout of the same relation. Numbers keep their exact form: a range stays a range (10–100×, not 100), an estimate keeps "about" | Can you point to where each item comes from? Is every number exactly as the source has it? |
 | P5 | **Parallel pages share one layout.** Sections of the same kind (five risks, three cases) use one layout so the audience can compare them. "Vary neighboring layouts" applies only between different relations | Does every page of a parallel group use the same layout? |
 | P6 | **The genre sets the density.** Keep each page within the genre budget (see d. Genre and density) | Is the page within its text-run budget? |
 | P7 | **The deck has a rhythm.** In narrative decks, place a light page (statement or metric) every 4–5 pages; avoid three heavy pages in a row | Are there three heavy pages in a row? |
@@ -339,8 +339,8 @@ apply to every body page, including free-design pages in templates without conte
 
 1. **Genre** — confirmed in d. (Eight Confirmations); sets the density budget.
 2. **Skeleton** — list the sections, mark parallel groups, and give each group one layout.
-3. **Each body page, in this order** — Message → Relation → candidate layouts for that relation →
-   Claim check → capacity. When the claim fails, try another layout of the same relation;
+3. **Each body page, in this order** — Evidence (find the source passages first) → Message → Relation →
+   candidate layouts for that relation → Claim check → capacity. When the claim fails, try another layout of the same relation;
    when none fits, write `Layout: free: <description>` and keep the Relation. When the content
    cannot fill the slots, delete slots or choose a lighter layout — never invent content to fill them.
 4. **Deck review** — series consistent, density within budget, light pages present, no three heavy
@@ -350,10 +350,21 @@ apply to every body page, including free-design pages in templates without conte
 uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path>
 ```
 
-Errors (missing fields, unknown relation or layout, a layout that does not show the relation, a
-series with mixed layouts) must be fixed. Hints (density, rhythm) are for judgement.
+Errors (missing fields, unknown relation or layout, a layout that does not show the relation, an
+Evidence quote not found in `sources/`, numbered pages such as 风险一 / 风险二 without a shared Series,
+a series with mixed layouts) must be fixed. Hints (density, rhythm) are for judgement — read each one
+and either fix the page or say in the spec why it stays.
 
-Each body page in the Content Outline carries five fields:
+**Evidence** holds one or more verbatim quotes from the converted source in `sources/`, in "…", “…”
+or 「…」, at least 8 characters each, in the source's own language. The checker looks each one up;
+a paraphrase or an invented quote fails. Quote the passages the page actually rests on — they are
+also what the Claim check should point to. A Claim check that only restates the layout's claim
+("三栏地位平等") proves nothing; name which content plays which role ("左栏 = …，右栏 = …").
+
+`templates/content/layouts.json` gives `slotNotes` for slots that are easy to misuse (for example
+`chevron_stages` STEP0_LABEL is the overall name, not stage one); `layout_fill.py --slots <id>` prints them.
+
+Each body page in the Content Outline carries these fields:
 
 ```markdown
 #### Slide 06 - 毁灭性滥用
@@ -361,6 +372,7 @@ Each body page in the Content Outline carries five fields:
 - **Relation**: chain_core
 - **Layout**: chain_core_grid
 - **Claim check**: 链路 = 获取知识 → 设计 → 合成 → 实验 → 扩散（原文顺序）；核心 = 全链路防护；约束 = 4 项措施，均出自原文
+- **Evidence**: "36 out of 38 providers fulfilled an order containing the sequence of the 1918 flu"
 - **Series**: risks 2/5            (only for pages in a parallel group)
 - **Title**: ...
 - **Content**: ...

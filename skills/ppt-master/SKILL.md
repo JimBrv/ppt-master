@@ -95,6 +95,11 @@ When the user provides non-Markdown content, convert immediately:
 Keep the **converted full text** in `<project_path>/sources/` (Step 2 `import-sources`). Plan from
 that text — never from a summary you wrote yourself, and never from memory of the source.
 
+> 🚫 **Do not change the skill or its environment.** Never edit files under `skills/ppt-master/`, and
+> never repoint, reinstall or patch `.venv`. If a script or the Python environment fails, stop and
+> report the error to the user (`uv sync` repairs the environment). The export warns when either has
+> been changed.
+>
 > 🚫 **Project isolation**: every project starts from its own `sources/`. Never copy speaker notes,
 > values files, SVG pages or a design spec from another project — not even an earlier run on the
 > same source. A re-run is a new project that goes through Steps 1–7 again. The tools enforce the
@@ -253,7 +258,8 @@ the preview, the checker and the Executor all read it from there.
 
 **Layout plan (every body page)**: choose layouts by the content's relation, not for variety — follow
 `references/strategist.md` → *Content Layout Selection* (principles P1–P7, relation vocabulary,
-five fields per page: Message / Relation / Layout / Claim check / Series). Then check the plan and fix
+fields per page: Message / Relation / Layout / Claim check / Evidence / Series). Evidence quotes are
+looked up verbatim in `sources/`. Then check the plan and fix
 every `[FAIL]` before the checkpoint; `[HINT]` lines (density, rhythm) are for judgement:
 ```bash
 uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path>

@@ -87,10 +87,14 @@ def main() -> int:
     if args.slots:
         svg, entry = load(args.project_path, args.slots)
         icons = set(entry.get('iconSlots', []))
+        notes = entry.get('slotNotes', {})
+        print(f'# {args.slots}: {entry.get("claim", "")}')
         for name in dict.fromkeys(SLOT_RE.findall(svg)):
             pat = slot_pattern(name)
             kind = 'icon' if pat in icons else f'{entry["slots"].get(pat, "?")} chars'
-            print(f'{name:<24} {kind}')
+            note = notes.get(name) or notes.get(pat)
+            note = f'  — {note}' if note else ''
+            print(f'{name:<24} {kind}{note}')
         for img in entry.get('imageSlots', []):
             print(f'_images.{img["name"]:<16} image {img["w"]}x{img["h"]}')
         return 0

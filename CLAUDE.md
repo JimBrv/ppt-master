@@ -142,8 +142,8 @@ grep -o 'href="\.\./images/[^"]*"' <project_path>/svg_output/*.svg | sort | uniq
   design body pages freely on `03_content.svg`.
 - Layouts are chosen by the content's **relation** (16-word vocabulary: statement, metric,
   contrast, problem_solution, parallel, sequence, …), never for variety. Each body page in
-  `design_spec.md` carries Message / Relation / Layout / Claim check (/ Series for parallel
-  pages); `layout_plan_check.py` checks the plan. Rules: `references/strategist.md`
+  `design_spec.md` carries Message / Relation / Layout / Claim check / Evidence (verbatim quotes
+  from `sources/`) (/ Series for parallel pages); `layout_plan_check.py` checks the plan. Rules: `references/strategist.md`
   → Content Layout Selection.
 - Layouts come from one shared library (`templates/content_library/library.py`) plus each
   template's `content_src/theme.json` + `shell.svg`. Never hand-edit `content/`; rebuild with

@@ -25,11 +25,13 @@ Usage:
     python3 scripts/build_pptx.py <project_path> --no-plan-check   # legacy projects planned before the layout fields existed
 """
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
+REPO = SCRIPTS.parent.parent.parent
 
 
 def run(label: str, argv: list) -> None:
@@ -46,9 +48,10 @@ SOURCE_MIN_CHARS = 3000
 def hygiene(proj: Path) -> None:
     """Warnings only: leftovers and sources that do not look like the real text."""
     warn = []
-    stray = sorted(f.name for f in proj.glob('*.json'))
+    stray = sorted(str(f.relative_to(proj)) for f in proj.rglob('*.json')
+                   if f.relative_to(proj).parts[0] not in ('templates',))
     if stray:
-        warn.append(f'{len(stray)} .json file(s) in the project root ({", ".join(stray[:4])}{" …" if len(stray) > 4 else ""}); '
+        warn.append(f'{len(stray)} .json file(s) left in the project ({", ".join(stray[:4])}{" …" if len(stray) > 4 else ""}); '
                     'values files belong in tmp/ and are deleted when the pages are done')
     if (proj / 'tmp').exists():
         warn.append('tmp/ still exists; delete it once the pages are written')
@@ -61,8 +64,33 @@ def hygiene(proj: Path) -> None:
         if md and md < SOURCE_MIN_CHARS and not any(f.suffix != '.md' for f in files):
             warn.append(f'sources/ holds only {md} characters of Markdown; if the source is longer, save the '
                         'converted full text (pdf_to_md / doc_to_md / web_to_md), not a summary')
+    warn += environment_changes()
     for w in warn:
         print(f'[WARN] {w}')
+
+
+def environment_changes() -> list:
+    """The skill and its Python environment are not the project's to change."""
+    out = []
+    try:
+        r = subprocess.run(['git', '-C', str(REPO), 'status', '--porcelain', '--', 'skills/ppt-master'],
+                           capture_output=True, text=True, timeout=20)
+        changed = [line[3:] for line in r.stdout.splitlines() if line.strip()] if r.returncode == 0 else []
+    except (OSError, subprocess.SubprocessError):
+        changed = []
+    if changed:
+        out.append(f'{len(changed)} file(s) under skills/ppt-master changed locally ({", ".join(changed[:3])}'
+                   f'{" …" if len(changed) > 3 else ""}); a run must not edit the skill — revert them, or report '
+                   'the problem that made the edit seem necessary')
+    cfg = REPO / '.venv' / 'pyvenv.cfg'
+    py = REPO / '.venv' / 'bin' / 'python'
+    if cfg.exists() and py.exists():
+        home = next((line.split('=', 1)[1].strip() for line in cfg.read_text().splitlines()
+                     if line.startswith('home')), '')
+        if home and not os.path.realpath(py).startswith(os.path.realpath(home)):
+            out.append(f'.venv/bin/python points to {os.path.realpath(py)}, not the environment\'s own Python '
+                       f'({home}); do not repoint the venv — run "uv sync" to repair it')
+    return out
 
 
 def main() -> None:

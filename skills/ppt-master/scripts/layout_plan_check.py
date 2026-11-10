@@ -9,10 +9,14 @@ Reads <project>/design_spec.md and, when the template has content layouts,
     - **Relation**: one relation from the vocabulary (layout_kit.RELATIONS)
     - **Layout**:   a layout ID, or "free: <description>"
     - **Claim check**: how the content makes the layout's claim true (layout IDs only)
-    - **Series**:   optional, "<group> n/m" for parallel pages that share one layout
+    - **Evidence**: one or more verbatim quotes from sources/, in "…", “…” or 「…」,
+                    each at least 8 characters, that the page's content rests on
+    - **Series**:   "<group> n/m" for parallel pages that share one layout;
+                    required when titles number pages in a group (风险一/风险二, Case 1/Case 2)
 
 Errors (exit 1): a missing field, an unknown relation or layout, a layout that
-does not show the page's relation, a series that uses more than one layout.
+does not show the page's relation, an Evidence quote that is not in sources/,
+numbered parallel pages without a Series, a series that uses more than one layout.
 Hints (never fail): density against the genre budget, rhythm of heavy and
 light pages. Density counts content text runs only: the page title, the page
 number and a layout's fixed labels (labelSlots in layouts.json) are left out. Density and rhythm are judgement calls; read the hints, then decide.
@@ -33,6 +37,7 @@ import argparse
 import json
 import re
 import sys
+import unicodedata
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -79,6 +84,33 @@ def label_positions(layout_svg: Path, labels) -> set:
         if slot in ('PAGE_TITLE', 'PAGE_NUM') or slot_pattern(slot) in labels:
             out.add((x, y))
     return out
+
+
+QUOTE_RE = re.compile(r'“([^”]+)”|"([^"]+)"|「([^」]+)」|『([^』]+)』')
+MIN_QUOTE = 8
+# "风险一：…", "风险 2：…", "Case 3: …" — a numbered member of a parallel group.
+ORDINAL_RE = re.compile(r'\s*([^\s：:0-9一二三四五六七八九十]{1,8}?)\s*([一二三四五六七八九十]{1,3}|\d{1,2})\s*[：:、.．\-—]')
+
+
+def norm(text: str) -> str:
+    """Fold a text for quote matching: Unicode width, curly quotes, Markdown
+    links and emphasis, whitespace and case."""
+    t = unicodedata.normalize('NFKC', text)
+    t = t.replace('’', "'").replace('‘', "'").replace('“', '"').replace('”', '"')
+    t = re.sub(r'\[([^\]]*)\]\([^)]*\)', r'\1', t)
+    t = re.sub(r'[*_`]', '', t)
+    return re.sub(r'\s+', ' ', t).strip().lower()
+
+
+def source_text(project: Path) -> str:
+    src = project / 'sources'
+    files = [f for f in src.rglob('*') if f.is_file() and f.suffix.lower() in ('.md', '.txt', '.markdown')] \
+        if src.exists() else []
+    return norm('\n'.join(f.read_text(encoding='utf-8', errors='ignore') for f in files))
+
+
+def quotes(text: str):
+    return [next(g for g in m.groups() if g) for m in QUOTE_RE.finditer(text)]
 
 
 PAGE_LAYOUT_RE = re.compile(r'content layout: (\w+)')
@@ -142,6 +174,10 @@ def main() -> int:
     m = GENRE_RE.search(spec)
     genre = m.group(1).lower() if m else None
     errors, hints, body = [], [], []
+    source = source_text(args.project_path)
+    if not source:
+        errors.append('sources/ holds no text (.md / .txt): save the converted full source there (Step 1); '
+                      'every page\'s Evidence is checked against it')
 
     for num, name, f in parse_slides(spec):
         layout = f.get('layout', '')
@@ -170,11 +206,37 @@ def main() -> int:
                     claim = entry.get('claim')
                     errors.append(f'{tag}: missing **Claim check**'
                                   + (f' — test the content against: {claim}' if claim else ''))
+        ev = f.get('evidence', '')
+        found = [q for q in quotes(ev) if len(norm(q)) >= MIN_QUOTE]
+        if not ev or not found:
+            errors.append(f'{tag}: **Evidence** needs at least one verbatim quote from sources/ '
+                          f'(in "…", “…” or 「…」, ≥ {MIN_QUOTE} characters)')
+        elif source:
+            missing = [q for q in found if norm(q) not in source]
+            for q in missing:
+                errors.append(f'{tag}: Evidence quote not found in sources/: "{q[:60]}"')
         msg = f.get('message', '')
         if msg and len(msg) > 40:
             hints.append(f'{tag}: Message is {len(msg)} characters; one sentence of ≤ 30 reads better')
+        om = ORDINAL_RE.match(f.get('title') or name)
         body.append(dict(num=num, rel=rel, lid=lid if not free else 'free', weight=weight,
-                         series=(f.get('series') or '').split()[0] if f.get('series') else ''))
+                         series=(f.get('series') or '').split()[0] if f.get('series') else '',
+                         group=om.group(1) if om else ''))
+
+    # Numbered titles mark a parallel group; its pages must declare it.
+    numbered = {}
+    for p in body:
+        if p['group']:
+            numbered.setdefault(p['group'], []).append(p)
+    for g, pages in numbered.items():
+        if len(pages) < 2:
+            continue
+        nums = ', '.join(f'{p["num"]:02d}' for p in pages)
+        if any(not p['series'] for p in pages):
+            errors.append(f'Slides {nums} are numbered "{g}…": a parallel group. Give each the same '
+                          f'**Series** (e.g. "{g} 1/{len(pages)}") and one shared layout')
+        elif len({p['series'] for p in pages}) > 1:
+            errors.append(f'Slides {nums} are numbered "{g}…" but name different Series')
 
     # Parallel pages share one layout.
     groups = {}

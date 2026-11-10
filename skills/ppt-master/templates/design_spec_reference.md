@@ -212,8 +212,9 @@
 - **Message**: [The one sentence the audience should remember, ≤ 30 characters]
 - **Relation**: [One of: statement, metric, contrast, problem_solution, parallel, sequence, escalation, layering, convergence, cycle, hub, classification, chain_core, evidence, timeline, matrix]
 - **Layout**: [Layout ID from `templates/content/layouts.json` that shows this relation; otherwise `free: <description>`]
-- **Claim check**: [How this content makes the layout's `claim` true; omit for free layouts]
-- **Series**: [Only for parallel pages that share one layout, e.g. `risks 2/5`]
+- **Claim check**: [How this content makes the layout's `claim` true — name which content plays which role; omit for free layouts]
+- **Evidence**: [One or more verbatim quotes from sources/, in "…" or 「…」, ≥ 8 characters each]
+- **Series**: [Parallel pages that share one layout, e.g. `risks 2/5`; required when titles are numbered like 风险一 / 风险二]
 - **Title**: [Page title]
 - **Chart**: [chart_type] (see VII. Chart Reference List)
 - **Content**:

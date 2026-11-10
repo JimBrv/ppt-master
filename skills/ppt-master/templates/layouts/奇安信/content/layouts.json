@@ -58,6 +58,13 @@
       "imageSlots": []
     },
     "chevron_stages": {
+      "slotNotes": {
+        "STEP0_LABEL": "总起：三个阶段的总名称（如\"决胜路线\"），不是第一阶段",
+        "STEP1_LABEL": "第一阶段名称",
+        "STEP2_LABEL": "第二阶段名称",
+        "STEP3_LABEL": "第三阶段名称",
+        "COL{n}_KEYWORD": "该阶段的一个关键词（大号斜体），出自原文"
+      },
       "relations": [
         "sequence"
       ],
@@ -92,6 +99,9 @@
       "imageSlots": []
     },
     "stair_steps": {
+      "slotNotes": {
+        "S{n}_HEAD{n}": "每级里的两个固定小标题，各级保持相同的文字"
+      },
       "relations": [
         "escalation"
       ],
@@ -130,6 +140,9 @@
       "imageSlots": []
     },
     "layered_rows": {
+      "slotNotes": {
+        "R{n}_LABEL": "层名称，R1 在最上方；层序必须有意义（下层支撑上层）"
+      },
       "relations": [
         "layering"
       ],
@@ -162,6 +175,10 @@
       "imageSlots": []
     },
     "hub_numbered_rows": {
+      "slotNotes": {
+        "HEADING": "右侧面板的总标题（一句话）",
+        "CALLOUT{n}": "环绕中心的标签：中心概念的组成项；右侧三行应覆盖这些标签，或说明三行是标签的归类"
+      },
       "relations": [
         "hub"
       ],
@@ -237,6 +254,9 @@
       ]
     },
     "loop_nodes": {
+      "slotNotes": {
+        "N{n}_TITLE": "闭环节点，顺时针排列；N5 的结果应回到 N1"
+      },
       "relations": [
         "cycle"
       ],
@@ -362,6 +382,9 @@
       "imageSlots": []
     },
     "probe_tier_channels": {
+      "slotNotes": {
+        "TOP_PILL": "通道标签（如\"通道一\"），三条通道格式一致"
+      },
       "relations": [
         "hub"
       ],
@@ -518,6 +541,9 @@
       "imageSlots": []
     },
     "funnel_layers": {
+      "slotNotes": {
+        "L{n}_LABEL": "漏斗层名称，L1 最宽；每层都比上一层范围更小"
+      },
       "relations": [
         "convergence"
       ],
@@ -550,6 +576,9 @@
       "imageSlots": []
     },
     "arrow_track_columns": {
+      "slotNotes": {
+        "POLICY_BTN": "策略条的按钮文字（总策略名）"
+      },
       "relations": [
         "escalation",
         "sequence"
@@ -621,6 +650,10 @@
       "imageSlots": []
     },
     "key_metrics": {
+      "slotNotes": {
+        "M{n}_NUM": "原文中的数字，原样保留：区间不能改成端点（10–100× 不能写成 100），近似值保留\"约/~\"",
+        "M{n}_SOURCE": "出处：原文的哪一部分或哪句话（如\"思想实验：设想 5000 万人\"），不得杜撰机构或报告"
+      },
       "relations": [
         "metric"
       ],
@@ -655,6 +688,11 @@
       "imageSlots": []
     },
     "problem_solution": {
+      "slotNotes": {
+        "SERIES": "平行组中的位置，如\"风险 2/5\"；同组各页格式一致",
+        "HOOK": "原文的小标题或一句原话",
+        "R{n}_ACTOR": "执行这条对策的主体（公司、政府、社会……）"
+      },
       "relations": [
         "problem_solution"
       ],
@@ -702,6 +740,9 @@
       "imageSlots": []
     },
     "contrast_split": {
+      "slotNotes": {
+        "L{n}_TITLE": "左栏第 n 行；与右栏第 n 行说的是同一件事"
+      },
       "relations": [
         "contrast"
       ],
@@ -783,6 +824,9 @@
       "imageSlots": []
     },
     "timeline": {
+      "slotNotes": {
+        "M{n}_DATE": "可查证的日期或年份，按时间先后从 M1 起填"
+      },
       "relations": [
         "timeline"
       ],

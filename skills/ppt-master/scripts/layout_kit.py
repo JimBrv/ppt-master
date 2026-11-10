@@ -351,9 +351,10 @@ def write_library(out_dir: Path, layouts: List[Layout], meta: Dict[str, dict], u
             raise ValueError(f'{lay.id}: metadata needs "relations" from RELATIONS and a "claim"'
                              + (f'; unknown: {bad}' if bad else ''))
         labels = list(m.get('labels', []))
-        unknown = [x for x in labels if x not in pat]
+        unknown = [x for x in labels if x not in pat] + \
+                  [x for x in m.get('slotNotes', {}) if x not in pat and x not in lay.caps]
         if unknown:
-            raise ValueError(f'{lay.id}: labels {unknown} are not slots of this layout')
+            raise ValueError(f'{lay.id}: labels / slotNotes {unknown} are not slot patterns of this layout')
         runs = len([k for k in lay.caps
                     if k not in ('PAGE_TITLE', 'PAGE_NUM') and slot_pattern(k) not in labels])
         entries[lay.id] = {**{k: v for k, v in m.items() if k != 'labels'},
