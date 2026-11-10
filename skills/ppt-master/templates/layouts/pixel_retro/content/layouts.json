@@ -615,6 +615,9 @@
       "imageSlots": []
     },
     "hero_statement": {
+      "slotNotes": {
+        "ATTRIBUTION": "只在 STATEMENT 是原文原话（或其忠实译文）时署作者名；自己的概括不署名，留空或写\"整理自《…》\""
+      },
       "relations": [
         "statement"
       ],
