@@ -16,79 +16,79 @@
   <use data-icon="{{TOP_ICON}}" x="949" y="200" width="46" height="46" fill="#FFFFFF"/>
   <use data-icon="{{MID_ICON}}" x="947" y="335" width="48" height="48" fill="#FFFFFF"/>
   <use data-icon="{{BOT_ICON}}" x="944" y="512" width="56" height="56" fill="#FFFFFF"/>
-  <rect x="90" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C1" x="90" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="145" y="221" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C1}}</text>
-  <rect x="210" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C2" x="210" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="265" y="221" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C2}}</text>
-  <rect x="330" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C3" x="330" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="385" y="221" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C3}}</text>
-  <rect x="450" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C4" x="450" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="505" y="221" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C4}}</text>
-  <rect x="570" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C5" x="570" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="625" y="221" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C5}}</text>
-  <rect x="690" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C6" x="690" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="745" y="221" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C6}}</text>
-  <rect x="810" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C7" x="810" y="196" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="865" y="221" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C7}}</text>
-  <rect x="90" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C8" x="90" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="145" y="274" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C8}}</text>
-  <rect x="210" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C9" x="210" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="265" y="274" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C9}}</text>
-  <rect x="330" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C10" x="330" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="385" y="274" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C10}}</text>
-  <rect x="450" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C11" x="450" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="505" y="274" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C11}}</text>
-  <rect x="570" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C12" x="570" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="625" y="274" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C12}}</text>
-  <rect x="690" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C13" x="690" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="745" y="274" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C13}}</text>
-  <rect x="810" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="TOP_C14" x="810" y="249" width="110" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="865" y="274" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#28A963">{{TOP_C14}}</text>
-  <rect x="90" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C1" x="90" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="165" y="366" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C1}}</text>
-  <rect x="255" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C2" x="255" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="330" y="366" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C2}}</text>
-  <rect x="420" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C3" x="420" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="495" y="366" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C3}}</text>
-  <rect x="585" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C4" x="585" y="341" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="660" y="366" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C4}}</text>
-  <rect x="90" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C5" x="90" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="165" y="417" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C5}}</text>
-  <rect x="255" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C6" x="255" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="330" y="417" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C6}}</text>
-  <rect x="420" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C7" x="420" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="495" y="417" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C7}}</text>
-  <rect x="585" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="MID_C8" x="585" y="392" width="150" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="660" y="417" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#4874CB">{{MID_C8}}</text>
-  <rect x="90" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C1" x="90" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="149" y="510" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C1}}</text>
-  <rect x="218" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C2" x="218" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="277" y="510" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C2}}</text>
-  <rect x="346" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C3" x="346" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="405" y="510" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C3}}</text>
-  <rect x="474" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C4" x="474" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="533" y="510" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C4}}</text>
-  <rect x="602" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C5" x="602" y="485" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="661" y="510" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C5}}</text>
-  <rect x="90" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C6" x="90" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="149" y="562" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C6}}</text>
-  <rect x="218" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C7" x="218" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="277" y="562" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C7}}</text>
-  <rect x="346" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C8" x="346" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="405" y="562" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C8}}</text>
-  <rect x="474" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C9" x="474" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="533" y="562" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C9}}</text>
-  <rect x="602" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C10" x="602" y="537" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="661" y="562" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C10}}</text>
-  <rect x="90" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C11" x="90" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="149" y="614" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C11}}</text>
-  <rect x="218" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C12" x="218" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="277" y="614" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C12}}</text>
-  <rect x="346" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C13" x="346" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="405" y="614" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C13}}</text>
-  <rect x="474" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C14" x="474" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="533" y="614" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C14}}</text>
-  <rect x="602" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
+  <rect data-slot-box="BOT_C15" x="602" y="589" width="118" height="38" rx="6" fill="#FFFFFF" fill-opacity="0.88"/>
   <text x="661" y="614" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#EE822F">{{BOT_C15}}</text>
   <rect x="906" y="255" width="133" height="47" rx="20" fill="#30BE71" fill-opacity="0.85"/>
   <text x="972" y="287" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{TOP_LABEL}}</text>

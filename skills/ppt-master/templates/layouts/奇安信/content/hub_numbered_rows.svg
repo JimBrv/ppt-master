@@ -6,15 +6,15 @@
   <circle cx="238" cy="440" r="123" fill="#1E6BEE" fill-opacity="0.12"/>
   <circle cx="238" cy="440" r="80" fill="#1E6BEE"/>
   <use data-icon="{{HUB_ICON}}" x="205" y="407" width="66" height="66" fill="#FFFFFF"/>
-  <rect x="20" y="300" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <rect data-slot-box="CALLOUT1" x="20" y="300" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
   <text x="75" y="333" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT1}}</text>
-  <rect x="120" y="222" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <rect data-slot-box="CALLOUT2" x="120" y="222" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
   <text x="175" y="255" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT2}}</text>
-  <rect x="262" y="246" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <rect data-slot-box="CALLOUT3" x="262" y="246" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
   <text x="317" y="279" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT3}}</text>
-  <rect x="20" y="540" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <rect data-slot-box="CALLOUT4" x="20" y="540" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
   <text x="75" y="573" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT4}}</text>
-  <rect x="258" y="585" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
+  <rect data-slot-box="CALLOUT5" x="258" y="585" width="110" height="52" rx="12" fill="#D9E8FC" stroke="#D1E6FF" stroke-width="1"/>
   <text x="313" y="618" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{CALLOUT5}}</text>
   <rect x="398" y="140" width="842" height="540" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#D4E5FC" stroke-width="1"/>
   <text x="819" y="200" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="27" font-weight="bold" text-anchor="middle" fill="#1E6BEE">{{HEADING}}</text>

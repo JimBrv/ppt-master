@@ -107,6 +107,13 @@ When a page's `Layout` field in the design spec is a layout ID, build that page 
 5. Fill icon slots with names from the approved icon list.
 6. Replace a `<rect data-image-slot="...">` with an `<image>` using the same box, or keep the rect if the image is a placeholder.
 
+Prefer filling the page with `scripts/layout_fill.py`. It applies rules 3–6 and refuses to write a page that breaks them:
+
+```bash
+uv run python3 ${SKILL_DIR}/scripts/layout_fill.py <project_path> --slots <layout_id>
+uv run python3 ${SKILL_DIR}/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
+```
+
 A `free: ...` Layout value means free design inside `03_content.svg`. Before leaving Step 6, `grep -l '{{' svg_output/*.svg` must print nothing.
 
 ---

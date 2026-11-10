@@ -150,6 +150,12 @@ templates/layouts/
 
 ---
 
+## Content Layouts From a Reference Deck
+
+To add content layouts, such as ready-made body pages taken from a deck the user likes, follow [scripts/docs/layouts.md](../scripts/docs/layouts.md): inspect the deck with `pptx_inspect.py`, define each layout in the template's `content_src/build_layouts.py`, regenerate, and verify with `layout_stress.py`. Never hand-edit the generated SVGs or `layouts.json`.
+
+---
+
 ## Phase Completion Checkpoint
 
 ```markdown

@@ -10,15 +10,15 @@
   <text x="256" y="233" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{T1_BADGE}}</text>
   <rect x="69" y="275" width="375" height="52" rx="6" fill="#30C0B4" fill-opacity="0.18"/>
   <text x="256" y="309" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#000000">{{T1_HEAD}}</text>
-  <rect x="96" y="355.0" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
+  <rect data-slot-box="T1_ITEM1" x="96" y="355.0" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
   <text x="118" y="381.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T1_ITEM1}}</text>
-  <rect x="96" y="398.5" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
+  <rect data-slot-box="T1_ITEM2" x="96" y="398.5" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
   <text x="118" y="424.5" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T1_ITEM2}}</text>
-  <rect x="96" y="442.0" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
+  <rect data-slot-box="T1_ITEM3" x="96" y="442.0" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
   <text x="118" y="468.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T1_ITEM3}}</text>
-  <rect x="96" y="485.5" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
+  <rect data-slot-box="T1_ITEM4" x="96" y="485.5" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
   <text x="118" y="511.5" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T1_ITEM4}}</text>
-  <rect x="96" y="529.0" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
+  <rect data-slot-box="T1_ITEM5" x="96" y="529.0" width="7" height="38" rx="3" fill="#30C0B4" fill-opacity="0.8"/>
   <text x="118" y="555.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T1_ITEM5}}</text>
   <!-- track 2 -->
   <circle cx="640" cy="225" r="42" fill="#FFFFFF"/>
@@ -26,15 +26,15 @@
   <text x="640" y="233" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{T2_BADGE}}</text>
   <rect x="453" y="275" width="375" height="52" rx="6" fill="#F2BA02" fill-opacity="0.18"/>
   <text x="640" y="309" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#000000">{{T2_HEAD}}</text>
-  <rect x="480" y="355.0" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
+  <rect data-slot-box="T2_ITEM1" x="480" y="355.0" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
   <text x="502" y="381.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T2_ITEM1}}</text>
-  <rect x="480" y="398.5" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
+  <rect data-slot-box="T2_ITEM2" x="480" y="398.5" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
   <text x="502" y="424.5" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T2_ITEM2}}</text>
-  <rect x="480" y="442.0" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
+  <rect data-slot-box="T2_ITEM3" x="480" y="442.0" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
   <text x="502" y="468.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T2_ITEM3}}</text>
-  <rect x="480" y="485.5" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
+  <rect data-slot-box="T2_ITEM4" x="480" y="485.5" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
   <text x="502" y="511.5" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T2_ITEM4}}</text>
-  <rect x="480" y="529.0" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
+  <rect data-slot-box="T2_ITEM5" x="480" y="529.0" width="7" height="38" rx="3" fill="#F2BA02" fill-opacity="0.8"/>
   <text x="502" y="555.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T2_ITEM5}}</text>
   <!-- track 3 -->
   <circle cx="1024" cy="225" r="42" fill="#FFFFFF"/>
@@ -42,15 +42,15 @@
   <text x="1024" y="233" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{T3_BADGE}}</text>
   <rect x="837" y="275" width="375" height="52" rx="6" fill="#4991F1" fill-opacity="0.18"/>
   <text x="1024" y="309" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#000000">{{T3_HEAD}}</text>
-  <rect x="864" y="355.0" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
+  <rect data-slot-box="T3_ITEM1" x="864" y="355.0" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
   <text x="886" y="381.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T3_ITEM1}}</text>
-  <rect x="864" y="398.5" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
+  <rect data-slot-box="T3_ITEM2" x="864" y="398.5" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
   <text x="886" y="424.5" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T3_ITEM2}}</text>
-  <rect x="864" y="442.0" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
+  <rect data-slot-box="T3_ITEM3" x="864" y="442.0" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
   <text x="886" y="468.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T3_ITEM3}}</text>
-  <rect x="864" y="485.5" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
+  <rect data-slot-box="T3_ITEM4" x="864" y="485.5" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
   <text x="886" y="511.5" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T3_ITEM4}}</text>
-  <rect x="864" y="529.0" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
+  <rect data-slot-box="T3_ITEM5" x="864" y="529.0" width="7" height="38" rx="3" fill="#4991F1" fill-opacity="0.8"/>
   <text x="886" y="555.0" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" font-weight="bold" fill="#0F1423">{{T3_ITEM5}}</text>
   <text x="640" y="664" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#3182EF">{{CONCLUSION}}</text>
   <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
