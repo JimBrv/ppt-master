@@ -1,11 +1,33 @@
 {
   "meta": {
-    "version": 1,
+    "version": 2,
     "canvas": "0 0 1280 720",
-    "usage": "在 design_spec 的 Layout 字段写版式 ID。slots 的数字是该槽位的最大中文字符数，英文按 0.55 个中文宽度估算；{n} 表示序号。"
+    "usage": "先按内容关系（relations，见 meta.relations）筛版式，再用 claim 验证内容；在 design_spec 的 Layout 字段写版式 ID。slots 的数字是该槽位的最大中文字符数，英文按 0.55 个中文宽度估算；{n} 表示序号。",
+    "relations": {
+      "statement": "论断",
+      "metric": "数字",
+      "contrast": "对照",
+      "problem_solution": "问题-对策",
+      "parallel": "并列",
+      "sequence": "顺序",
+      "escalation": "递进",
+      "layering": "分层",
+      "convergence": "收敛",
+      "cycle": "循环",
+      "hub": "中心辐射",
+      "classification": "分档",
+      "chain_core": "链路+核心",
+      "evidence": "论点+证据",
+      "timeline": "时间线",
+      "matrix": "二维矩阵"
+    }
   },
   "layouts": {
     "three_pillars": {
+      "relations": [
+        "parallel"
+      ],
+      "claim": "三栏地位平等，交换顺序不改变意思",
       "label": "三栏并列卡片",
       "summary": "三个并列主题，各含 3 张图标卡片，底部一句结论",
       "source": "P13",
@@ -19,6 +41,9 @@
         "单组要点超过 3 个"
       ],
       "items": "固定 3 栏；每栏 2–3 张卡片。少于 3 张时删掉整张卡片，其余卡片加高填满栏高，不留空洞",
+      "maxRuns": 40,
+      "weight": "heavy",
+      "labelSlots": [],
       "slots": {
         "COL{n}_TITLE": 12,
         "COL{n}_CARD{n}_TITLE": 14,
@@ -33,6 +58,10 @@
       "imageSlots": []
     },
     "chevron_stages": {
+      "relations": [
+        "sequence"
+      ],
+      "claim": "三个阶段有先后，前一阶段是后一阶段的前提",
       "label": "箭头阶段 + 三列",
       "summary": "顶部箭头流程条，下接三列关键词卡片和蓝色说明带",
       "source": "P14",
@@ -45,6 +74,9 @@
         "阶段间无先后关系"
       ],
       "items": "固定 1 个总起 + 3 个阶段",
+      "maxRuns": 22,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "STEP{n}_LABEL": 11,
         "COL{n}_NAME": 11,
@@ -60,6 +92,10 @@
       "imageSlots": []
     },
     "stair_steps": {
+      "relations": [
+        "escalation"
+      ],
+      "claim": "每一级都比前一级程度更高，能说出升级的是什么维度",
       "label": "阶梯递进",
       "summary": "六级上升阶梯，每级含等级圆和两段说明",
       "source": "P18",
@@ -72,6 +108,13 @@
         "少于 4 级"
       ],
       "items": "4–6 级。减少时删掉最靠前的列，并让其余列等宽铺满 x=35..1200",
+      "maxRuns": 42,
+      "weight": "heavy",
+      "labelSlots": [
+        "SUBTITLE",
+        "AXIS_NOTE",
+        "S{n}_HEAD{n}"
+      ],
       "slots": {
         "SUBTITLE": 32,
         "S{n}_NAME": 10,
@@ -87,6 +130,10 @@
       "imageSlots": []
     },
     "layered_rows": {
+      "relations": [
+        "layering"
+      ],
+      "claim": "下层支撑上层（或由外到内），调换层序会出错",
       "label": "分层横带",
       "summary": "四层横带贯穿中轴，左标题右说明，底部结论",
       "source": "P24（简化）",
@@ -99,6 +146,9 @@
         "说明超过两行"
       ],
       "items": "3–4 层。3 层时删掉最后一层，其余行高增到 140",
+      "maxRuns": 13,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "R{n}_LABEL": 15,
         "R{n}_L{n}": 28,
@@ -112,6 +162,10 @@
       "imageSlots": []
     },
     "hub_numbered_rows": {
+      "relations": [
+        "hub"
+      ],
+      "claim": "三行都是中心概念的组成维度，不把问题和对策混排",
       "label": "中心枢纽 + 编号行",
       "summary": "左侧枢纽图与环绕标签，右侧三条编号说明",
       "source": "P25",
@@ -124,6 +178,11 @@
         "需要大段说明"
       ],
       "items": "固定 3 行；环绕标签 3–5 个，未填的自动删除",
+      "maxRuns": 20,
+      "weight": "medium",
+      "labelSlots": [
+        "HEADING"
+      ],
       "slots": {
         "CALLOUT{n}": 5,
         "HEADING": 28,
@@ -140,6 +199,11 @@
       "imageSlots": []
     },
     "image_stack_pills": {
+      "relations": [
+        "evidence",
+        "parallel"
+      ],
+      "claim": "有一张真实主图，每一条都在描述这张图的主体",
       "label": "主图 + 胶囊列表",
       "summary": "左侧圆形主图，右侧沿弧线排列的优势胶囊",
       "source": "P29",
@@ -152,6 +216,9 @@
         "每条超过一行"
       ],
       "items": "5–8 条。减少时按条数重新均分 y=150..678，x 仍取弧线对称值",
+      "maxRuns": 16,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "P{n}_TAG": 6,
         "P{n}_BODY": 36,
@@ -170,6 +237,10 @@
       ]
     },
     "loop_nodes": {
+      "relations": [
+        "cycle"
+      ],
+      "claim": "最后一个节点的结果回到第一个节点，形成持续运转",
       "label": "闭环五节点",
       "summary": "五个节点沿环排列，表达持续闭环",
       "source": "P28",
@@ -182,6 +253,9 @@
         "节点不是 5 个"
       ],
       "items": "固定 5 个节点，顺序为左上起顺时针",
+      "maxRuns": 15,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "N{n}_TITLE": 10,
         "N{n}_L{n}": 13,
@@ -194,6 +268,11 @@
       "imageSlots": []
     },
     "stage_matrix_evidence": {
+      "relations": [
+        "evidence",
+        "sequence"
+      ],
+      "claim": "左侧是有先后的阶段，右侧是一张真实截图作为证据",
       "label": "阶段矩阵 + 证据图",
       "summary": "左侧四阶段要点，右侧系统截图与关键结果",
       "source": "P31–P34",
@@ -206,6 +285,11 @@
         "阶段不足 3 个"
       ],
       "items": "3–4 个阶段；每阶段 2–4 个要点，未填的要点连同白色小卡自动删除",
+      "maxRuns": 23,
+      "weight": "medium",
+      "labelSlots": [
+        "CALLOUT_LABEL_L{n}"
+      ],
       "slots": {
         "STAGE{n}_LABEL": 2,
         "STAGE{n}_CHIP{n}": 12,
@@ -229,6 +313,10 @@
       ]
     },
     "architecture_radial": {
+      "relations": [
+        "hub"
+      ],
+      "claim": "有一个中心系统，左边的输入和右边的输出都直接与它相连",
       "label": "放射式三层架构",
       "summary": "左侧来源，中心四节点枢纽，右侧输出，底部三段说明",
       "source": "P12",
@@ -241,6 +329,14 @@
         "节点文字较长"
       ],
       "items": "固定 3 个输入、4 个中心节点、3 个输出",
+      "maxRuns": 55,
+      "weight": "heavy",
+      "labelSlots": [
+        "SRC_TITLE_L{n}",
+        "INPUT_LABEL",
+        "HUB_HEADER",
+        "OUT_LABEL"
+      ],
       "slots": {
         "SRC_TITLE_L{n}": 7,
         "SRC{n}_L{n}": 7,
@@ -266,6 +362,10 @@
       "imageSlots": []
     },
     "probe_tier_channels": {
+      "relations": [
+        "hub"
+      ],
+      "claim": "一个核心通过几条并行通道连接不同对象",
       "label": "统一入口 + 三通道",
       "summary": "左侧蓝色半圆总起，右侧沿弧线排列三条接入通道",
       "source": "P15",
@@ -278,6 +378,13 @@
         "通道间有先后顺序"
       ],
       "items": "固定 3 条通道",
+      "maxRuns": 24,
+      "weight": "medium",
+      "labelSlots": [
+        "TOP_PILL",
+        "MID_PILL",
+        "BOT_PILL"
+      ],
       "slots": {
         "HUB_TITLE": 13,
         "HUB_L{n}": 27,
@@ -310,6 +417,10 @@
       "imageSlots": []
     },
     "three_track_checklist": {
+      "relations": [
+        "parallel"
+      ],
+      "claim": "三条线相互独立，每条线内部是一份清单",
       "label": "三轨清单",
       "summary": "三个圆形徽标带出三列 5 项清单，底部一句结论",
       "source": "P16",
@@ -322,6 +433,9 @@
         "需要图标卡片时改用 three_pillars"
       ],
       "items": "固定 3 列；每列 3–5 条，未填的条目连同左侧色条自动删除",
+      "maxRuns": 22,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "T{n}_BADGE": 3,
         "T{n}_HEAD": 15,
@@ -334,6 +448,10 @@
       "imageSlots": []
     },
     "tier_chip_pyramid": {
+      "relations": [
+        "classification"
+      ],
+      "claim": "每个条目只属于一档，越往上越少或越高级",
       "label": "分层标签 + 金字塔",
       "summary": "三层色带排列标签块，右侧金字塔标注层级",
       "source": "P17",
@@ -346,6 +464,9 @@
         "没有层级差异"
       ],
       "items": "上层最多 14 个、中层 8 个、下层 15 个标签；未填的标签连同白底自动删除",
+      "maxRuns": 40,
+      "weight": "heavy",
+      "labelSlots": [],
       "slots": {
         "TOP_C{n}": 7,
         "MID_C{n}": 9,
@@ -364,6 +485,10 @@
       "imageSlots": []
     },
     "chain_core_grid": {
+      "relations": [
+        "chain_core"
+      ],
+      "claim": "上方是有先后的链路，中间的核心贯穿整条链路，下方是支撑或约束",
       "label": "链路 + 核心 + 四宫格",
       "summary": "顶部五段链路，中部核心能力带，底部四项约束",
       "source": "P23",
@@ -376,6 +501,9 @@
         "链路不足 3 段"
       ],
       "items": "固定 5 段链路、4 个核心能力、4 项约束",
+      "maxRuns": 23,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "CH{n}_TITLE": 8,
         "CH{n}_BODY": 14,
@@ -390,6 +518,10 @@
       "imageSlots": []
     },
     "funnel_layers": {
+      "relations": [
+        "convergence"
+      ],
+      "claim": "每一层都比上一层窄，最后得出结果",
       "label": "漏斗分层",
       "summary": "中央四层漏斗贯穿横带，左标题右说明，底部结论",
       "source": "P24",
@@ -402,6 +534,9 @@
         "超过 4 层"
       ],
       "items": "固定 4 层",
+      "maxRuns": 13,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "L{n}_LABEL": 10,
         "L{n}_D{n}": 20,
@@ -415,6 +550,11 @@
       "imageSlots": []
     },
     "arrow_track_columns": {
+      "relations": [
+        "escalation",
+        "sequence"
+      ],
+      "claim": "各段沿一个方向递增（强度、权限或成熟度）",
       "label": "箭头轨道 + 三列 + 策略条",
       "summary": "渐变箭头表达三段演进，下接三列说明和策略条",
       "source": "P27",
@@ -427,6 +567,9 @@
         "需要大段说明时改用 chevron_stages"
       ],
       "items": "固定 3 段",
+      "maxRuns": 15,
+      "weight": "medium",
+      "labelSlots": [],
       "slots": {
         "S{n}_LABEL": 11,
         "C{n}_TITLE": 9,
@@ -440,6 +583,283 @@
       "iconSlots": [
         "S{n}_ICON"
       ],
+      "imageSlots": []
+    },
+    "hero_statement": {
+      "relations": [
+        "statement"
+      ],
+      "claim": "整页只有一个观点，其余文字都在支撑它",
+      "label": "大字论断 / 引语",
+      "summary": "一到两行大字论断，配出处、两行补充和三个关键词",
+      "source": "原创（补位：论断）",
+      "bestFor": [
+        "开篇论点、章节转折、结尾号召",
+        "一句值得单独成页的引语",
+        "叙事类文稿的\"呼吸页\""
+      ],
+      "avoidFor": [
+        "有 3 个以上需要展开的要点",
+        "论断需要数据支撑时改用 key_metrics"
+      ],
+      "items": "论断 1–2 行；出处、补充说明、关键词均可不填，未填的关键词连同底块自动删除",
+      "maxRuns": 8,
+      "weight": "light",
+      "labelSlots": [
+        "KICKER"
+      ],
+      "slots": {
+        "KICKER": 32,
+        "STATEMENT_L{n}": 23,
+        "ATTRIBUTION": 45,
+        "SUPPORT_L{n}": 52,
+        "TAG{n}": 13,
+        "PAGE_TITLE": 32,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "key_metrics": {
+      "relations": [
+        "metric"
+      ],
+      "claim": "每个数字都来自原文，并且能用一句话解读",
+      "label": "三个关键数字",
+      "summary": "三张大数字卡（数字、单位、标签、说明、来源），底部一句结论",
+      "source": "原创（补位：数字）",
+      "bestFor": [
+        "规模、速度、比例、预测等关键数据",
+        "用数字建立认知冲击"
+      ],
+      "avoidFor": [
+        "原文没有确切数字",
+        "数字只是装饰、与结论无关",
+        "超过 3 个数字时拆页或改用图表"
+      ],
+      "items": "固定 3 个数字；每个数字 M{n}_SOURCE 写出处（原文段落或数据来源）",
+      "maxRuns": 22,
+      "weight": "medium",
+      "labelSlots": [],
+      "slots": {
+        "M{n}_NUM": 4,
+        "M{n}_UNIT": 14,
+        "M{n}_LABEL": 13,
+        "M{n}_L{n}": 18,
+        "M{n}_SOURCE": 22,
+        "TAKEAWAY": 46,
+        "PAGE_TITLE": 32,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "problem_solution": {
+      "relations": [
+        "problem_solution"
+      ],
+      "claim": "右侧每条对策都对应左侧的问题；左侧写清\"为什么可能发生\"",
+      "label": "问题 → 对策",
+      "summary": "左侧问题与成因，箭头指向右侧三条分主体的对策，底部一句话",
+      "source": "原创（补位：问题-对策）",
+      "bestFor": [
+        "风险与应对、痛点与方案",
+        "平行章节反复使用（SERIES 标注 1/5、2/5…）",
+        "HOOK 放章节的原文小标题或引语"
+      ],
+      "avoidFor": [
+        "只有问题没有对策",
+        "对策超过 3 条",
+        "问题和对策之间没有对应关系"
+      ],
+      "items": "成因 1–3 条、对策 1–3 条，未填的连同底块自动删除；同一系列的各页保持同样的标签文字",
+      "maxRuns": 16,
+      "weight": "medium",
+      "labelSlots": [
+        "SERIES",
+        "HOOK",
+        "PROBLEM_LABEL",
+        "WHY_LABEL",
+        "RESPONSE_LABEL"
+      ],
+      "slots": {
+        "SERIES": 7,
+        "HOOK": 51,
+        "PROBLEM_LABEL": 31,
+        "PROBLEM_TITLE": 17,
+        "PROBLEM_L{n}": 29,
+        "WHY_LABEL": 27,
+        "WHY{n}": 28,
+        "RESPONSE_LABEL": 28,
+        "R{n}_ACTOR": 7,
+        "R{n}_ACTION": 19,
+        "R{n}_L{n}": 33,
+        "CONCLUSION": 54,
+        "PAGE_TITLE": 32,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "contrast_split": {
+      "relations": [
+        "contrast"
+      ],
+      "claim": "每一行左右两项说的是同一件事，构成一一对照",
+      "label": "左右对照",
+      "summary": "左右两栏逐行对照（误区/事实、现状/目标、之前/之后），底部结论",
+      "source": "原创（补位：对照）",
+      "bestFor": [
+        "误区与事实",
+        "现状与目标、之前与之后",
+        "两种做法的逐项比较"
+      ],
+      "avoidFor": [
+        "两边各说各的、无法逐行对应",
+        "超过两个对象时改用 three_pillars",
+        "要表达\"两个极端之间的立场\"时改用 spectrum_position"
+      ],
+      "items": "2–4 行；未填的行（左右两格）自动删除",
+      "maxRuns": 19,
+      "weight": "medium",
+      "labelSlots": [
+        "VS_LABEL"
+      ],
+      "slots": {
+        "L_HEAD": 20,
+        "R_HEAD": 20,
+        "VS_LABEL": 2,
+        "L{n}_TITLE": 26,
+        "L{n}_NOTE": 32,
+        "R{n}_TITLE": 26,
+        "R{n}_NOTE": 32,
+        "VERDICT": 52,
+        "PAGE_TITLE": 32,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "spectrum_position": {
+      "relations": [
+        "contrast"
+      ],
+      "claim": "两端是两个都要避免的极端，中间才是主张",
+      "label": "两极之间的立场",
+      "summary": "横轴两端是两个极端，中间高亮所持立场，下方三条原则",
+      "source": "原创（补位：立场）",
+      "bestFor": [
+        "\"既不……也不……\"式的立场",
+        "在两种错误倾向之间定位",
+        "方法论、原则的提出"
+      ],
+      "avoidFor": [
+        "两端不是同一维度的两极",
+        "简单的二选一时改用 contrast_split"
+      ],
+      "items": "两端各 1 个、中间 1 个；原则 1–3 条，未填的连同卡片自动删除",
+      "maxRuns": 24,
+      "weight": "medium",
+      "labelSlots": [
+        "PRINCIPLES_LABEL"
+      ],
+      "slots": {
+        "L_NAME": 13,
+        "L_L{n}": 21,
+        "L_TAG": 9,
+        "R_NAME": 13,
+        "R_L{n}": 21,
+        "R_TAG": 9,
+        "M_NAME": 13,
+        "M_L{n}": 23,
+        "PRINCIPLES_LABEL": 33,
+        "P{n}_TITLE": 15,
+        "P{n}_L{n}": 21,
+        "CONCLUSION": 50,
+        "PAGE_TITLE": 32,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "timeline": {
+      "relations": [
+        "timeline"
+      ],
+      "claim": "节点按真实时间排序，日期可以查证",
+      "label": "时间线",
+      "summary": "横向时间轴上下交错 3–6 个节点，每个节点有日期、标题和两行说明",
+      "source": "原创（补位：时间线）",
+      "bestFor": [
+        "发展历程、里程碑",
+        "路线图与预测时间点"
+      ],
+      "avoidFor": [
+        "没有日期的步骤（那是顺序，改用 chevron_stages）",
+        "节点超过 6 个"
+      ],
+      "items": "3–6 个节点，从 M1 起按时间先后填；未填的节点连同卡片自动删除",
+      "maxRuns": 25,
+      "weight": "medium",
+      "labelSlots": [],
+      "slots": {
+        "M{n}_DATE": 11,
+        "M{n}_TITLE": 14,
+        "M{n}_L{n}": 16,
+        "CONCLUSION": 50,
+        "PAGE_TITLE": 32,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "matrix_2x2": {
+      "relations": [
+        "matrix"
+      ],
+      "claim": "两个维度相互独立，每个条目只落进一个象限；右上象限是重点",
+      "label": "二维四象限",
+      "summary": "两条坐标轴划出四个象限，右上象限高亮，底部一句结论",
+      "source": "原创（补位：矩阵）",
+      "bestFor": [
+        "按两个维度定位、分类",
+        "优先级与取舍分析"
+      ],
+      "avoidFor": [
+        "两个维度相关或说不清",
+        "条目无法归入唯一象限"
+      ],
+      "items": "固定 4 个象限；把要强调的象限放在右上（TR）",
+      "maxRuns": 17,
+      "weight": "medium",
+      "labelSlots": [
+        "Y_HIGH",
+        "Y_LABEL",
+        "Y_LOW",
+        "X_LOW",
+        "X_LABEL",
+        "X_HIGH"
+      ],
+      "slots": {
+        "Y_HIGH": 6,
+        "Y_LABEL": 6,
+        "Y_LOW": 6,
+        "X_LOW": 13,
+        "X_LABEL": 25,
+        "X_HIGH": 13,
+        "TL_TITLE": 19,
+        "TL_L{n}": 27,
+        "TR_TITLE": 19,
+        "TR_L{n}": 27,
+        "BL_TITLE": 19,
+        "BL_L{n}": 27,
+        "BR_TITLE": 19,
+        "BR_L{n}": 27,
+        "CONCLUSION": 52,
+        "PAGE_TITLE": 32,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
       "imageSlots": []
     }
   }

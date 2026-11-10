@@ -31,7 +31,7 @@ python3 scripts/svg_to_pptx.py <project_path> -s final
 | Project management | `project_manager.py`, `batch_validate.py`, `generate_examples_index.py`, `error_helper.py` | [docs/project.md](./docs/project.md) |
 | SVG pipeline | `finalize_svg.py`, `svg_to_pptx.py`, `total_md_split.py`, `svg_quality_checker.py`, `preview.py` | [docs/svg-pipeline.md](./docs/svg-pipeline.md) |
 | Image tools | `image_gen.py`, `analyze_images.py`, `gemini_watermark_remover.py` | [docs/image.md](./docs/image.md) |
-| Content layouts | `layout_build.py`, `layout_fill.py`, `layout_stress.py`, `pptx_inspect.py`, `layout_kit.py` | [docs/layouts.md](./docs/layouts.md) |
+| Content layouts | `layout_build.py`, `layout_plan_check.py`, `layout_fill.py`, `layout_stress.py`, `pptx_inspect.py`, `layout_kit.py` | [docs/layouts.md](./docs/layouts.md) |
 | Troubleshooting | validation, preview, export, dependency issues | [docs/troubleshooting.md](./docs/troubleshooting.md) |
 
 ## High-Frequency Commands

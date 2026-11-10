@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: timeline. Fill every slot; see layouts.json for capacity. -->
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <rect x="60" y="360" width="1160" height="6" rx="3" fill="#D4E5FC"/>
+  <polygon points="1218,350 1244,363 1218,376" fill="#D4E5FC"/>
+  <!-- milestone 1 -->
+  <rect data-slot-box="M1_TITLE" x="168" y="341" width="44" height="44" rx="22" fill="#2C7FEF" fill-opacity="0.15"/>
+  <rect data-slot-box="M1_TITLE" x="179" y="352" width="22" height="22" rx="11" fill="#2C7FEF"/>
+  <rect data-slot-box="M1_TITLE" x="189" y="330" width="2" height="21" fill="#D4E5FC"/>
+  <rect data-slot-box="M1_TITLE" x="40" y="180" width="300" height="150" rx="12" fill="#FFFFFF" fill-opacity="0.92" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="190" y="220" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2C7FEF">{{M1_DATE}}</text>
+  <text x="190" y="254" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#0F1423">{{M1_TITLE}}</text>
+  <text x="190" y="282" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M1_L1}}</text>
+  <text x="190" y="306" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M1_L2}}</text>
+  <!-- milestone 2 -->
+  <rect data-slot-box="M2_TITLE" x="348" y="341" width="44" height="44" rx="22" fill="#2C7FEF" fill-opacity="0.15"/>
+  <rect data-slot-box="M2_TITLE" x="359" y="352" width="22" height="22" rx="11" fill="#2C7FEF"/>
+  <rect data-slot-box="M2_TITLE" x="369" y="375" width="2" height="21" fill="#D4E5FC"/>
+  <rect data-slot-box="M2_TITLE" x="220" y="396" width="300" height="150" rx="12" fill="#FFFFFF" fill-opacity="0.92" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="370" y="436" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2C7FEF">{{M2_DATE}}</text>
+  <text x="370" y="470" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#0F1423">{{M2_TITLE}}</text>
+  <text x="370" y="498" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M2_L1}}</text>
+  <text x="370" y="522" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M2_L2}}</text>
+  <!-- milestone 3 -->
+  <rect data-slot-box="M3_TITLE" x="528" y="341" width="44" height="44" rx="22" fill="#2C7FEF" fill-opacity="0.15"/>
+  <rect data-slot-box="M3_TITLE" x="539" y="352" width="22" height="22" rx="11" fill="#2C7FEF"/>
+  <rect data-slot-box="M3_TITLE" x="549" y="330" width="2" height="21" fill="#D4E5FC"/>
+  <rect data-slot-box="M3_TITLE" x="400" y="180" width="300" height="150" rx="12" fill="#FFFFFF" fill-opacity="0.92" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="550" y="220" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2C7FEF">{{M3_DATE}}</text>
+  <text x="550" y="254" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#0F1423">{{M3_TITLE}}</text>
+  <text x="550" y="282" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M3_L1}}</text>
+  <text x="550" y="306" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M3_L2}}</text>
+  <!-- milestone 4 -->
+  <rect data-slot-box="M4_TITLE" x="708" y="341" width="44" height="44" rx="22" fill="#2C7FEF" fill-opacity="0.15"/>
+  <rect data-slot-box="M4_TITLE" x="719" y="352" width="22" height="22" rx="11" fill="#2C7FEF"/>
+  <rect data-slot-box="M4_TITLE" x="729" y="375" width="2" height="21" fill="#D4E5FC"/>
+  <rect data-slot-box="M4_TITLE" x="580" y="396" width="300" height="150" rx="12" fill="#FFFFFF" fill-opacity="0.92" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="730" y="436" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2C7FEF">{{M4_DATE}}</text>
+  <text x="730" y="470" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#0F1423">{{M4_TITLE}}</text>
+  <text x="730" y="498" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M4_L1}}</text>
+  <text x="730" y="522" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M4_L2}}</text>
+  <!-- milestone 5 -->
+  <rect data-slot-box="M5_TITLE" x="888" y="341" width="44" height="44" rx="22" fill="#2C7FEF" fill-opacity="0.15"/>
+  <rect data-slot-box="M5_TITLE" x="899" y="352" width="22" height="22" rx="11" fill="#2C7FEF"/>
+  <rect data-slot-box="M5_TITLE" x="909" y="330" width="2" height="21" fill="#D4E5FC"/>
+  <rect data-slot-box="M5_TITLE" x="760" y="180" width="300" height="150" rx="12" fill="#FFFFFF" fill-opacity="0.92" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="910" y="220" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2C7FEF">{{M5_DATE}}</text>
+  <text x="910" y="254" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#0F1423">{{M5_TITLE}}</text>
+  <text x="910" y="282" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M5_L1}}</text>
+  <text x="910" y="306" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M5_L2}}</text>
+  <!-- milestone 6 -->
+  <rect data-slot-box="M6_TITLE" x="1068" y="341" width="44" height="44" rx="22" fill="#2C7FEF" fill-opacity="0.15"/>
+  <rect data-slot-box="M6_TITLE" x="1079" y="352" width="22" height="22" rx="11" fill="#2C7FEF"/>
+  <rect data-slot-box="M6_TITLE" x="1089" y="375" width="2" height="21" fill="#D4E5FC"/>
+  <rect data-slot-box="M6_TITLE" x="940" y="396" width="300" height="150" rx="12" fill="#FFFFFF" fill-opacity="0.92" stroke="#D4E5FC" stroke-width="1"/>
+  <text x="1090" y="436" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2C7FEF">{{M6_DATE}}</text>
+  <text x="1090" y="470" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#0F1423">{{M6_TITLE}}</text>
+  <text x="1090" y="498" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M6_L1}}</text>
+  <text x="1090" y="522" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="16" text-anchor="middle" fill="#333333">{{M6_L2}}</text>
+  <text x="640" y="640" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#3182EF">{{CONCLUSION}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

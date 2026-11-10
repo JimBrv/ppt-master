@@ -43,6 +43,7 @@ description: >
 | `${SKILL_DIR}/scripts/pptx_to_template.py` | Turn a user-supplied `.pptx` into a layout template (real backgrounds + logos) |
 | `${SKILL_DIR}/scripts/layout_fill.py` | Fill one content layout from a values file, checking every slot's capacity |
 | `${SKILL_DIR}/scripts/layout_build.py` | Build a template's content layouts from the shared library and its theme |
+| `${SKILL_DIR}/scripts/layout_plan_check.py` | Check the design spec's layout plan (relation ↔ layout, series, density) |
 | `${SKILL_DIR}/scripts/layout_stress.py` | Stress-test a template's content layout library |
 | `${SKILL_DIR}/scripts/pptx_inspect.py` | Extract geometry and renders from a reference deck to build new layouts |
 | `${SKILL_DIR}/scripts/analyze_images.py` | Image analysis |
@@ -190,7 +191,7 @@ cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2
 > (`01_cover` / `02_chapter` / `02_toc` / `03_content` / `04_ending`) are always used for
 > cover, TOC, chapter and ending pages. A template whose entry in `layouts_index.json` has
 > `contentLayouts` also ships `content/`: ready-made body pages with `{{SLOT}}` text and
-> capacities (currently `奇安信`, `mckinsey`, `pixel_retro`, 15 layouts each). The `cp -R`
+> capacities (currently `奇安信`, `mckinsey`, `pixel_retro`, 22 layouts each). The `cp -R`
 > above copies it; the Strategist then picks a layout ID per body page and the Executor fills
 > it with `layout_fill.py`. Templates without `content/` design body pages freely on
 > `03_content.svg`, as before. All templates share one layout library
@@ -222,7 +223,7 @@ Read references/shared-standards.md
 1. Canvas format
 2. Page count range
 3. Target audience
-4. Style objective
+4. Style objective (including **genre and density**: narrative / report / solution — see strategist.md §d)
 5. Color scheme
 6. Icon usage approach
 7. Typography plan
@@ -238,11 +239,23 @@ uv run python3 ${SKILL_DIR}/scripts/analyze_images.py <project_path>/images
 **Output**: `<project_path>/design_spec.md`
 > 🚨 **CRITICAL I/O RULE**: To prevent IDE/Watcher deadlocks in this workspace, **NEVER** use standard AI file writing tools (like `write_to_file`) to output `design_spec.md`. You MUST use `uv run python3 ${SKILL_DIR}/scripts/file_write.py <target_path>` and pass the content via STDIN (e.g., using `send_command_input`) terminated by `<<EOF>>`.
 
+The spec lives at the project root (`<project_path>/design_spec.md`, not under `templates/`):
+the preview, the checker and the Executor all read it from there.
+
+**Layout plan (every body page)**: choose layouts by the content's relation, not for variety — follow
+`references/strategist.md` → *Content Layout Selection* (principles P1–P7, relation vocabulary,
+five fields per page: Message / Relation / Layout / Claim check / Series). Then check the plan and fix
+every `[FAIL]` before the checkpoint; `[HINT]` lines (density, rhythm) are for judgement:
+```bash
+uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path>
+```
+
 **✅ Checkpoint — Phase deliverables complete, auto-proceed to next step**:
 ```markdown
 ## ✅ Strategist Phase Complete
 - [x] Eight Confirmations completed (user confirmed)
 - [x] Design Specification & Content Outline generated
+- [x] `layout_plan_check.py` passes
 - [ ] **Next**: Auto-proceed to [Image_Generator / Executor] phase
 ```
 

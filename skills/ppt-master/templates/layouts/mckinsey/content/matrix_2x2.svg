@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: matrix_2x2. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <rect x="140" y="156" width="4" height="438" rx="2" fill="#7F8C8D"/>
+  <polygon points="130,160 142,138 154,160" fill="#7F8C8D"/>
+  <rect x="170" y="600" width="1046" height="4" rx="2" fill="#7F8C8D"/>
+  <polygon points="1214,590 1236,602 1214,614" fill="#7F8C8D"/>
+  <text x="126" y="180" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" text-anchor="end" fill="#7F8C8D">{{Y_HIGH}}</text>
+  <text x="126" y="380" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="end" fill="#0076A8">{{Y_LABEL}}</text>
+  <text x="126" y="584" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" text-anchor="end" fill="#7F8C8D">{{Y_LOW}}</text>
+  <text x="170" y="634" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#7F8C8D">{{X_LOW}}</text>
+  <text x="693" y="634" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#0076A8">{{X_LABEL}}</text>
+  <text x="1216" y="634" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" text-anchor="end" fill="#7F8C8D">{{X_HIGH}}</text>
+  <!-- quadrant TL -->
+  <rect x="170" y="150" width="525" height="210" rx="14" fill="#F2F7F9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="198" y="206" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#004B77">{{TL_TITLE}}</text>
+  <text x="198" y="250" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{TL_L1}}</text>
+  <text x="198" y="278" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{TL_L2}}</text>
+  <text x="198" y="306" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{TL_L3}}</text>
+  <!-- quadrant TR -->
+  <rect x="715" y="150" width="525" height="210" rx="14" fill="#005587"/>
+  <text x="743" y="206" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">{{TR_TITLE}}</text>
+  <text x="743" y="250" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#FFFFFF">{{TR_L1}}</text>
+  <text x="743" y="278" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#FFFFFF">{{TR_L2}}</text>
+  <text x="743" y="306" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#FFFFFF">{{TR_L3}}</text>
+  <!-- quadrant BL -->
+  <rect x="170" y="380" width="525" height="210" rx="14" fill="#F2F7F9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="198" y="436" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#004B77">{{BL_TITLE}}</text>
+  <text x="198" y="480" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{BL_L1}}</text>
+  <text x="198" y="508" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{BL_L2}}</text>
+  <text x="198" y="536" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{BL_L3}}</text>
+  <!-- quadrant BR -->
+  <rect x="715" y="380" width="525" height="210" rx="14" fill="#F2F7F9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="743" y="436" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#004B77">{{BR_TITLE}}</text>
+  <text x="743" y="480" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{BR_L1}}</text>
+  <text x="743" y="508" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{BR_L2}}</text>
+  <text x="743" y="536" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{BR_L3}}</text>
+  <text x="640" y="682" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#005587">{{CONCLUSION}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

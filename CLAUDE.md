@@ -36,6 +36,7 @@ uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
 uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
 uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/奇安信
 uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
+uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]   # check the layout plan in design_spec.md
 uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 
 # Post-processing & export — RECOMMENDED: one fail-fast invocation
@@ -75,7 +76,7 @@ uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
 - `skills/ppt-master/scripts/` — Runnable tool scripts
 - `skills/ppt-master/scripts/docs/` — Topic-focused script docs
 - `skills/ppt-master/templates/` — Layout templates, chart templates, 640+ vector icons
-- `skills/ppt-master/templates/content_library/` — Shared content-layout library (15 body-page layouts, structure + color roles)
+- `skills/ppt-master/templates/content_library/` — Shared content-layout library (22 body-page layouts, structure + color roles, relation + claim per layout)
 - `skills/ppt-master/templates/layouts/<template>/content/` — A template's built body layouts (`奇安信`, `mckinsey`, `pixel_retro`); `content_src/` holds its `theme.json` + `shell.svg`
 - `examples/` — Example projects
 - `projects/` — User project workspace
@@ -135,9 +136,14 @@ grep -o 'href="\.\./images/[^"]*"' <project_path>/svg_output/*.svg | sort | uniq
 
 - Default template: `奇安信`. A template = core pages (`01_cover` … `04_ending`, always used
   for cover/TOC/chapter/ending) + optional `content/` body layouts.
-- `奇安信`, `mckinsey`, `pixel_retro` ship 15 body layouts each; the Strategist names one per
+- `奇安信`, `mckinsey`, `pixel_retro` ship 22 body layouts each; the Strategist names one per
   body page (`Layout: <id>`) and the Executor fills it with `layout_fill.py`. Other templates
   design body pages freely on `03_content.svg`.
+- Layouts are chosen by the content's **relation** (16-word vocabulary: statement, metric,
+  contrast, problem_solution, parallel, sequence, …), never for variety. Each body page in
+  `design_spec.md` carries Message / Relation / Layout / Claim check (/ Series for parallel
+  pages); `layout_plan_check.py` checks the plan. Rules: `references/strategist.md`
+  → Content Layout Selection.
 - Layouts come from one shared library (`templates/content_library/library.py`) plus each
   template's `content_src/theme.json` + `shell.svg`. Never hand-edit `content/`; rebuild with
   `layout_build.py` and verify with `layout_stress.py`. Details: `skills/ppt-master/scripts/docs/layouts.md`.

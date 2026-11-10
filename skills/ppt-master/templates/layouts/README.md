@@ -7,7 +7,7 @@ Pre-built PPT page layout templates supporting multiple styles and use cases.
 
 > **AI / Programmatic recommendation**: Prefer reading `layouts_index.json`; use this README for human browsing and quick comparison.
 
-> **Content layouts**: `奇安信`, `mckinsey` and `pixel_retro` also ship `content/` — 15 ready-made body-page layouts each, built from the shared library in `../content_library/` with the template's own `content_src/theme.json` and `shell.svg`. Other templates design body pages freely on `03_content.svg`; any of them can get the layouts with `scripts/layout_build.py` (see [scripts/docs/layouts.md](../../scripts/docs/layouts.md)).
+> **Content layouts**: `奇安信`, `mckinsey` and `pixel_retro` also ship `content/` — 22 ready-made body-page layouts each, built from the shared library in `../content_library/` with the template's own `content_src/theme.json` and `shell.svg`. Other templates design body pages freely on `03_content.svg`; any of them can get the layouts with `scripts/layout_build.py` (see [scripts/docs/layouts.md](../../scripts/docs/layouts.md)).
 
 ---
 

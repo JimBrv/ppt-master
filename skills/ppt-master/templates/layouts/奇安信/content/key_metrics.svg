@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- QAX content layout: key_metrics. Fill every slot; see layouts.json for capacity. -->
+  <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
+  <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
+  <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
+  <!-- metric 1 -->
+  <rect x="44" y="150" width="384" height="414" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#D4E5FC" stroke-width="1"/>
+  <rect x="76" y="182" width="48" height="6" rx="3" fill="#2C7FEF"/>
+  <text x="76" y="292" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="72" font-weight="bold" fill="#2C7FEF">{{M1_NUM}}</text>
+  <text x="76" y="336" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" fill="#4874CB">{{M1_UNIT}}</text>
+  <rect x="76" y="362" width="320" height="2" rx="1" fill="#D4E5FC"/>
+  <text x="76" y="408" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#0F1423">{{M1_LABEL}}</text>
+  <text x="76" y="450" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M1_L1}}</text>
+  <text x="76" y="478" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M1_L2}}</text>
+  <text x="76" y="506" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M1_L3}}</text>
+  <text x="76" y="542" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" fill="#64748B">{{M1_SOURCE}}</text>
+  <!-- metric 2 -->
+  <rect x="448" y="150" width="384" height="414" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#D4E5FC" stroke-width="1"/>
+  <rect x="480" y="182" width="48" height="6" rx="3" fill="#2C7FEF"/>
+  <text x="480" y="292" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="72" font-weight="bold" fill="#2C7FEF">{{M2_NUM}}</text>
+  <text x="480" y="336" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" fill="#4874CB">{{M2_UNIT}}</text>
+  <rect x="480" y="362" width="320" height="2" rx="1" fill="#D4E5FC"/>
+  <text x="480" y="408" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#0F1423">{{M2_LABEL}}</text>
+  <text x="480" y="450" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M2_L1}}</text>
+  <text x="480" y="478" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M2_L2}}</text>
+  <text x="480" y="506" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M2_L3}}</text>
+  <text x="480" y="542" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" fill="#64748B">{{M2_SOURCE}}</text>
+  <!-- metric 3 -->
+  <rect x="852" y="150" width="384" height="414" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#D4E5FC" stroke-width="1"/>
+  <rect x="884" y="182" width="48" height="6" rx="3" fill="#2C7FEF"/>
+  <text x="884" y="292" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="72" font-weight="bold" fill="#2C7FEF">{{M3_NUM}}</text>
+  <text x="884" y="336" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="22" font-weight="bold" fill="#4874CB">{{M3_UNIT}}</text>
+  <rect x="884" y="362" width="320" height="2" rx="1" fill="#D4E5FC"/>
+  <text x="884" y="408" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" fill="#0F1423">{{M3_LABEL}}</text>
+  <text x="884" y="450" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M3_L1}}</text>
+  <text x="884" y="478" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M3_L2}}</text>
+  <text x="884" y="506" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="17" fill="#333333">{{M3_L3}}</text>
+  <text x="884" y="542" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" fill="#64748B">{{M3_SOURCE}}</text>
+  <rect x="44" y="590" width="1192" height="84" rx="14" fill="#2C7FEF"/>
+  <text x="640" y="641" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{TAKEAWAY}}</text>
+  <text x="1240" y="712" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="14" text-anchor="end" fill="#9CAEC3">{{PAGE_NUM}}</text>
+</svg>

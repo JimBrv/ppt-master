@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720">
+  <!-- Pixel Retro content layout: contrast_split. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <text x="60" y="70" font-family="Consolas, Microsoft YaHei, monospace" font-size="36" font-weight="bold" fill="#39FF14" filter="url(#glowGreen)">{{PAGE_TITLE}}</text>
+  <rect x="60" y="100" width="200" height="2" fill="#30363D"/>
+  <rect x="0" y="716" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <g transform="translate(10.02,-15.97) scale(0.9843)">
+  <rect x="40" y="150" width="570" height="64" rx="12" fill="#8B949E"/>
+  <text x="325" y="192" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#0D1117">{{L_HEAD}}</text>
+  <rect x="670" y="150" width="570" height="64" rx="12" fill="#00D4FF"/>
+  <text x="955" y="192" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#0D1117">{{R_HEAD}}</text>
+  <circle cx="640" cy="182" r="28" fill="#161B22"/>
+  <circle cx="640" cy="182" r="28" fill="none" stroke="#30363D" stroke-width="2"/>
+  <text x="640" y="189" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#1FD9FF">{{VS_LABEL}}</text>
+  <!-- row 1 -->
+  <rect data-slot-box="L1_TITLE" x="40" y="234" width="570" height="80" rx="10" fill="#15242D" stroke="#30363D" stroke-width="1"/>
+  <text x="64" y="268" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#C9D1D9">{{L1_TITLE}}</text>
+  <text x="64" y="296" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#8B949E">{{L1_NOTE}}</text>
+  <rect data-slot-box="R1_TITLE" x="624" y="262" width="32" height="24" rx="12" fill="#00D4FF" fill-opacity="0.25"/>
+  <rect data-slot-box="R1_TITLE" x="670" y="234" width="570" height="80" rx="10" fill="#00D4FF" fill-opacity="0.08" stroke="#30363D" stroke-width="1"/>
+  <text x="694" y="268" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#1FD9FF">{{R1_TITLE}}</text>
+  <text x="694" y="296" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{R1_NOTE}}</text>
+  <!-- row 2 -->
+  <rect data-slot-box="L2_TITLE" x="40" y="326" width="570" height="80" rx="10" fill="#15242D" stroke="#30363D" stroke-width="1"/>
+  <text x="64" y="360" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#C9D1D9">{{L2_TITLE}}</text>
+  <text x="64" y="388" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#8B949E">{{L2_NOTE}}</text>
+  <rect data-slot-box="R2_TITLE" x="624" y="354" width="32" height="24" rx="12" fill="#00D4FF" fill-opacity="0.25"/>
+  <rect data-slot-box="R2_TITLE" x="670" y="326" width="570" height="80" rx="10" fill="#00D4FF" fill-opacity="0.08" stroke="#30363D" stroke-width="1"/>
+  <text x="694" y="360" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#1FD9FF">{{R2_TITLE}}</text>
+  <text x="694" y="388" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{R2_NOTE}}</text>
+  <!-- row 3 -->
+  <rect data-slot-box="L3_TITLE" x="40" y="418" width="570" height="80" rx="10" fill="#15242D" stroke="#30363D" stroke-width="1"/>
+  <text x="64" y="452" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#C9D1D9">{{L3_TITLE}}</text>
+  <text x="64" y="480" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#8B949E">{{L3_NOTE}}</text>
+  <rect data-slot-box="R3_TITLE" x="624" y="446" width="32" height="24" rx="12" fill="#00D4FF" fill-opacity="0.25"/>
+  <rect data-slot-box="R3_TITLE" x="670" y="418" width="570" height="80" rx="10" fill="#00D4FF" fill-opacity="0.08" stroke="#30363D" stroke-width="1"/>
+  <text x="694" y="452" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#1FD9FF">{{R3_TITLE}}</text>
+  <text x="694" y="480" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{R3_NOTE}}</text>
+  <!-- row 4 -->
+  <rect data-slot-box="L4_TITLE" x="40" y="510" width="570" height="80" rx="10" fill="#15242D" stroke="#30363D" stroke-width="1"/>
+  <text x="64" y="544" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#C9D1D9">{{L4_TITLE}}</text>
+  <text x="64" y="572" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#8B949E">{{L4_NOTE}}</text>
+  <rect data-slot-box="R4_TITLE" x="624" y="538" width="32" height="24" rx="12" fill="#00D4FF" fill-opacity="0.25"/>
+  <rect data-slot-box="R4_TITLE" x="670" y="510" width="570" height="80" rx="10" fill="#00D4FF" fill-opacity="0.08" stroke="#30363D" stroke-width="1"/>
+  <text x="694" y="544" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#1FD9FF">{{R4_TITLE}}</text>
+  <text x="694" y="572" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{R4_NOTE}}</text>
+  <rect x="40" y="612" width="1200" height="64" rx="12" fill="#00D4FF"/>
+  <text x="640" y="653" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#0D1117">{{VERDICT}}</text>
+  </g>
+  <text x="60" y="698" font-family="Consolas, monospace" font-size="14" fill="#8B949E">{{PAGE_NUM}}</text>
+</svg>

@@ -10,8 +10,38 @@ slot in full-width characters (Latin text counts about 0.55 each).
 | `pptx_inspect.py` | Extract geometry and real renders from a reference deck |
 | `layout_kit.py` | Library for building and filling layouts; imported, not run |
 | `layout_build.py` | Build a template's `content/` from the shared library and its theme |
+| `layout_plan_check.py` | Check a design spec's layout plan: relation ↔ layout, series, density |
 | `layout_fill.py` | Fill one layout from a values file, with every check applied |
 | `layout_stress.py` | Fill a whole library to capacity and run the real export |
+
+## Relations and claims
+
+Every layout declares the content **relation** it shows and the **claim** its
+visual makes. The Strategist classifies a page's content into one relation,
+chooses among the layouts that show it, and tests the claim against the
+content (rules: `references/strategist.md` → Content Layout Selection).
+
+The vocabulary is `RELATIONS` in `layout_kit.py`: statement, metric, contrast,
+problem_solution, parallel, sequence, escalation, layering, convergence, cycle,
+hub, classification, chain_core, evidence, timeline, matrix. `layouts.json`
+carries, per layout:
+
+| Field | Source | Meaning |
+|-------|--------|---------|
+| `relations` | `META` in the library | Relations the layout shows; the first is the main one |
+| `claim` | `META` in the library | A sentence the content must make true, e.g. funnel: "every layer is narrower than the one above" |
+| `labels` → `labelSlots` | `META` in the library | Fixed labels (series tag, section captions, axis names); not counted as content |
+| `maxRuns` | computed | Content text slots when fully filled (title, page number and labels excluded) |
+| `weight` | computed | `light` ≤ 12, `medium` ≤ 30, `heavy` > 30 |
+
+`layout_build.py` refuses a layout whose relations are missing or not in the
+vocabulary, or whose claim is empty. Add a relation to the vocabulary only when
+a real page cannot be described by any existing one, and give it a layout.
+
+```bash
+uv run python3 scripts/layout_plan_check.py <project_path>            # the plan in design_spec.md
+uv run python3 scripts/layout_plan_check.py <project_path> --output   # plus content text runs per page vs the genre budget
+```
 
 ## How a library is put together
 
@@ -119,7 +149,9 @@ three values keeps three chips. Unfilled image slots stay as placeholders.
    - keep the body inside the canonical body area;
    - mark single-slot containers with `box=` so unused items disappear cleanly.
 
-   Fill in `bestFor`, `avoidFor`, `items` and `source` in the metadata.
+   Fill in `relations`, `claim`, `bestFor`, `avoidFor`, `items` and `source` in the metadata.
+   A layout drawn without a reference page (to cover a relation the library lacks) records
+   `source='原创（补位：…）'`.
    SVG features PowerPoint cannot take are simplified: no clip paths, masks,
    rotated text, or 3D. Vertical text becomes horizontal.
 

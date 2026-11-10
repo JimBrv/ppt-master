@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720">
+  <!-- Pixel Retro content layout: problem_solution. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <text x="60" y="70" font-family="Consolas, Microsoft YaHei, monospace" font-size="36" font-weight="bold" fill="#39FF14" filter="url(#glowGreen)">{{PAGE_TITLE}}</text>
+  <rect x="60" y="100" width="200" height="2" fill="#30363D"/>
+  <rect x="0" y="716" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <g transform="translate(10.02,-15.97) scale(0.9843)">
+  <rect x="40" y="146" width="150" height="40" rx="20" fill="#00D4FF"/>
+  <text x="115" y="173" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#0D1117">{{SERIES}}</text>
+  <text x="210" y="174" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-style="italic" fill="#1F6FEB">{{HOOK}}</text>
+  <!-- problem panel -->
+  <rect x="40" y="206" width="560" height="404" rx="16" fill="#15242D" stroke="#30363D" stroke-width="1"/>
+  <text x="72" y="248" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" font-weight="bold" fill="#8B949E">{{PROBLEM_LABEL}}</text>
+  <text x="72" y="294" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="28" font-weight="bold" fill="#E6EDF3">{{PROBLEM_TITLE}}</text>
+  <text x="72" y="332" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{PROBLEM_L1}}</text>
+  <text x="72" y="358" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{PROBLEM_L2}}</text>
+  <rect x="72" y="382" width="496" height="1.5" fill="#30363D"/>
+  <text x="72" y="416" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="bold" fill="#1F6FEB">{{WHY_LABEL}}</text>
+  <rect data-slot-box="WHY1" x="74" y="446" width="9" height="9" rx="2" fill="#00D4FF"/>
+  <text x="96" y="458" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{WHY1}}</text>
+  <rect data-slot-box="WHY2" x="74" y="496" width="9" height="9" rx="2" fill="#00D4FF"/>
+  <text x="96" y="508" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{WHY2}}</text>
+  <rect data-slot-box="WHY3" x="74" y="546" width="9" height="9" rx="2" fill="#00D4FF"/>
+  <text x="96" y="558" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{WHY3}}</text>
+  <polygon points="608,390 630,390 630,374 654,410 630,446 630,430 608,430" fill="#00D4FF"/>
+  <!-- responses -->
+  <text x="668" y="236" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#1FD9FF">{{RESPONSE_LABEL}}</text>
+  <rect data-slot-box="R1_ACTION" x="668" y="256" width="572" height="106" rx="12" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <rect data-slot-box="R1_ACTION" x="688" y="274" width="124" height="34" rx="17" fill="#00D4FF" fill-opacity="0.15"/>
+  <text x="750" y="297" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#00D4FF">{{R1_ACTOR}}</text>
+  <text x="830" y="298" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#E6EDF3">{{R1_ACTION}}</text>
+  <text x="688" y="340" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{R1_L1}}</text>
+  <rect data-slot-box="R2_ACTION" x="668" y="374" width="572" height="106" rx="12" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <rect data-slot-box="R2_ACTION" x="688" y="392" width="124" height="34" rx="17" fill="#39FF14" fill-opacity="0.15"/>
+  <text x="750" y="415" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#39FF14">{{R2_ACTOR}}</text>
+  <text x="830" y="416" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#E6EDF3">{{R2_ACTION}}</text>
+  <text x="688" y="458" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{R2_L1}}</text>
+  <rect data-slot-box="R3_ACTION" x="668" y="492" width="572" height="106" rx="12" fill="#161B22" stroke="#30363D" stroke-width="1"/>
+  <rect data-slot-box="R3_ACTION" x="688" y="510" width="124" height="34" rx="17" fill="#FFD700" fill-opacity="0.15"/>
+  <text x="750" y="533" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFD700">{{R3_ACTOR}}</text>
+  <text x="830" y="534" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#E6EDF3">{{R3_ACTION}}</text>
+  <text x="688" y="576" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{R3_L1}}</text>
+  <rect x="40" y="628" width="1200" height="56" rx="12" fill="#00D4FF" fill-opacity="0.1"/>
+  <text x="640" y="664" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#39FF14">{{CONCLUSION}}</text>
+  </g>
+  <text x="60" y="698" font-family="Consolas, monospace" font-size="14" fill="#8B949E">{{PAGE_NUM}}</text>
+</svg>

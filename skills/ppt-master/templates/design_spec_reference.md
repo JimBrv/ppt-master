@@ -10,6 +10,7 @@
 | **Design Style** | {design_style} |
 | **Target Audience** | [Filled by Strategist] |
 | **Use Case** | [Filled by Strategist] |
+| **Genre** | [narrative / report / solution — sets the text density per page] |
 | **Created Date** | {date_str} |
 
 ---
@@ -201,14 +202,18 @@
 
 #### Slide 01 - Cover
 
-- **Layout**: Full-screen background image + centered title
+- **Layout**: cover
 - **Title**: [Main title]
 - **Subtitle**: [Subtitle]
 - **Info**: [Author / Date / Organization]
 
 #### Slide 02 - [Page Name]
 
-- **Layout**: [Layout ID from `templates/content/layouts.json` if the template has one; otherwise choose a layout mode]
+- **Message**: [The one sentence the audience should remember, ≤ 30 characters]
+- **Relation**: [One of: statement, metric, contrast, problem_solution, parallel, sequence, escalation, layering, convergence, cycle, hub, classification, chain_core, evidence, timeline, matrix]
+- **Layout**: [Layout ID from `templates/content/layouts.json` that shows this relation; otherwise `free: <description>`]
+- **Claim check**: [How this content makes the layout's `claim` true; omit for free layouts]
+- **Series**: [Only for parallel pages that share one layout, e.g. `risks 2/5`]
 - **Title**: [Page title]
 - **Chart**: [chart_type] (see VII. Chart Reference List)
 - **Content**:
@@ -258,7 +263,8 @@ Generate corresponding speaker note files for each page, saved to the `notes/` d
 ### Pre-generation
 
 - [ ] Content fits page capacity
-- [ ] Layout mode selected correctly
+- [ ] Every body page has Message, Relation, Layout (and Claim check for layout IDs)
+- [ ] `layout_plan_check.py` passes; density and rhythm hints reviewed
 - [ ] Colors used semantically
 
 ### Post-generation

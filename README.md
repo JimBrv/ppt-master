@@ -23,7 +23,8 @@
 | **📦 uv Environment** | This project uses [uv](https://github.com/astral-sh/uv) as the Python package and virtual-environment manager instead of plain `pip`. All scripts are run via `uv run python3 <script>`, dependencies are installed with `uv pip install`, and project config lives in `pyproject.toml`. |
 | **📋 AGENTS.md Update** | Updated the quick-reference command table, added the `excel_to_md.py` entry, and documented the PTY I/O bypass rule. |
 | **🛡️ QAX (奇安信) Default Template** | Brand template with the real background art and logo extracted from QAX decks. Recommended by default when no template is named (the user still confirms). |
-| **📐 Content Layouts** | 15 ready-made body-page layouts (pillars, stages, funnel, pyramid, radial architecture, ...) absorbed from a real deck. Each is a complete page with `{{SLOT}}` text and per-slot capacity; `layout_fill.py` fills one and rejects overflow. Shipped for `奇安信`, `mckinsey` and `pixel_retro`. |
+| **📐 Content Layouts** | 22 ready-made body-page layouts (statement, key metrics, problem → response, contrast, pillars, stages, funnel, pyramid, timeline, 2×2, ...), each declaring the content relation it shows and a claim to test it against. Each is a complete page with `{{SLOT}}` text and per-slot capacity; `layout_fill.py` fills one and rejects overflow. Shipped for `奇安信`, `mckinsey` and `pixel_retro`. |
+| **🧭 Relation-driven Layout Choice** | The Strategist picks each body page's layout from the content's relation (16-word vocabulary), checks the layout's visual claim, keeps parallel sections on one layout, and sizes text to the genre (narrative / report / solution). `layout_plan_check.py` checks the plan. |
 | **🧩 Shared Layout Library** | Layouts are written once against color roles (`templates/content_library/`); a template adds only `theme.json` + `shell.svg`, and `layout_build.py` produces its `content/`. `pptx_inspect.py` and `layout_stress.py` absorb new layouts from reference decks and stress-test them. |
 | **🎨 Your .pptx as the Template** | `pptx_to_template.py` turns a user-supplied `.pptx` into a template with its real backgrounds and logos at exact positions. |
 | **👀 Live Preview** | `preview.py --serve` shows outline / rendered layout / text tabs and reloads page by page as SVGs land; `executor_output.md` keeps the Executor transcript. |
@@ -197,6 +198,7 @@ uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <pr
 uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> --slots <layout_id>
 uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
 uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
+uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]
 uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
 uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 
@@ -241,7 +243,7 @@ ppt-master/
 │       │   └── image_gen.py        #     AI image generation
 │       └── templates/
 │           ├── layouts/            #     21 page templates (奇安信 default); content/ = body layouts
-│           ├── content_library/    #     Shared library of the 15 body layouts
+│           ├── content_library/    #     Shared library of the 22 body layouts
 │           ├── charts/             #     Chart templates
 │           └── icons/              #     Vector icons
 ├── examples/                       # Example projects (15 projects, 229 pages)

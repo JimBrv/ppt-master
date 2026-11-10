@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: key_metrics. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <!-- metric 1 -->
+  <rect x="44" y="150" width="384" height="414" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="76" y="182" width="48" height="6" rx="3" fill="#005587"/>
+  <text x="76" y="292" font-family="Microsoft YaHei, Arial, sans-serif" font-size="72" font-weight="bold" fill="#005587">{{M1_NUM}}</text>
+  <text x="76" y="336" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" font-weight="bold" fill="#0076A8">{{M1_UNIT}}</text>
+  <rect x="76" y="362" width="320" height="2" rx="1" fill="#E5E7EB"/>
+  <text x="76" y="408" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">{{M1_LABEL}}</text>
+  <text x="76" y="450" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M1_L1}}</text>
+  <text x="76" y="478" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M1_L2}}</text>
+  <text x="76" y="506" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M1_L3}}</text>
+  <text x="76" y="542" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#7F8C8D">{{M1_SOURCE}}</text>
+  <!-- metric 2 -->
+  <rect x="448" y="150" width="384" height="414" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="480" y="182" width="48" height="6" rx="3" fill="#005587"/>
+  <text x="480" y="292" font-family="Microsoft YaHei, Arial, sans-serif" font-size="72" font-weight="bold" fill="#005587">{{M2_NUM}}</text>
+  <text x="480" y="336" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" font-weight="bold" fill="#0076A8">{{M2_UNIT}}</text>
+  <rect x="480" y="362" width="320" height="2" rx="1" fill="#E5E7EB"/>
+  <text x="480" y="408" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">{{M2_LABEL}}</text>
+  <text x="480" y="450" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M2_L1}}</text>
+  <text x="480" y="478" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M2_L2}}</text>
+  <text x="480" y="506" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M2_L3}}</text>
+  <text x="480" y="542" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#7F8C8D">{{M2_SOURCE}}</text>
+  <!-- metric 3 -->
+  <rect x="852" y="150" width="384" height="414" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="884" y="182" width="48" height="6" rx="3" fill="#005587"/>
+  <text x="884" y="292" font-family="Microsoft YaHei, Arial, sans-serif" font-size="72" font-weight="bold" fill="#005587">{{M3_NUM}}</text>
+  <text x="884" y="336" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" font-weight="bold" fill="#0076A8">{{M3_UNIT}}</text>
+  <rect x="884" y="362" width="320" height="2" rx="1" fill="#E5E7EB"/>
+  <text x="884" y="408" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">{{M3_LABEL}}</text>
+  <text x="884" y="450" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M3_L1}}</text>
+  <text x="884" y="478" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M3_L2}}</text>
+  <text x="884" y="506" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{M3_L3}}</text>
+  <text x="884" y="542" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#7F8C8D">{{M3_SOURCE}}</text>
+  <rect x="44" y="590" width="1192" height="84" rx="14" fill="#005587"/>
+  <text x="640" y="641" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{TAKEAWAY}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

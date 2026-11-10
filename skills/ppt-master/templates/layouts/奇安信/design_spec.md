@@ -74,25 +74,32 @@ Font stack: `Microsoft YaHei, SimHei, sans-serif`. Sizes are SVG px; 1pt ≈ 1.3
 
 ## VII. Content Layouts
 
-`content/layouts.json` indexes fifteen ready-made content pages. Prefer one of these for every body page; use `03_content.svg` only when none fits.
+`content/layouts.json` indexes twenty-two ready-made content pages. Prefer one of these for every body page; use `03_content.svg` only when none fits. Choose by the content's relation, then test the layout's `claim` (see `references/strategist.md` → Content Layout Selection).
 
-| ID | Best for |
-|----|----------|
-| `three_pillars` | Three parallel themes |
-| `chevron_stages` | Three sequential stages |
-| `stair_steps` | Graded levels, low to high |
-| `layered_rows` | Layered architectures |
-| `hub_numbered_rows` | One concept, three dimensions |
-| `image_stack_pills` | Advantage lists with a hero image |
-| `loop_nodes` | Five-step closed loops |
-| `stage_matrix_evidence` | Case studies backed by a screenshot |
-| `architecture_radial` | End-to-end architecture: inputs, central hub, outputs |
-| `probe_tier_channels` | One platform connecting several channels |
-| `three_track_checklist` | Three parallel step-by-step checklists |
-| `tier_chip_pyramid` | Compatibility or support matrices by tier |
-| `chain_core_grid` | A chain, a core engine, and its constraints |
-| `funnel_layers` | Layers that progressively filter or converge |
-| `arrow_track_columns` | Modes or policies that escalate in stages |
+| ID | Relation | Best for |
+|----|----------|----------|
+| `three_pillars` | parallel | Three parallel themes |
+| `chevron_stages` | sequence | Three sequential stages |
+| `stair_steps` | escalation | Graded levels, low to high |
+| `layered_rows` | layering | Layered architectures |
+| `hub_numbered_rows` | hub | One concept, three dimensions |
+| `image_stack_pills` | evidence, parallel | Advantage lists with a hero image |
+| `loop_nodes` | cycle | Five-step closed loops |
+| `stage_matrix_evidence` | evidence, sequence | Case studies backed by a screenshot |
+| `architecture_radial` | hub | End-to-end architecture: inputs, central hub, outputs |
+| `probe_tier_channels` | hub | One platform connecting several channels |
+| `three_track_checklist` | parallel | Three parallel step-by-step checklists |
+| `tier_chip_pyramid` | classification | Compatibility or support matrices by tier |
+| `chain_core_grid` | chain_core | A chain, a core engine, and its constraints |
+| `funnel_layers` | convergence | Layers that progressively filter or converge |
+| `arrow_track_columns` | escalation, sequence | Modes or policies that escalate in stages |
+| `hero_statement` | statement | One thesis, a quotation, or a call to action |
+| `key_metrics` | metric | Three key numbers that carry the point |
+| `problem_solution` | problem_solution | A problem and its responses; repeats across parallel sections |
+| `contrast_split` | contrast | Myth vs fact, before vs after, row-by-row comparison |
+| `spectrum_position` | contrast | A position held between two extremes |
+| `timeline` | timeline | Dated milestones or a roadmap |
+| `matrix_2x2` | matrix | Positioning on two independent dimensions |
 
 ## VIII. SVG Technical Constraints
 

@@ -31,6 +31,41 @@ SLOT_RE = re.compile(r'\{\{(\w+)\}\}')
 # it onto a template whose header or footer takes more room.
 CANONICAL_BODY = (0, 130, 1280, 705)
 
+# The relation vocabulary. A page's content has one of these relations; a
+# layout declares the relations it can show (META "relations") and a claim
+# its visual makes. The Strategist picks the relation first, then a layout
+# that shows it. Keys are what design_spec.md and layouts.json use.
+RELATIONS = {
+    'statement':        ('论断', '核心是…；一句引语；号召'),
+    'metric':           ('数字', '具体数值、比例、规模、时间点'),
+    'contrast':         ('对照', '而不是…；误区与事实；之前与之后；两个极端'),
+    'problem_solution': ('问题-对策', '风险是…，应对是…'),
+    'parallel':         ('并列', '同时；分别；三个方面'),
+    'sequence':         ('顺序', '然后；依次；第一步'),
+    'escalation':       ('递进', '逐步升级；越来越；成熟度'),
+    'layering':         ('分层', '基于；支撑；由外到内'),
+    'convergence':      ('收敛', '筛选；层层过滤；最终'),
+    'cycle':            ('循环', '闭环；反馈；持续迭代'),
+    'hub':              ('中心辐射', '围绕；连接；以…为核心'),
+    'classification':   ('分档', '分为几档；属于哪一类'),
+    'chain_core':       ('链路+核心', '整条链路；贯穿；支撑与约束'),
+    'evidence':         ('论点+证据', '如图所示；案例截图；实测结果'),
+    'timeline':         ('时间线', '年份；日期；里程碑'),
+    'matrix':           ('二维矩阵', '两个维度；高低×快慢；象限'),
+}
+
+# Layout weight by the number of text slots it holds when fully filled.
+WEIGHTS = ((12, 'light'), (30, 'medium'), (10 ** 9, 'heavy'))
+
+# Content text runs per body page, by genre: (average, single-page maximum).
+# The page title, the page number and a layout's fixed labels (its
+# "labelSlots": series tags, section captions, axis names) do not count.
+DENSITY = {'narrative': (15, 25), 'report': (25, 40), 'solution': (35, 50)}
+
+
+def weight_of(runs: int) -> str:
+    return next(w for limit, w in WEIGHTS if runs <= limit)
+
 
 def text_units(s: str) -> float:
     """Approximate rendered width of s, in full-width characters."""
@@ -309,8 +344,23 @@ def write_library(out_dir: Path, layouts: List[Layout], meta: Dict[str, dict], u
             k = slot_pattern(slot)
             pat[k] = min(pat.get(k, 999), cap)
         icons = sorted({slot_pattern(i) for i in lay.icons})
-        entries[lay.id] = {**meta[lay.id], 'slots': pat, 'iconSlots': icons, 'imageSlots': lay.imgs}
-    index = {'meta': {'version': 1, 'canvas': '0 0 1280 720', 'usage': usage}, 'layouts': entries}
+        m = meta[lay.id]
+        bad = [r for r in m.get('relations', []) if r not in RELATIONS]
+        if not m.get('relations') or bad or not m.get('claim'):
+            raise ValueError(f'{lay.id}: metadata needs "relations" from RELATIONS and a "claim"'
+                             + (f'; unknown: {bad}' if bad else ''))
+        labels = list(m.get('labels', []))
+        unknown = [x for x in labels if x not in pat]
+        if unknown:
+            raise ValueError(f'{lay.id}: labels {unknown} are not slots of this layout')
+        runs = len([k for k in lay.caps
+                    if k not in ('PAGE_TITLE', 'PAGE_NUM') and slot_pattern(k) not in labels])
+        entries[lay.id] = {**{k: v for k, v in m.items() if k != 'labels'},
+                           'maxRuns': runs, 'weight': weight_of(runs), 'labelSlots': labels,
+                           'slots': pat, 'iconSlots': icons, 'imageSlots': lay.imgs}
+    index = {'meta': {'version': 2, 'canvas': '0 0 1280 720', 'usage': usage,
+                      'relations': {k: v[0] for k, v in RELATIONS.items()}},
+             'layouts': entries}
     (out_dir / 'layouts.json').write_text(json.dumps(index, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     return index
 

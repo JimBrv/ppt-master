@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720">
+  <!-- Pixel Retro content layout: key_metrics. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <text x="60" y="70" font-family="Consolas, Microsoft YaHei, monospace" font-size="36" font-weight="bold" fill="#39FF14" filter="url(#glowGreen)">{{PAGE_TITLE}}</text>
+  <rect x="60" y="100" width="200" height="2" fill="#30363D"/>
+  <rect x="0" y="716" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <g transform="translate(10.02,-15.97) scale(0.9843)">
+  <!-- metric 1 -->
+  <rect x="44" y="150" width="384" height="414" rx="16" fill="#161B22" fill-opacity="0.9" stroke="#30363D" stroke-width="1"/>
+  <rect x="76" y="182" width="48" height="6" rx="3" fill="#00D4FF"/>
+  <text x="76" y="292" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="72" font-weight="bold" fill="#00D4FF">{{M1_NUM}}</text>
+  <text x="76" y="336" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" fill="#1F6FEB">{{M1_UNIT}}</text>
+  <rect x="76" y="362" width="320" height="2" rx="1" fill="#30363D"/>
+  <text x="76" y="408" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#E6EDF3">{{M1_LABEL}}</text>
+  <text x="76" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M1_L1}}</text>
+  <text x="76" y="478" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M1_L2}}</text>
+  <text x="76" y="506" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M1_L3}}</text>
+  <text x="76" y="542" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#8B949E">{{M1_SOURCE}}</text>
+  <!-- metric 2 -->
+  <rect x="448" y="150" width="384" height="414" rx="16" fill="#161B22" fill-opacity="0.9" stroke="#30363D" stroke-width="1"/>
+  <rect x="480" y="182" width="48" height="6" rx="3" fill="#00D4FF"/>
+  <text x="480" y="292" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="72" font-weight="bold" fill="#00D4FF">{{M2_NUM}}</text>
+  <text x="480" y="336" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" fill="#1F6FEB">{{M2_UNIT}}</text>
+  <rect x="480" y="362" width="320" height="2" rx="1" fill="#30363D"/>
+  <text x="480" y="408" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#E6EDF3">{{M2_LABEL}}</text>
+  <text x="480" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M2_L1}}</text>
+  <text x="480" y="478" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M2_L2}}</text>
+  <text x="480" y="506" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M2_L3}}</text>
+  <text x="480" y="542" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#8B949E">{{M2_SOURCE}}</text>
+  <!-- metric 3 -->
+  <rect x="852" y="150" width="384" height="414" rx="16" fill="#161B22" fill-opacity="0.9" stroke="#30363D" stroke-width="1"/>
+  <rect x="884" y="182" width="48" height="6" rx="3" fill="#00D4FF"/>
+  <text x="884" y="292" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="72" font-weight="bold" fill="#00D4FF">{{M3_NUM}}</text>
+  <text x="884" y="336" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" fill="#1F6FEB">{{M3_UNIT}}</text>
+  <rect x="884" y="362" width="320" height="2" rx="1" fill="#30363D"/>
+  <text x="884" y="408" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#E6EDF3">{{M3_LABEL}}</text>
+  <text x="884" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M3_L1}}</text>
+  <text x="884" y="478" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M3_L2}}</text>
+  <text x="884" y="506" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#C9D1D9">{{M3_L3}}</text>
+  <text x="884" y="542" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#8B949E">{{M3_SOURCE}}</text>
+  <rect x="44" y="590" width="1192" height="84" rx="14" fill="#00D4FF"/>
+  <text x="640" y="641" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#0D1117">{{TAKEAWAY}}</text>
+  </g>
+  <text x="60" y="698" font-family="Consolas, monospace" font-size="14" fill="#8B949E">{{PAGE_NUM}}</text>
+</svg>

@@ -40,6 +40,20 @@ Confirm target audience, usage occasion, and core message; provide initial asses
 | **B) General Consulting** | Data clarity first | Teams / management | "Let data speak" |
 | **C) Top Consulting** | Logical persuasion first | Executives / board | "Lead with conclusions" |
 
+**Genre and density** (confirmed together with the style): decide what kind of text the source is,
+because it sets how much each body page carries. Write it as `**Genre**` in I. Project Information.
+
+| Genre | Typical source | Avg text runs / body page | Single-page max | Light pages (statement / metric) |
+|-------|----------------|---------------------------|-----------------|----------------------------------|
+| `narrative` | Essay, speech, opinion piece, keynote | ≤ 15 | 25 | At least 1 per 4–5 body pages |
+| `report` | Work report, review, research findings | ≤ 25 | 40 | Recommended |
+| `solution` | Solution, product, technical architecture | ≤ 35 | 50 | Optional |
+
+A text run is one line of **content**: the page title, the page number and a layout's fixed labels
+(`labelSlots` in `layouts.json`, such as series tags, section captions and axis names) do not count.
+The budgets are guidance, not a gate:
+`layout_plan_check.py --output` reports pages over budget as hints.
+
 **Style selection decision tree**:
 
 ```
@@ -279,16 +293,81 @@ Built-in library contains 33 chart templates; see `templates/charts/charts_index
 
 **PPT 16:9 (1280x720) key dimensions**: Safe area 1200x640 (40px margins); Title area 1200x100; Content area 1200x500; Footer area 1200x40.
 
-### Content Layout Library
+### Content Layout Selection
 
-When `<project_path>/templates/content/layouts.json` exists, plan every body page against it:
+A layout is a visual claim about how the content is related. Choose it from the
+content's relation, never from the item count or for variety's sake. These rules
+apply to every body page, including free-design pages in templates without content layouts.
 
-1. Pick a layout ID by `bestFor` / `avoidFor`, and write it as the page's field: `- **Layout**: three_pillars`.
-2. Fit the Content points to that layout's `items` rule and `slots` capacity; the numbers are maximum Chinese characters per line.
-3. If nothing fits, write `- **Layout**: free: <description>`. The Executor then uses `03_content.svg`.
-4. Vary layouts between neighboring pages, except for parallel instances such as a run of case studies.
+#### Principles
 
-Cover, TOC, chapter, and ending pages keep their standard templates.
+| # | Principle | Test question |
+|---|-----------|---------------|
+| P1 | **One message per page.** Write the one sentence (≤ 30 characters) the audience should remember; the title is that sentence or close to it | Reading only the title, can you state the page's conclusion? |
+| P2 | **The relation picks the layout.** Find the relation words in the message and source, classify the page into one relation below, and choose only among layouts that show it | Which relation is this? Does the chosen layout show that relation? |
+| P3 | **The visual claim must hold.** Every layout implies something (a funnel narrows, a loop returns to its start, stairs rise). Read the layout's `claim` against the content | Read the claim aloud with this content. Is it true? |
+| P4 | **Capacity is a ceiling.** Fill only what the source supports; every item must trace back to the source. If slots stay empty, delete them or pick a lighter layout of the same relation | Can you point to where each item comes from? |
+| P5 | **Parallel pages share one layout.** Sections of the same kind (five risks, three cases) use one layout so the audience can compare them. "Vary neighboring layouts" applies only between different relations | Does every page of a parallel group use the same layout? |
+| P6 | **The genre sets the density.** Keep each page within the genre budget (see d. Genre and density) | Is the page within its text-run budget? |
+| P7 | **The deck has a rhythm.** In narrative decks, place a light page (statement or metric) every 4–5 pages; avoid three heavy pages in a row | Are there three heavy pages in a row? |
+
+#### Relation vocabulary
+
+| Relation | Cue words | Layouts |
+|----------|-----------|---------|
+| `statement` | "the core is…", a quotation, a call to action | `hero_statement` |
+| `metric` | Concrete numbers, ratios, scale, dates as predictions | `key_metrics` |
+| `contrast` | "rather than", myth vs fact, before vs after, two extremes | `contrast_split`, `spectrum_position` |
+| `problem_solution` | "the risk is…, the response is…" | `problem_solution` |
+| `parallel` | "at the same time", "respectively", "three aspects" | `three_pillars`, `three_track_checklist`, `image_stack_pills` |
+| `sequence` | "then", "in turn", "step one" | `chevron_stages`, `arrow_track_columns`, `stage_matrix_evidence` |
+| `escalation` | "escalates", "more and more", maturity levels | `stair_steps`, `arrow_track_columns` |
+| `layering` | "built on", "supports", "from outside in" | `layered_rows` |
+| `convergence` | "filters", "narrows down", "finally" | `funnel_layers` |
+| `cycle` | "closed loop", "feedback", "continuous iteration" | `loop_nodes` |
+| `hub` | "around", "connects", "centered on" | `hub_numbered_rows`, `architecture_radial`, `probe_tier_channels` |
+| `classification` | "falls into tiers", "which category" | `tier_chip_pyramid` |
+| `chain_core` | "the whole chain", "runs through", supports and constraints | `chain_core_grid` |
+| `evidence` | "as shown", case screenshots, measured results | `stage_matrix_evidence`, `image_stack_pills` |
+| `timeline` | Years, dates, milestones | `timeline` |
+| `matrix` | Two dimensions, high/low × fast/slow, quadrants | `matrix_2x2` |
+
+`layouts.json` lists each layout's `relations`, `claim`, `labelSlots`, `maxRuns` and `weight`
+(content slots when fully filled: light ≤ 12, medium ≤ 30, heavy > 30); its `meta.relations` repeats the vocabulary.
+
+#### Procedure
+
+1. **Genre** — confirmed in d. (Eight Confirmations); sets the density budget.
+2. **Skeleton** — list the sections, mark parallel groups, and give each group one layout.
+3. **Each body page, in this order** — Message → Relation → candidate layouts for that relation →
+   Claim check → capacity. When the claim fails, try another layout of the same relation;
+   when none fits, write `Layout: free: <description>` and keep the Relation. When the content
+   cannot fill the slots, delete slots or choose a lighter layout — never invent content to fill them.
+4. **Deck review** — series consistent, density within budget, light pages present, no three heavy
+   pages in a row; then run the checker before presenting the spec:
+
+```bash
+uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path>
+```
+
+Errors (missing fields, unknown relation or layout, a layout that does not show the relation, a
+series with mixed layouts) must be fixed. Hints (density, rhythm) are for judgement.
+
+Each body page in the Content Outline carries five fields:
+
+```markdown
+#### Slide 06 - 毁灭性滥用
+- **Message**: AI 让普通人也可能走完生物武器的整条攻击链
+- **Relation**: chain_core
+- **Layout**: chain_core_grid
+- **Claim check**: 链路 = 获取知识 → 设计 → 合成 → 实验 → 扩散（原文顺序）；核心 = 全链路防护；约束 = 4 项措施，均出自原文
+- **Series**: risks 2/5            (only for pages in a parallel group)
+- **Title**: ...
+- **Content**: ...
+```
+
+Cover, TOC, chapter, and ending pages keep their standard templates; give them
+`Layout: cover` / `toc` / `chapter` / `ending`.
 
 ---
 

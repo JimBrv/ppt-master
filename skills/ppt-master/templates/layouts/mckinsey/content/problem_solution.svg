@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: problem_solution. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <rect x="40" y="146" width="150" height="40" rx="20" fill="#005587"/>
+  <text x="115" y="173" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{SERIES}}</text>
+  <text x="210" y="174" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-style="italic" fill="#0076A8">{{HOOK}}</text>
+  <!-- problem panel -->
+  <rect x="40" y="206" width="560" height="404" rx="16" fill="#F2F7F9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="72" y="248" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#7F8C8D">{{PROBLEM_LABEL}}</text>
+  <text x="72" y="294" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PROBLEM_TITLE}}</text>
+  <text x="72" y="332" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{PROBLEM_L1}}</text>
+  <text x="72" y="358" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#5D6D7E">{{PROBLEM_L2}}</text>
+  <rect x="72" y="382" width="496" height="1.5" fill="#E5E7EB"/>
+  <text x="72" y="416" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#0076A8">{{WHY_LABEL}}</text>
+  <rect data-slot-box="WHY1" x="74" y="446" width="9" height="9" rx="2" fill="#005587"/>
+  <text x="96" y="458" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{WHY1}}</text>
+  <rect data-slot-box="WHY2" x="74" y="496" width="9" height="9" rx="2" fill="#005587"/>
+  <text x="96" y="508" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{WHY2}}</text>
+  <rect data-slot-box="WHY3" x="74" y="546" width="9" height="9" rx="2" fill="#005587"/>
+  <text x="96" y="558" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{WHY3}}</text>
+  <polygon points="608,390 630,390 630,374 654,410 630,446 630,430 608,430" fill="#005587"/>
+  <!-- responses -->
+  <text x="668" y="236" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{RESPONSE_LABEL}}</text>
+  <rect data-slot-box="R1_ACTION" x="668" y="256" width="572" height="106" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <rect data-slot-box="R1_ACTION" x="688" y="274" width="124" height="34" rx="17" fill="#005587" fill-opacity="0.15"/>
+  <text x="750" y="297" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#005587">{{R1_ACTOR}}</text>
+  <text x="830" y="298" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#2C3E50">{{R1_ACTION}}</text>
+  <text x="688" y="340" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{R1_L1}}</text>
+  <rect data-slot-box="R2_ACTION" x="668" y="374" width="572" height="106" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <rect data-slot-box="R2_ACTION" x="688" y="392" width="124" height="34" rx="17" fill="#27AE60" fill-opacity="0.15"/>
+  <text x="750" y="415" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#27AE60">{{R2_ACTOR}}</text>
+  <text x="830" y="416" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#2C3E50">{{R2_ACTION}}</text>
+  <text x="688" y="458" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{R2_L1}}</text>
+  <rect data-slot-box="R3_ACTION" x="668" y="492" width="572" height="106" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <rect data-slot-box="R3_ACTION" x="688" y="510" width="124" height="34" rx="17" fill="#0076A8" fill-opacity="0.15"/>
+  <text x="750" y="533" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#0076A8">{{R3_ACTOR}}</text>
+  <text x="830" y="534" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#2C3E50">{{R3_ACTION}}</text>
+  <text x="688" y="576" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{R3_L1}}</text>
+  <rect x="40" y="628" width="1200" height="56" rx="12" fill="#005587" fill-opacity="0.1"/>
+  <text x="640" y="664" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#005587">{{CONCLUSION}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

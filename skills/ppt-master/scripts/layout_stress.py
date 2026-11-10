@@ -29,7 +29,7 @@ from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
-from layout_kit import SLOT_RE, fill_layout, slot_pattern  # noqa: E402
+from layout_kit import RELATIONS, SLOT_RE, fill_layout, slot_pattern  # noqa: E402
 
 ICON_DIR = SCRIPTS.parent / 'templates' / 'icons'
 SAMPLE_ICONS = ['shield-check', 'eye', 'bell', 'server', 'cog', 'key', 'target', 'users', 'lock-closed', 'chart-bar']
@@ -57,9 +57,12 @@ def check_library(content: Path, index: dict, wanted):
         for img in entry.get('imageSlots', []):
             if f'data-image-slot="{img["name"]}"' not in svg:
                 problems.append(f'{lid}: image slot {img["name"]} missing from the SVG')
-        for field in ('label', 'summary', 'bestFor', 'avoidFor', 'items'):
+        for field in ('label', 'summary', 'bestFor', 'avoidFor', 'items', 'relations', 'claim'):
             if not entry.get(field):
                 problems.append(f'{lid}: metadata field "{field}" is empty')
+        for rel in entry.get('relations', []):
+            if rel not in RELATIONS:
+                problems.append(f'{lid}: relation "{rel}" is not in the vocabulary (layout_kit.RELATIONS)')
     return problems
 
 
