@@ -29,6 +29,8 @@ PPT Master is an AI-driven presentation generation system. Through multi-role co
 - The default template is `skills/ppt-master/templates/layouts/奇安信/`. Follow Step 3 of `SKILL.md`; it copies the SVGs, `content/`, and the image assets into the project.
 - When `<project>/templates/content/layouts.json` exists, every body page should name a layout ID in its `Layout` field. The layout's SVG is the complete page: fill its `{{SLOT}}` placeholders and keep its geometry, colors, and font sizes. Rules are in `references/strategist.md` and section 1.7 of `references/executor-base.md`.
 - Use `Layout: free: <description>` with `03_content.svg` only when no layout fits.
+- Templates with content layouts: `奇安信`, `mckinsey`, `pixel_retro` (15 each, `contentLayouts` in `layouts_index.json`). The others have core pages only; their body pages are designed freely, as before.
+- All three are built from one shared library, `templates/content_library/library.py`, plus each template's `content_src/theme.json` and `shell.svg`. Never edit `content/` by hand; rebuild it with `layout_build.py`. Adding layouts to another template is done on request only; see `skills/ppt-master/scripts/docs/layouts.md`.
 
 ## Common Commands
 
@@ -79,6 +81,8 @@ uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
 - `skills/ppt-master/scripts/` — Tool scripts
 - `skills/ppt-master/scripts/docs/` — Topic-focused script docs (`conversion`, `project`, `svg-pipeline`, `image`, `troubleshooting`)
 - `skills/ppt-master/templates/` — Layout templates, chart templates, icon library
+- `skills/ppt-master/templates/content_library/` — Shared content-layout library (15 body-page layouts, structure + color roles)
+- `skills/ppt-master/templates/layouts/<template>/content/` — A template's built body layouts (`奇安信`, `mckinsey`, `pixel_retro`); `content_src/` holds its `theme.json` + `shell.svg`
 - `examples/` — Example projects
 - `projects/` — User project workspace
 

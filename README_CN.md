@@ -22,6 +22,13 @@
 | **📌 临时文件规范** | 所有生成过程中的临时文件统一写入当前项目的 `tmp/` 子目录，任务完成后自动清理，保持工程目录整洁。已写入 SKILL.md 作为强制规范。 |
 | **📦 uv 环境管理** | 本项目统一使用 [uv](https://github.com/astral-sh/uv) 作为 Python 包与虚拟环境管理工具，替代传统 `pip`。所有脚本通过 `uv run python3 <script>` 执行，依赖通过 `uv pip install` 安装，项目配置写入 `pyproject.toml`。 |
 | **📋 AGENTS.md 更新** | 更新工具命令速查表，新增 `excel_to_md.py` 条目及 PTY I/O 锁绕过说明。 |
+| **🛡️ 奇安信默认模板** | 从奇安信 PPT 提取真实背景与 logo 的品牌模板。未指定模板时默认推荐（仍由用户确认）。 |
+| **📐 正文版式** | 从真实 PPT 吸收的 15 种正文页版式（三支柱、阶段、漏斗、金字塔、环形架构等）。每个版式是带 `{{SLOT}}` 槽位和容量的完整页面，`layout_fill.py` 填充并拒绝超长文字。`奇安信`、`mckinsey`、`pixel_retro` 已配备。 |
+| **🧩 共享版式库** | 版式按颜色角色只写一次（`templates/content_library/`）；模板只需提供 `theme.json` + `shell.svg`，由 `layout_build.py` 生成 `content/`。`pptx_inspect.py`、`layout_stress.py` 用于从参考 PPT 吸收新版式并压测。 |
+| **🎨 用你的 .pptx 当模板** | `pptx_to_template.py` 把用户提供的 `.pptx` 转成模板，背景与 logo 按原位置还原。 |
+| **👀 实时预览** | `preview.py --serve` 提供 设计大纲 / 实际排布 / 实际文字 三个标签页，SVG 逐页生成即自动刷新；`executor_output.md` 记录执行过程。 |
+| **📦 一步导出** | `build_pptx.py --verify` 依次执行备注拆分 → finalize → 导出，出错即停，并校验文字无丢失、无断行；默认只输出一份可编辑 PPT。单页修改可用 `--page` 重新处理。 |
+| **🤖 多 AI 入口** | `AGENTS.md` 为通用入口，`GEMINI.md` 引用它，Gemini / Codex 可直接使用同一套 skill；`uv.lock` 纳入版本管理，环境可复现。 |
 
 > **致谢**：感谢原作者 [@hugohe3](https://github.com/hugohe3) 的出色设计，本仓库所有功能扩展均遵循原项目 MIT 协议。
 
@@ -50,7 +57,9 @@
     ↓
 [创建项目] → project_manager.py init <project_name> --format ppt169
     ↓
-[策略师] — 八大确认 & 设计规格
+[模板] — 默认奇安信；核心页 + 可选正文版式（content/）
+    ↓
+[策略师] — 八大确认 & 设计规格；为每个正文页选定版式
     ↓
 [图像生成器]（选择 AI 图像生成时）
     ↓
@@ -62,10 +71,10 @@
     ├── total_md_split.py  ← 备注拆分为每页文件
     ├── finalize_svg.py    ← 嵌入图像、修正几何
     └── svg_to_pptx.py     ← SVG → 原生 DrawingML PPTX
+    （build_pptx.py --verify 一次跑完三步并校验文字）
     ↓
 输出：
-    ├── presentation.pptx        ← 原生形状（DrawingML）— 可直接编辑
-    └── presentation_svg.pptx   ← SVG 参考版本
+    └── <项目名>.pptx            ← 原生形状（DrawingML）— 可直接编辑
 ```
 
 ### 📚 文档导航
@@ -77,6 +86,8 @@
 | 📐 [Canvas Formats](./skills/ppt-master/references/canvas-formats.md) | PPT/小红书/朋友圈/海报等 10+ 格式 |
 | 🛠️ [Scripts README](./skills/ppt-master/scripts/README.md) | 工具脚本索引与高频命令 |
 | 📊 [Chart Templates](./skills/ppt-master/templates/charts/) | 标准化图表模板库 |
+| 🗂️ [Layout Templates](./skills/ppt-master/templates/layouts/README.md) | 21 套页面模板，以及哪些配有正文版式 |
+| 📐 [Content Layouts](./skills/ppt-master/scripts/docs/layouts.md) | 正文版式的填充、生成、吸收与压测 |
 | 💼 [Examples](./examples/README.md) | 15 个示例项目，229 页 SVG 样例 |
 
 ---
@@ -180,15 +191,23 @@ node skills/ppt-master/scripts/web_to_md.cjs <URL>
 uv run python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 -o <project>/images
 uv run python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
 
-# ── 后处理流水线（必须串行执行，禁止批量）──────────────────────
-uv run python3 skills/ppt-master/scripts/total_md_split.py <project_path>
-# ✅ 确认无错误后继续
-uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path>
-# ✅ 确认无错误后继续
-uv run python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
-# 默认输出 native (.pptx) + SVG 参考版 (_svg.pptx)
-# --only native   只生成原生形状版
-# --only legacy   只生成 SVG 图像版
+# ── 模板与正文版式 ──────────────────────────────────────────────
+uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <project_path>
+uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> --slots <layout_id>
+uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
+uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
+uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
+uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
+
+# ── 后处理与导出（推荐：一次执行，出错即停）──────────────────────
+uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+# 手动方式（逐条执行，确认无误再下一步）：
+#   total_md_split.py <project_path> → finalize_svg.py <project_path> → svg_to_pptx.py <project_path> -s final
+# 只重新处理改过的一页：
+uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path> --page <page_name>
+
+# ── 实时预览 ────────────────────────────────────────────────────
+uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
 
 # ── SVG 质量检查 ─────────────────────────────────────────────────
 uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
@@ -214,12 +233,21 @@ ppt-master/
 │       │   ├── project_manager.py  #     项目管理
 │       │   ├── finalize_svg.py     #     SVG 后处理
 │       │   ├── svg_to_pptx.py      #     SVG → PPTX 导出
+│       │   ├── build_pptx.py       #     一步导出 + 文字校验
+│       │   ├── preview.py          #     实时预览
+│       │   ├── pptx_to_template.py #     用户 .pptx → 模板
+│       │   ├── layout_*.py         #     正文版式：生成 / 填充 / 压测
 │       │   └── image_gen.py        #     AI 图像生成
-│       └── templates/              #   布局模板、图表、图标库
+│       └── templates/
+│           ├── layouts/            #     21 套页面模板（默认奇安信）；content/ 为正文版式
+│           ├── content_library/    #     15 种正文版式的共享库
+│           ├── charts/             #     图表模板
+│           └── icons/              #     矢量图标
 ├── examples/                       # 示例项目（15 个，229 页）
 ├── projects/                       # 用户项目工作区
 ├── AGENTS.md                       # 通用 AI 代理入口
-└── CLAUDE.md                       # Claude Code 专用入口
+├── CLAUDE.md                       # Claude Code 专用入口
+└── GEMINI.md                       # Gemini 入口（引用 AGENTS.md）
 ```
 
 ---

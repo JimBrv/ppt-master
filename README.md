@@ -22,6 +22,13 @@
 | **📌 Temp File Convention** | All intermediate files generated during processing are written to a per-project `tmp/` subdirectory and cleaned up automatically on completion. Enforced as a mandatory rule in `SKILL.md`. |
 | **📦 uv Environment** | This project uses [uv](https://github.com/astral-sh/uv) as the Python package and virtual-environment manager instead of plain `pip`. All scripts are run via `uv run python3 <script>`, dependencies are installed with `uv pip install`, and project config lives in `pyproject.toml`. |
 | **📋 AGENTS.md Update** | Updated the quick-reference command table, added the `excel_to_md.py` entry, and documented the PTY I/O bypass rule. |
+| **🛡️ QAX (奇安信) Default Template** | Brand template with the real background art and logo extracted from QAX decks. Recommended by default when no template is named (the user still confirms). |
+| **📐 Content Layouts** | 15 ready-made body-page layouts (pillars, stages, funnel, pyramid, radial architecture, ...) absorbed from a real deck. Each is a complete page with `{{SLOT}}` text and per-slot capacity; `layout_fill.py` fills one and rejects overflow. Shipped for `奇安信`, `mckinsey` and `pixel_retro`. |
+| **🧩 Shared Layout Library** | Layouts are written once against color roles (`templates/content_library/`); a template adds only `theme.json` + `shell.svg`, and `layout_build.py` produces its `content/`. `pptx_inspect.py` and `layout_stress.py` absorb new layouts from reference decks and stress-test them. |
+| **🎨 Your .pptx as the Template** | `pptx_to_template.py` turns a user-supplied `.pptx` into a template with its real backgrounds and logos at exact positions. |
+| **👀 Live Preview** | `preview.py --serve` shows outline / rendered layout / text tabs and reloads page by page as SVGs land; `executor_output.md` keeps the Executor transcript. |
+| **📦 One-step Export** | `build_pptx.py --verify` runs notes split → finalize → export fail-fast and verifies no text was lost or wrapped; exports one editable deck by default. Single pages can be re-finalized with `--page`. |
+| **🤖 Multi-agent Entry** | `AGENTS.md` is the shared entry; `GEMINI.md` imports it, so Gemini / Codex can run the same skill. `uv.lock` is tracked for reproducible environments. |
 
 > **Credit**: Thanks to the original author [@hugohe3](https://github.com/hugohe3) for the excellent design. All extensions in this fork remain under the same MIT license.
 
@@ -50,7 +57,9 @@ User Input (PDF / DOCX / XLSX / URL / Markdown)
     ↓
 [Create Project] → project_manager.py init <project_name> --format ppt169
     ↓
-[Strategist] — Eight Confirmations & Design Specifications
+[Template] — default 奇安信; core pages + optional content layouts (content/)
+    ↓
+[Strategist] — Eight Confirmations & Design Specifications; picks a content layout per body page
     ↓
 [Image_Generator] (when AI image generation is selected)
     ↓
@@ -62,10 +71,10 @@ User Input (PDF / DOCX / XLSX / URL / Markdown)
     ├── total_md_split.py  ← Split notes into per-page files
     ├── finalize_svg.py    ← Embed images, fix geometry
     └── svg_to_pptx.py     ← Compile SVG → Native DrawingML PPTX
+    (build_pptx.py --verify runs all three fail-fast and checks the text)
     ↓
 Output:
-    ├── presentation.pptx        ← Native shapes (DrawingML) — directly editable
-    └── presentation_svg.pptx   ← SVG reference version
+    └── <project_name>.pptx      ← Native shapes (DrawingML) — directly editable
 ```
 
 ### 📚 Documentation
@@ -77,6 +86,8 @@ Output:
 | 📐 [Canvas Formats](./skills/ppt-master/references/canvas-formats.md) | PPT / Xiaohongshu / WeChat Moments / poster and 10+ formats |
 | 🛠️ [Scripts README](./skills/ppt-master/scripts/README.md) | Script index and high-frequency commands |
 | 📊 [Chart Templates](./skills/ppt-master/templates/charts/) | Standardized chart template library |
+| 🗂️ [Layout Templates](./skills/ppt-master/templates/layouts/README.md) | Page templates (21) and which ones ship content layouts |
+| 📐 [Content Layouts](./skills/ppt-master/scripts/docs/layouts.md) | Fill, build, absorb and stress-test body-page layouts |
 | 💼 [Examples](./examples/README.md) | 15 example projects, 229 SVG pages |
 
 ---
@@ -181,15 +192,23 @@ node skills/ppt-master/scripts/web_to_md.cjs <URL>
 uv run python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 -o <project>/images
 uv run python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
 
-# ── Post-processing (run sequentially — never batch) ────────────
-uv run python3 skills/ppt-master/scripts/total_md_split.py <project_path>
-# ✅ Confirm no errors before running the next command
-uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path>
-# ✅ Confirm no errors before running the next command
-uv run python3 skills/ppt-master/scripts/svg_to_pptx.py <project_path> -s final
-# Default: native (.pptx) + SVG reference (_svg.pptx)
-# --only native   skip SVG reference version
-# --only legacy   SVG image version only
+# ── Templates & Content Layouts ─────────────────────────────────
+uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <project_path>
+uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> --slots <layout_id>
+uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
+uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
+uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
+uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
+
+# ── Post-processing & Export (recommended: one fail-fast run) ───
+uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+# Manual form — run one at a time, confirm each before the next:
+#   total_md_split.py <project_path> → finalize_svg.py <project_path> → svg_to_pptx.py <project_path> -s final
+# Re-process one edited page:
+uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path> --page <page_name>
+
+# ── Live Preview ────────────────────────────────────────────────
+uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
 
 # ── SVG Quality Check ───────────────────────────────────────────
 uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
@@ -215,12 +234,21 @@ ppt-master/
 │       │   ├── project_manager.py  #     Project management
 │       │   ├── finalize_svg.py     #     SVG post-processing
 │       │   ├── svg_to_pptx.py      #     SVG → PPTX export
+│       │   ├── build_pptx.py       #     One-step export + text verification
+│       │   ├── preview.py          #     Live preview
+│       │   ├── pptx_to_template.py #     User .pptx → template
+│       │   ├── layout_*.py         #     Content layouts: build / fill / stress
 │       │   └── image_gen.py        #     AI image generation
-│       └── templates/              #   Layout templates, charts, icons
+│       └── templates/
+│           ├── layouts/            #     21 page templates (奇安信 default); content/ = body layouts
+│           ├── content_library/    #     Shared library of the 15 body layouts
+│           ├── charts/             #     Chart templates
+│           └── icons/              #     Vector icons
 ├── examples/                       # Example projects (15 projects, 229 pages)
 ├── projects/                       # User project workspace
 ├── AGENTS.md                       # General AI agent entry
-└── CLAUDE.md                       # Claude Code dedicated entry
+├── CLAUDE.md                       # Claude Code dedicated entry
+└── GEMINI.md                       # Gemini entry (imports AGENTS.md)
 ```
 
 ---

@@ -61,7 +61,8 @@ For complete tool documentation, see `${SKILL_DIR}/scripts/README.md`.
 
 | Index | Path | Purpose |
 |-------|------|---------|
-| Layout templates | `${SKILL_DIR}/templates/layouts/layouts_index.json` | Query available page layout templates |
+| Layout templates | `${SKILL_DIR}/templates/layouts/layouts_index.json` | Query available page layout templates (`contentLayouts` = number of ready-made body layouts) |
+| Content layouts | `<project_path>/templates/content/layouts.json` | Body-page layouts of the chosen template, if it has any (see Step 3) |
 | Chart templates | `${SKILL_DIR}/templates/charts/charts_index.json` | Query available chart SVG templates |
 | Icon library | `${SKILL_DIR}/templates/icons/icons_index.json` | Query available icon names and categories |
 
@@ -184,6 +185,17 @@ cp -R ${SKILL_DIR}/templates/layouts/<template_name>/content <project_path>/temp
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.png <project_path>/images/ 2>/dev/null || true
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2>/dev/null || true
 ```
+
+> 📐 **Content layouts (body pages)**: a template has two layers. Its core pages
+> (`01_cover` / `02_chapter` / `02_toc` / `03_content` / `04_ending`) are always used for
+> cover, TOC, chapter and ending pages. A template whose entry in `layouts_index.json` has
+> `contentLayouts` also ships `content/`: ready-made body pages with `{{SLOT}}` text and
+> capacities (currently `奇安信`, `mckinsey`, `pixel_retro`, 15 layouts each). The `cp -R`
+> above copies it; the Strategist then picks a layout ID per body page and the Executor fills
+> it with `layout_fill.py`. Templates without `content/` design body pages freely on
+> `03_content.svg`, as before. All templates share one layout library
+> (`templates/content_library/`); give another template the layouts with `layout_build.py`
+> — see `scripts/docs/layouts.md`. Do this only when the user asks; it is not part of a normal run.
 
 After the user confirms option B, proceed directly to Step 4.
 
@@ -314,6 +326,9 @@ Read references/executor-consultant-top.md # Top consulting style (MBB level)
 ```
 
 > Only need to read executor-base + one style file.
+
+> 📐 When a page's `Layout` field is a layout ID, fill `templates/content/<id>.svg` with
+> `scripts/layout_fill.py` (executor-base.md §1.7) instead of drawing the page from scratch.
 
 **Design Parameter Confirmation (Mandatory)**: Before generating the first SVG, the Executor MUST review and output key design parameters from the Design Specification (canvas dimensions, color scheme, font plan, body font size) to ensure spec adherence. See executor-base.md Section 2 for details.
 

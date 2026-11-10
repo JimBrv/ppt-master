@@ -75,6 +75,8 @@ uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
 - `skills/ppt-master/scripts/` — Runnable tool scripts
 - `skills/ppt-master/scripts/docs/` — Topic-focused script docs
 - `skills/ppt-master/templates/` — Layout templates, chart templates, 640+ vector icons
+- `skills/ppt-master/templates/content_library/` — Shared content-layout library (15 body-page layouts, structure + color roles)
+- `skills/ppt-master/templates/layouts/<template>/content/` — A template's built body layouts (`奇安信`, `mckinsey`, `pixel_retro`); `content_src/` holds its `theme.json` + `shell.svg`
 - `examples/` — Example projects
 - `projects/` — User project workspace
 
@@ -128,6 +130,17 @@ templates together. Verify before export:
 ```bash
 grep -o 'href="\.\./images/[^"]*"' <project_path>/svg_output/*.svg | sort | uniq -c
 ```
+
+## Templates and Content Layouts
+
+- Default template: `奇安信`. A template = core pages (`01_cover` … `04_ending`, always used
+  for cover/TOC/chapter/ending) + optional `content/` body layouts.
+- `奇安信`, `mckinsey`, `pixel_retro` ship 15 body layouts each; the Strategist names one per
+  body page (`Layout: <id>`) and the Executor fills it with `layout_fill.py`. Other templates
+  design body pages freely on `03_content.svg`.
+- Layouts come from one shared library (`templates/content_library/library.py`) plus each
+  template's `content_src/theme.json` + `shell.svg`. Never hand-edit `content/`; rebuild with
+  `layout_build.py` and verify with `layout_stress.py`. Details: `skills/ppt-master/scripts/docs/layouts.md`.
 
 ## Output Sanity Rules
 

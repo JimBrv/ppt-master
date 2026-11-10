@@ -7,6 +7,8 @@ Pre-built PPT page layout templates supporting multiple styles and use cases.
 
 > **AI / Programmatic recommendation**: Prefer reading `layouts_index.json`; use this README for human browsing and quick comparison.
 
+> **Content layouts**: `奇安信`, `mckinsey` and `pixel_retro` also ship `content/` — 15 ready-made body-page layouts each, built from the shared library in `../content_library/` with the template's own `content_src/theme.json` and `shell.svg`. Other templates design body pages freely on `03_content.svg`; any of them can get the layouts with `scripts/layout_build.py` (see [scripts/docs/layouts.md](../../scripts/docs/layouts.md)).
+
 ---
 
 ## Quick Template Index
@@ -112,7 +114,8 @@ Each template should contain the following standard files (TOC page is optional)
 | `02_chapter.svg` | Yes | Chapter page | Chapter number, chapter title |
 | `03_content.svg` | Yes | Content page | Fixed header/footer, flexible content area |
 | `04_ending.svg` | Yes | Ending page | Thank-you message, contact info |
-| `content/` | Optional | Content layout library | Complete body pages with named slots, indexed by `content/layouts.json` |
+| `content/` | Optional | Content layout library | Complete body pages with named slots, indexed by `content/layouts.json`. Generated — do not edit |
+| `content_src/` | With `content/` | Layout sources | `theme.json` (colors per role, body box, reserved areas) + `shell.svg` (page frame); `layout_build.py` turns them into `content/` |
 
 > **Design philosophy**: Templates define visual consistency and structural pages; content pages maintain maximum flexibility, letting AI determine layout based on actual content.
 
