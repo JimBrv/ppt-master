@@ -1,0 +1,34 @@
+{
+  "name": "McKinsey",
+  "font": "Microsoft YaHei, Arial, sans-serif",
+  "id_prefix": "mck",
+  "title_capacity": 40,
+  "body_box": [0, 92, 1280, 632],
+  "reserved": [
+    [0, 0, 1280, 82],
+    [0, 640, 1280, 720]
+  ],
+  "colors": {
+    "primary": "#005587",
+    "ink": "#2C3E50",
+    "surface": "#FFFFFF",
+    "page_bg": "#FFFFFF",
+    "on_accent": "#FFFFFF",
+    "secondary": "#0076A8",
+    "emphasis": "#005587",
+    "text": "#5D6D7E",
+    "muted": "#7F8C8D",
+    "line": "#E5E7EB",
+    "levels": ["#7FAAC3", "#4D88AB", "#0076A8", "#004D5C"],
+    "ramp": ["#27AE60", "#27AE60", "#0076A8", "#005587", "#D4880F", "#E74C3C"],
+    "trio_a": ["#005587", "#27AE60", "#0076A8"],
+    "trio_b": ["#0076A8", "#D4880F", "#005587"],
+    "steps": ["#D4880F", "#27AE60", "#0076A8", "#005587"],
+    "pills": ["#005587", "#0076A8", "#27AE60"],
+    "channels": ["#005587", "#0076A8", "#27AE60"],
+    "track": ["#27AE60", "#0076A8", "#0076A8", "#005587", "#E74C3C"],
+    "tier_fill": ["#27AE60", "#005587", "#D4880F"],
+    "tier_text": ["#1E8449", "#005587", "#A0650A"],
+    "tier_mark": ["#27AE60", "#005587", "#D4880F"]
+  }
+}

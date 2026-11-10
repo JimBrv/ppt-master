@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: architecture_radial. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="mckNodeA" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#005587"/><stop offset="100%" stop-color="#33779F"/></linearGradient>
+    <linearGradient id="mckNodeB" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#005587"/><stop offset="100%" stop-color="#0076A8"/></linearGradient>
+  </defs>
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <!-- source column -->
+  <text x="110" y="176" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#003C5E">{{SRC_TITLE_L1}}</text>
+  <text x="110" y="200" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#003C5E">{{SRC_TITLE_L2}}</text>
+  <rect x="42" y="221" width="134" height="290" rx="20" fill="#E0EBF1"/>
+  <text x="109" y="258" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC1_L1}}</text>
+  <text x="109" y="280" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC1_L2}}</text>
+  <text x="109" y="302" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC1_L3}}</text>
+  <text x="109" y="342" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC2_L1}}</text>
+  <text x="109" y="364" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC2_L2}}</text>
+  <text x="109" y="386" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC2_L3}}</text>
+  <text x="109" y="426" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC3_L1}}</text>
+  <text x="109" y="448" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC3_L2}}</text>
+  <text x="109" y="470" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2C3E50">{{SRC3_L3}}</text>
+  <path d="M202,156 L202,576" fill="none" stroke="#005587" stroke-width="3" stroke-dasharray="4,8"/>
+  <!-- wedges converging on the hub -->
+  <path d="M355,191 L688,373 L367,570 C300,450 296,310 355,191 Z" fill="#005587" fill-opacity="0.12"/>
+  <path d="M1013,195 L680,373 L1024,531 C1076,420 1074,300 1013,195 Z" fill="#0076A8" fill-opacity="0.12"/>
+  <text x="320" y="186" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#005587">{{INPUT_LABEL}}</text>
+  <!-- input 1 -->
+  <rect x="244" y="236" width="126" height="73" rx="36" fill="#FFFFFF" stroke="#005587" stroke-width="1"/>
+  <text x="294" y="267" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#005587">{{IN1_P1}}</text>
+  <text x="294" y="287" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#005587">{{IN1_P2}}</text>
+  <circle cx="397" cy="280" r="43" fill="url(#mckNodeA)"/>
+  <text x="397" y="277" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{IN1_C1}}</text>
+  <text x="397" y="297" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{IN1_C2}}</text>
+  <polygon points="443,266 469,280 443,294" fill="#005587"/>
+  <!-- input 2 -->
+  <rect x="211" y="344" width="126" height="73" rx="36" fill="#FFFFFF" stroke="#005587" stroke-width="1"/>
+  <text x="261" y="375" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#005587">{{IN2_P1}}</text>
+  <text x="261" y="395" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#005587">{{IN2_P2}}</text>
+  <circle cx="364" cy="384" r="43" fill="url(#mckNodeA)"/>
+  <text x="364" y="381" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{IN2_C1}}</text>
+  <text x="364" y="401" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{IN2_C2}}</text>
+  <polygon points="410,370 436,384 410,398" fill="#005587"/>
+  <!-- input 3 -->
+  <rect x="242" y="451" width="126" height="73" rx="36" fill="#FFFFFF" stroke="#005587" stroke-width="1"/>
+  <text x="292" y="482" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#005587">{{IN3_P1}}</text>
+  <text x="292" y="502" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#005587">{{IN3_P2}}</text>
+  <circle cx="395" cy="482" r="43" fill="url(#mckNodeA)"/>
+  <text x="395" y="479" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{IN3_C1}}</text>
+  <text x="395" y="499" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{IN3_C2}}</text>
+  <polygon points="441,468 467,482 441,496" fill="#005587"/>
+  <!-- hub -->
+  <text x="681" y="178" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#005587">{{HUB_HEADER}}</text>
+  <circle cx="681" cy="374" r="181" fill="#FFFFFF"/>
+  <circle cx="681" cy="374" r="189" fill="none" stroke="#E5E7EB" stroke-width="1.5"/>
+  <circle cx="681" cy="266" r="40" fill="url(#mckNodeB)"/>
+  <text x="681" y="263" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE1_L1}}</text>
+  <text x="681" y="285" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE1_L2}}</text>
+  <circle cx="790" cy="375" r="40" fill="url(#mckNodeB)"/>
+  <text x="790" y="372" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE2_L1}}</text>
+  <text x="790" y="394" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE2_L2}}</text>
+  <circle cx="681" cy="484" r="40" fill="url(#mckNodeB)"/>
+  <text x="681" y="481" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE3_L1}}</text>
+  <text x="681" y="503" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE3_L2}}</text>
+  <circle cx="572" cy="375" r="40" fill="url(#mckNodeB)"/>
+  <text x="572" y="372" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE4_L1}}</text>
+  <text x="572" y="394" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{NODE4_L2}}</text>
+  <text x="681" y="368" font-family="Microsoft YaHei, Arial, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#005587">{{CENTER_L1}}</text>
+  <text x="681" y="394" font-family="Microsoft YaHei, Arial, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#005587">{{CENTER_L2}}</text>
+  <text x="681" y="215" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">{{CAP_TOP}}</text>
+  <text x="681" y="545" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">{{CAP_BOTTOM}}</text>
+  <text x="790" y="432" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">{{CAP_RIGHT_L1}}</text>
+  <text x="790" y="452" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">{{CAP_RIGHT_L2}}</text>
+  <text x="572" y="432" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">{{CAP_LEFT_L1}}</text>
+  <text x="572" y="452" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" text-anchor="middle" fill="#7F8C8D">{{CAP_LEFT_L2}}</text>
+  <!-- outputs -->
+  <text x="961" y="246" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#0076A8">{{OUT_LABEL}}</text>
+  <rect x="904" y="268" width="115" height="39" rx="8" fill="#FFFFFF" stroke="#0076A8" stroke-width="1"/>
+  <text x="961" y="294" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#0076A8">{{OUT1}}</text>
+  <polygon points="1021,272 1047,287 1021,303" fill="#0076A8"/>
+  <rect x="927" y="344" width="115" height="39" rx="8" fill="#FFFFFF" stroke="#0076A8" stroke-width="1"/>
+  <text x="984" y="370" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#0076A8">{{OUT2}}</text>
+  <polygon points="1044,348 1070,363 1044,379" fill="#0076A8"/>
+  <rect x="904" y="420" width="115" height="39" rx="8" fill="#FFFFFF" stroke="#0076A8" stroke-width="1"/>
+  <text x="961" y="446" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#0076A8">{{OUT3}}</text>
+  <polygon points="1021,424 1047,439 1021,455" fill="#0076A8"/>
+  <rect x="1088" y="221" width="150" height="290" rx="16" fill="#0076A8"/>
+  <text x="1163" y="262" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{OUTP1_L1}}</text>
+  <text x="1163" y="284" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{OUTP1_L2}}</text>
+  <text x="1163" y="350" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{OUTP2_L1}}</text>
+  <text x="1163" y="372" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{OUTP2_L2}}</text>
+  <text x="1163" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{OUTP3_L1}}</text>
+  <text x="1163" y="460" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{OUTP3_L2}}</text>
+  <!-- three notes -->
+  <rect x="37" y="591" width="378" height="100" rx="12" fill="#FFFFFF" fill-opacity="0.85" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="53" y="623" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2C3E50">{{NOTE1_TITLE}}</text>
+  <text x="53" y="650" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5D6D7E">{{NOTE1_L1}}</text>
+  <text x="53" y="674" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5D6D7E">{{NOTE1_L2}}</text>
+  <rect x="448" y="591" width="378" height="100" rx="12" fill="#FFFFFF" fill-opacity="0.85" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="464" y="623" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2C3E50">{{NOTE2_TITLE}}</text>
+  <text x="464" y="650" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5D6D7E">{{NOTE2_L1}}</text>
+  <text x="464" y="674" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5D6D7E">{{NOTE2_L2}}</text>
+  <rect x="860" y="591" width="378" height="100" rx="12" fill="#FFFFFF" fill-opacity="0.85" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="876" y="623" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" fill="#2C3E50">{{NOTE3_TITLE}}</text>
+  <text x="876" y="650" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5D6D7E">{{NOTE3_L1}}</text>
+  <text x="876" y="674" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#5D6D7E">{{NOTE3_L2}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: hub_numbered_rows. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <circle cx="238" cy="440" r="123" fill="#004B77" fill-opacity="0.12"/>
+  <circle cx="238" cy="440" r="80" fill="#004B77"/>
+  <use data-icon="{{HUB_ICON}}" x="205" y="407" width="66" height="66" fill="#FFFFFF"/>
+  <rect data-slot-box="CALLOUT1" x="20" y="300" width="110" height="52" rx="12" fill="#D6E4EC" stroke="#CCDDE7" stroke-width="1"/>
+  <text x="75" y="333" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#004B77">{{CALLOUT1}}</text>
+  <rect data-slot-box="CALLOUT2" x="120" y="222" width="110" height="52" rx="12" fill="#D6E4EC" stroke="#CCDDE7" stroke-width="1"/>
+  <text x="175" y="255" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#004B77">{{CALLOUT2}}</text>
+  <rect data-slot-box="CALLOUT3" x="262" y="246" width="110" height="52" rx="12" fill="#D6E4EC" stroke="#CCDDE7" stroke-width="1"/>
+  <text x="317" y="279" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#004B77">{{CALLOUT3}}</text>
+  <rect data-slot-box="CALLOUT4" x="20" y="540" width="110" height="52" rx="12" fill="#D6E4EC" stroke="#CCDDE7" stroke-width="1"/>
+  <text x="75" y="573" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#004B77">{{CALLOUT4}}</text>
+  <rect data-slot-box="CALLOUT5" x="258" y="585" width="110" height="52" rx="12" fill="#D6E4EC" stroke="#CCDDE7" stroke-width="1"/>
+  <text x="313" y="618" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#004B77">{{CALLOUT5}}</text>
+  <rect x="398" y="140" width="842" height="540" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="819" y="200" font-family="Microsoft YaHei, Arial, sans-serif" font-size="27" font-weight="bold" text-anchor="middle" fill="#004B77">{{HEADING}}</text>
+  <!-- row 1 -->
+  <rect x="505" y="232" width="705" height="112" rx="14" fill="#F2F7F9" stroke="#E5E7EB" stroke-width="1"/>
+  <circle cx="500" cy="288" r="42" fill="#FFFFFF"/>
+  <circle cx="500" cy="288" r="31" fill="#005587"/>
+  <text x="500" y="298" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{R1_NUM}}</text>
+  <text x="556" y="296" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" fill="#2C3E50">{{R1_TITLE}}</text>
+  <text x="748" y="284" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{R1_L1}}</text>
+  <text x="748" y="308" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{R1_L2}}</text>
+  <rect x="985" y="265" width="205" height="46" rx="10" fill="#005587" fill-opacity="0.15"/>
+  <text x="1087" y="294" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#005587">{{R1_TAG}}</text>
+  <!-- row 2 -->
+  <rect x="505" y="372" width="705" height="112" rx="14" fill="#F2F7F9" stroke="#E5E7EB" stroke-width="1"/>
+  <circle cx="500" cy="428" r="42" fill="#FFFFFF"/>
+  <circle cx="500" cy="428" r="31" fill="#27AE60"/>
+  <text x="500" y="438" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{R2_NUM}}</text>
+  <text x="556" y="436" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" fill="#2C3E50">{{R2_TITLE}}</text>
+  <text x="748" y="424" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{R2_L1}}</text>
+  <text x="748" y="448" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{R2_L2}}</text>
+  <rect x="985" y="405" width="205" height="46" rx="10" fill="#27AE60" fill-opacity="0.15"/>
+  <text x="1087" y="434" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#27AE60">{{R2_TAG}}</text>
+  <!-- row 3 -->
+  <rect x="505" y="512" width="705" height="112" rx="14" fill="#F2F7F9" stroke="#E5E7EB" stroke-width="1"/>
+  <circle cx="500" cy="568" r="42" fill="#FFFFFF"/>
+  <circle cx="500" cy="568" r="31" fill="#0076A8"/>
+  <text x="500" y="578" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{R3_NUM}}</text>
+  <text x="556" y="576" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" fill="#2C3E50">{{R3_TITLE}}</text>
+  <text x="748" y="564" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{R3_L1}}</text>
+  <text x="748" y="588" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{R3_L2}}</text>
+  <rect x="985" y="545" width="205" height="46" rx="10" fill="#0076A8" fill-opacity="0.15"/>
+  <text x="1087" y="574" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#0076A8">{{R3_TAG}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

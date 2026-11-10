@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720">
+  <!-- Pixel Retro content layout: loop_nodes. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <text x="60" y="70" font-family="Consolas, Microsoft YaHei, monospace" font-size="36" font-weight="bold" fill="#39FF14" filter="url(#glowGreen)">{{PAGE_TITLE}}</text>
+  <rect x="60" y="100" width="200" height="2" fill="#30363D"/>
+  <rect x="0" y="716" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <g transform="translate(10.02,-15.97) scale(0.9843)">
+  <path d="M300,235 Q430,170 560,210" fill="none" stroke="#30363D" stroke-width="16" stroke-linecap="round"/>
+  <path d="M720,210 Q850,170 975,235" fill="none" stroke="#30363D" stroke-width="16" stroke-linecap="round"/>
+  <path d="M1085,440 Q1085,545 940,530" fill="none" stroke="#30363D" stroke-width="16" stroke-linecap="round"/>
+  <path d="M795,535 Q640,625 495,535" fill="none" stroke="#30363D" stroke-width="16" stroke-linecap="round"/>
+  <path d="M350,530 Q190,545 180,440" fill="none" stroke="#30363D" stroke-width="16" stroke-linecap="round"/>
+  <!-- node 1 -->
+  <circle cx="196" cy="275" r="47" fill="#04AFD3"/>
+  <use data-icon="{{N1_ICON}}" x="174" y="253" width="44" height="44" fill="#0D1117"/>
+  <text x="196" y="361" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#39FF14">{{N1_TITLE}}</text>
+  <text x="196" y="393" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N1_L1}}</text>
+  <text x="196" y="419" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N1_L2}}</text>
+  <!-- node 2 -->
+  <circle cx="639" cy="230" r="47" fill="#04AFD3"/>
+  <use data-icon="{{N2_ICON}}" x="617" y="208" width="44" height="44" fill="#0D1117"/>
+  <text x="639" y="316" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#39FF14">{{N2_TITLE}}</text>
+  <text x="639" y="348" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N2_L1}}</text>
+  <text x="639" y="374" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N2_L2}}</text>
+  <!-- node 3 -->
+  <circle cx="1076" cy="275" r="47" fill="#04AFD3"/>
+  <use data-icon="{{N3_ICON}}" x="1054" y="253" width="44" height="44" fill="#0D1117"/>
+  <text x="1076" y="361" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#39FF14">{{N3_TITLE}}</text>
+  <text x="1076" y="393" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N3_L1}}</text>
+  <text x="1076" y="419" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N3_L2}}</text>
+  <!-- node 4 -->
+  <circle cx="867" cy="493" r="47" fill="#04AFD3"/>
+  <use data-icon="{{N4_ICON}}" x="845" y="471" width="44" height="44" fill="#0D1117"/>
+  <text x="867" y="579" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#39FF14">{{N4_TITLE}}</text>
+  <text x="867" y="611" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N4_L1}}</text>
+  <text x="867" y="637" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N4_L2}}</text>
+  <!-- node 5 -->
+  <circle cx="422" cy="494" r="47" fill="#04AFD3"/>
+  <use data-icon="{{N5_ICON}}" x="400" y="472" width="44" height="44" fill="#0D1117"/>
+  <text x="422" y="580" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#39FF14">{{N5_TITLE}}</text>
+  <text x="422" y="612" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N5_L1}}</text>
+  <text x="422" y="638" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="18" text-anchor="middle" fill="#E6EDF3">{{N5_L2}}</text>
+  </g>
+  <text x="60" y="698" font-family="Consolas, monospace" font-size="14" fill="#8B949E">{{PAGE_NUM}}</text>
+</svg>

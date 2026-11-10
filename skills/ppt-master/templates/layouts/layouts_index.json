@@ -224,6 +224,7 @@
       "summary": "A McKinsey-style template for strategic consulting and investment analysis",
       "tone": "Data-driven, structured thinking, professional whitespace, minimalist premium",
       "themeMode": "Light theme (white background + McKinsey Blue accent)",
+      "contentLayouts": 15,
       "keywords": [
         "McKinsey",
         "Consulting",
@@ -248,6 +249,7 @@
       "summary": "A pixel-art template for tech sharing and gaming-themed content",
       "tone": "Retro gaming, neon cyber, geek tech, 8-bit style",
       "themeMode": "Dark theme (deep space black background + neon accents)",
+      "contentLayouts": 15,
       "keywords": [
         "Pixel art",
         "Retro gaming",

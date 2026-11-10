@@ -32,9 +32,10 @@ uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <pr
 # SVG quality check
 uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
 
-# Content layouts: fill one page; stress-test a library; inspect a reference deck
+# Content layouts: fill one page; stress-test a library; build a library from its theme; inspect a reference deck
 uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
 uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/奇安信
+uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
 uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 
 # Post-processing & export — RECOMMENDED: one fail-fast invocation

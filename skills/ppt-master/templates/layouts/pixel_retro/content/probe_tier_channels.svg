@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720">
+  <!-- Pixel Retro content layout: probe_tier_channels. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <text x="60" y="70" font-family="Consolas, Microsoft YaHei, monospace" font-size="36" font-weight="bold" fill="#39FF14" filter="url(#glowGreen)">{{PAGE_TITLE}}</text>
+  <rect x="60" y="100" width="200" height="2" fill="#30363D"/>
+  <rect x="0" y="716" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <g transform="translate(10.02,-15.97) scale(0.9843)">
+  <path d="M0,179 L350,179 C465,179 553,272 553,386 C553,500 465,593 350,593 L0,593 Z" fill="#00D4FF" fill-opacity="0.08"/>
+  <path d="M0,231 L303,231 C398,231 474,300 474,386 C474,472 398,541 303,541 L0,541 Z" fill="#00D4FF"/>
+  <text x="29" y="326" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="bold" fill="#0D1117">{{HUB_TITLE}}</text>
+  <text x="30" y="360" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#0D1117">{{HUB_L1}}</text>
+  <text x="30" y="382" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#0D1117">{{HUB_L2}}</text>
+  <path d="M28,397 L395,397" fill="none" stroke="#0D1117" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="66" cy="451" r="38" fill="#161B22"/>
+  <use data-icon="{{HUB_ICON}}" x="50" y="435" width="32" height="32" fill="#00D4FF"/>
+  <text x="118" y="442" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#0D1117">{{HUB_TAG_L1}}</text>
+  <text x="118" y="472" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#0D1117">{{HUB_TAG_L2}}</text>
+  <!-- channel TOP -->
+  <circle cx="505" cy="218" r="47" fill="#161B22"/>
+  <circle cx="505" cy="218" r="47" fill="none" stroke="#30363D" stroke-width="1"/>
+  <use data-icon="{{TOP_ICON}}" x="487" y="200" width="36" height="36" fill="#00D4FF"/>
+  <rect x="587" y="181" width="103" height="40" rx="10" fill="#00D4FF"/>
+  <text x="638" y="209" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#0D1117">{{TOP_PILL}}</text>
+  <text x="700" y="210" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" fill="#E6EDF3">{{TOP_NAME}}</text>
+  <text x="960" y="208" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#00D4FF">{{TOP_HINT}}</text>
+  <text x="587" y="253" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#E6EDF3">{{TOP_L1}}</text>
+  <text x="587" y="281" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#E6EDF3">{{TOP_L2}}</text>
+  <text x="1213" y="203" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#00D4FF">{{TOP_NOTE_L1}}</text>
+  <text x="1213" y="227" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#00D4FF">{{TOP_NOTE_L2}}</text>
+  <!-- channel MID -->
+  <circle cx="570" cy="390" r="47" fill="#161B22"/>
+  <circle cx="570" cy="390" r="47" fill="none" stroke="#30363D" stroke-width="1"/>
+  <use data-icon="{{MID_ICON}}" x="552" y="372" width="36" height="36" fill="#00D4FF"/>
+  <rect x="652" y="352" width="103" height="40" rx="10" fill="#39FF14"/>
+  <text x="703" y="380" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#0D1117">{{MID_PILL}}</text>
+  <text x="765" y="381" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" fill="#E6EDF3">{{MID_NAME}}</text>
+  <text x="975" y="379" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#39FF14">{{MID_HINT}}</text>
+  <text x="652" y="424" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#E6EDF3">{{MID_L1}}</text>
+  <text x="652" y="452" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#E6EDF3">{{MID_L2}}</text>
+  <text x="1213" y="374" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#39FF14">{{MID_NOTE_L1}}</text>
+  <text x="1213" y="398" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#39FF14">{{MID_NOTE_L2}}</text>
+  <!-- channel BOT -->
+  <circle cx="505" cy="561" r="47" fill="#161B22"/>
+  <circle cx="505" cy="561" r="47" fill="none" stroke="#30363D" stroke-width="1"/>
+  <use data-icon="{{BOT_ICON}}" x="487" y="543" width="36" height="36" fill="#00D4FF"/>
+  <rect x="587" y="524" width="103" height="40" rx="10" fill="#FFD700"/>
+  <text x="638" y="552" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#0D1117">{{BOT_PILL}}</text>
+  <text x="700" y="553" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" fill="#E6EDF3">{{BOT_NAME}}</text>
+  <text x="960" y="551" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#FFD700">{{BOT_HINT}}</text>
+  <text x="587" y="596" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#E6EDF3">{{BOT_L1}}</text>
+  <text x="587" y="624" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#E6EDF3">{{BOT_L2}}</text>
+  <text x="1213" y="546" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFD700">{{BOT_NOTE_L1}}</text>
+  <text x="1213" y="570" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#FFD700">{{BOT_NOTE_L2}}</text>
+  <text x="636" y="680" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#39FF14">{{CONCLUSION}}</text>
+  </g>
+  <text x="60" y="698" font-family="Consolas, monospace" font-size="14" fill="#8B949E">{{PAGE_NUM}}</text>
+</svg>

@@ -3,7 +3,8 @@
 PPT Master - Stress-test a template's content layout library.
 
 Checks that every layout in <template>/content/ is consistent with
-layouts.json, fills every text slot to its full capacity with full-width
+layouts.json and, when the template has content_src/, that content/ is a
+fresh build with no reserved-area conflicts. It then fills every text slot to its full capacity with full-width
 characters, then runs the real pipeline on the result: svg_quality_checker.py
 and build_pptx.py --verify. A layout that overflows, breaks a technical
 constraint, or loses text on export fails here instead of in a real deck.
@@ -85,6 +86,10 @@ def main() -> int:
     wanted = args.layouts.split(',') if args.layouts else sorted(index)
 
     problems = check_library(content, index, wanted)
+    if (args.template_dir / 'content_src' / 'theme.json').exists():
+        import layout_build
+        if not layout_build.check(args.template_dir):
+            problems.append('content/ is stale or overlaps reserved areas; run layout_build.py on the template')
     icons = [n for n in SAMPLE_ICONS if (ICON_DIR / f'{n}.svg').exists()]
 
     root = Path(tempfile.mkdtemp(prefix='layout_stress_'))

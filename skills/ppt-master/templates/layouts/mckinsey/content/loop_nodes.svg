@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: loop_nodes. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <path d="M300,235 Q430,170 560,210" fill="none" stroke="#CCDDE7" stroke-width="16" stroke-linecap="round"/>
+  <path d="M720,210 Q850,170 975,235" fill="none" stroke="#CCDDE7" stroke-width="16" stroke-linecap="round"/>
+  <path d="M1085,440 Q1085,545 940,530" fill="none" stroke="#CCDDE7" stroke-width="16" stroke-linecap="round"/>
+  <path d="M795,535 Q640,625 495,535" fill="none" stroke="#CCDDE7" stroke-width="16" stroke-linecap="round"/>
+  <path d="M350,530 Q190,545 180,440" fill="none" stroke="#CCDDE7" stroke-width="16" stroke-linecap="round"/>
+  <!-- node 1 -->
+  <circle cx="196" cy="275" r="47" fill="#33779F"/>
+  <use data-icon="{{N1_ICON}}" x="174" y="253" width="44" height="44" fill="#FFFFFF"/>
+  <text x="196" y="361" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#004065">{{N1_TITLE}}</text>
+  <text x="196" y="393" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N1_L1}}</text>
+  <text x="196" y="419" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N1_L2}}</text>
+  <!-- node 2 -->
+  <circle cx="639" cy="230" r="47" fill="#33779F"/>
+  <use data-icon="{{N2_ICON}}" x="617" y="208" width="44" height="44" fill="#FFFFFF"/>
+  <text x="639" y="316" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#004065">{{N2_TITLE}}</text>
+  <text x="639" y="348" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N2_L1}}</text>
+  <text x="639" y="374" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N2_L2}}</text>
+  <!-- node 3 -->
+  <circle cx="1076" cy="275" r="47" fill="#33779F"/>
+  <use data-icon="{{N3_ICON}}" x="1054" y="253" width="44" height="44" fill="#FFFFFF"/>
+  <text x="1076" y="361" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#004065">{{N3_TITLE}}</text>
+  <text x="1076" y="393" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N3_L1}}</text>
+  <text x="1076" y="419" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N3_L2}}</text>
+  <!-- node 4 -->
+  <circle cx="867" cy="493" r="47" fill="#33779F"/>
+  <use data-icon="{{N4_ICON}}" x="845" y="471" width="44" height="44" fill="#FFFFFF"/>
+  <text x="867" y="579" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#004065">{{N4_TITLE}}</text>
+  <text x="867" y="611" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N4_L1}}</text>
+  <text x="867" y="637" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N4_L2}}</text>
+  <!-- node 5 -->
+  <circle cx="422" cy="494" r="47" fill="#33779F"/>
+  <use data-icon="{{N5_ICON}}" x="400" y="472" width="44" height="44" fill="#FFFFFF"/>
+  <text x="422" y="580" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#004065">{{N5_TITLE}}</text>
+  <text x="422" y="612" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N5_L1}}</text>
+  <text x="422" y="638" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" text-anchor="middle" fill="#2C3E50">{{N5_L2}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

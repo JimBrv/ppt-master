@@ -42,6 +42,7 @@ description: >
 | `${SKILL_DIR}/scripts/project_manager.py` | Project init / validate / manage |
 | `${SKILL_DIR}/scripts/pptx_to_template.py` | Turn a user-supplied `.pptx` into a layout template (real backgrounds + logos) |
 | `${SKILL_DIR}/scripts/layout_fill.py` | Fill one content layout from a values file, checking every slot's capacity |
+| `${SKILL_DIR}/scripts/layout_build.py` | Build a template's content layouts from the shared library and its theme |
 | `${SKILL_DIR}/scripts/layout_stress.py` | Stress-test a template's content layout library |
 | `${SKILL_DIR}/scripts/pptx_inspect.py` | Extract geometry and renders from a reference deck to build new layouts |
 | `${SKILL_DIR}/scripts/analyze_images.py` | Image analysis |

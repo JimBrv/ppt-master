@@ -1,0 +1,446 @@
+{
+  "meta": {
+    "version": 1,
+    "canvas": "0 0 1280 720",
+    "usage": "在 design_spec 的 Layout 字段写版式 ID。slots 的数字是该槽位的最大中文字符数，英文按 0.55 个中文宽度估算；{n} 表示序号。"
+  },
+  "layouts": {
+    "three_pillars": {
+      "label": "三栏并列卡片",
+      "summary": "三个并列主题，各含 3 张图标卡片，底部一句结论",
+      "source": "P13",
+      "bestFor": [
+        "三个互不包含的主题或方案对比",
+        "部署形态、能力分组",
+        "每组有 2–3 个可并列的要点"
+      ],
+      "avoidFor": [
+        "有先后顺序的流程",
+        "单组要点超过 3 个"
+      ],
+      "items": "固定 3 栏；每栏 2–3 张卡片。少于 3 张时删掉整张卡片，其余卡片加高填满栏高，不留空洞",
+      "slots": {
+        "COL{n}_TITLE": 12,
+        "COL{n}_CARD{n}_TITLE": 14,
+        "COL{n}_CARD{n}_L{n}": 20,
+        "CONCLUSION": 50,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "COL{n}_CARD{n}_ICON"
+      ],
+      "imageSlots": []
+    },
+    "chevron_stages": {
+      "label": "箭头阶段 + 三列",
+      "summary": "顶部箭头流程条，下接三列关键词卡片和蓝色说明带",
+      "source": "P14",
+      "bestFor": [
+        "三阶段递进或分步策略",
+        "一个总起概念带出三个阶段"
+      ],
+      "avoidFor": [
+        "阶段超过 3 个",
+        "阶段间无先后关系"
+      ],
+      "items": "固定 1 个总起 + 3 个阶段",
+      "slots": {
+        "STEP{n}_LABEL": 11,
+        "COL{n}_NAME": 11,
+        "COL{n}_KEYWORD": 6,
+        "COL{n}_TITLE": 15,
+        "COL{n}_L{n}": 20,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "COL{n}_ICON"
+      ],
+      "imageSlots": []
+    },
+    "stair_steps": {
+      "label": "阶梯递进",
+      "summary": "六级上升阶梯，每级含等级圆和两段说明",
+      "source": "P18",
+      "bestFor": [
+        "影响、风险或成熟度分级",
+        "由低到高的多方案对比"
+      ],
+      "avoidFor": [
+        "无程度差异的并列项",
+        "少于 4 级"
+      ],
+      "items": "4–6 级。减少时删掉最靠前的列，并让其余列等宽铺满 x=35..1200",
+      "slots": {
+        "SUBTITLE": 32,
+        "S{n}_NAME": 10,
+        "S{n}_GRADE": 2,
+        "S{n}_HEAD{n}": 10,
+        "S{n}_A{n}": 10,
+        "S{n}_B{n}": 10,
+        "AXIS_NOTE": 12,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "layered_rows": {
+      "label": "分层横带",
+      "summary": "四层横带贯穿中轴，左标题右说明，底部结论",
+      "source": "P24（简化）",
+      "bestFor": [
+        "分层架构或检测层级",
+        "L1–L4 这类有层次的体系"
+      ],
+      "avoidFor": [
+        "层之间无上下关系",
+        "说明超过两行"
+      ],
+      "items": "3–4 层。3 层时删掉最后一层，其余行高增到 140",
+      "slots": {
+        "R{n}_LABEL": 15,
+        "R{n}_L{n}": 28,
+        "CONCLUSION": 40,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "R{n}_ICON"
+      ],
+      "imageSlots": []
+    },
+    "hub_numbered_rows": {
+      "label": "中心枢纽 + 编号行",
+      "summary": "左侧枢纽图与环绕标签，右侧三条编号说明",
+      "source": "P25",
+      "bestFor": [
+        "一个核心概念的三个维度",
+        "身份、角色、责任归属"
+      ],
+      "avoidFor": [
+        "超过 3 个维度",
+        "需要大段说明"
+      ],
+      "items": "固定 3 行；环绕标签 3–5 个，未填的自动删除",
+      "slots": {
+        "CALLOUT{n}": 5,
+        "HEADING": 28,
+        "R{n}_NUM": 1,
+        "R{n}_TITLE": 8,
+        "R{n}_L{n}": 14,
+        "R{n}_TAG": 11,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "HUB_ICON"
+      ],
+      "imageSlots": []
+    },
+    "image_stack_pills": {
+      "label": "主图 + 胶囊列表",
+      "summary": "左侧圆形主图，右侧沿弧线排列的优势胶囊",
+      "source": "P29",
+      "bestFor": [
+        "产品优势、能力清单",
+        "5–8 条短句并列"
+      ],
+      "avoidFor": [
+        "没有合适的主图",
+        "每条超过一行"
+      ],
+      "items": "5–8 条。减少时按条数重新均分 y=150..678，x 仍取弧线对称值",
+      "slots": {
+        "P{n}_TAG": 6,
+        "P{n}_BODY": 36,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": [
+        {
+          "name": "HERO",
+          "x": 80,
+          "y": 275,
+          "w": 305,
+          "h": 305
+        }
+      ]
+    },
+    "loop_nodes": {
+      "label": "闭环五节点",
+      "summary": "五个节点沿环排列，表达持续闭环",
+      "source": "P28",
+      "bestFor": [
+        "运营闭环、持续改进流程",
+        "首尾相接的 5 步流程"
+      ],
+      "avoidFor": [
+        "单向流程",
+        "节点不是 5 个"
+      ],
+      "items": "固定 5 个节点，顺序为左上起顺时针",
+      "slots": {
+        "N{n}_TITLE": 10,
+        "N{n}_L{n}": 13,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "N{n}_ICON"
+      ],
+      "imageSlots": []
+    },
+    "stage_matrix_evidence": {
+      "label": "阶段矩阵 + 证据图",
+      "summary": "左侧四阶段要点，右侧系统截图与关键结果",
+      "source": "P31–P34",
+      "bestFor": [
+        "场景实例、落地案例",
+        "有截图佐证的产品功能"
+      ],
+      "avoidFor": [
+        "没有截图或证据图",
+        "阶段不足 3 个"
+      ],
+      "items": "3–4 个阶段；每阶段 2–4 个要点，未填的要点连同白色小卡自动删除",
+      "slots": {
+        "STAGE{n}_LABEL": 2,
+        "STAGE{n}_CHIP{n}": 12,
+        "STAGE{n}_L{n}": 27,
+        "CAPTION": 42,
+        "CALLOUT_LABEL_L{n}": 2,
+        "RESULT{n}_TITLE": 28,
+        "RESULT{n}_BODY": 34,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": [
+        {
+          "name": "SCREENSHOT",
+          "x": 614,
+          "y": 161,
+          "w": 607,
+          "h": 317
+        }
+      ]
+    },
+    "architecture_radial": {
+      "label": "放射式三层架构",
+      "summary": "左侧来源，中心四节点枢纽，右侧输出，底部三段说明",
+      "source": "P12",
+      "bestFor": [
+        "端到端产品架构总览",
+        "输入、处理、输出三段结构"
+      ],
+      "avoidFor": [
+        "没有明确中心平台",
+        "节点文字较长"
+      ],
+      "items": "固定 3 个输入、4 个中心节点、3 个输出",
+      "slots": {
+        "SRC_TITLE_L{n}": 7,
+        "SRC{n}_L{n}": 7,
+        "INPUT_LABEL": 11,
+        "IN{n}_P{n}": 7,
+        "IN{n}_C{n}": 5,
+        "HUB_HEADER": 16,
+        "NODE{n}_L{n}": 4,
+        "CENTER_L{n}": 7,
+        "CAP_TOP": 14,
+        "CAP_BOTTOM": 17,
+        "CAP_RIGHT_L{n}": 9,
+        "CAP_LEFT_L{n}": 9,
+        "OUT_LABEL": 8,
+        "OUT{n}": 6,
+        "OUTP{n}_L{n}": 8,
+        "NOTE{n}_TITLE": 21,
+        "NOTE{n}_L{n}": 23,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "probe_tier_channels": {
+      "label": "统一入口 + 三通道",
+      "summary": "左侧蓝色半圆总起，右侧沿弧线排列三条接入通道",
+      "source": "P15",
+      "bestFor": [
+        "一个平台对接多种形态",
+        "每条通道有名称、说明和动作"
+      ],
+      "avoidFor": [
+        "通道超过 3 条",
+        "通道间有先后顺序"
+      ],
+      "items": "固定 3 条通道",
+      "slots": {
+        "HUB_TITLE": 13,
+        "HUB_L{n}": 27,
+        "HUB_TAG_L{n}": 14,
+        "TOP_PILL": 4,
+        "TOP_NAME": 11,
+        "TOP_HINT": 12,
+        "TOP_L{n}": 33,
+        "TOP_NOTE_L{n}": 7,
+        "MID_PILL": 4,
+        "MID_NAME": 9,
+        "MID_HINT": 12,
+        "MID_L{n}": 30,
+        "MID_NOTE_L{n}": 7,
+        "BOT_PILL": 4,
+        "BOT_NAME": 11,
+        "BOT_HINT": 12,
+        "BOT_L{n}": 33,
+        "BOT_NOTE_L{n}": 7,
+        "CONCLUSION": 50,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "BOT_ICON",
+        "HUB_ICON",
+        "MID_ICON",
+        "TOP_ICON"
+      ],
+      "imageSlots": []
+    },
+    "three_track_checklist": {
+      "label": "三轨清单",
+      "summary": "三个圆形徽标带出三列 5 项清单，底部一句结论",
+      "source": "P16",
+      "bestFor": [
+        "实施步骤与验收清单",
+        "每列有 3–5 条短句"
+      ],
+      "avoidFor": [
+        "单条内容超过一行",
+        "需要图标卡片时改用 three_pillars"
+      ],
+      "items": "固定 3 列；每列 3–5 条，未填的条目连同左侧色条自动删除",
+      "slots": {
+        "T{n}_BADGE": 3,
+        "T{n}_HEAD": 15,
+        "T{n}_ITEM{n}": 19,
+        "CONCLUSION": 50,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "tier_chip_pyramid": {
+      "label": "分层标签 + 金字塔",
+      "summary": "三层色带排列标签块，右侧金字塔标注层级",
+      "source": "P17",
+      "bestFor": [
+        "兼容、适配、支持矩阵",
+        "大量短名称按状态分层"
+      ],
+      "avoidFor": [
+        "标签是长句",
+        "没有层级差异"
+      ],
+      "items": "上层最多 14 个、中层 8 个、下层 15 个标签；未填的标签连同白底自动删除",
+      "slots": {
+        "TOP_C{n}": 7,
+        "MID_C{n}": 9,
+        "BOT_C{n}": 7,
+        "TOP_LABEL": 5,
+        "MID_LABEL": 5,
+        "BOT_LABEL": 5,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "BOT_ICON",
+        "MID_ICON",
+        "TOP_ICON"
+      ],
+      "imageSlots": []
+    },
+    "chain_core_grid": {
+      "label": "链路 + 核心 + 四宫格",
+      "summary": "顶部五段链路，中部核心能力带，底部四项约束",
+      "source": "P23",
+      "bestFor": [
+        "检测或分析机制说明",
+        "链路加核心引擎加约束条件"
+      ],
+      "avoidFor": [
+        "没有中心能力",
+        "链路不足 3 段"
+      ],
+      "items": "固定 5 段链路、4 个核心能力、4 项约束",
+      "slots": {
+        "CH{n}_TITLE": 8,
+        "CH{n}_BODY": 14,
+        "CORE{n}": 4,
+        "CENTER": 7,
+        "G{n}_LABEL": 6,
+        "G{n}_VALUE": 21,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [],
+      "imageSlots": []
+    },
+    "funnel_layers": {
+      "label": "漏斗分层",
+      "summary": "中央四层漏斗贯穿横带，左标题右说明，底部结论",
+      "source": "P24",
+      "bestFor": [
+        "逐层收敛、过滤、研判",
+        "层级有先后筛选关系"
+      ],
+      "avoidFor": [
+        "层间没有收敛关系时改用 layered_rows",
+        "超过 4 层"
+      ],
+      "items": "固定 4 层",
+      "slots": {
+        "L{n}_LABEL": 10,
+        "L{n}_D{n}": 20,
+        "CONCLUSION": 47,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "L{n}_ICON"
+      ],
+      "imageSlots": []
+    },
+    "arrow_track_columns": {
+      "label": "箭头轨道 + 三列 + 策略条",
+      "summary": "渐变箭头表达三段演进，下接三列说明和策略条",
+      "source": "P27",
+      "bestFor": [
+        "模式或策略的分段演进",
+        "从观察到执行的递进"
+      ],
+      "avoidFor": [
+        "阶段超过 3 个",
+        "需要大段说明时改用 chevron_stages"
+      ],
+      "items": "固定 3 段",
+      "slots": {
+        "S{n}_LABEL": 11,
+        "C{n}_TITLE": 9,
+        "C{n}_L{n}": 14,
+        "POLICY_BTN": 8,
+        "POLICY_A": 13,
+        "POLICY_B": 19,
+        "PAGE_TITLE": 40,
+        "PAGE_NUM": 3
+      },
+      "iconSlots": [
+        "S{n}_ICON"
+      ],
+      "imageSlots": []
+    }
+  }
+}

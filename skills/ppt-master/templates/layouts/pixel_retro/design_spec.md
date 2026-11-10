@@ -302,3 +302,27 @@ Text:
   Secondary text     #8B949E  Mist Gray
   Emphasis text      #FFFFFF  Pure White
 ```
+
+---
+
+## XIV. Content Layouts
+
+`content/layouts.json` indexes fifteen ready-made content pages built from the shared library (`templates/content_library/`) with this template's `content_src/theme.json` and `shell.svg`. Prefer one of these for every body page; use `03_content.svg` only when none fits. Rebuild with `scripts/layout_build.py`; never edit `content/` by hand.
+
+| ID | Best for |
+|----|----------|
+| `three_pillars` | Three parallel themes |
+| `chevron_stages` | Three sequential stages |
+| `stair_steps` | Graded levels, low to high |
+| `layered_rows` | Layered architectures |
+| `hub_numbered_rows` | One concept, three dimensions |
+| `image_stack_pills` | Advantage lists with a hero image |
+| `loop_nodes` | Five-step closed loops |
+| `stage_matrix_evidence` | Case studies backed by a screenshot |
+| `architecture_radial` | End-to-end architecture: inputs, central hub, outputs |
+| `probe_tier_channels` | One platform connecting several channels |
+| `three_track_checklist` | Three parallel step-by-step checklists |
+| `tier_chip_pyramid` | Compatibility or support matrices by tier |
+| `chain_core_grid` | A chain, a core engine, and its constraints |
+| `funnel_layers` | Layers that progressively filter or converge |
+| `arrow_track_columns` | Modes or policies that escalate in stages |

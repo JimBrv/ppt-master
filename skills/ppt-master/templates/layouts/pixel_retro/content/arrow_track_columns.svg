@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720">
+  <!-- Pixel Retro content layout: arrow_track_columns. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="pxTrackA" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#39FF14"/><stop offset="100%" stop-color="#00D4FF"/></linearGradient>
+    <linearGradient id="pxTrackB" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#00D4FF"/><stop offset="100%" stop-color="#1F6FEB"/></linearGradient>
+    <linearGradient id="pxBtn" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#04AFD3"/><stop offset="100%" stop-color="#00D4FF"/></linearGradient>
+    <linearGradient id="pxArrow" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1F6FEB"/><stop offset="100%" stop-color="#FF2E97"/></linearGradient>
+  </defs>
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <text x="60" y="70" font-family="Consolas, Microsoft YaHei, monospace" font-size="36" font-weight="bold" fill="#39FF14" filter="url(#glowGreen)">{{PAGE_TITLE}}</text>
+  <rect x="60" y="100" width="200" height="2" fill="#30363D"/>
+  <rect x="0" y="716" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <g transform="translate(10.02,-15.97) scale(0.9843)">
+  <!-- track -->
+  <rect x="132" y="216" width="340" height="49" fill="url(#pxTrackA)"/>
+  <rect x="470" y="216" width="384" height="49" fill="url(#pxTrackB)"/>
+  <polygon points="852,216 1130,216 1130,194 1203,240 1130,287 1130,265 852,265" fill="url(#pxArrow)"/>
+  <rect x="100" y="201" width="72" height="72" rx="24" fill="#39FF14"/>
+  <use data-icon="{{S1_ICON}}" x="119" y="220" width="34" height="34" fill="#0D1117"/>
+  <text x="300" y="250" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#0D1117">{{S1_LABEL}}</text>
+  <rect x="425" y="201" width="72" height="72" rx="24" fill="#00D4FF"/>
+  <use data-icon="{{S2_ICON}}" x="444" y="220" width="34" height="34" fill="#0D1117"/>
+  <text x="665" y="250" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#0D1117">{{S2_LABEL}}</text>
+  <rect x="822" y="201" width="72" height="72" rx="24" fill="#1F6FEB"/>
+  <use data-icon="{{S3_ICON}}" x="841" y="220" width="34" height="34" fill="#0D1117"/>
+  <text x="1010" y="250" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#0D1117">{{S3_LABEL}}</text>
+  <!-- column 1 -->
+  <rect x="160" y="288" width="253" height="197" rx="12" fill="#161B22" fill-opacity="0.7"/>
+  <text x="286" y="344" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{C1_TITLE}}</text>
+  <text x="286" y="412" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="middle" fill="#E6EDF3">{{C1_L1}}</text>
+  <text x="286" y="442" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="middle" fill="#E6EDF3">{{C1_L2}}</text>
+  <!-- column 2 -->
+  <rect x="546" y="288" width="253" height="197" rx="12" fill="#161B22" fill-opacity="0.7"/>
+  <text x="672" y="344" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{C2_TITLE}}</text>
+  <text x="672" y="412" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="middle" fill="#E6EDF3">{{C2_L1}}</text>
+  <text x="672" y="442" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="middle" fill="#E6EDF3">{{C2_L2}}</text>
+  <!-- column 3 -->
+  <rect x="931" y="288" width="253" height="197" rx="12" fill="#161B22" fill-opacity="0.7"/>
+  <text x="1057" y="344" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{C3_TITLE}}</text>
+  <text x="1057" y="412" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="middle" fill="#E6EDF3">{{C3_L1}}</text>
+  <text x="1057" y="442" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="middle" fill="#E6EDF3">{{C3_L2}}</text>
+  <rect x="160" y="511" width="1024" height="95" rx="14" fill="#161B22" fill-opacity="0.7"/>
+  <rect x="215" y="533" width="184" height="50" rx="6" fill="url(#pxBtn)"/>
+  <text x="307" y="566" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#0D1117">{{POLICY_BTN}}</text>
+  <text x="628" y="566" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#04AFD3">{{POLICY_A}}</text>
+  <text x="961" y="566" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="bold" text-anchor="middle" fill="#04AFD3">{{POLICY_B}}</text>
+  </g>
+  <text x="60" y="698" font-family="Consolas, monospace" font-size="14" fill="#8B949E">{{PAGE_NUM}}</text>
+</svg>

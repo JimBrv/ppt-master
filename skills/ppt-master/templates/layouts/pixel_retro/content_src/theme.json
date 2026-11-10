@@ -1,0 +1,40 @@
+{
+  "name": "Pixel Retro",
+  "font": "Microsoft YaHei, PingFang SC, sans-serif",
+  "id_prefix": "px",
+  "title_capacity": 32,
+  "body_box": [0, 112, 1280, 678],
+  "reserved": [
+    [0, 0, 1280, 104],
+    [40, 682, 140, 704],
+    [0, 714, 1280, 720]
+  ],
+  "colors": {
+    "primary": "#00D4FF",
+    "ink": "#E6EDF3",
+    "surface": "#161B22",
+    "page_bg": "#0D1117",
+    "on_accent": "#0D1117",
+    "secondary": "#1F6FEB",
+    "text": "#C9D1D9",
+    "muted": "#8B949E",
+    "ink_strong": "#FFFFFF",
+    "emphasis": "#39FF14",
+    "node_title": "#39FF14",
+    "label": "#00D4FF",
+    "line": "#30363D",
+    "line_soft": "#30363D",
+    "shade": "#30363D",
+    "levels": ["#39FF14", "#00D4FF", "#1F6FEB", "#FF2E97"],
+    "ramp": ["#39FF14", "#39FF14", "#00D4FF", "#1F6FEB", "#FFD700", "#FF2E97"],
+    "trio_a": ["#00D4FF", "#39FF14", "#FFD700"],
+    "trio_b": ["#39FF14", "#FFD700", "#00D4FF"],
+    "steps": ["#FF2E97", "#39FF14", "#00D4FF", "#FFD700"],
+    "pills": ["#00D4FF", "#39FF14", "#FFD700"],
+    "channels": ["#00D4FF", "#39FF14", "#FFD700"],
+    "track": ["#39FF14", "#00D4FF", "#00D4FF", "#1F6FEB", "#FF2E97"],
+    "tier_fill": ["#238636", "#1F6FEB", "#8B2252"],
+    "tier_text": ["#39FF14", "#00D4FF", "#FF2E97"],
+    "tier_mark": ["#39FF14", "#00D4FF", "#FF2E97"]
+  }
+}

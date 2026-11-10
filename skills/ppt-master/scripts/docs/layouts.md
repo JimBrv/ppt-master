@@ -9,11 +9,44 @@ slot in full-width characters (Latin text counts about 0.55 each).
 |--------|------|
 | `pptx_inspect.py` | Extract geometry and real renders from a reference deck |
 | `layout_kit.py` | Library for building and filling layouts; imported, not run |
+| `layout_build.py` | Build a template's `content/` from the shared library and its theme |
 | `layout_fill.py` | Fill one layout from a values file, with every check applied |
 | `layout_stress.py` | Fill a whole library to capacity and run the real export |
 
-Each template's layouts are generated from `templates/layouts/<template>/content_src/build_layouts.py`.
-Edit that file, not the SVGs; the SVGs and `layouts.json` are its output.
+## How a library is put together
+
+Structure and styling are kept apart, so one layout works in every template:
+
+| Piece | Where | Holds |
+|-------|-------|-------|
+| Shared library | `templates/content_library/library.py` | One builder per layout: geometry, slots, capacities, metadata. Colors are **roles** (`T.primary`, `T.surface`, `T.trio_a[1]`, ...), never hex values |
+| Theme | `templates/layouts/<template>/content_src/theme.json` | The template's colors for each role, title capacity, `body_box`, `reserved` areas, gradient `id_prefix` |
+| Shell | `templates/layouts/<template>/content_src/shell.svg` | The template's own page frame: background, logo, title, page number, with the tokens `%%DEFS%%`, `%%BODY%%`, `%%LAYOUT_ID%%`, `{{PAGE_TITLE}}`, `{{PAGE_NUM}}` |
+
+`layout_build.py` combines the three and writes `content/`. Edit the library,
+theme or shell, never the generated SVGs or `layouts.json`.
+
+```bash
+uv run python3 scripts/layout_build.py templates/layouts/<template>           # build content/
+uv run python3 scripts/layout_build.py templates/layouts/<template> --check   # is content/ fresh? writes nothing
+uv run python3 scripts/layout_build.py --all --check                          # every template with content_src/
+```
+
+**Theme.** Only `primary`, `ink`, `surface`, `page_bg` and `on_accent` are
+required; every other role is derived from them (`derive_roles` in
+`layout_kit.py`) and can be overridden one by one. Series roles (`levels`,
+`ramp`, `trio_a`, `steps`, `tier_fill`, ...) are lists. A dark template sets
+`surface`/`page_bg` dark and `on_accent` to its background color.
+
+**Body box.** Builders draw on a canonical body area, `(0, 130)`–`(1280, 705)`.
+When a template's header or footer takes a different amount of room, set
+`body_box` and the body is scaled uniformly into it. Capacities stay valid
+because uniform scaling keeps text and boxes in proportion.
+
+**Checks after every build.** Elements that overlap a `reserved` area (logo,
+header, footer) are reported as conflicts; intentional full-width bands are
+built with `bleed=True` and skipped. Color pairs with weak contrast are
+reported as warnings only, so review those pages by eye.
 
 ## Filling a page (Executor, Step 6)
 
@@ -35,6 +68,31 @@ images, and writes nothing if anything fails. Slots left out are removed along
 with their containers (rects marked `data-slot-box`), so a seven-chip row with
 three values keeps three chips. Unfilled image slots stay as placeholders.
 
+## Giving an existing template the layouts
+
+1. **Draft the theme and shell** from the template's `03_content.svg`:
+
+   ```bash
+   uv run python3 scripts/layout_build.py templates/layouts/<template> --init
+   ```
+
+   This is a draft. Check the shell keeps the template's real background,
+   logo and title; set `reserved` to the logo, header and footer areas and
+   `body_box` to the space between them; correct the colors.
+
+2. **Build and look.**
+
+   ```bash
+   uv run python3 scripts/layout_build.py templates/layouts/<template>
+   uv run python3 scripts/layout_stress.py templates/layouts/<template>
+   ```
+
+   Fix every conflict. Then fill a few layouts with real text and look at
+   them, in a dark template especially, for text that loses contrast.
+
+3. **Register it.** Add a Content Layouts section to the template's
+   `design_spec.md` and set `contentLayouts` in `templates/layouts/layouts_index.json`.
+
 ## Absorbing layouts from a reference deck
 
 1. **Look at the pages.** Render them and pick the ones worth keeping:
@@ -51,33 +109,35 @@ three values keeps three chips. Unfilled image slots stay as placeholders.
    groups in 1280x720 canvas px, with rotation, flip, normalized custom paths,
    fills, alpha, text, and font size in pt and px.
 
-3. **Turn each page into a layout.** Add a builder to the template's
-   `content_src/build_layouts.py`:
+3. **Turn each page into a layout.** Add a builder to
+   `templates/content_library/library.py`, plus its `META` entry and a place
+   in `BUILDERS`:
    - keep the structure, and replace every piece of text with a slot;
    - set each text box's width and font size, from which `layout_kit` derives the capacity;
-   - map colors onto the template palette;
+   - use color roles, not hex values; add a role to `layout_kit.derive_roles`
+     only when no existing one fits;
+   - keep the body inside the canonical body area;
    - mark single-slot containers with `box=` so unused items disappear cleanly.
 
-   Then add its metadata, especially `bestFor`, `avoidFor`, `items` and
-   `source`, and regenerate:
-
-   ```bash
-   uv run python3 skills/ppt-master/templates/layouts/<template>/content_src/build_layouts.py
-   ```
-
+   Fill in `bestFor`, `avoidFor`, `items` and `source` in the metadata.
    SVG features PowerPoint cannot take are simplified: no clip paths, masks,
    rotated text, or 3D. Vertical text becomes horizontal.
 
-4. **Register it.** Update the content-layout table in the template's
-   `design_spec.md` and `contentLayouts` in `templates/layouts/layouts_index.json`.
-
-5. **Verify.**
+4. **Rebuild every template** that uses the library, and register the new
+   count in each `design_spec.md` and `layouts_index.json`:
 
    ```bash
-   uv run python3 scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
+   uv run python3 scripts/layout_build.py --all
    ```
 
-   This checks the SVGs against `layouts.json`, fills every slot to capacity,
+5. **Verify** each template:
+
+   ```bash
+   uv run python3 scripts/layout_stress.py templates/layouts/<template>
+   ```
+
+   This checks the SVGs against `layouts.json`, confirms `content/` is a
+   fresh build with no reserved-area conflicts, fills every slot to capacity,
    and runs `svg_quality_checker.py` and `build_pptx.py --verify`. Then fill
    the new layout with the reference page's real text using `layout_fill.py`,
    and compare it with the original in PowerPoint before committing.
@@ -86,10 +146,8 @@ Keep a page only if its structure recurs or says something the existing
 layouts cannot. A near-duplicate of an existing layout makes the Strategist's
 choice harder without adding range.
 
-## Another brand
+## A new brand
 
-Use `pptx_to_template.py` for the new brand's backgrounds and logos, create
-`templates/layouts/<brand>/content_src/build_layouts.py` with that brand's
-`Shell` (background images, title position, palette), and copy over the
-builders you want to reuse. The structure carries over; only the colors and
-shell change.
+Run `pptx_to_template.py` for the brand's backgrounds and logos, then follow
+"Giving an existing template the layouts" above. The structure carries over
+unchanged; only the theme and shell are new.

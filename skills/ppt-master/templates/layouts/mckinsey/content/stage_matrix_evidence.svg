@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: stage_matrix_evidence. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <!-- stage 1 -->
+  <rect x="63" y="148" width="493" height="138" rx="12" fill="#005587" fill-opacity="0.12"/>
+  <rect x="33" y="187" width="60" height="60" rx="10" fill="#005587"/>
+  <text x="63" y="224" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STAGE1_LABEL}}</text>
+  <rect data-slot-box="STAGE1_CHIP1" x="110" y="170" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="120" y="196" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE1_CHIP1}}</text>
+  <rect data-slot-box="STAGE1_CHIP2" x="331" y="170" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="341" y="196" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE1_CHIP2}}</text>
+  <rect data-slot-box="STAGE1_CHIP3" x="110" y="224" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="120" y="250" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE1_CHIP3}}</text>
+  <rect data-slot-box="STAGE1_CHIP4" x="331" y="224" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="341" y="250" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE1_CHIP4}}</text>
+  <!-- stage 2 -->
+  <rect x="63" y="300" width="493" height="138" rx="12" fill="#005587" fill-opacity="0.12"/>
+  <rect x="33" y="339" width="60" height="60" rx="10" fill="#005587"/>
+  <text x="63" y="376" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STAGE2_LABEL}}</text>
+  <rect data-slot-box="STAGE2_CHIP1" x="110" y="322" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="120" y="348" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE2_CHIP1}}</text>
+  <rect data-slot-box="STAGE2_CHIP2" x="331" y="322" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="341" y="348" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE2_CHIP2}}</text>
+  <rect data-slot-box="STAGE2_CHIP3" x="110" y="376" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="120" y="402" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE2_CHIP3}}</text>
+  <rect data-slot-box="STAGE2_CHIP4" x="331" y="376" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="341" y="402" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE2_CHIP4}}</text>
+  <!-- stage 3 -->
+  <rect x="63" y="452" width="493" height="138" rx="12" fill="#005587" fill-opacity="0.12"/>
+  <rect x="33" y="491" width="60" height="60" rx="10" fill="#005587"/>
+  <text x="63" y="528" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STAGE3_LABEL}}</text>
+  <rect data-slot-box="STAGE3_CHIP1" x="110" y="474" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="120" y="500" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE3_CHIP1}}</text>
+  <rect data-slot-box="STAGE3_CHIP2" x="331" y="474" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="341" y="500" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE3_CHIP2}}</text>
+  <rect data-slot-box="STAGE3_CHIP3" x="110" y="528" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="120" y="554" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE3_CHIP3}}</text>
+  <rect data-slot-box="STAGE3_CHIP4" x="331" y="528" width="209" height="41" rx="6" fill="#FFFFFF"/>
+  <text x="341" y="554" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE3_CHIP4}}</text>
+  <polygon points="39,272 57,272 57,294 64,294 48,315 32,294 39,294" fill="#D6E4EC"/>
+  <polygon points="39,424 57,424 57,446 64,446 48,467 32,446 39,446" fill="#D6E4EC"/>
+  <polygon points="39,566 57,566 57,588 64,588 48,609 32,588 39,588" fill="#D6E4EC"/>
+  <!-- final stage: single wide chip -->
+  <rect x="63" y="604" width="493" height="91" rx="12" fill="#005587" fill-opacity="0.12"/>
+  <rect x="33" y="619" width="60" height="60" rx="10" fill="#005587"/>
+  <text x="63" y="656" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STAGE4_LABEL}}</text>
+  <rect x="110" y="617" width="431" height="62" rx="6" fill="#FFFFFF"/>
+  <text x="122" y="643" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE4_L1}}</text>
+  <text x="122" y="666" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE4_L2}}</text>
+  <!-- evidence panel -->
+  <rect x="602" y="148" width="629" height="376" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1"/>
+  <rect data-image-slot="SCREENSHOT" x="614" y="161" width="607" height="317" rx="6" fill="#F2F7F9" stroke="#ABB2B9" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="616" y="507" font-family="Microsoft YaHei, Arial, sans-serif" font-size="14" fill="#7F8C8D">{{CAPTION}}</text>
+  <!-- key results callout -->
+  <rect x="602" y="554" width="629" height="140" rx="12" fill="#005587"/>
+  <text x="640" y="618" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{CALLOUT_LABEL_L1}}</text>
+  <text x="640" y="646" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{CALLOUT_LABEL_L2}}</text>
+  <rect x="680" y="576" width="4" height="40" rx="2" fill="#FFFFFF"/>
+  <rect x="680" y="640" width="4" height="40" rx="2" fill="#FFFFFF"/>
+  <text x="696" y="590" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">{{RESULT1_TITLE}}</text>
+  <text x="696" y="613" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#FFFFFF">{{RESULT1_BODY}}</text>
+  <text x="696" y="654" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">{{RESULT2_TITLE}}</text>
+  <text x="696" y="677" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#FFFFFF">{{RESULT2_BODY}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

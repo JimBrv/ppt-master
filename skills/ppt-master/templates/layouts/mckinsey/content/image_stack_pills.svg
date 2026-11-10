@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: image_stack_pills. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <circle cx="232" cy="427" r="198" fill="#D6E4EC" fill-opacity="0.7"/>
+  <circle cx="232" cy="427" r="166" fill="#FFFFFF"/>
+  <rect data-image-slot="HERO" x="80" y="275" width="305" height="305" rx="6" fill="#F2F7F9" stroke="#ABB2B9" stroke-width="1" stroke-dasharray="6,4"/>
+  <!-- pill 1 -->
+  <rect x="379" y="150" width="861" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
+  <text x="401" y="180" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#005587">{{P1_TAG}}</text>
+  <text x="544" y="179" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P1_BODY}}</text>
+  <!-- pill 2 -->
+  <rect x="417" y="219" width="823" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
+  <text x="439" y="249" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#0076A8">{{P2_TAG}}</text>
+  <text x="582" y="248" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P2_BODY}}</text>
+  <!-- pill 3 -->
+  <rect x="454" y="288" width="786" height="45" rx="22" fill="#27AE60" fill-opacity="0.14"/>
+  <text x="476" y="318" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#27AE60">{{P3_TAG}}</text>
+  <text x="619" y="317" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P3_BODY}}</text>
+  <!-- pill 4 -->
+  <rect x="471" y="357" width="769" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
+  <text x="493" y="387" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#005587">{{P4_TAG}}</text>
+  <text x="636" y="386" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P4_BODY}}</text>
+  <!-- pill 5 -->
+  <rect x="471" y="426" width="769" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
+  <text x="493" y="456" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#0076A8">{{P5_TAG}}</text>
+  <text x="636" y="455" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P5_BODY}}</text>
+  <!-- pill 6 -->
+  <rect x="454" y="495" width="786" height="45" rx="22" fill="#27AE60" fill-opacity="0.14"/>
+  <text x="476" y="525" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#27AE60">{{P6_TAG}}</text>
+  <text x="619" y="524" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P6_BODY}}</text>
+  <!-- pill 7 -->
+  <rect x="417" y="564" width="823" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
+  <text x="439" y="594" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#005587">{{P7_TAG}}</text>
+  <text x="582" y="593" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P7_BODY}}</text>
+  <!-- pill 8 -->
+  <rect x="379" y="633" width="861" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
+  <text x="401" y="663" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#0076A8">{{P8_TAG}}</text>
+  <text x="544" y="662" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P8_BODY}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

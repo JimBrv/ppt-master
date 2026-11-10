@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720" width="1280" height="720">
+  <!-- Pixel Retro content layout: funnel_layers. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <filter id="glowGreen" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="#0D1117"/>
+  <rect x="0" y="0" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <text x="60" y="70" font-family="Consolas, Microsoft YaHei, monospace" font-size="36" font-weight="bold" fill="#39FF14" filter="url(#glowGreen)">{{PAGE_TITLE}}</text>
+  <rect x="60" y="100" width="200" height="2" fill="#30363D"/>
+  <rect x="0" y="716" width="1280" height="4" fill="#39FF14" fill-opacity="0.6"/>
+  <g transform="translate(10.02,-15.97) scale(0.9843)">
+  <!-- layer 1 band -->
+  <rect x="171" y="195" width="977" height="90" rx="4" fill="#39FF14" fill-opacity="0.16"/>
+  <rect x="1143" y="195" width="5" height="90" rx="2" fill="#39FF14"/>
+  <!-- layer 2 band -->
+  <rect x="171" y="295" width="977" height="94" rx="4" fill="#00D4FF" fill-opacity="0.16"/>
+  <rect x="1143" y="295" width="5" height="94" rx="2" fill="#00D4FF"/>
+  <!-- layer 3 band -->
+  <rect x="171" y="399" width="977" height="87" rx="4" fill="#1F6FEB" fill-opacity="0.16"/>
+  <rect x="1143" y="399" width="5" height="87" rx="2" fill="#1F6FEB"/>
+  <!-- layer 4 band -->
+  <rect x="171" y="497" width="977" height="79" rx="4" fill="#FF2E97" fill-opacity="0.16"/>
+  <rect x="1143" y="497" width="5" height="79" rx="2" fill="#FF2E97"/>
+  <!-- funnel, drawn bottom-up so upper layers overlap lower ones -->
+  <path d="M512,473 L666,473 L645,567 Q589,587 533,567 Z" fill="#FF2E97"/>
+  <path d="M480,378 L698,378 L668,473 Q589,493 510,473 Z" fill="#1F6FEB"/>
+  <path d="M437,287 L741,287 L699,379 Q589,399 479,379 Z" fill="#00D4FF"/>
+  <path d="M379,194 L799,194 L740,288 Q589,308 438,288 Z" fill="#39FF14"/>
+  <ellipse cx="589" cy="194" rx="209" ry="15" fill="#30363D"/>
+  <circle cx="589" cy="256" r="26" fill="none" stroke="#0D1117" stroke-width="1.5"/>
+  <use data-icon="{{L1_ICON}}" x="575" y="242" width="28" height="28" fill="#0D1117"/>
+  <text x="181" y="248" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#E6EDF3">{{L1_LABEL}}</text>
+  <text x="1135" y="235" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L1_D1}}</text>
+  <text x="1135" y="259" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L1_D2}}</text>
+  <circle cx="589" cy="348" r="26" fill="none" stroke="#0D1117" stroke-width="1.5"/>
+  <use data-icon="{{L2_ICON}}" x="575" y="334" width="28" height="28" fill="#0D1117"/>
+  <text x="181" y="350" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#E6EDF3">{{L2_LABEL}}</text>
+  <text x="1135" y="337" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L2_D1}}</text>
+  <text x="1135" y="361" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L2_D2}}</text>
+  <circle cx="589" cy="440" r="26" fill="none" stroke="#0D1117" stroke-width="1.5"/>
+  <use data-icon="{{L3_ICON}}" x="575" y="426" width="28" height="28" fill="#0D1117"/>
+  <text x="181" y="450" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#E6EDF3">{{L3_LABEL}}</text>
+  <text x="1135" y="437" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L3_D1}}</text>
+  <text x="1135" y="461" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L3_D2}}</text>
+  <circle cx="589" cy="533" r="26" fill="none" stroke="#0D1117" stroke-width="1.5"/>
+  <use data-icon="{{L4_ICON}}" x="575" y="519" width="28" height="28" fill="#0D1117"/>
+  <text x="181" y="544" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#E6EDF3">{{L4_LABEL}}</text>
+  <text x="1135" y="531" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L4_D1}}</text>
+  <text x="1135" y="555" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" text-anchor="end" fill="#E6EDF3">{{L4_D2}}</text>
+  <text x="643" y="664" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#39FF14">{{CONCLUSION}}</text>
+  </g>
+  <text x="60" y="698" font-family="Consolas, monospace" font-size="14" fill="#8B949E">{{PAGE_NUM}}</text>
+</svg>

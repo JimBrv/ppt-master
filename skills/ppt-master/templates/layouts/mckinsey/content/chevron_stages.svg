@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: chevron_stages. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <g transform="translate(38.96,-30.09) scale(0.9391)">
+  <polygon points="0,150 313,150 335,176 313,202 0,202" fill="#D4880F"/>
+  <text x="160" y="184" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STEP0_LABEL}}</text>
+  <polygon points="338,150 628,150 650,176 628,202 338,202 360,176" fill="#27AE60"/>
+  <text x="494" y="184" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STEP1_LABEL}}</text>
+  <polygon points="652,150 942,150 964,176 942,202 652,202 674,176" fill="#0076A8"/>
+  <text x="808" y="184" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STEP2_LABEL}}</text>
+  <polygon points="967,150 1257,150 1279,176 1257,202 967,202 989,176" fill="#005587"/>
+  <text x="1123" y="184" font-family="Microsoft YaHei, Arial, sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STEP3_LABEL}}</text>
+  <path d="M0,524 Q0,496 28,496 L1252,496 Q1280,496 1280,524 L1280,720 L0,720 Z" fill="#004B77"/>
+  <!-- column 1 -->
+  <rect x="71" y="226" width="358" height="246" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="99" y="290" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{COL1_NAME}}</text>
+  <text x="99" y="392" font-family="Microsoft YaHei, Arial, sans-serif" font-size="48" font-weight="bold" font-style="italic" fill="#005587">{{COL1_KEYWORD}}</text>
+  <use data-icon="{{COL1_ICON}}" x="359" y="410" width="48" height="48" fill="#005587"/>
+  <text x="250" y="548" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL1_TITLE}}</text>
+  <text x="250" y="587" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL1_L1}}</text>
+  <text x="250" y="614" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL1_L2}}</text>
+  <text x="250" y="641" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL1_L3}}</text>
+  <!-- column 2 -->
+  <rect x="462" y="226" width="358" height="246" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="490" y="290" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{COL2_NAME}}</text>
+  <text x="490" y="392" font-family="Microsoft YaHei, Arial, sans-serif" font-size="48" font-weight="bold" font-style="italic" fill="#27AE60">{{COL2_KEYWORD}}</text>
+  <use data-icon="{{COL2_ICON}}" x="750" y="410" width="48" height="48" fill="#27AE60"/>
+  <text x="641" y="548" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL2_TITLE}}</text>
+  <text x="641" y="587" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL2_L1}}</text>
+  <text x="641" y="614" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL2_L2}}</text>
+  <text x="641" y="641" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL2_L3}}</text>
+  <!-- column 3 -->
+  <rect x="853" y="226" width="358" height="246" rx="16" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="881" y="290" font-family="Microsoft YaHei, Arial, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{COL3_NAME}}</text>
+  <text x="881" y="392" font-family="Microsoft YaHei, Arial, sans-serif" font-size="48" font-weight="bold" font-style="italic" fill="#0076A8">{{COL3_KEYWORD}}</text>
+  <use data-icon="{{COL3_ICON}}" x="1141" y="410" width="48" height="48" fill="#0076A8"/>
+  <text x="1032" y="548" font-family="Microsoft YaHei, Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL3_TITLE}}</text>
+  <text x="1032" y="587" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL3_L1}}</text>
+  <text x="1032" y="614" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL3_L2}}</text>
+  <text x="1032" y="641" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FFFFFF">{{COL3_L3}}</text>
+  </g>
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

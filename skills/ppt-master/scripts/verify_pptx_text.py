@@ -42,6 +42,16 @@ def svg_text_runs(svg: Path):
             yield s
 
 
+def iter_shapes(shapes):
+    """Every shape on a slide, including those inside groups (an SVG <g>
+    with a transform exports as a group)."""
+    for sh in shapes:
+        if sh.shape_type == 6:  # MSO_SHAPE_TYPE.GROUP
+            yield from iter_shapes(sh.shapes)
+        else:
+            yield sh
+
+
 def verify_via_pptx(deck: Path, svgs) -> int:
     """Fallback verification with no LibreOffice: read the deck's own text
     frames via python-pptx and confirm every SVG string is present.
@@ -70,7 +80,7 @@ def verify_via_pptx(deck: Path, svgs) -> int:
             bad += 1
             continue
         present = {flatten(sh.text_frame.text)
-                   for sh in slides[i].shapes
+                   for sh in iter_shapes(slides[i].shapes)
                    if sh.has_text_frame and sh.text_frame.text.strip()}
         blob = ''.join(present)
         for s in svg_text_runs(svg):
