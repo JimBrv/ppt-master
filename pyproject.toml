@@ -1,7 +1,7 @@
 [project]
 name = "ppt-master"
 version = "0.1.0"
-description = "Add your description here"
+description = "AI-driven presentation generation: source documents to natively editable PPTX"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [

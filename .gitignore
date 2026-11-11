@@ -165,11 +165,11 @@ yarn.lock
 TODO.md
 PERSONAL_NOTES.md
 
-# Projects directory - Work-in-progress projects (not version controlled)
-# Completed projects should be moved to examples/
-# Use cloud sync (iCloud/Dropbox) for backup and multi-device access
-projects/*
-exampleDoc/*
+# Workspace - the user's own work, never version-controlled: projects in
+# progress, the archive and raw source documents (they may be confidential).
+# Back it up with cloud sync (iCloud/Dropbox) if needed.
+workspace/*
+!workspace/README.md
 .venv/*
 .env
 # Quarantine for files awaiting manual deletion

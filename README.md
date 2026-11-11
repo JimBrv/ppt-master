@@ -84,13 +84,12 @@ Output:
 | Document | Description |
 |----------|-------------|
 | 🧭 [AGENTS.md](./AGENTS.md) | Repository-level entry for general AI agents, quick-reference commands |
-| 📖 [SKILL.md](./skills/ppt-master/SKILL.md) | Complete workflow rules and role definitions |
-| 📐 [Canvas Formats](./skills/ppt-master/references/canvas-formats.md) | PPT / Xiaohongshu / WeChat Moments / poster and 10+ formats |
-| 🛠️ [Scripts README](./skills/ppt-master/scripts/README.md) | Script index and high-frequency commands |
-| 📊 [Chart Templates](./skills/ppt-master/templates/charts/) | Standardized chart template library |
-| 🗂️ [Layout Templates](./skills/ppt-master/templates/layouts/README.md) | Page templates (21) and which ones ship content layouts |
-| 📐 [Content Layouts](./skills/ppt-master/scripts/docs/layouts.md) | Fill, build, absorb and stress-test body-page layouts |
-| 💼 [Examples](./examples/README.md) | 15 example projects, 229 SVG pages |
+| 📖 [SKILL.md](./SKILL.md) | Complete workflow rules and role definitions |
+| 📐 [Canvas Formats](./references/canvas-formats.md) | PPT / Xiaohongshu / WeChat Moments / poster and 10+ formats |
+| 🛠️ [Scripts README](./scripts/README.md) | Script index and high-frequency commands |
+| 📊 [Chart Templates](./templates/charts/) | Standardized chart template library |
+| 🗂️ [Layout Templates](./templates/layouts/README.md) | Page templates (21) and which ones ship content layouts |
+| 📐 [Content Layouts](./scripts/docs/layouts.md) | Fill, build, absorb and stress-test body-page layouts |
 
 ---
 
@@ -125,7 +124,7 @@ uv sync
 
 > 💡 All scripts are run via **`uv run python3`** to ensure dependency isolation:
 > ```bash
-> uv run python3 skills/ppt-master/scripts/pdf_to_md.py input.pdf
+> uv run python3 scripts/pdf_to_md.py input.pdf
 > ```
 
 #### Pandoc (Optional)
@@ -172,7 +171,7 @@ AI: Sure. I'll read the file first, then run Strategist eight confirmations:
    ...
 ```
 
-> 💡 **AI lost context?** Ask it to read `skills/ppt-master/SKILL.md` first; use `AGENTS.md` as the repository-level entry.
+> 💡 **AI lost context?** Ask it to read `SKILL.md` first; use `AGENTS.md` as the repository-level entry.
 
 ---
 
@@ -180,43 +179,43 @@ AI: Sure. I'll read the file first, then run Strategist eight confirmations:
 
 ```bash
 # ── Project Setup ──────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/project_manager.py init <project_name> --format ppt169
-uv run python3 skills/ppt-master/scripts/project_manager.py import-sources <project_path> <files...>
+uv run python3 scripts/project_manager.py init <project_name> --format ppt169
+uv run python3 scripts/project_manager.py import-sources <project_path> <files...>
 
 # ── Source Conversion ───────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/pdf_to_md.py <PDF_file>
-uv run python3 skills/ppt-master/scripts/doc_to_md.py <DOCX_or_other>   # requires pandoc
-uv run python3 skills/ppt-master/scripts/excel_to_md.py <XLSX_or_XLSM>  # requires openpyxl pillow
-uv run python3 skills/ppt-master/scripts/web_to_md.py <URL>
-node skills/ppt-master/scripts/web_to_md.cjs <URL>
+uv run python3 scripts/pdf_to_md.py <PDF_file>
+uv run python3 scripts/doc_to_md.py <DOCX_or_other>   # requires pandoc
+uv run python3 scripts/excel_to_md.py <XLSX_or_XLSM>  # requires openpyxl pillow
+uv run python3 scripts/web_to_md.py <URL>
+node scripts/web_to_md.cjs <URL>
 
 # ── Image Tools ─────────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 -o <project>/images
-uv run python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
+uv run python3 scripts/image_gen.py "prompt" --aspect_ratio 16:9 -o <project>/images
+uv run python3 scripts/analyze_images.py <project_path>/images
 
 # ── Templates & Content Layouts ─────────────────────────────────
-uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <project_path>
-uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> --slots <layout_id>
-uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
-uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
-uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]
-uv run python3 skills/ppt-master/scripts/render_pages.py <project_path> [--page 03] [--sheet]
-uv run python3 skills/ppt-master/scripts/free_page_check.py <project_path>
-uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
-uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
+uv run python3 scripts/pptx_to_template.py <template.pptx> <project_path>
+uv run python3 scripts/layout_fill.py <project_path> --slots <layout_id>
+uv run python3 scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
+uv run python3 scripts/layout_build.py templates/layouts/<template> [--check|--init]
+uv run python3 scripts/layout_plan_check.py <project_path> [--output]
+uv run python3 scripts/render_pages.py <project_path> [--page 03] [--sheet]
+uv run python3 scripts/free_page_check.py <project_path>
+uv run python3 scripts/layout_stress.py templates/layouts/<template>
+uv run python3 scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 
 # ── Post-processing & Export (recommended: one fail-fast run) ───
-uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+uv run python3 scripts/build_pptx.py <project_path> --verify
 # Manual form — run one at a time, confirm each before the next:
 #   total_md_split.py <project_path> → finalize_svg.py <project_path> → svg_to_pptx.py <project_path> -s final
 # Re-process one edited page:
-uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path> --page <page_name>
+uv run python3 scripts/finalize_svg.py <project_path> --page <page_name>
 
 # ── Live Preview ────────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
+uv run python3 scripts/preview.py <project_path> --serve
 
 # ── SVG Quality Check ───────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
+uv run python3 scripts/svg_quality_checker.py <project_path>
 ```
 
 ---
@@ -224,36 +223,34 @@ uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
 ## 📁 Project Structure
 
 ```text
-ppt-master/
-├── skills/
-│   └── ppt-master/                 # Main skill source
-│       ├── SKILL.md                #   Workflow entry point
-│       ├── workflows/              #   Workflow files
-│       ├── references/             #   Role definitions & specs
-│       ├── scripts/                #   Tool scripts
-│       │   ├── pdf_to_md.py        #     PDF → Markdown (black-bg fix)
-│       │   ├── doc_to_md.py        #     DOCX/EPUB → Markdown
-│       │   ├── excel_to_md.py      #     Excel → Markdown (NEW)
-│       │   ├── web_to_md.py        #     URL → Markdown
-│       │   ├── file_write.py       #     Safe I/O writer (PTY hang fix)
-│       │   ├── project_manager.py  #     Project management
-│       │   ├── finalize_svg.py     #     SVG post-processing
-│       │   ├── svg_to_pptx.py      #     SVG → PPTX export
-│       │   ├── build_pptx.py       #     One-step export + text verification
-│       │   ├── preview.py          #     Live preview
-│       │   ├── pptx_to_template.py #     User .pptx → template
-│       │   ├── layout_*.py         #     Content layouts: build / fill / stress
-│       │   └── image_gen.py        #     AI image generation
-│       └── templates/
-│           ├── layouts/            #     21 page templates (奇安信 default); content/ = body layouts
-│           ├── content_library/    #     Shared library of the 22 body layouts
-│           ├── charts/             #     Chart templates
-│           └── icons/              #     Vector icons
-├── examples/                       # Example projects (15 projects, 229 pages)
-├── projects/                       # User project workspace
-├── AGENTS.md                       # General AI agent entry
-├── CLAUDE.md                       # Claude Code dedicated entry
-└── GEMINI.md                       # Gemini entry (imports AGENTS.md)
+ppt-master/                         # Repository root = skill root
+├── SKILL.md                        # Workflow entry point
+├── references/                     # Role definitions & specs
+├── workflows/                      # Workflow files
+├── scripts/                        # Tool scripts (topic docs in scripts/docs/)
+│   ├── pdf_to_md.py / doc_to_md.py / excel_to_md.py / web_to_md.py   # Sources → Markdown
+│   ├── project_manager.py          #   Project management
+│   ├── layout_*.py                 #   Content layouts: plan check / build / fill / stress
+│   ├── free_page_check.py          #   Free-design pages: checked by result
+│   ├── render_pages.py             #   Render pages to PNG for self-review
+│   ├── finalize_svg.py             #   SVG post-processing
+│   ├── svg_to_pptx.py              #   SVG → PPTX export
+│   ├── build_pptx.py               #   One-step export + text verification
+│   ├── preview.py                  #   Live preview
+│   ├── pptx_to_template.py         #   User .pptx → template
+│   └── image_gen.py                #   AI image generation
+├── templates/
+│   ├── layouts/                    #   Page templates (奇安信 default); content/ = body layouts
+│   ├── content_library/            #   Shared library of the 22 body layouts
+│   ├── charts/                     #   Chart templates
+│   └── icons/                      #   Vector icons
+├── workspace/                      # Your work, never in git
+│   ├── projects/                   #   Decks in progress
+│   ├── archive/                    #   Finished decks and experiment runs
+│   └── inbox/                      #   Raw source documents
+├── AGENTS.md                       # Instructions for every agent (single source)
+├── CLAUDE.md                       # Imports AGENTS.md
+└── GEMINI.md                       # Imports AGENTS.md
 ```
 
 ---
@@ -321,15 +318,15 @@ Charts are rendered as custom SVG graphics converted to native PowerPoint shapes
 uv pip install openpyxl pillow
 
 # Basic usage
-uv run python3 skills/ppt-master/scripts/excel_to_md.py data.xlsx
-uv run python3 skills/ppt-master/scripts/excel_to_md.py report.xlsm -o output.md
+uv run python3 scripts/excel_to_md.py data.xlsx
+uv run python3 scripts/excel_to_md.py report.xlsm -o output.md
 ```
 
 Features: multi-sheet sections, merged-cell annotations, hyperlinks, comment extraction, embedded images (white background), named ranges, date formatting.
 
 </details>
 
-> 📖 For more questions, see [SKILL.md](./skills/ppt-master/SKILL.md) and [AGENTS.md](./AGENTS.md)
+> 📖 For more questions, see [SKILL.md](./SKILL.md) and [AGENTS.md](./AGENTS.md)
 
 ---
 

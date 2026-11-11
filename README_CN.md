@@ -84,13 +84,12 @@
 | 文档 | 说明 |
 |------|------|
 | 🧭 [AGENTS.md](./AGENTS.md) | 通用 AI 代理入口，工具命令速查 |
-| 📖 [SKILL.md](./skills/ppt-master/SKILL.md) | 完整工作流规范与角色定义 |
-| 📐 [Canvas Formats](./skills/ppt-master/references/canvas-formats.md) | PPT/小红书/朋友圈/海报等 10+ 格式 |
-| 🛠️ [Scripts README](./skills/ppt-master/scripts/README.md) | 工具脚本索引与高频命令 |
-| 📊 [Chart Templates](./skills/ppt-master/templates/charts/) | 标准化图表模板库 |
-| 🗂️ [Layout Templates](./skills/ppt-master/templates/layouts/README.md) | 21 套页面模板，以及哪些配有正文版式 |
-| 📐 [Content Layouts](./skills/ppt-master/scripts/docs/layouts.md) | 正文版式的填充、生成、吸收与压测 |
-| 💼 [Examples](./examples/README.md) | 15 个示例项目，229 页 SVG 样例 |
+| 📖 [SKILL.md](./SKILL.md) | 完整工作流规范与角色定义 |
+| 📐 [Canvas Formats](./references/canvas-formats.md) | PPT/小红书/朋友圈/海报等 10+ 格式 |
+| 🛠️ [Scripts README](./scripts/README.md) | 工具脚本索引与高频命令 |
+| 📊 [Chart Templates](./templates/charts/) | 标准化图表模板库 |
+| 🗂️ [Layout Templates](./templates/layouts/README.md) | 21 套页面模板，以及哪些配有正文版式 |
+| 📐 [Content Layouts](./scripts/docs/layouts.md) | 正文版式的填充、生成、吸收与压测 |
 
 ---
 
@@ -125,7 +124,7 @@ uv sync
 
 > 💡 所有脚本**统一使用 `uv run python3`** 执行，确保依赖隔离：
 > ```bash
-> uv run python3 skills/ppt-master/scripts/pdf_to_md.py input.pdf
+> uv run python3 scripts/pdf_to_md.py input.pdf
 > ```
 
 #### Pandoc（可选）
@@ -171,7 +170,7 @@ AI：好的，我先读取文件，然后进行策略师八大确认：
    ...
 ```
 
-> 💡 **AI 丢失上下文？** 让 AI 先读取 `skills/ppt-master/SKILL.md`；使用 `AGENTS.md` 作为仓库级入口。
+> 💡 **AI 丢失上下文？** 让 AI 先读取 `SKILL.md`；使用 `AGENTS.md` 作为仓库级入口。
 
 ---
 
@@ -179,43 +178,43 @@ AI：好的，我先读取文件，然后进行策略师八大确认：
 
 ```bash
 # ── 项目初始化 ──────────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/project_manager.py init <project_name> --format ppt169
-uv run python3 skills/ppt-master/scripts/project_manager.py import-sources <project_path> <files...>
+uv run python3 scripts/project_manager.py init <project_name> --format ppt169
+uv run python3 scripts/project_manager.py import-sources <project_path> <files...>
 
 # ── 内容转换 ────────────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/pdf_to_md.py <PDF_file>
-uv run python3 skills/ppt-master/scripts/doc_to_md.py <DOCX_or_other>   # 需要 pandoc
-uv run python3 skills/ppt-master/scripts/excel_to_md.py <XLSX_or_XLSM>  # 需要 openpyxl pillow
-uv run python3 skills/ppt-master/scripts/web_to_md.py <URL>
-node skills/ppt-master/scripts/web_to_md.cjs <URL>
+uv run python3 scripts/pdf_to_md.py <PDF_file>
+uv run python3 scripts/doc_to_md.py <DOCX_or_other>   # 需要 pandoc
+uv run python3 scripts/excel_to_md.py <XLSX_or_XLSM>  # 需要 openpyxl pillow
+uv run python3 scripts/web_to_md.py <URL>
+node scripts/web_to_md.cjs <URL>
 
 # ── 图像工具 ────────────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/image_gen.py "prompt" --aspect_ratio 16:9 -o <project>/images
-uv run python3 skills/ppt-master/scripts/analyze_images.py <project_path>/images
+uv run python3 scripts/image_gen.py "prompt" --aspect_ratio 16:9 -o <project>/images
+uv run python3 scripts/analyze_images.py <project_path>/images
 
 # ── 模板与正文版式 ──────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/pptx_to_template.py <template.pptx> <project_path>
-uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> --slots <layout_id>
-uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
-uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
-uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]
-uv run python3 skills/ppt-master/scripts/render_pages.py <project_path> [--page 03] [--sheet]
-uv run python3 skills/ppt-master/scripts/free_page_check.py <project_path>
-uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
-uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
+uv run python3 scripts/pptx_to_template.py <template.pptx> <project_path>
+uv run python3 scripts/layout_fill.py <project_path> --slots <layout_id>
+uv run python3 scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
+uv run python3 scripts/layout_build.py templates/layouts/<template> [--check|--init]
+uv run python3 scripts/layout_plan_check.py <project_path> [--output]
+uv run python3 scripts/render_pages.py <project_path> [--page 03] [--sheet]
+uv run python3 scripts/free_page_check.py <project_path>
+uv run python3 scripts/layout_stress.py templates/layouts/<template>
+uv run python3 scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 
 # ── 后处理与导出（推荐：一次执行，出错即停）──────────────────────
-uv run python3 skills/ppt-master/scripts/build_pptx.py <project_path> --verify
+uv run python3 scripts/build_pptx.py <project_path> --verify
 # 手动方式（逐条执行，确认无误再下一步）：
 #   total_md_split.py <project_path> → finalize_svg.py <project_path> → svg_to_pptx.py <project_path> -s final
 # 只重新处理改过的一页：
-uv run python3 skills/ppt-master/scripts/finalize_svg.py <project_path> --page <page_name>
+uv run python3 scripts/finalize_svg.py <project_path> --page <page_name>
 
 # ── 实时预览 ────────────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/preview.py <project_path> --serve
+uv run python3 scripts/preview.py <project_path> --serve
 
 # ── SVG 质量检查 ─────────────────────────────────────────────────
-uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
+uv run python3 scripts/svg_quality_checker.py <project_path>
 ```
 
 ---
@@ -223,36 +222,34 @@ uv run python3 skills/ppt-master/scripts/svg_quality_checker.py <project_path>
 ## 📁 项目结构
 
 ```text
-ppt-master/
-├── skills/
-│   └── ppt-master/                 # 主 Skill 源码
-│       ├── SKILL.md                #   工作流主入口
-│       ├── workflows/              #   工作流文件
-│       ├── references/             #   角色定义与技术规范
-│       ├── scripts/                #   工具脚本
-│       │   ├── pdf_to_md.py        #     PDF → Markdown（修复黑底 Bug）
-│       │   ├── doc_to_md.py        #     DOCX/EPUB → Markdown
-│       │   ├── excel_to_md.py      #     Excel → Markdown（NEW）
-│       │   ├── web_to_md.py        #     URL → Markdown
-│       │   ├── file_write.py       #     I/O 安全写入（修复 PTY 挂起）
-│       │   ├── project_manager.py  #     项目管理
-│       │   ├── finalize_svg.py     #     SVG 后处理
-│       │   ├── svg_to_pptx.py      #     SVG → PPTX 导出
-│       │   ├── build_pptx.py       #     一步导出 + 文字校验
-│       │   ├── preview.py          #     实时预览
-│       │   ├── pptx_to_template.py #     用户 .pptx → 模板
-│       │   ├── layout_*.py         #     正文版式：生成 / 填充 / 压测
-│       │   └── image_gen.py        #     AI 图像生成
-│       └── templates/
-│           ├── layouts/            #     21 套页面模板（默认奇安信）；content/ 为正文版式
-│           ├── content_library/    #     22 种正文版式的共享库
-│           ├── charts/             #     图表模板
-│           └── icons/              #     矢量图标
-├── examples/                       # 示例项目（15 个，229 页）
-├── projects/                       # 用户项目工作区
-├── AGENTS.md                       # 通用 AI 代理入口
-├── CLAUDE.md                       # Claude Code 专用入口
-└── GEMINI.md                       # Gemini 入口（引用 AGENTS.md）
+ppt-master/                         # 仓库根 = 技能根
+├── SKILL.md                        # 工作流主入口
+├── references/                     # 角色定义与技术规范
+├── workflows/                      # 工作流文件
+├── scripts/                        # 工具脚本（专题文档在 scripts/docs/）
+│   ├── pdf_to_md.py / doc_to_md.py / excel_to_md.py / web_to_md.py   # 素材 → Markdown
+│   ├── project_manager.py          #   项目管理
+│   ├── layout_*.py                 #   正文版式：规划检查 / 生成 / 填充 / 压测
+│   ├── free_page_check.py          #   自由设计页：按结果检查
+│   ├── render_pages.py             #   页面渲染成图，供模型自查
+│   ├── finalize_svg.py             #   SVG 后处理
+│   ├── svg_to_pptx.py              #   SVG → PPTX 导出
+│   ├── build_pptx.py               #   一步导出 + 文字校验
+│   ├── preview.py                  #   实时预览
+│   ├── pptx_to_template.py         #   用户 .pptx → 模板
+│   └── image_gen.py                #   AI 图像生成
+├── templates/
+│   ├── layouts/                    #   页面模板（默认奇安信）；content/ 为正文版式
+│   ├── content_library/            #   22 种正文版式的共享库
+│   ├── charts/                     #   图表模板
+│   └── icons/                      #   矢量图标
+├── workspace/                      # 你的工作区，不进 git
+│   ├── projects/                   #   进行中的项目
+│   ├── archive/                    #   完成的项目与实验
+│   └── inbox/                      #   原始素材
+├── AGENTS.md                       # 给所有代理的说明（唯一来源）
+├── CLAUDE.md                       # 引用 AGENTS.md
+└── GEMINI.md                       # 引用 AGENTS.md
 ```
 
 ---
@@ -320,15 +317,15 @@ ppt-master/
 uv pip install openpyxl pillow
 
 # 基本用法
-uv run python3 skills/ppt-master/scripts/excel_to_md.py data.xlsx
-uv run python3 skills/ppt-master/scripts/excel_to_md.py report.xlsm -o output.md
+uv run python3 scripts/excel_to_md.py data.xlsx
+uv run python3 scripts/excel_to_md.py report.xlsm -o output.md
 ```
 
 支持特性：多 Sheet 分节、合并单元格注释、超链接、批注提取、嵌入图片（白底）、命名范围、日期格式化。
 
 </details>
 
-> 📖 更多问题参见 [SKILL.md](./skills/ppt-master/SKILL.md) 和 [AGENTS.md](./AGENTS.md)
+> 📖 更多问题参见 [SKILL.md](./SKILL.md) 和 [AGENTS.md](./AGENTS.md)
 
 ---
 
