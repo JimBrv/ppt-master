@@ -11,6 +11,7 @@
 | **Target Audience** | [Filled by Strategist] |
 | **Use Case** | [Filled by Strategist] |
 | **Genre** | [narrative / report / solution — sets the text density per page] |
+| **Layout mode** | [open — design a page freely when that shows the content's own structure better (frontier-tier models) / library — stay with the template's layouts] |
 | **Created Date** | {date_str} |
 
 ---
@@ -211,8 +212,8 @@
 
 - **Message**: [The one sentence the audience should remember, ≤ 30 characters]
 - **Relation**: [One of: statement, metric, contrast, problem_solution, parallel, sequence, escalation, layering, convergence, cycle, hub, classification, chain_core, evidence, timeline, matrix]
-- **Layout**: [Layout ID from `templates/content/layouts.json` that shows this relation; otherwise `free: <description>`]
-- **Claim check**: [How this content makes the layout's `claim` true — name which content plays which role; omit for free layouts]
+- **Layout**: [Layout ID from `templates/content/layouts.json` that shows this relation, or `free: <one line describing the design>` when the content has its own count, grouping, links or metaphor (open mode)]
+- **Claim check**: [Which content plays which part — against the layout's `claim`, or, on a free page, against the claim your own design makes]
 - **Evidence**: [One or more verbatim quotes from sources/, in "…" or 「…」, ≥ 8 characters each]
 - **Series**: [Parallel pages that share one layout, e.g. `risks 2/5`; required when titles are numbered like 风险一 / 风险二]
 - **Title**: [Page title]
@@ -264,7 +265,8 @@ Generate corresponding speaker note files for each page, saved to the `notes/` d
 ### Pre-generation
 
 - [ ] Content fits page capacity
-- [ ] Every body page has Message, Relation, Layout (and Claim check for layout IDs)
+- [ ] Every body page has Message, Relation, Layout and Claim check (free pages state their own claim)
+- [ ] No page merges, drops, regroups or pads the source's items to fit a layout
 - [ ] `layout_plan_check.py` passes; density and rhythm hints reviewed
 - [ ] Colors used semantically
 

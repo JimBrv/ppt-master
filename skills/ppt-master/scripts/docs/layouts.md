@@ -12,7 +12,25 @@ slot in full-width characters (Latin text counts about 0.55 each).
 | `layout_build.py` | Build a template's `content/` from the shared library and its theme |
 | `layout_plan_check.py` | Check a design spec's layout plan: relation ↔ layout, series, density |
 | `layout_fill.py` | Fill one layout from a values file, with every check applied |
+| `free_page_check.py` | Check free-design pages by their result: frame kept, no overflow or overlap |
+| `render_pages.py` | Render pages to PNG so the model can look at what it drew |
 | `layout_stress.py` | Fill a whole library to capacity and run the real export |
+
+## Layouts are the default, not a cage
+
+When the model can read the page content's own structure or metaphor, it designs the page for it
+instead of fitting it into a preset layout. A side-by-side test (one essay, one model, three pages
+built both ways) went 3–0 to the free pages: a layout held three responses where the source named
+four, three equal columns where the source made two groups, and had no place for the author's own
+image. So the spec carries a **Layout mode**:
+
+| Mode | For | Body pages |
+|------|-----|------------|
+| `open` | Frontier-tier models | Free design when the source has its own count, grouping, links or metaphor; a library layout otherwise |
+| `library` | Small or fast-tier models; strict uniformity | Library layouts; `free` only when no claim holds. The default when the row is missing |
+
+What stays fixed in both modes are the checks on the result: Evidence quotes, the template frame,
+text that fits, a clean export. See "Free pages" below.
 
 ## Relations and claims
 
@@ -100,8 +118,35 @@ images, and writes nothing if anything fails. It also refuses a page that
 number is the slide number, and that slide's Layout must be this layout
 (`--no-plan-check` for tests outside a project). `build_pptx.py` checks the same
 thing for every page before exporting. Slots left out are removed along
-with their containers (rects marked `data-slot-box`), so a seven-chip row with
-three values keeps three chips. Unfilled image slots stay as placeholders.
+with every shape tied to them (`data-slot-box="<slot>"` on a rect, circle, polygon or path), so a
+seven-chip row with three values keeps three chips, and a card whose title is empty leaves no empty
+card behind. Items are not re-spaced: an unused item leaves white space. Unfilled image slots stay
+as placeholders.
+
+## Free pages
+
+`content/free_frame.svg` is the template's shell with an empty body: the base of a free page, so its
+title and page number sit exactly where the layout pages have them. `layouts.json` → `meta.frame`
+gives the body box, the reserved areas, the title capacity, the font and the palette (color roles
+plus a `series` list and an `alert` color). Both are written by `layout_build.py`.
+
+```bash
+uv run python3 scripts/render_pages.py <project_path> --page 03     # PNG in <project_path>/tmp/render/
+uv run python3 scripts/render_pages.py <project_path> --sheet       # plus one contact sheet of the deck
+uv run python3 scripts/free_page_check.py <project_path>            # every page planned as free
+```
+
+`free_page_check.py` fails a page when a frame image is missing or moved, the title or page number
+is not where the frame puts it, a `{{PLACEHOLDER}}` is left, or a line of text leaves the canvas,
+enters a reserved area, is wider than the box or circle it sits in, overlaps another line, or is
+below 12px. Width is estimated as in the library (full-width character = one font-size, Latin =
+0.55) with a small tolerance, so it complements the render: the check catches what is measurable,
+the model's eyes catch balance, hierarchy and holes. Elements under a rotate or matrix transform are
+skipped and reported. Free pages of one Series are compared by their shapes; a page that shares
+under half gets a hint. `build_pptx.py` runs the check before exporting.
+
+A free page that works well and recurs is a candidate for the library: add it as a builder (see
+"Absorbing layouts from a reference deck", step 3 onward).
 
 ## Giving an existing template the layouts
 
@@ -152,7 +197,9 @@ three values keeps three chips. Unfilled image slots stay as placeholders.
    - use color roles, not hex values; add a role to `layout_kit.derive_roles`
      only when no existing one fits;
    - keep the body inside the canonical body area;
-   - mark single-slot containers with `box=` so unused items disappear cleanly.
+   - tie every shape that belongs to an optional item to the item's key slot with `box=` (its
+     title or label), so an unused item leaves nothing behind. Check it: fill the layout with its
+     last item left out and look at the render.
 
    Fill in `relations`, `claim`, `bestFor`, `avoidFor`, `items` and `source` in the metadata.
    A layout drawn without a reference page (to cover a relation the library lacks) records

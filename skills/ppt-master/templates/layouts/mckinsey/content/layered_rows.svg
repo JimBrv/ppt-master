@@ -18,33 +18,33 @@
   <g transform="translate(38.96,-30.09) scale(0.9391)">
   <rect x="571" y="140" width="8" height="464" rx="4" fill="#E5E7EB"/>
   <!-- layer 1 -->
-  <rect x="150" y="140" width="998" height="104" rx="8" fill="#7FAAC3" fill-opacity="0.18"/>
-  <rect x="1143" y="140" width="5" height="104" rx="2" fill="#7FAAC3"/>
-  <circle cx="575" cy="192" r="30" fill="#7FAAC3"/>
+  <rect data-slot-box="R1_LABEL" x="150" y="140" width="998" height="104" rx="8" fill="#7FAAC3" fill-opacity="0.18"/>
+  <rect data-slot-box="R1_LABEL" x="1143" y="140" width="5" height="104" rx="2" fill="#7FAAC3"/>
+  <circle data-slot-box="R1_LABEL" cx="575" cy="192" r="30" fill="#7FAAC3"/>
   <use data-icon="{{R1_ICON}}" x="559" y="176" width="32" height="32" fill="#FFFFFF"/>
   <text x="176" y="201" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">{{R1_LABEL}}</text>
   <text x="636" y="186" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{R1_L1}}</text>
   <text x="636" y="212" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{R1_L2}}</text>
   <!-- layer 2 -->
-  <rect x="150" y="256" width="998" height="104" rx="8" fill="#4D88AB" fill-opacity="0.18"/>
-  <rect x="1143" y="256" width="5" height="104" rx="2" fill="#4D88AB"/>
-  <circle cx="575" cy="308" r="30" fill="#4D88AB"/>
+  <rect data-slot-box="R2_LABEL" x="150" y="256" width="998" height="104" rx="8" fill="#4D88AB" fill-opacity="0.18"/>
+  <rect data-slot-box="R2_LABEL" x="1143" y="256" width="5" height="104" rx="2" fill="#4D88AB"/>
+  <circle data-slot-box="R2_LABEL" cx="575" cy="308" r="30" fill="#4D88AB"/>
   <use data-icon="{{R2_ICON}}" x="559" y="292" width="32" height="32" fill="#FFFFFF"/>
   <text x="176" y="317" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">{{R2_LABEL}}</text>
   <text x="636" y="302" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{R2_L1}}</text>
   <text x="636" y="328" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{R2_L2}}</text>
   <!-- layer 3 -->
-  <rect x="150" y="372" width="998" height="104" rx="8" fill="#0076A8" fill-opacity="0.18"/>
-  <rect x="1143" y="372" width="5" height="104" rx="2" fill="#0076A8"/>
-  <circle cx="575" cy="424" r="30" fill="#0076A8"/>
+  <rect data-slot-box="R3_LABEL" x="150" y="372" width="998" height="104" rx="8" fill="#0076A8" fill-opacity="0.18"/>
+  <rect data-slot-box="R3_LABEL" x="1143" y="372" width="5" height="104" rx="2" fill="#0076A8"/>
+  <circle data-slot-box="R3_LABEL" cx="575" cy="424" r="30" fill="#0076A8"/>
   <use data-icon="{{R3_ICON}}" x="559" y="408" width="32" height="32" fill="#FFFFFF"/>
   <text x="176" y="433" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">{{R3_LABEL}}</text>
   <text x="636" y="418" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{R3_L1}}</text>
   <text x="636" y="444" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{R3_L2}}</text>
   <!-- layer 4 -->
-  <rect x="150" y="488" width="998" height="104" rx="8" fill="#004D5C" fill-opacity="0.18"/>
-  <rect x="1143" y="488" width="5" height="104" rx="2" fill="#004D5C"/>
-  <circle cx="575" cy="540" r="30" fill="#004D5C"/>
+  <rect data-slot-box="R4_LABEL" x="150" y="488" width="998" height="104" rx="8" fill="#004D5C" fill-opacity="0.18"/>
+  <rect data-slot-box="R4_LABEL" x="1143" y="488" width="5" height="104" rx="2" fill="#004D5C"/>
+  <circle data-slot-box="R4_LABEL" cx="575" cy="540" r="30" fill="#004D5C"/>
   <use data-icon="{{R4_ICON}}" x="559" y="524" width="32" height="32" fill="#FFFFFF"/>
   <text x="176" y="549" font-family="Microsoft YaHei, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2C3E50">{{R4_LABEL}}</text>
   <text x="636" y="534" font-family="Microsoft YaHei, Arial, sans-serif" font-size="17" fill="#2C3E50">{{R4_L1}}</text>

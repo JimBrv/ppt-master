@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 720">
+  <!-- McKinsey content layout: free. Fill every slot; see layouts.json for capacity. -->
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#005587"/>
+      <stop offset="100%" stop-color="#0076A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1280" height="5" fill="url(#headerGrad)"/>
+  <rect x="0" y="5" width="1280" height="75" fill="#FAFBFC"/>
+  <line x1="0" y1="80" x2="1280" y2="80" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="60" y="22" width="6" height="40" fill="#005587"/>
+  <text x="84" y="52" font-family="Arial, Microsoft YaHei, sans-serif" font-size="28" font-weight="bold" fill="#2C3E50">{{PAGE_TITLE}}</text>
+  <rect x="0" y="640" width="1280" height="80" fill="#FAFBFC"/>
+  <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
+  <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
+  <!-- Free page: draw the body here, inside x 40–1240, y 92–632.
+       Keep the frame (background, logo, title, page number) exactly as it is.
+       Colors and font: layouts.json -> meta.frame. Rules: executor-base.md -> Free pages. -->
+  <text x="1180" y="676" text-anchor="middle" font-family="Arial, Microsoft YaHei, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF">{{PAGE_NUM}}</text>
+</svg>

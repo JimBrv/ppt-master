@@ -24,7 +24,8 @@
 | **📋 AGENTS.md 更新** | 更新工具命令速查表，新增 `excel_to_md.py` 条目及 PTY I/O 锁绕过说明。 |
 | **🛡️ 奇安信默认模板** | 从奇安信 PPT 提取真实背景与 logo 的品牌模板。未指定模板时默认推荐（仍由用户确认）。 |
 | **📐 正文版式** | 22 种正文页版式（大字论断、关键数字、问题→对策、对照、三支柱、阶段、漏斗、金字塔、时间线、四象限等），每个版式标明它表达的内容关系和可验证的视觉暗示。每个版式是带 `{{SLOT}}` 槽位和容量的完整页面，`layout_fill.py` 填充并拒绝超长文字。`奇安信`、`mckinsey`、`pixel_retro` 已配备。 |
-| **🧭 按内容关系选版式** | 策略师按内容关系（16 类词汇）为每个正文页选版式，用版式的视觉暗示验证内容，平行章节统一版式，并按文体（议论 / 汇报 / 方案）控制每页文字量。`layout_plan_check.py` 校验规划。 |
+| **🧭 按内容关系选版式** | 策略师按内容关系（16 类词汇）为每个正文页选形式，用视觉暗示验证内容，平行章节统一设计，并按文体（议论 / 汇报 / 方案）控制每页文字量。`layout_plan_check.py` 校验规划。 |
+| **🎨 内容优先，版式是默认项** | 当模型能读出内容自身的结构或比喻时，优先自由设计，而不是套进预设版式（开放模式，适用于强模型）。自由页保留模板外框，由模型渲染后自查（`render_pages.py`），并按结果检查（`free_page_check.py`）。 |
 | **🧩 共享版式库** | 版式按颜色角色只写一次（`templates/content_library/`）；模板只需提供 `theme.json` + `shell.svg`，由 `layout_build.py` 生成 `content/`。`pptx_inspect.py`、`layout_stress.py` 用于从参考 PPT 吸收新版式并压测。 |
 | **🎨 用你的 .pptx 当模板** | `pptx_to_template.py` 把用户提供的 `.pptx` 转成模板，背景与 logo 按原位置还原。 |
 | **👀 实时预览** | `preview.py --serve` 提供 设计大纲 / 实际排布 / 实际文字 三个标签页，SVG 逐页生成即自动刷新；`executor_output.md` 记录执行过程。 |
@@ -198,6 +199,8 @@ uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> --slots <
 uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
 uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
 uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]
+uv run python3 skills/ppt-master/scripts/render_pages.py <project_path> [--page 03] [--sheet]
+uv run python3 skills/ppt-master/scripts/free_page_check.py <project_path>
 uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
 uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 

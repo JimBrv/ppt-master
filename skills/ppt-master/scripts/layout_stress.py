@@ -29,7 +29,7 @@ from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
-from layout_kit import RELATIONS, SLOT_RE, fill_layout, slot_pattern  # noqa: E402
+from layout_kit import FRAME_FILE, RELATIONS, SLOT_RE, fill_layout, slot_pattern  # noqa: E402
 
 ICON_DIR = SCRIPTS.parent / 'templates' / 'icons'
 SAMPLE_ICONS = ['shield-check', 'eye', 'bell', 'server', 'cog', 'key', 'target', 'users', 'lock-closed', 'chart-bar']
@@ -38,7 +38,7 @@ SAMPLE_ICONS = ['shield-check', 'eye', 'bell', 'server', 'cog', 'key', 'target',
 def check_library(content: Path, index: dict, wanted):
     """Problems that make a layout unusable regardless of its content."""
     problems = []
-    svgs = {p.stem for p in content.glob('*.svg')}
+    svgs = {p.stem for p in content.glob('*.svg') if p.name != FRAME_FILE}  # the free-page frame is not a layout
     for lid in sorted(set(index) - svgs):
         problems.append(f'{lid}: listed in layouts.json but {lid}.svg is missing')
     for lid in sorted(svgs - set(index)):

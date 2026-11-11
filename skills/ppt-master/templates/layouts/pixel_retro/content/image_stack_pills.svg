@@ -19,35 +19,35 @@
   <circle cx="232" cy="427" r="166" fill="#161B22"/>
   <rect data-image-slot="HERO" x="80" y="275" width="305" height="305" rx="6" fill="#15242D" stroke="#696F76" stroke-width="1" stroke-dasharray="6,4"/>
   <!-- pill 1 -->
-  <rect x="379" y="150" width="861" height="45" rx="22" fill="#00D4FF" fill-opacity="0.14"/>
+  <rect data-slot-box="P1_TAG" x="379" y="150" width="861" height="45" rx="22" fill="#00D4FF" fill-opacity="0.14"/>
   <text x="401" y="180" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#00D4FF">{{P1_TAG}}</text>
   <text x="544" y="179" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P1_BODY}}</text>
   <!-- pill 2 -->
-  <rect x="417" y="219" width="823" height="45" rx="22" fill="#39FF14" fill-opacity="0.14"/>
+  <rect data-slot-box="P2_TAG" x="417" y="219" width="823" height="45" rx="22" fill="#39FF14" fill-opacity="0.14"/>
   <text x="439" y="249" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#39FF14">{{P2_TAG}}</text>
   <text x="582" y="248" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P2_BODY}}</text>
   <!-- pill 3 -->
-  <rect x="454" y="288" width="786" height="45" rx="22" fill="#FFD700" fill-opacity="0.14"/>
+  <rect data-slot-box="P3_TAG" x="454" y="288" width="786" height="45" rx="22" fill="#FFD700" fill-opacity="0.14"/>
   <text x="476" y="318" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#FFD700">{{P3_TAG}}</text>
   <text x="619" y="317" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P3_BODY}}</text>
   <!-- pill 4 -->
-  <rect x="471" y="357" width="769" height="45" rx="22" fill="#00D4FF" fill-opacity="0.14"/>
+  <rect data-slot-box="P4_TAG" x="471" y="357" width="769" height="45" rx="22" fill="#00D4FF" fill-opacity="0.14"/>
   <text x="493" y="387" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#00D4FF">{{P4_TAG}}</text>
   <text x="636" y="386" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P4_BODY}}</text>
   <!-- pill 5 -->
-  <rect x="471" y="426" width="769" height="45" rx="22" fill="#39FF14" fill-opacity="0.14"/>
+  <rect data-slot-box="P5_TAG" x="471" y="426" width="769" height="45" rx="22" fill="#39FF14" fill-opacity="0.14"/>
   <text x="493" y="456" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#39FF14">{{P5_TAG}}</text>
   <text x="636" y="455" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P5_BODY}}</text>
   <!-- pill 6 -->
-  <rect x="454" y="495" width="786" height="45" rx="22" fill="#FFD700" fill-opacity="0.14"/>
+  <rect data-slot-box="P6_TAG" x="454" y="495" width="786" height="45" rx="22" fill="#FFD700" fill-opacity="0.14"/>
   <text x="476" y="525" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#FFD700">{{P6_TAG}}</text>
   <text x="619" y="524" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P6_BODY}}</text>
   <!-- pill 7 -->
-  <rect x="417" y="564" width="823" height="45" rx="22" fill="#00D4FF" fill-opacity="0.14"/>
+  <rect data-slot-box="P7_TAG" x="417" y="564" width="823" height="45" rx="22" fill="#00D4FF" fill-opacity="0.14"/>
   <text x="439" y="594" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#00D4FF">{{P7_TAG}}</text>
   <text x="582" y="593" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P7_BODY}}</text>
   <!-- pill 8 -->
-  <rect x="379" y="633" width="861" height="45" rx="22" fill="#39FF14" fill-opacity="0.14"/>
+  <rect data-slot-box="P8_TAG" x="379" y="633" width="861" height="45" rx="22" fill="#39FF14" fill-opacity="0.14"/>
   <text x="401" y="663" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="bold" fill="#39FF14">{{P8_TAG}}</text>
   <text x="544" y="662" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="16" fill="#C9D1D9">{{P8_BODY}}</text>
   </g>

@@ -61,7 +61,15 @@ WEIGHTS = ((12, 'light'), (30, 'medium'), (10 ** 9, 'heavy'))
 # The page title, the page number and a layout's fixed labels (its
 # "labelSlots": series tags, section captions, axis names) do not count.
 # The average may be a (target, ceiling) range; a hint fires above the ceiling.
-DENSITY = {'narrative': ((20, 25), 25), 'report': (25, 40), 'solution': (35, 50)}
+# Budgets are hints, never gates: a page that shows its content's own
+# structure well may carry more than a sparse one.
+DENSITY = {'narrative': ((20, 30), 36), 'report': (30, 46), 'solution': (40, 56)}
+
+# Color roles a free-design page may use (layouts.json -> meta.frame.palette).
+FRAME_ROLES = ('primary', 'deep', 'ink', 'text', 'muted', 'surface', 'page_bg', 'tint', 'panel',
+               'halo', 'line', 'on_accent')
+FRAME_FILE = 'free_frame.svg'
+FREE_ID = 'free'  # the layout marker a page built on the frame carries
 
 
 def weight_of(runs: int) -> str:
@@ -230,18 +238,25 @@ class Layout:
         self.p.append(f'  <text x="{x}" y="{y}" font-family="{self.T.font}" font-size="{size}"{b}{i}{a} '
                       f'fill="{fill}">{{{{{slot}}}}}</text>')
 
+    @staticmethod
+    def _box(slot):
+        """Tie a shape to a slot: layout_fill removes the shape when that
+        slot has no value. Use the item's key slot (its title or label) for
+        every shape that belongs to the item, so an unused item leaves nothing."""
+        return f' data-slot-box="{slot}"' if slot else ''
+
     def rr(self, x, y, w, h, r=0, fill='none', op=None, stroke=None, sw=1, box=None, bleed=False):
         self._extend(x, y, x + w, y + h, bleed)
-        bx = f' data-slot-box="{box}"' if box else ''
+        bx = self._box(box)
         rx = f' rx="{r}"' if r else ''
         o = f' fill-opacity="{op}"' if op is not None else ''
         st = f' stroke="{stroke}" stroke-width="{sw}"' if stroke else ''
         self.p.append(f'  <rect{bx} x="{x}" y="{y}" width="{w}" height="{h}"{rx} fill="{fill}"{o}{st}/>')
 
-    def c(self, cx, cy, r, fill, op=None):
+    def c(self, cx, cy, r, fill, op=None, box=None):
         self._extend(cx - r, cy - r, cx + r, cy + r)
         o = f' fill-opacity="{op}"' if op is not None else ''
-        self.p.append(f'  <circle cx="{cx}" cy="{cy}" r="{r}" fill="{fill}"{o}/>')
+        self.p.append(f'  <circle{self._box(box)} cx="{cx}" cy="{cy}" r="{r}" fill="{fill}"{o}/>')
 
     def ring(self, cx, cy, r, stroke, sw, op=None):
         self._extend(cx - r, cy - r, cx + r, cy + r)
@@ -254,16 +269,16 @@ class Layout:
         if xs and ys:
             self._extend(min(xs), min(ys), max(xs), max(ys), bleed)
 
-    def poly(self, pts, fill, op=None, bleed=False):
+    def poly(self, pts, fill, op=None, bleed=False, box=None):
         self._extend_points(pts, bleed)
         o = f' fill-opacity="{op}"' if op is not None else ''
-        self.p.append(f'  <polygon points="{pts}" fill="{fill}"{o}/>')
+        self.p.append(f'  <polygon{self._box(box)} points="{pts}" fill="{fill}"{o}/>')
 
-    def path(self, d, fill='none', stroke=None, sw=None, op=None, bleed=False):
+    def path(self, d, fill='none', stroke=None, sw=None, op=None, bleed=False, box=None):
         self._extend_points(re.sub(r'[A-Za-z]', ' ', d), bleed)
         st = f' stroke="{stroke}" stroke-width="{sw}" stroke-linecap="round"' if stroke else ''
         o = f' fill-opacity="{op}"' if op is not None else ''
-        self.p.append(f'  <path d="{d}" fill="{fill}"{st}{o}/>')
+        self.p.append(f'  <path{self._box(box)} d="{d}" fill="{fill}"{st}{o}/>')
 
     def raw(self, line, box=None, bleed=False):
         """An element the helpers do not cover; pass its bounding box."""
@@ -332,9 +347,34 @@ def conflicts(lay: Layout) -> List[str]:
     return out
 
 
+def frame_info(theme: Theme) -> dict:
+    """What a free-design page needs to sit beside the library's pages."""
+    x0, y0, x1, y1 = theme.body_box or CANONICAL_BODY
+    c = theme.colors
+    return {'file': FRAME_FILE,
+            'body': [max(x0, 40), y0, min(x1, 1240), y1],
+            'reserved': [list(r) for r in theme.reserved],
+            'titleCapacity': theme.title_capacity,
+            'font': theme.font,
+            'palette': {**{r: c[r] for r in FRAME_ROLES},
+                        'series': list(c['trio_a']), 'alert': c['steps'][0]}}
+
+
+def render_frame(theme: Theme, shell: str) -> str:
+    """The template's page frame with an empty body: the base of a free page."""
+    f = frame_info(theme)
+    bx0, by0, bx1, by1 = f['body']
+    body = (f'  <!-- Free page: draw the body here, inside x {bx0:g}–{bx1:g}, y {by0:g}–{by1:g}.\n'
+            f'       Keep the frame (background, logo, title, page number) exactly as it is.\n'
+            f'       Colors and font: layouts.json -> meta.frame. Rules: executor-base.md -> Free pages. -->')
+    return shell.replace('%%LAYOUT_ID%%', FREE_ID).replace('%%DEFS%%', '').replace('%%BODY%%', body)
+
+
 def write_library(out_dir: Path, layouts: List[Layout], meta: Dict[str, dict], usage: str, shell: str) -> dict:
-    """Write each layout's SVG plus the layouts.json index; return the index."""
+    """Write each layout's SVG, the free-page frame and the layouts.json index; return the index."""
     out_dir.mkdir(parents=True, exist_ok=True)
+    theme = layouts[0].T
+    (out_dir / FRAME_FILE).write_text(render_frame(theme, shell), encoding='utf-8')
     entries = {}
     for lay in layouts:
         if lay.id not in meta:
@@ -360,8 +400,9 @@ def write_library(out_dir: Path, layouts: List[Layout], meta: Dict[str, dict], u
         entries[lay.id] = {**{k: v for k, v in m.items() if k != 'labels'},
                            'maxRuns': runs, 'weight': weight_of(runs), 'labelSlots': labels,
                            'slots': pat, 'iconSlots': icons, 'imageSlots': lay.imgs}
-    index = {'meta': {'version': 2, 'canvas': '0 0 1280 720', 'usage': usage,
-                      'relations': {k: v[0] for k, v in RELATIONS.items()}},
+    index = {'meta': {'version': 3, 'canvas': '0 0 1280 720', 'usage': usage,
+                      'relations': {k: v[0] for k, v in RELATIONS.items()},
+                      'frame': frame_info(theme)},
              'layouts': entries}
     (out_dir / 'layouts.json').write_text(json.dumps(index, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     return index
@@ -377,7 +418,7 @@ def fill_layout(svg: str, values: Dict[str, object], caps: Dict[str, int],
 
     values maps slot name -> text (icon slots take an icon name), plus an
     optional "_images": {image_slot: filename in images/}. A text, icon or
-    container (data-slot-box) whose slot has no value is removed; unfilled
+shape tied to a slot (data-slot-box) whose slot has no value is removed; unfilled
     image slots stay as placeholders. Any error means the result is unusable.
     """
     errors: List[str] = []
@@ -413,7 +454,7 @@ def fill_layout(svg: str, values: Dict[str, object], caps: Dict[str, int],
         removed.append(m.group(1))
         return ''
 
-    svg = re.sub(r'^[ \t]*<rect data-slot-box="(\w+)"[^>]*/>\n', unless_filled, svg, flags=re.M)
+    svg = re.sub(r'^[ \t]*<(?:rect|circle|polygon|path) data-slot-box="(\w+)"[^>]*/>\n', unless_filled, svg, flags=re.M)
     svg = re.sub(r'^[ \t]*<text[^>]*>\s*\{\{(\w+)\}\}\s*</text>\n', unless_filled, svg, flags=re.M)
     svg = re.sub(r'^[ \t]*<use data-icon="\{\{(\w+)\}\}"[^>]*/>\n', unless_filled, svg, flags=re.M)
 

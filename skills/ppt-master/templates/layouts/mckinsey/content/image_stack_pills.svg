@@ -20,35 +20,35 @@
   <circle cx="232" cy="427" r="166" fill="#FFFFFF"/>
   <rect data-image-slot="HERO" x="80" y="275" width="305" height="305" rx="6" fill="#F2F7F9" stroke="#ABB2B9" stroke-width="1" stroke-dasharray="6,4"/>
   <!-- pill 1 -->
-  <rect x="379" y="150" width="861" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
+  <rect data-slot-box="P1_TAG" x="379" y="150" width="861" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
   <text x="401" y="180" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#005587">{{P1_TAG}}</text>
   <text x="544" y="179" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P1_BODY}}</text>
   <!-- pill 2 -->
-  <rect x="417" y="219" width="823" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
+  <rect data-slot-box="P2_TAG" x="417" y="219" width="823" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
   <text x="439" y="249" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#0076A8">{{P2_TAG}}</text>
   <text x="582" y="248" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P2_BODY}}</text>
   <!-- pill 3 -->
-  <rect x="454" y="288" width="786" height="45" rx="22" fill="#27AE60" fill-opacity="0.14"/>
+  <rect data-slot-box="P3_TAG" x="454" y="288" width="786" height="45" rx="22" fill="#27AE60" fill-opacity="0.14"/>
   <text x="476" y="318" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#27AE60">{{P3_TAG}}</text>
   <text x="619" y="317" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P3_BODY}}</text>
   <!-- pill 4 -->
-  <rect x="471" y="357" width="769" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
+  <rect data-slot-box="P4_TAG" x="471" y="357" width="769" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
   <text x="493" y="387" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#005587">{{P4_TAG}}</text>
   <text x="636" y="386" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P4_BODY}}</text>
   <!-- pill 5 -->
-  <rect x="471" y="426" width="769" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
+  <rect data-slot-box="P5_TAG" x="471" y="426" width="769" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
   <text x="493" y="456" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#0076A8">{{P5_TAG}}</text>
   <text x="636" y="455" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P5_BODY}}</text>
   <!-- pill 6 -->
-  <rect x="454" y="495" width="786" height="45" rx="22" fill="#27AE60" fill-opacity="0.14"/>
+  <rect data-slot-box="P6_TAG" x="454" y="495" width="786" height="45" rx="22" fill="#27AE60" fill-opacity="0.14"/>
   <text x="476" y="525" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#27AE60">{{P6_TAG}}</text>
   <text x="619" y="524" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P6_BODY}}</text>
   <!-- pill 7 -->
-  <rect x="417" y="564" width="823" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
+  <rect data-slot-box="P7_TAG" x="417" y="564" width="823" height="45" rx="22" fill="#005587" fill-opacity="0.14"/>
   <text x="439" y="594" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#005587">{{P7_TAG}}</text>
   <text x="582" y="593" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P7_BODY}}</text>
   <!-- pill 8 -->
-  <rect x="379" y="633" width="861" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
+  <rect data-slot-box="P8_TAG" x="379" y="633" width="861" height="45" rx="22" fill="#0076A8" fill-opacity="0.14"/>
   <text x="401" y="663" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#0076A8">{{P8_TAG}}</text>
   <text x="544" y="662" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#5D6D7E">{{P8_BODY}}</text>
   </g>

@@ -26,13 +26,13 @@ def stage_matrix_evidence(l: Layout):
         for m, (cx, cy) in enumerate([(110, y + 22), (331, y + 22), (110, y + 76), (331, y + 76)], 1):
             l.rr(cx, cy, 209, 41, 6, T.surface, box=f'STAGE{n}_CHIP{m}')
             l.t(cx + 10, cy + 26, f'STAGE{n}_CHIP{m}', 15, 189)
-    for y in (272, 424, 566):
-        l.poly(f'39,{y} 57,{y} 57,{y+22} 64,{y+22} 48,{y+43} 32,{y+22} 39,{y+22}', T.halo)
+    for y, tie in ((272, None), (424, None), (566, 'STAGE4_LABEL')):
+        l.poly(f'39,{y} 57,{y} 57,{y+22} 64,{y+22} 48,{y+43} 32,{y+22} 39,{y+22}', T.halo, box=tie)
     l.note('final stage: single wide chip')
-    l.rr(63, 604, 493, 91, 12, T.primary, .12)
-    l.rr(33, 619, 60, 60, 10, T.primary)
+    l.rr(63, 604, 493, 91, 12, T.primary, .12, box='STAGE4_LABEL')
+    l.rr(33, 619, 60, 60, 10, T.primary, box='STAGE4_LABEL')
     l.t(63, 656, 'STAGE4_LABEL', 20, 50, T.on_accent, True, 'middle')
-    l.rr(110, 617, 431, 62, 6, T.surface)
+    l.rr(110, 617, 431, 62, 6, T.surface, box='STAGE4_LABEL')
     l.t(122, 643, 'STAGE4_L1', 15, 407); l.t(122, 666, 'STAGE4_L2', 15, 407)
     l.note('evidence panel')
     l.rr(602, 148, 629, 376, 12, T.surface, None, T.line, 1)
@@ -42,7 +42,7 @@ def stage_matrix_evidence(l: Layout):
     l.rr(602, 554, 629, 140, 12, T.primary)
     l.t(640, 618, 'CALLOUT_LABEL_L1', 20, 44, T.on_accent, True, 'middle')
     l.t(640, 646, 'CALLOUT_LABEL_L2', 20, 44, T.on_accent, True, 'middle')
-    l.rr(680, 576, 4, 40, 2, T.on_accent); l.rr(680, 640, 4, 40, 2, T.on_accent)
+    l.rr(680, 576, 4, 40, 2, T.on_accent, box='RESULT1_TITLE'); l.rr(680, 640, 4, 40, 2, T.on_accent, box='RESULT2_TITLE')
     l.t(696, 590, 'RESULT1_TITLE', 18, 520, T.on_accent, True); l.t(696, 613, 'RESULT1_BODY', 15, 520, T.on_accent)
     l.t(696, 654, 'RESULT2_TITLE', 18, 520, T.on_accent, True); l.t(696, 677, 'RESULT2_BODY', 15, 520, T.on_accent)
 
@@ -58,7 +58,7 @@ def three_pillars(l: Layout):
         l.t(x + 193, 189, f'COL{n}_TITLE', 26, 320, T.on_accent, True, 'middle')
         for m in (1, 2, 3):
             y = 222 + (m - 1) * 146
-            l.rr(x + 12, y, 362, 134, 10, T.card_tint, .07)
+            l.rr(x + 12, y, 362, 134, 10, T.card_tint, .07, box=f'COL{n}_CARD{m}_TITLE')
             l.icon(x + 26, y + 12, 28, f'COL{n}_CARD{m}_ICON', T.deep)
             l.t(x + 64, y + 34, f'COL{n}_CARD{m}_TITLE', 20, 290, T.deep, True)
             for k in (1, 2, 3):
@@ -95,10 +95,10 @@ def stair_steps(l: Layout):
     for n, (x, top, col) in enumerate(zip((35, 232, 428, 624, 821, 1019), tops, T.ramp), 1):
         cx = x + 90
         l.note(f'step {n}')
-        l.rr(x, top, 181, 400, 12, T.surface, None, T.line, 1)
-        l.path(f'M{x},{top+40} L{x},{top+12} Q{x},{top} {x+12},{top} L{x+169},{top} Q{x+181},{top} {x+181},{top+12} L{x+181},{top+40} Z', T.primary)
+        l.rr(x, top, 181, 400, 12, T.surface, None, T.line, 1, box=f'S{n}_NAME')
+        l.path(f'M{x},{top+40} L{x},{top+12} Q{x},{top} {x+12},{top} L{x+169},{top} Q{x+181},{top} {x+181},{top+12} L{x+181},{top+40} Z', T.primary, box=f'S{n}_NAME')
         l.t(cx, top + 27, f'S{n}_NAME', 16, 165, T.on_accent, True, 'middle')
-        l.c(cx, top + 112, 58, col, .2); l.c(cx, top + 112, 40, col)
+        l.c(cx, top + 112, 58, col, .2, box=f'S{n}_NAME'); l.c(cx, top + 112, 40, col, box=f'S{n}_NAME')
         l.t(cx, top + 121, f'S{n}_GRADE', 24, 60, T.on_accent, True, 'middle')
         l.t(cx, top + 200, f'S{n}_HEAD1', 16, 163, T.deep, True, 'middle')
         for k in (1, 2):
@@ -115,9 +115,9 @@ def layered_rows(l: Layout):
     for n, (y, col) in enumerate(zip((140, 256, 372, 488), T.levels), 1):
         mid = y + 52
         l.note(f'layer {n}')
-        l.rr(150, y, 998, 104, 8, col, .18)
-        l.rr(1143, y, 5, 104, 2, col)
-        l.c(575, mid, 30, col)
+        l.rr(150, y, 998, 104, 8, col, .18, box=f'R{n}_LABEL')
+        l.rr(1143, y, 5, 104, 2, col, box=f'R{n}_LABEL')
+        l.c(575, mid, 30, col, box=f'R{n}_LABEL')
         l.icon(559, mid - 16, 32, f'R{n}_ICON', T.on_accent)
         l.t(176, mid + 9, f'R{n}_LABEL', 24, 360, T.ink, True)
         l.t(636, mid - 6, f'R{n}_L1', 17, 490); l.t(636, mid + 20, f'R{n}_L2', 17, 490)
@@ -155,7 +155,7 @@ def image_stack_pills(l: Layout):
         col = T.pills[(n - 1) % 3]
         y = 150 + (n - 1) * 69
         l.note(f'pill {n}')
-        l.rr(x, y, 1240 - x, 45, 22, col, .14)
+        l.rr(x, y, 1240 - x, 45, 22, col, .14, box=f'P{n}_TAG')
         l.t(x + 22, y + 30, f'P{n}_TAG', 20, 130, col, True)
         l.t(x + 165, y + 29, f'P{n}_BODY', 16, 590, T.text)
 
@@ -428,7 +428,7 @@ def key_metrics(l: Layout):
 
 def problem_solution(l: Layout):
     T = l.T
-    l.rr(40, 146, 150, 40, 20, T.primary)
+    l.rr(40, 146, 150, 40, 20, T.primary, box='SERIES')
     l.t(115, 173, 'SERIES', 18, 130, T.on_accent, True, 'middle')
     l.t(210, 174, 'HOOK', 20, 1020, T.secondary, False, None, True)
     l.note('problem panel')
@@ -558,7 +558,7 @@ META = {
  'three_pillars': dict(relations=['parallel'], claim='三栏地位平等，交换顺序不改变意思',
    label='三栏并列卡片', summary='三个并列主题，各含 3 张图标卡片，底部一句结论', source='P13',
    bestFor=['三个互不包含的主题或方案对比', '部署形态、能力分组', '每组有 2–3 个可并列的要点'], avoidFor=['有先后顺序的流程', '单组要点超过 3 个'],
-   items='固定 3 栏；每栏 2–3 张卡片。少于 3 张时删掉整张卡片，其余卡片加高填满栏高，不留空洞'),
+   items='固定 3 栏；每栏 1–3 张卡片，各栏张数尽量相同。未填的卡片整张删除，下方留白，不重排'),
  'chevron_stages': dict(slotNotes={'STEP0_LABEL': '总起：三个阶段的总名称（如"决胜路线"），不是第一阶段', 'STEP1_LABEL': '第一阶段名称', 'STEP2_LABEL': '第二阶段名称', 'STEP3_LABEL': '第三阶段名称', 'COL{n}_KEYWORD': '该阶段的一个关键词（大号斜体），出自原文'},
    relations=['sequence'], claim='三个阶段有先后，前一阶段是后一阶段的前提',
    label='箭头阶段 + 三列', summary='顶部箭头流程条，下接三列关键词卡片和蓝色说明带', source='P14',
@@ -568,12 +568,12 @@ META = {
    labels=['SUBTITLE', 'AXIS_NOTE', 'S{n}_HEAD{n}'], relations=['escalation'], claim='每一级都比前一级程度更高，能说出升级的是什么维度',
    label='阶梯递进', summary='六级上升阶梯，每级含等级圆和两段说明', source='P18',
    bestFor=['影响、风险或成熟度分级', '由低到高的多方案对比'], avoidFor=['无程度差异的并列项', '少于 4 级'],
-   items='4–6 级。减少时删掉最靠前的列，并让其余列等宽铺满 x=35..1200'),
+   items='4–6 级，从 S1 起连续填。未填的级整列删除，右侧留白，不重排'),
  'layered_rows': dict(slotNotes={'R{n}_LABEL': '层名称，R1 在最上方；层序必须有意义（下层支撑上层）'},
    relations=['layering'], claim='下层支撑上层（或由外到内），调换层序会出错',
    label='分层横带', summary='四层横带贯穿中轴，左标题右说明，底部结论', source='P24（简化）',
    bestFor=['分层架构或检测层级', 'L1–L4 这类有层次的体系'], avoidFor=['层之间无上下关系', '说明超过两行'],
-   items='3–4 层。3 层时删掉最后一层，其余行高增到 140'),
+   items='3–4 层，从 R1 起连续填。未填的层整行删除，不重排'),
  'hub_numbered_rows': dict(slotNotes={'HEADING': '右侧面板的总标题（一句话）', 'CALLOUT{n}': '环绕中心的标签：中心概念的组成项；右侧三行应覆盖这些标签，或说明三行是标签的归类'},
    labels=['HEADING'], relations=['hub'], claim='三行都是中心概念的组成维度，不把问题和对策混排',
    label='中心枢纽 + 编号行', summary='左侧枢纽图与环绕标签，右侧三条编号说明', source='P25',
@@ -582,7 +582,7 @@ META = {
  'image_stack_pills': dict(relations=['evidence', 'parallel'], claim='有一张真实主图，每一条都在描述这张图的主体',
    label='主图 + 胶囊列表', summary='左侧圆形主图，右侧沿弧线排列的优势胶囊', source='P29',
    bestFor=['产品优势、能力清单', '5–8 条短句并列'], avoidFor=['没有合适的主图', '每条超过一行'],
-   items='5–8 条。减少时按条数重新均分 y=150..678，x 仍取弧线对称值'),
+   items='5–8 条，从 P1 起连续填。未填的条整条删除，不重排；少于 7 条时下方留白'),
  'loop_nodes': dict(slotNotes={'N{n}_TITLE': '闭环节点，顺时针排列；N5 的结果应回到 N1'},
    relations=['cycle'], claim='最后一个节点的结果回到第一个节点，形成持续运转',
    label='闭环五节点', summary='五个节点沿环排列，表达持续闭环', source='P28',

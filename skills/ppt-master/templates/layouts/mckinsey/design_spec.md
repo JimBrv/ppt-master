@@ -264,7 +264,7 @@ Templates use `{{PLACEHOLDER}}` format placeholders. Common placeholders:
 
 ## XIV. Content Layouts
 
-`content/layouts.json` indexes twenty-two ready-made content pages built from the shared library (`templates/content_library/`) with this template's `content_src/theme.json` and `shell.svg`. Prefer one of these for every body page; use `03_content.svg` only when none fits. Rebuild with `scripts/layout_build.py`; never edit `content/` by hand. Choose by the content's relation, then test the layout's `claim` (see `references/strategist.md` → Content Layout Selection).
+`content/layouts.json` indexes twenty-two ready-made content pages built from the shared library (`templates/content_library/`) with this template's `content_src/theme.json` and `shell.svg`. They are the default for body pages. In open layout mode, design a page freely on `content/free_frame.svg` (this template's frame with an empty body; colors in `layouts.json` → `meta.frame.palette`) when the content has its own count, grouping, links or metaphor; in library mode, go free only when no layout's claim holds. Rebuild with `scripts/layout_build.py`; never edit `content/` by hand. Choose by the content's relation, then test the layout's `claim` (see `references/strategist.md` → Content Layout Selection).
 
 | ID | Relation | Best for |
 |----|----------|----------|

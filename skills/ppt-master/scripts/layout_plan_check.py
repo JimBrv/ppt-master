@@ -7,12 +7,17 @@ Reads <project>/design_spec.md and, when the template has content layouts,
 
     - **Message**:  the one sentence the audience should remember
     - **Relation**: one relation from the vocabulary (layout_kit.RELATIONS)
-    - **Layout**:   a layout ID, or "free: <description>"
-    - **Claim check**: how the content makes the layout's claim true (layout IDs only)
+    - **Layout**:   a layout ID, or "free: <description>" for a page designed for its content
+    - **Claim check**: which content plays which part: against the layout's claim, or, on a
+                    free page, against the claim its own design makes
     - **Evidence**: one or more verbatim quotes from sources/, in "…", “…” or 「…」,
                     each at least 8 characters, that the page's content rests on
     - **Series**:   "<group> n/m" for parallel pages that share one layout;
                     required when titles number pages in a group (风险一/风险二, Case 1/Case 2)
+
+I. Project Information may carry **Layout mode**: `open` (design a page freely
+whenever that shows the content's own structure better than a layout does) or
+`library` (stay with the layouts; the default when the row is missing).
 
 Errors (exit 1): a missing field, an unknown relation or layout, a layout that
 does not show the page's relation, an Evidence quote that is not in sources/,
@@ -42,11 +47,13 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from layout_kit import DENSITY, RELATIONS, slot_pattern  # noqa: E402
+from layout_kit import DENSITY, FREE_ID, RELATIONS, slot_pattern  # noqa: E402
 
 SLIDE_RE = re.compile(r'^####\s+Slide\s+(\d+)\s*[-–—:]?\s*(.*)$', re.M)
 FIELD_RE = re.compile(r'^\s*-\s+\*\*([^*]+)\*\*\s*[:：]\s*(.*)$', re.M)
 GENRE_RE = re.compile(r'\*\*Genre\*\*\s*\|?\s*[:：]?\s*`?(\w+)', re.I)
+MODE_RE = re.compile(r'\*\*Layout mode\*\*\s*\|?\s*[:：]?\s*`?(\w+)', re.I)
+MODES = ('open', 'library')
 STANDARD = ('cover', 'toc', 'chapter', 'ending', 'end', 'agenda')
 STANDARD_NAMES = re.compile(r'cover|toc|table of contents|agenda|chapter|section divider|ending|closing|thank|'
                             r'封面|目录|章节|过渡|封底|结束|致谢', re.I)
@@ -173,7 +180,12 @@ def main() -> int:
 
     m = GENRE_RE.search(spec)
     genre = m.group(1).lower() if m else None
+    m = MODE_RE.search(spec)
+    mode = m.group(1).lower() if m else 'library'
     errors, hints, body = [], [], []
+    if mode not in MODES:
+        errors.append(f'**Layout mode** "{mode}" is not one of: {", ".join(MODES)}')
+        mode = 'library'
     source = source_text(args.project_path)
     if not source:
         errors.append('sources/ holds no text (.md / .txt): save the converted full source there (Step 1); '
@@ -206,6 +218,14 @@ def main() -> int:
                     claim = entry.get('claim')
                     errors.append(f'{tag}: missing **Claim check**'
                                   + (f' — test the content against: {claim}' if claim else ''))
+        if free:
+            if not f.get('claim check'):
+                errors.append(f'{tag}: missing **Claim check** — a free page makes its own claim: say what the '
+                              'picture asserts and which content plays which part')
+            shows = sorted(k for k, e in layouts.items() if rel in e.get('relations', []))
+            if mode == 'library' and shows:
+                hints.append(f'{tag}: free page in library mode, though {", ".join(shows)} show "{rel}"; '
+                             'keep it only if none of their claims holds, or set **Layout mode** to open')
         ev = f.get('evidence', '')
         found = [q for q in quotes(ev) if len(norm(q)) >= MIN_QUOTE]
         if not ev or not found:
@@ -279,7 +299,7 @@ def main() -> int:
             if want not in ('free', 'standard', '') and got != want:
                 errors.append(f'svg_output/{svg.name}: design_spec.md plans {want}, but the page '
                               + (f'was filled from {got}' if got else 'was not filled from a layout (use layout_fill.py)'))
-            elif want == 'free' and got:
+            elif want == 'free' and got and got != FREE_ID:
                 errors.append(f'svg_output/{svg.name}: design_spec.md plans a free page, but it was filled from {got}')
 
     # Density, after the Executor.
@@ -313,7 +333,7 @@ def main() -> int:
                 if avg > avg_ceiling:
                     hints.append(f'average {avg:.1f} content text runs per page is over the {genre} budget of {avg_label}')
 
-    print(f'[SCAN] {len(body)} body page(s); genre: {genre or "not set"}; '
+    print(f'[SCAN] {len(body)} body page(s); genre: {genre or "not set"}; layout mode: {mode}; '
           f'{"content layouts: " + str(len(layouts)) if layouts else "no content layouts (free design)"}')
     for p in body:
         print(f'  Slide {p["num"]:02d}  {p["rel"] or "?":17} {p["lid"] or "?":22} {p["weight"] or "":7} {p["series"]}')

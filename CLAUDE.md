@@ -37,6 +37,8 @@ uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_i
 uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/奇安信
 uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
 uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]   # check the layout plan in design_spec.md
+uv run python3 skills/ppt-master/scripts/render_pages.py <project_path> [--page 03] [--sheet]   # render pages to PNG and look at them
+uv run python3 skills/ppt-master/scripts/free_page_check.py <project_path>                      # free-design pages: frame kept, no overflow or overlap
 uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 
 # Post-processing & export — RECOMMENDED: one fail-fast invocation
@@ -137,9 +139,17 @@ grep -o 'href="\.\./images/[^"]*"' <project_path>/svg_output/*.svg | sort | uniq
 
 - Default template: `奇安信`. A template = core pages (`01_cover` … `04_ending`, always used
   for cover/TOC/chapter/ending) + optional `content/` body layouts.
+- **First principle**: when the model can read the page content's own structure or metaphor, it
+  designs the page for it instead of fitting it into a preset layout. The layouts are the default,
+  not a cage; never merge, drop, regroup or pad what the source says to fit one.
 - `奇安信`, `mckinsey`, `pixel_retro` ship 22 body layouts each; the Strategist names one per
   body page (`Layout: <id>`) and the Executor fills it with `layout_fill.py`. Other templates
   design body pages freely on `03_content.svg`.
+- `**Layout mode**` in the spec: `open` (frontier-tier models — Opus / Fable / Gemini argon-class)
+  designs a page freely (`Layout: free: …`, on `content/free_frame.svg`) when the source has its own
+  count, grouping, links or metaphor; `library` (small models, or strict uniformity) stays with
+  the layouts. A free page states its own Claim check, is rendered and looked at
+  (`render_pages.py`), and must pass `free_page_check.py`; `build_pptx.py` runs that check.
 - Layouts are chosen by the content's **relation** (16-word vocabulary: statement, metric,
   contrast, problem_solution, parallel, sequence, …), never for variety. Each body page in
   `design_spec.md` carries Message / Relation / Layout / Claim check / Evidence (verbatim quotes

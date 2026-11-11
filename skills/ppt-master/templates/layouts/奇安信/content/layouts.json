@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": 2,
+    "version": 3,
     "canvas": "0 0 1280 720",
     "usage": "先按内容关系（relations，见 meta.relations）筛版式，再用 claim 验证内容；在 design_spec 的 Layout 字段写版式 ID。slots 的数字是该槽位的最大中文字符数，英文按 0.55 个中文宽度估算；{n} 表示序号。",
     "relations": {
@@ -20,6 +20,51 @@
       "evidence": "论点+证据",
       "timeline": "时间线",
       "matrix": "二维矩阵"
+    },
+    "frame": {
+      "file": "free_frame.svg",
+      "body": [
+        40,
+        130,
+        1240,
+        705
+      ],
+      "reserved": [
+        [
+          0,
+          0,
+          1280,
+          118
+        ],
+        [
+          1215,
+          697,
+          1245,
+          716
+        ]
+      ],
+      "titleCapacity": 22,
+      "font": "Microsoft YaHei, SimHei, sans-serif",
+      "palette": {
+        "primary": "#2C7FEF",
+        "deep": "#1E6BEE",
+        "ink": "#0F1423",
+        "text": "#333333",
+        "muted": "#64748B",
+        "surface": "#FFFFFF",
+        "page_bg": "#FFFFFF",
+        "tint": "#F4F7FB",
+        "panel": "#E0ECFD",
+        "halo": "#D9E8FC",
+        "line": "#D4E5FC",
+        "on_accent": "#FFFFFF",
+        "series": [
+          "#1E6BEE",
+          "#28A963",
+          "#42AFF0"
+        ],
+        "alert": "#EE822F"
+      }
     }
   },
   "layouts": {
@@ -40,7 +85,7 @@
         "有先后顺序的流程",
         "单组要点超过 3 个"
       ],
-      "items": "固定 3 栏；每栏 2–3 张卡片。少于 3 张时删掉整张卡片，其余卡片加高填满栏高，不留空洞",
+      "items": "固定 3 栏；每栏 1–3 张卡片，各栏张数尽量相同。未填的卡片整张删除，下方留白，不重排",
       "maxRuns": 40,
       "weight": "heavy",
       "labelSlots": [],
@@ -117,7 +162,7 @@
         "无程度差异的并列项",
         "少于 4 级"
       ],
-      "items": "4–6 级。减少时删掉最靠前的列，并让其余列等宽铺满 x=35..1200",
+      "items": "4–6 级，从 S1 起连续填。未填的级整列删除，右侧留白，不重排",
       "maxRuns": 42,
       "weight": "heavy",
       "labelSlots": [
@@ -158,7 +203,7 @@
         "层之间无上下关系",
         "说明超过两行"
       ],
-      "items": "3–4 层。3 层时删掉最后一层，其余行高增到 140",
+      "items": "3–4 层，从 R1 起连续填。未填的层整行删除，不重排",
       "maxRuns": 13,
       "weight": "medium",
       "labelSlots": [],
@@ -232,7 +277,7 @@
         "没有合适的主图",
         "每条超过一行"
       ],
-      "items": "5–8 条。减少时按条数重新均分 y=150..678，x 仍取弧线对称值",
+      "items": "5–8 条，从 P1 起连续填。未填的条整条删除，不重排；少于 7 条时下方留白",
       "maxRuns": 16,
       "weight": "medium",
       "labelSlots": [],

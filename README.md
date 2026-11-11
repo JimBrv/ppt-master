@@ -24,7 +24,8 @@
 | **📋 AGENTS.md Update** | Updated the quick-reference command table, added the `excel_to_md.py` entry, and documented the PTY I/O bypass rule. |
 | **🛡️ QAX (奇安信) Default Template** | Brand template with the real background art and logo extracted from QAX decks. Recommended by default when no template is named (the user still confirms). |
 | **📐 Content Layouts** | 22 ready-made body-page layouts (statement, key metrics, problem → response, contrast, pillars, stages, funnel, pyramid, timeline, 2×2, ...), each declaring the content relation it shows and a claim to test it against. Each is a complete page with `{{SLOT}}` text and per-slot capacity; `layout_fill.py` fills one and rejects overflow. Shipped for `奇安信`, `mckinsey` and `pixel_retro`. |
-| **🧭 Relation-driven Layout Choice** | The Strategist picks each body page's layout from the content's relation (16-word vocabulary), checks the layout's visual claim, keeps parallel sections on one layout, and sizes text to the genre (narrative / report / solution). `layout_plan_check.py` checks the plan. |
+| **🧭 Relation-driven Layout Choice** | The Strategist picks each body page's form from the content's relation (16-word vocabulary), checks the visual claim, keeps parallel sections on one design, and sizes text to the genre (narrative / report / solution). `layout_plan_check.py` checks the plan. |
+| **🎨 Content First, Layouts as Default** | When the model can read the content's own structure or metaphor, it designs the page freely instead of fitting a preset layout (open layout mode, for frontier-tier models). Free pages keep the template frame, are rendered and reviewed by the model (`render_pages.py`), and are checked by result (`free_page_check.py`). |
 | **🧩 Shared Layout Library** | Layouts are written once against color roles (`templates/content_library/`); a template adds only `theme.json` + `shell.svg`, and `layout_build.py` produces its `content/`. `pptx_inspect.py` and `layout_stress.py` absorb new layouts from reference decks and stress-test them. |
 | **🎨 Your .pptx as the Template** | `pptx_to_template.py` turns a user-supplied `.pptx` into a template with its real backgrounds and logos at exact positions. |
 | **👀 Live Preview** | `preview.py --serve` shows outline / rendered layout / text tabs and reloads page by page as SVGs land; `executor_output.md` keeps the Executor transcript. |
@@ -199,6 +200,8 @@ uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> --slots <
 uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_id> <values.json> -o <project_path>/svg_output/<page>.svg
 uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
 uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]
+uv run python3 skills/ppt-master/scripts/render_pages.py <project_path> [--page 03] [--sheet]
+uv run python3 skills/ppt-master/scripts/free_page_check.py <project_path>
 uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/<template>
 uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 

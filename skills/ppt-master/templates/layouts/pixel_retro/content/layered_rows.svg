@@ -17,33 +17,33 @@
   <g transform="translate(10.02,-15.97) scale(0.9843)">
   <rect x="571" y="140" width="8" height="464" rx="4" fill="#30363D"/>
   <!-- layer 1 -->
-  <rect x="150" y="140" width="998" height="104" rx="8" fill="#39FF14" fill-opacity="0.18"/>
-  <rect x="1143" y="140" width="5" height="104" rx="2" fill="#39FF14"/>
-  <circle cx="575" cy="192" r="30" fill="#39FF14"/>
+  <rect data-slot-box="R1_LABEL" x="150" y="140" width="998" height="104" rx="8" fill="#39FF14" fill-opacity="0.18"/>
+  <rect data-slot-box="R1_LABEL" x="1143" y="140" width="5" height="104" rx="2" fill="#39FF14"/>
+  <circle data-slot-box="R1_LABEL" cx="575" cy="192" r="30" fill="#39FF14"/>
   <use data-icon="{{R1_ICON}}" x="559" y="176" width="32" height="32" fill="#0D1117"/>
   <text x="176" y="201" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#E6EDF3">{{R1_LABEL}}</text>
   <text x="636" y="186" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{R1_L1}}</text>
   <text x="636" y="212" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{R1_L2}}</text>
   <!-- layer 2 -->
-  <rect x="150" y="256" width="998" height="104" rx="8" fill="#00D4FF" fill-opacity="0.18"/>
-  <rect x="1143" y="256" width="5" height="104" rx="2" fill="#00D4FF"/>
-  <circle cx="575" cy="308" r="30" fill="#00D4FF"/>
+  <rect data-slot-box="R2_LABEL" x="150" y="256" width="998" height="104" rx="8" fill="#00D4FF" fill-opacity="0.18"/>
+  <rect data-slot-box="R2_LABEL" x="1143" y="256" width="5" height="104" rx="2" fill="#00D4FF"/>
+  <circle data-slot-box="R2_LABEL" cx="575" cy="308" r="30" fill="#00D4FF"/>
   <use data-icon="{{R2_ICON}}" x="559" y="292" width="32" height="32" fill="#0D1117"/>
   <text x="176" y="317" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#E6EDF3">{{R2_LABEL}}</text>
   <text x="636" y="302" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{R2_L1}}</text>
   <text x="636" y="328" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{R2_L2}}</text>
   <!-- layer 3 -->
-  <rect x="150" y="372" width="998" height="104" rx="8" fill="#1F6FEB" fill-opacity="0.18"/>
-  <rect x="1143" y="372" width="5" height="104" rx="2" fill="#1F6FEB"/>
-  <circle cx="575" cy="424" r="30" fill="#1F6FEB"/>
+  <rect data-slot-box="R3_LABEL" x="150" y="372" width="998" height="104" rx="8" fill="#1F6FEB" fill-opacity="0.18"/>
+  <rect data-slot-box="R3_LABEL" x="1143" y="372" width="5" height="104" rx="2" fill="#1F6FEB"/>
+  <circle data-slot-box="R3_LABEL" cx="575" cy="424" r="30" fill="#1F6FEB"/>
   <use data-icon="{{R3_ICON}}" x="559" y="408" width="32" height="32" fill="#0D1117"/>
   <text x="176" y="433" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#E6EDF3">{{R3_LABEL}}</text>
   <text x="636" y="418" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{R3_L1}}</text>
   <text x="636" y="444" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{R3_L2}}</text>
   <!-- layer 4 -->
-  <rect x="150" y="488" width="998" height="104" rx="8" fill="#FF2E97" fill-opacity="0.18"/>
-  <rect x="1143" y="488" width="5" height="104" rx="2" fill="#FF2E97"/>
-  <circle cx="575" cy="540" r="30" fill="#FF2E97"/>
+  <rect data-slot-box="R4_LABEL" x="150" y="488" width="998" height="104" rx="8" fill="#FF2E97" fill-opacity="0.18"/>
+  <rect data-slot-box="R4_LABEL" x="1143" y="488" width="5" height="104" rx="2" fill="#FF2E97"/>
+  <circle data-slot-box="R4_LABEL" cx="575" cy="540" r="30" fill="#FF2E97"/>
   <use data-icon="{{R4_ICON}}" x="559" y="524" width="32" height="32" fill="#0D1117"/>
   <text x="176" y="549" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="bold" fill="#E6EDF3">{{R4_LABEL}}</text>
   <text x="636" y="534" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="17" fill="#E6EDF3">{{R4_L1}}</text>

@@ -45,14 +45,27 @@ because it sets how much each body page carries. Write it as `**Genre**` in I. P
 
 | Genre | Typical source | Avg text runs / body page | Single-page max | Light pages (statement / metric) |
 |-------|----------------|---------------------------|-----------------|----------------------------------|
-| `narrative` | Essay, speech, opinion piece, keynote | 20–25 | 25 | At least 1 per 4–5 body pages |
-| `report` | Work report, review, research findings | ≤ 25 | 40 | Recommended |
-| `solution` | Solution, product, technical architecture | ≤ 35 | 50 | Optional |
+| `narrative` | Essay, speech, opinion piece, keynote | 20–30 | 36 | At least 1 per 4–5 body pages |
+| `report` | Work report, review, research findings | ≤ 30 | 46 | Recommended |
+| `solution` | Solution, product, technical architecture | ≤ 40 | 56 | Optional |
 
 A text run is one line of **content**: the page title, the page number and a layout's fixed labels
 (`labelSlots` in `layouts.json`, such as series tags, section captions and axis names) do not count.
 The budgets are guidance, not a gate:
-`layout_plan_check.py --output` reports pages over budget as hints.
+`layout_plan_check.py --output` reports pages over budget as hints. A page that shows its
+content's own structure well (groups, links, a drawn metaphor) may carry more than a sparse one;
+cut text when the page is hard to read, not to hit a number.
+
+**Layout mode** (confirmed together with the genre): write it as `**Layout mode**` in
+I. Project Information. It decides how freely body pages are designed — see Content Layout Selection.
+
+| Mode | Use it when | Body pages |
+|------|-------------|------------|
+| `open` | You are a frontier-tier model (Claude Opus / Fable, Gemini argon-class, or stronger) | Read the content's own structure first; design the page freely when that shows it better, otherwise fill a library layout |
+| `library` | You are a small or fast-tier model (flash, haiku, mini…), or the user asks for strict uniformity or speed | Fill library layouts; `free` only when no layout's claim holds |
+
+Recommend the mode that matches the model you are running as; the user may override it. A missing
+row means `library`.
 
 **Style selection decision tree**:
 
@@ -295,19 +308,30 @@ Built-in library contains 33 chart templates; see `templates/charts/charts_index
 
 ### Content Layout Selection
 
-A layout is a visual claim about how the content is related. Choose it from the
-content's relation, never from the item count or for variety's sake. These rules
+> **First principle: when you can read the page content's own structure or metaphor, design the
+> page for it yourself instead of fitting it into a preset layout.**
+
+A page's form is a visual claim about how its content is related. Choose it from the
+content's relation, never from the item count or for variety's sake. The library's layouts are
+measured, proven on export and consistent; they are the default, not a cage. These rules
 apply to every body page, including free-design pages in templates without content layouts.
+
+Why the first principle holds: in a side-by-side test on one essay, the same model built three
+pages twice — once from the library, once freely — and the free pages won all three. The library
+page lost even where a fitting layout existed, because the author's own image ("the pendulum has
+swung") had no place in it; elsewhere the layout held three responses where the source named
+four, and three columns where the source made two groups.
 
 #### Principles
 
 | # | Principle | Test question |
 |---|-----------|---------------|
+| P0 | **The content's own structure comes first.** Before looking at layouts, read what the source itself gives the page: how many items it enumerates, how it groups them, which items it links, what image or metaphor it uses | Did the page keep the source's count, grouping, links and image — or the layout's? |
 | P1 | **One message per page.** Write the one sentence (≤ 30 characters) the audience should remember; the title is that sentence or close to it | Reading only the title, can you state the page's conclusion? |
-| P2 | **The relation picks the layout.** Find the relation words in the message and source, classify the page into one relation below, and choose only among layouts that show it | Which relation is this? Does the chosen layout show that relation? |
-| P3 | **The visual claim must hold.** Every layout implies something (a funnel narrows, a loop returns to its start, stairs rise). Read the layout's `claim` against the content | Read the claim aloud with this content. Is it true? |
-| P4 | **Capacity is a ceiling.** Fill only what the source supports; every item must trace back to the source. If slots stay empty, delete them or pick a lighter layout of the same relation. Numbers keep their exact form: a range stays a range (10–100×, not 100), an estimate keeps "about" | Can you point to where each item comes from? Is every number exactly as the source has it? |
-| P5 | **Parallel pages share one layout.** Sections of the same kind (five risks, three cases) use one layout so the audience can compare them. "Vary neighboring layouts" applies only between different relations | Does every page of a parallel group use the same layout? |
+| P2 | **The relation picks the form.** Find the relation words in the message and source, classify the page into one relation below, and choose only among layouts that show it — or design a free page that shows it | Which relation is this? Does the chosen layout or design show that relation? |
+| P3 | **The visual claim must hold.** Every layout implies something (a funnel narrows, a loop returns to its start, stairs rise). Read the layout's `claim` against the content; a free page states its own claim and must draw every part of it | Read the claim aloud with this content. Is it true? |
+| P4 | **Capacity is a ceiling, and never a mould.** Fill only what the source supports; every item must trace back to the source. If slots stay empty, delete them or pick a lighter layout of the same relation. Never merge, drop, regroup or pad the source's items to fit a layout. Numbers keep their exact form: a range stays a range (10–100×, not 100), an estimate keeps "about" | Can you point to where each item comes from? Is every number exactly as the source has it? |
+| P5 | **Parallel pages share one design.** Sections of the same kind (five risks, three cases) use one layout — or one free design, drawn once and repeated — so the audience can compare them. "Vary neighboring layouts" applies only between different relations | Does every page of a parallel group use the same layout? |
 | P6 | **The genre sets the density.** Keep each page within the genre budget (see d. Genre and density) | Is the page within its text-run budget? |
 | P7 | **The deck has a rhythm.** In narrative decks, place a light page (statement or metric) every 4–5 pages; avoid three heavy pages in a row | Are there three heavy pages in a row? |
 
@@ -335,14 +359,39 @@ apply to every body page, including free-design pages in templates without conte
 `layouts.json` lists each layout's `relations`, `claim`, `labelSlots`, `maxRuns` and `weight`
 (content slots when fully filled: light ≤ 12, medium ≤ 30, heavy > 30); its `meta.relations` repeats the vocabulary.
 
+#### When to design a free page (open mode)
+
+Go free when any one of these is true; otherwise fill the library layout — it is faster, its
+capacity is measured, and parallel pages come out identical.
+
+| Test | The source… | Example |
+|------|-------------|---------|
+| Count | enumerates N items and the layout holds fewer or more, so fitting would merge, drop or pad | Four defenses; the layout holds three responses |
+| Grouping | groups its items its own way, and the layout would impose another | Risks #1–3 are security threats, #4–5 are not; the layout has three equal columns |
+| Metaphor | has its own image that can be drawn | "The pendulum has swung" |
+| Links | says how items relate to each other (A works with B, A feeds B), and the layout has no place for it | Two defenses "are most powerful when used together" |
+| Two relations | needs two relations on one page | A thought experiment (statement) that poses five parallel questions |
+
+A free page still carries every field. Write `Layout: free: <one line describing the design>`, keep
+the nearest **Relation**, and write a **Claim check** for the claim your own design makes: what the
+picture asserts, and which content plays which part. The Executor builds it on the template's frame,
+looks at the render, and runs `free_page_check.py` (executor-base.md → Free pages).
+
+In `library` mode the tests do not apply: choose a layout, and when its count or grouping does not
+match the source, say the compromise in the Claim check ("原文四类，版式三条：把 1、2 合并").
+
 #### Procedure
 
-1. **Genre** — confirmed in d. (Eight Confirmations); sets the density budget.
-2. **Skeleton** — list the sections, mark parallel groups, and give each group one layout.
+1. **Genre and layout mode** — confirmed in d. (Eight Confirmations); they set the density budget
+   and how freely pages are designed.
+2. **Skeleton** — list the sections, mark parallel groups, and give each group one design.
 3. **Each body page, in this order** — Evidence (find the source passages first) → Message → Relation →
-   candidate layouts for that relation → Claim check → capacity. When the claim fails, try another layout of the same relation;
-   when none fits, write `Layout: free: <description>` and keep the Relation. When the content
-   cannot fill the slots, delete slots or choose a lighter layout — never invent content to fill them.
+   the content's own structure (count, grouping, links, image: P0) → form → Claim check → capacity.
+   *Form, open mode:* run the go-free tests; when one is met, design a free page, otherwise pick among
+   the layouts for that relation. *Form, library mode:* pick among the layouts for that relation;
+   when a claim fails, try another layout of the same relation; only when none holds, write
+   `Layout: free: <description>`. When the content cannot fill the slots, delete slots or choose a
+   lighter layout — never invent content to fill them.
 4. **Deck review** — series consistent, density within budget, light pages present, no three heavy
    pages in a row; then run the checker before presenting the spec:
 
@@ -350,9 +399,9 @@ apply to every body page, including free-design pages in templates without conte
 uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path>
 ```
 
-Errors (missing fields, unknown relation or layout, a layout that does not show the relation, an
-Evidence quote not found in `sources/`, numbered pages such as 风险一 / 风险二 without a shared Series,
-a series with mixed layouts) must be fixed. Hints (density, rhythm) are for judgement — read each one
+Errors (missing fields — including the Claim check of a free page —, unknown relation or layout, a
+layout that does not show the relation, an Evidence quote not found in `sources/`, numbered pages
+such as 风险一 / 风险二 without a shared Series, a series with mixed layouts) must be fixed. Hints (density, rhythm) are for judgement — read each one
 and either fix the page or say in the spec why it stays.
 
 **Evidence** holds one or more verbatim quotes from the converted source in `sources/`, in "…", “…”
@@ -374,6 +423,19 @@ Each body page in the Content Outline carries these fields:
 - **Claim check**: 链路 = 获取知识 → 设计 → 合成 → 实验 → 扩散（原文顺序）；核心 = 全链路防护；约束 = 4 项措施，均出自原文
 - **Evidence**: "36 out of 38 providers fulfilled an order containing the sequence of the 1918 flu"
 - **Series**: risks 2/5            (only for pages in a parallel group)
+- **Title**: ...
+- **Content**: ...
+```
+
+A free page (open mode) carries the same fields:
+
+```markdown
+#### Slide 02 - 讨论 AI 风险的三条原则
+- **Message**: 谈 AI 风险要冷静务实：不渲染末日、承认不确定、干预尽量精准
+- **Relation**: contrast
+- **Layout**: free: 钟摆（原文的比喻）——两端摆动，中间铅垂线是主张；下方三条原则三栏
+- **Claim check**: 画面主张：公众态度在两端来回摆，铅垂线不动。左摆 = 2023–2024 末日论；右摆 = 2025–2026 转向机遇；铅垂线 = 冷静、基于事实；三栏 = 原文三条原则
+- **Evidence**: "the pendulum has swung, and AI opportunity, not AI risk, is driving many political decisions"
 - **Title**: ...
 - **Content**: ...
 ```

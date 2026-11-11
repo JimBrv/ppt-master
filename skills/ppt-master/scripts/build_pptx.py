@@ -8,8 +8,11 @@ any stage fails, then optionally verifies the exported deck:
     0. preflight           layout_plan_check.py --output: design_spec.md exists at
                            the project root, the plan passes, and every page in
                            svg_output/ is the planned page filled from the planned
-                           layout (fails the build); stray files and a missing or
-                           summary-sized source are reported (warnings)
+                           layout (fails the build); then free_page_check.py: every
+                           free-design page keeps the template frame, and no text
+                           overflows its box, overlaps or leaves the canvas (fails
+                           the build); stray files and a missing or summary-sized
+                           source are reported (warnings)
     1. total_md_split.py   split speaker notes
     2. finalize_svg.py     embed icons/images, flatten text, rects -> paths
     3. svg_to_pptx.py      export ONE editable native-shapes deck from svg_final/
@@ -116,6 +119,7 @@ def main() -> None:
     else:
         run('0/3  preflight: pages match design_spec.md',
             [str(SCRIPTS / 'layout_plan_check.py'), proj, '--output'])
+        run('0/3  preflight: free-design pages', [str(SCRIPTS / 'free_page_check.py'), proj])
 
     if not args.skip_notes:
         run('1/3  split speaker notes', [str(SCRIPTS / 'total_md_split.py'), proj])

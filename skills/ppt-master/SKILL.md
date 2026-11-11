@@ -44,6 +44,8 @@ description: >
 | `${SKILL_DIR}/scripts/layout_fill.py` | Fill one content layout from a values file, checking every slot's capacity |
 | `${SKILL_DIR}/scripts/layout_build.py` | Build a template's content layouts from the shared library and its theme |
 | `${SKILL_DIR}/scripts/layout_plan_check.py` | Check the design spec's layout plan (relation ↔ layout, series, density) |
+| `${SKILL_DIR}/scripts/free_page_check.py` | Check free-design pages by their result (frame kept, no text overflow or overlap) |
+| `${SKILL_DIR}/scripts/render_pages.py` | Render pages to PNG so you can look at what you drew |
 | `${SKILL_DIR}/scripts/layout_stress.py` | Stress-test a template's content layout library |
 | `${SKILL_DIR}/scripts/pptx_inspect.py` | Extract geometry and renders from a reference deck to build new layouts |
 | `${SKILL_DIR}/scripts/analyze_images.py` | Image analysis |
@@ -207,8 +209,10 @@ cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2
 > `contentLayouts` also ships `content/`: ready-made body pages with `{{SLOT}}` text and
 > capacities (currently `奇安信`, `mckinsey`, `pixel_retro`, 22 layouts each). The `cp -R`
 > above copies it; the Strategist then picks a layout ID per body page and the Executor fills
-> it with `layout_fill.py`. Templates without `content/` design body pages freely on
-> `03_content.svg`, as before. All templates share one layout library
+> it with `layout_fill.py`. The layouts are the default, not a cage: in open layout mode a page
+> whose content has its own count, grouping, links or metaphor is designed freely on
+> `content/free_frame.svg` (the same frame, with an empty body). Templates without `content/` design
+> body pages freely on `03_content.svg`, as before. All templates share one layout library
 > (`templates/content_library/`); give another template the layouts with `layout_build.py`
 > — see `scripts/docs/layouts.md`. Do this only when the user asks; it is not part of a normal run.
 
@@ -237,7 +241,7 @@ Read references/shared-standards.md
 1. Canvas format
 2. Page count range
 3. Target audience
-4. Style objective (including **genre and density**: narrative / report / solution — see strategist.md §d)
+4. Style objective (including **genre and density**: narrative / report / solution, and **layout mode**: open / library — see strategist.md §d)
 5. Color scheme
 6. Icon usage approach
 7. Typography plan
@@ -256,9 +260,13 @@ uv run python3 ${SKILL_DIR}/scripts/analyze_images.py <project_path>/images
 The spec lives at the project root (`<project_path>/design_spec.md`, not under `templates/`):
 the preview, the checker and the Executor all read it from there.
 
-**Layout plan (every body page)**: choose layouts by the content's relation, not for variety — follow
-`references/strategist.md` → *Content Layout Selection* (principles P1–P7, relation vocabulary,
-fields per page: Message / Relation / Layout / Claim check / Evidence / Series). Evidence quotes are
+> 🧭 **First principle**: when you can read the page content's own structure or metaphor, design
+> the page for it yourself instead of fitting it into a preset layout. Never merge, drop, regroup
+> or pad what the source says to fit a layout.
+
+**Layout plan (every body page)**: choose each page's form by the content's relation, not for variety — follow
+`references/strategist.md` → *Content Layout Selection* (principles P0–P7, relation vocabulary,
+when to design a free page, fields per page: Message / Relation / Layout / Claim check / Evidence / Series). Evidence quotes are
 looked up verbatim in `sources/`. Then check the plan and fix
 every `[FAIL]` before the checkpoint; `[HINT]` lines (density, rhythm) are for judgement:
 ```bash
@@ -357,6 +365,8 @@ Read references/executor-consultant-top.md # Top consulting style (MBB level)
 
 > 📐 When a page's `Layout` field is a layout ID, fill `templates/content/<id>.svg` with
 > `scripts/layout_fill.py` (executor-base.md §1.7) instead of drawing the page from scratch.
+> When it is `free: …`, design the page on the template's frame, **render it and look at it**
+> (`render_pages.py`), and pass `free_page_check.py` (executor-base.md §1.7 → Free pages).
 
 **Design Parameter Confirmation (Mandatory)**: Before generating the first SVG, the Executor MUST review and output key design parameters from the Design Specification (canvas dimensions, color scheme, font plan, body font size) to ensure spec adherence. See executor-base.md Section 2 for details.
 
@@ -404,15 +414,17 @@ your own status update if useful, e.g. "page 3/8 done, reload the preview to see
 ```bash
 uv run python3 ${SKILL_DIR}/scripts/build_pptx.py <project_path> --verify
 ```
-Its preflight (`layout_plan_check.py --output`) stops the export when `design_spec.md` is missing from
-the project root, the plan fails, or a page in `svg_output/` is not the planned page filled from the
-planned layout. It also warns about stray `.json` files, a leftover `tmp/`, and a source that looks
+Its preflight (`layout_plan_check.py --output`, then `free_page_check.py`) stops the export when
+`design_spec.md` is missing from the project root, the plan fails, a page in `svg_output/` is not the
+planned page filled from the planned layout, or a free-design page changed the frame or has text
+that overflows, overlaps or leaves the canvas. It also warns about stray `.json` files, a leftover `tmp/`, and a source that looks
 like a summary. Fix the cause — do not skip the preflight. (`--no-plan-check` exists only for projects
 planned before the layout fields existed.)
 
 When running the sub-steps by hand instead, first run the same preflight and fix every `[FAIL]`:
 ```bash
 uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path> --output
+uv run python3 ${SKILL_DIR}/scripts/free_page_check.py <project_path>
 ```
 
 > ⚠️ The following three sub-steps MUST be **executed individually one at a time**. Each command must complete and be confirmed successful before running the next.

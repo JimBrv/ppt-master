@@ -3,7 +3,7 @@
   <image href="../images/qax_bg_content.jpg" x="0" y="0" width="1280" height="720" preserveAspectRatio="none"/>
   <image href="../images/qax_logo.png" x="992.3" y="0" width="275.2" height="110.4" preserveAspectRatio="none"/>
   <text x="58" y="88" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="40" font-weight="bold" fill="#003893">{{PAGE_TITLE}}</text>
-  <rect x="40" y="146" width="150" height="40" rx="20" fill="#2C7FEF"/>
+  <rect data-slot-box="SERIES" x="40" y="146" width="150" height="40" rx="20" fill="#2C7FEF"/>
   <text x="115" y="173" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{SERIES}}</text>
   <text x="210" y="174" font-family="Microsoft YaHei, SimHei, sans-serif" font-size="20" font-style="italic" fill="#4874CB">{{HOOK}}</text>
   <!-- problem panel -->

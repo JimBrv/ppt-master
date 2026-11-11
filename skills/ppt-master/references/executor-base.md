@@ -123,7 +123,53 @@ item is a defect (strategist.md P4). After all pages are written, compare densit
 uv run python3 ${SKILL_DIR}/scripts/layout_plan_check.py <project_path> --output
 ```
 
-A `free: ...` Layout value means free design inside `03_content.svg`. Before leaving Step 6, `grep -l '{{' svg_output/*.svg` must print nothing.
+Before leaving Step 6, `grep -l '{{' svg_output/*.svg` must print nothing.
+
+#### Free pages
+
+A `free: …` Layout value means the page is designed for its content (strategist.md → first
+principle). A layout page is safe by construction; a free page is checked by its result. Follow
+these steps for every free page:
+
+1. **Start from the frame.** Copy `templates/content/free_frame.svg` when the template has it (it puts
+   the title and page number exactly where the layout pages have them), otherwise `03_content.svg`.
+   Keep its `<image>` tags, title position and page number unchanged; fill `{{PAGE_TITLE}}` and
+   `{{PAGE_NUM}}`; draw the body inside `meta.frame.body` of `templates/content/layouts.json`
+   (`x 40–1240, y 130–705` by default) and out of `meta.frame.reserved`.
+2. **Use the template's colors.** Take every color from `meta.frame.palette`: `primary`, `deep`,
+   `ink`, `text`, `muted`, `surface`, `tint`, `panel`, `halo`, `line`, `on_accent`, the `series`
+   list for parallel groups, and `alert` for the one thing the page warns about. No new hues.
+3. **Keep the type scale** so free and layout pages read as one deck: section head 18–22 bold, card
+   title 19–22 bold, body 15–17, caption 13–14, a hero number up to 64; nothing below 12.
+4. **Measure before you write.** One line per `<text>`. A full-width character is one font-size
+   wide, a Latin character about 0.55: a 16px line in a 330px box holds 20 full-width characters.
+   Cards: radius 10–14, a 1px `line` stroke or a `tint` fill.
+5. **Draw the claim.** Every part the Claim check names — the groups, the link between two items,
+   the metaphor — must be visible in the picture, not only stated in text.
+6. **One design per series.** Draw the first page of a Series, then reuse its geometry for the
+   others; only the text changes.
+7. **Look at it.** Render the page, read the PNG, fix what you see, render again:
+
+   ```bash
+   uv run python3 ${SKILL_DIR}/scripts/render_pages.py <project_path> --page 03
+   uv run python3 ${SKILL_DIR}/scripts/render_pages.py <project_path> --sheet    # the whole deck on one image
+   ```
+
+   Check: text overflowing or colliding; uneven gaps and misaligned edges; empty holes; whether the
+   eye lands first on the page's Message; whether the page is too full to read. Before the deck is
+   done, look at the `--sheet` once: free and layout pages should read as one deck.
+8. **Pass the check.**
+
+   ```bash
+   uv run python3 ${SKILL_DIR}/scripts/free_page_check.py <project_path>
+   ```
+
+   It fails a page whose frame was changed, whose text is wider than its box, overlaps other text,
+   leaves the canvas or enters a reserved area, or that still holds a `{{PLACEHOLDER}}`.
+   `build_pptx.py` runs it before exporting.
+
+The SVG technical constraints apply unchanged. Renders go to `<project_path>/tmp/render/`; delete
+`tmp/` with the values files.
 
 ---
 

@@ -54,12 +54,12 @@
   <text x="341" y="554" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE3_CHIP4}}</text>
   <polygon points="39,272 57,272 57,294 64,294 48,315 32,294 39,294" fill="#D6E4EC"/>
   <polygon points="39,424 57,424 57,446 64,446 48,467 32,446 39,446" fill="#D6E4EC"/>
-  <polygon points="39,566 57,566 57,588 64,588 48,609 32,588 39,588" fill="#D6E4EC"/>
+  <polygon data-slot-box="STAGE4_LABEL" points="39,566 57,566 57,588 64,588 48,609 32,588 39,588" fill="#D6E4EC"/>
   <!-- final stage: single wide chip -->
-  <rect x="63" y="604" width="493" height="91" rx="12" fill="#005587" fill-opacity="0.12"/>
-  <rect x="33" y="619" width="60" height="60" rx="10" fill="#005587"/>
+  <rect data-slot-box="STAGE4_LABEL" x="63" y="604" width="493" height="91" rx="12" fill="#005587" fill-opacity="0.12"/>
+  <rect data-slot-box="STAGE4_LABEL" x="33" y="619" width="60" height="60" rx="10" fill="#005587"/>
   <text x="63" y="656" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{STAGE4_LABEL}}</text>
-  <rect x="110" y="617" width="431" height="62" rx="6" fill="#FFFFFF"/>
+  <rect data-slot-box="STAGE4_LABEL" x="110" y="617" width="431" height="62" rx="6" fill="#FFFFFF"/>
   <text x="122" y="643" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE4_L1}}</text>
   <text x="122" y="666" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#2C3E50">{{STAGE4_L2}}</text>
   <!-- evidence panel -->
@@ -70,8 +70,8 @@
   <rect x="602" y="554" width="629" height="140" rx="12" fill="#005587"/>
   <text x="640" y="618" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{CALLOUT_LABEL_L1}}</text>
   <text x="640" y="646" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{CALLOUT_LABEL_L2}}</text>
-  <rect x="680" y="576" width="4" height="40" rx="2" fill="#FFFFFF"/>
-  <rect x="680" y="640" width="4" height="40" rx="2" fill="#FFFFFF"/>
+  <rect data-slot-box="RESULT1_TITLE" x="680" y="576" width="4" height="40" rx="2" fill="#FFFFFF"/>
+  <rect data-slot-box="RESULT2_TITLE" x="680" y="640" width="4" height="40" rx="2" fill="#FFFFFF"/>
   <text x="696" y="590" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">{{RESULT1_TITLE}}</text>
   <text x="696" y="613" font-family="Microsoft YaHei, Arial, sans-serif" font-size="15" fill="#FFFFFF">{{RESULT1_BODY}}</text>
   <text x="696" y="654" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">{{RESULT2_TITLE}}</text>

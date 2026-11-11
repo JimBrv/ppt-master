@@ -16,7 +16,7 @@
   <line x1="0" y1="640" x2="1280" y2="640" stroke="#E5E7EB" stroke-width="1"/>
   <rect x="1140" y="655" width="80" height="30" fill="#005587" rx="4"/>
   <g transform="translate(38.96,-30.09) scale(0.9391)">
-  <rect x="40" y="146" width="150" height="40" rx="20" fill="#005587"/>
+  <rect data-slot-box="SERIES" x="40" y="146" width="150" height="40" rx="20" fill="#005587"/>
   <text x="115" y="173" font-family="Microsoft YaHei, Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{SERIES}}</text>
   <text x="210" y="174" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-style="italic" fill="#0076A8">{{HOOK}}</text>
   <!-- problem panel -->

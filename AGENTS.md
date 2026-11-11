@@ -28,7 +28,8 @@ PPT Master is an AI-driven presentation generation system. Through multi-role co
 
 - The default template is `skills/ppt-master/templates/layouts/奇安信/`. Follow Step 3 of `SKILL.md`; it copies the SVGs, `content/`, and the image assets into the project.
 - When `<project>/templates/content/layouts.json` exists, every body page should name a layout ID in its `Layout` field. The layout's SVG is the complete page: fill its `{{SLOT}}` placeholders and keep its geometry, colors, and font sizes. Rules are in `references/strategist.md` and section 1.7 of `references/executor-base.md`.
-- Use `Layout: free: <description>` with `03_content.svg` only when no layout fits.
+- **First principle**: when you can read the page content's own structure or metaphor, design the page for it yourself instead of fitting it into a preset layout. Never merge, drop, regroup or pad what the source says to fit a layout.
+- `**Layout mode**` in the spec decides how freely pages are designed. `open` (frontier-tier models: Claude Opus / Fable, Gemini argon-class): write `Layout: free: <description>` when the source has its own count, grouping, links or metaphor; build the page on `templates/content/free_frame.svg`, render it and look at it (`render_pages.py`), and pass `free_page_check.py`. `library` (small or fast-tier models, or strict uniformity): stay with the layouts; `free` only when no layout's claim holds. A free page writes a Claim check for the claim its own design makes.
 - Templates with content layouts: `奇安信`, `mckinsey`, `pixel_retro` (22 each, `contentLayouts` in `layouts_index.json`). The others have core pages only; their body pages are designed freely, as before.
 - Choose a layout by the content's **relation** (statement, metric, contrast, problem_solution, parallel, sequence, …), never for variety. Each body page carries Message / Relation / Layout / Claim check / Evidence (verbatim source quotes, checked against `sources/`) (/ Series for parallel pages); run `layout_plan_check.py` before presenting the spec. Rules: `skills/ppt-master/references/strategist.md` → Content Layout Selection.
 - Never edit files under `skills/ppt-master/` or repoint `.venv` during a run; if a tool or the environment fails, stop and report it (`uv sync` repairs the venv).
@@ -65,6 +66,8 @@ uv run python3 skills/ppt-master/scripts/layout_fill.py <project_path> <layout_i
 uv run python3 skills/ppt-master/scripts/layout_stress.py skills/ppt-master/templates/layouts/奇安信
 uv run python3 skills/ppt-master/scripts/layout_build.py skills/ppt-master/templates/layouts/<template> [--check|--init]
 uv run python3 skills/ppt-master/scripts/layout_plan_check.py <project_path> [--output]   # check the layout plan in design_spec.md
+uv run python3 skills/ppt-master/scripts/render_pages.py <project_path> [--page 03] [--sheet]   # render pages to PNG and look at them
+uv run python3 skills/ppt-master/scripts/free_page_check.py <project_path>                      # free-design pages: frame kept, no overflow or overlap
 uv run python3 skills/ppt-master/scripts/pptx_inspect.py <deck.pptx> -o <out_dir> --pages 12-35 --render
 
 # Post-processing and export: one fail-fast invocation (recommended)

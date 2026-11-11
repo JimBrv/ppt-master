@@ -74,7 +74,7 @@ Font stack: `Microsoft YaHei, SimHei, sans-serif`. Sizes are SVG px; 1pt ≈ 1.3
 
 ## VII. Content Layouts
 
-`content/layouts.json` indexes twenty-two ready-made content pages. Prefer one of these for every body page; use `03_content.svg` only when none fits. Choose by the content's relation, then test the layout's `claim` (see `references/strategist.md` → Content Layout Selection).
+`content/layouts.json` indexes twenty-two ready-made content pages. They are the default for body pages. In open layout mode, design a page freely on `content/free_frame.svg` (this template's frame with an empty body; colors in `layouts.json` → `meta.frame.palette`) when the content has its own count, grouping, links or metaphor; in library mode, go free only when no layout's claim holds. Choose by the content's relation, then test the layout's `claim` (see `references/strategist.md` → Content Layout Selection).
 
 | ID | Relation | Best for |
 |----|----------|----------|

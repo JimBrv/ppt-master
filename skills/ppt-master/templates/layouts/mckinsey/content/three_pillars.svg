@@ -23,19 +23,19 @@
   <rect x="40" y="136" width="386" height="530" rx="14" fill="#FFFFFF" fill-opacity="0.85" stroke="#E5E7EB" stroke-width="1"/>
   <rect x="52" y="148" width="362" height="62" rx="10" fill="url(#mckHead)"/>
   <text x="233" y="189" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL1_TITLE}}</text>
-  <rect x="52" y="222" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL1_CARD1_TITLE" x="52" y="222" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL1_CARD1_ICON}}" x="66" y="234" width="28" height="28" fill="#004B77"/>
   <text x="104" y="256" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL1_CARD1_TITLE}}</text>
   <text x="68" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL1_CARD1_L1}}</text>
   <text x="68" y="314" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL1_CARD1_L2}}</text>
   <text x="68" y="340" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL1_CARD1_L3}}</text>
-  <rect x="52" y="368" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL1_CARD2_TITLE" x="52" y="368" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL1_CARD2_ICON}}" x="66" y="380" width="28" height="28" fill="#004B77"/>
   <text x="104" y="402" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL1_CARD2_TITLE}}</text>
   <text x="68" y="434" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL1_CARD2_L1}}</text>
   <text x="68" y="460" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL1_CARD2_L2}}</text>
   <text x="68" y="486" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL1_CARD2_L3}}</text>
-  <rect x="52" y="514" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL1_CARD3_TITLE" x="52" y="514" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL1_CARD3_ICON}}" x="66" y="526" width="28" height="28" fill="#004B77"/>
   <text x="104" y="548" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL1_CARD3_TITLE}}</text>
   <text x="68" y="580" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL1_CARD3_L1}}</text>
@@ -45,19 +45,19 @@
   <rect x="447" y="136" width="386" height="530" rx="14" fill="#FFFFFF" fill-opacity="0.85" stroke="#E5E7EB" stroke-width="1"/>
   <rect x="459" y="148" width="362" height="62" rx="10" fill="url(#mckHead)"/>
   <text x="640" y="189" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL2_TITLE}}</text>
-  <rect x="459" y="222" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL2_CARD1_TITLE" x="459" y="222" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL2_CARD1_ICON}}" x="473" y="234" width="28" height="28" fill="#004B77"/>
   <text x="511" y="256" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL2_CARD1_TITLE}}</text>
   <text x="475" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL2_CARD1_L1}}</text>
   <text x="475" y="314" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL2_CARD1_L2}}</text>
   <text x="475" y="340" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL2_CARD1_L3}}</text>
-  <rect x="459" y="368" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL2_CARD2_TITLE" x="459" y="368" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL2_CARD2_ICON}}" x="473" y="380" width="28" height="28" fill="#004B77"/>
   <text x="511" y="402" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL2_CARD2_TITLE}}</text>
   <text x="475" y="434" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL2_CARD2_L1}}</text>
   <text x="475" y="460" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL2_CARD2_L2}}</text>
   <text x="475" y="486" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL2_CARD2_L3}}</text>
-  <rect x="459" y="514" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL2_CARD3_TITLE" x="459" y="514" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL2_CARD3_ICON}}" x="473" y="526" width="28" height="28" fill="#004B77"/>
   <text x="511" y="548" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL2_CARD3_TITLE}}</text>
   <text x="475" y="580" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL2_CARD3_L1}}</text>
@@ -67,19 +67,19 @@
   <rect x="854" y="136" width="386" height="530" rx="14" fill="#FFFFFF" fill-opacity="0.85" stroke="#E5E7EB" stroke-width="1"/>
   <rect x="866" y="148" width="362" height="62" rx="10" fill="url(#mckHead)"/>
   <text x="1047" y="189" font-family="Microsoft YaHei, Arial, sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#FFFFFF">{{COL3_TITLE}}</text>
-  <rect x="866" y="222" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL3_CARD1_TITLE" x="866" y="222" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL3_CARD1_ICON}}" x="880" y="234" width="28" height="28" fill="#004B77"/>
   <text x="918" y="256" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL3_CARD1_TITLE}}</text>
   <text x="882" y="288" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL3_CARD1_L1}}</text>
   <text x="882" y="314" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL3_CARD1_L2}}</text>
   <text x="882" y="340" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL3_CARD1_L3}}</text>
-  <rect x="866" y="368" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL3_CARD2_TITLE" x="866" y="368" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL3_CARD2_ICON}}" x="880" y="380" width="28" height="28" fill="#004B77"/>
   <text x="918" y="402" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL3_CARD2_TITLE}}</text>
   <text x="882" y="434" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL3_CARD2_L1}}</text>
   <text x="882" y="460" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL3_CARD2_L2}}</text>
   <text x="882" y="486" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL3_CARD2_L3}}</text>
-  <rect x="866" y="514" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
+  <rect data-slot-box="COL3_CARD3_TITLE" x="866" y="514" width="362" height="134" rx="10" fill="#005587" fill-opacity="0.07"/>
   <use data-icon="{{COL3_CARD3_ICON}}" x="880" y="526" width="28" height="28" fill="#004B77"/>
   <text x="918" y="548" font-family="Microsoft YaHei, Arial, sans-serif" font-size="20" font-weight="bold" fill="#004B77">{{COL3_CARD3_TITLE}}</text>
   <text x="882" y="580" font-family="Microsoft YaHei, Arial, sans-serif" font-size="16" fill="#2C3E50">{{COL3_CARD3_L1}}</text>
